@@ -72,28 +72,28 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 .DS_Store
 
-DAGV1100/AdventureGame/Library/
+UVU_Animation_Portfolio/UnityProject/Library/
 
-DAGV1100/AdventureGame/Logs/
+UVU_Animation_Portfolio/UnityProject/Logs/
 
-DAGV1100/AdventureGame/Packages/
+UVU_Animation_Portfolio/UnityProject/Packages/
 
-DAGV1100/AdventureGame/Temp/
+UVU_Animation_Portfolio/UnityProject/Temp/
 
-DAGV1200/Maya/images/
+UVU_Animation_Portfolio/UnityProject/images/
 
-DAGV1200/Maya/cache/
+UVU_Animation_Portfolio/UnityProject/cache/
 
-DAGV1200/Maya/movies/
+UVU_Animation_Portfolio/UnityProject/movies/
 
-DAGV1700/AdventureGame/Library/
-/DAGV1700/AdventureGame/Temp
-/DAGV1700/AdventureGame/Logs
+UVU_Animation_Portfolio/UnityProject/Library/
+/UVU_Animation_Portfolio/UnityProject/Temp
+/UVU_Animation_Portfolio/UnityProject/Logs
 *.log
 *.dwlt
-/DAGV1700/AdventureGame/Logs
+/UVU_Animation_Portfolio/UnityProject/Logs
 
-DAGV1700/AdventureGame/obj/Debug/
-DAGV1700/AdventureGame/UserSettings/Search.settings
-/DAGV1700/AdventureGame/UserSettings
-/DAGV1700/AdventureGame/Temp
+UVU_Animation_Portfolio/UnityProject/obj/Debug/
+UVU_Animation_Portfolio/UnityProject/UserSettings/Search.settings
+/UVU_Animation_Portfolio/UnityProject/UserSettings
+/UVU_Animation_Portfolio/UnityProject/Temp
