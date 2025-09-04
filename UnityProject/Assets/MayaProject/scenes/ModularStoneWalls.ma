@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: ModularStoneWalls.ma
-//Last modified: Wed, Sep 03, 2025 12:04:01 PM
+//Last modified: Wed, Sep 03, 2025 12:06:49 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" -nodeType "aiImagerDenoiserOidn"
@@ -11,12 +11,12 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
-fileInfo "UUID" "4461392C-446B-7060-CDC5-BD900DD187E7";
+fileInfo "UUID" "095C0CD1-41FC-875F-B6C7-7FA762B7854D";
 createNode transform -s -n "persp";
 	rename -uid "2B1FF3FC-467C-5F09-5912-9CA6D577C50C";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -1.0613278490986848 2.1098079332889701 14.233710409804067 ;
-	setAttr ".r" -type "double3" -9.5999999999999055 712.79999999999222 -1.0018230116341306e-16 ;
+	setAttr ".t" -type "double3" 0.85729013100713392 2.1098079332889723 14.354419621609448 ;
+	setAttr ".r" -type "double3" -9.5999999999998433 719.99999999999875 -5.9299669116772639e-17 ;
 	setAttr ".rpt" -type "double3" -1.8106988973853262e-16 5.3262850242077949e-17 5.234910323540595e-17 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "FA531D06-4D9C-2B53-E2A9-8BA222FE53F0";
