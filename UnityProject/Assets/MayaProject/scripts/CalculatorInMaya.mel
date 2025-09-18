@@ -1,0 +1,84 @@
+global proc float calculateSum(float $input[]) {
+    float $sum = 0.0;
+    for ($num in $input) {
+        $sum += $num;
+    }
+    return $sum;
+}
+
+global proc float calculateDifference(float $input[]) {
+    float $difference = $input[0];
+    for ($i = 1; $i < size($input); $i++) {
+        $difference -= $input[$i];
+    }
+    return $difference;
+}
+
+global proc float calculateMultiplication(float $input[]) {
+    float $product = 1.0;
+    for ($num in $input) {
+        $product *= $num;
+    }
+    return $product;
+}
+
+global proc float calculateDivision(float $input[]) {
+    float $quotient = $input[0];
+    for ($i = 1; $i < size($input); $i++) {
+        if ($input[$i] == 0) {
+            print("Error: Division by zero.\n");
+            return 0.0;
+        }
+        $quotient /= $input[$i];
+    }
+    return $quotient;
+}
+
+global proc float calculatePower(float $input[]) {
+    // $input[0] = base, $input[1] = exponent
+    return pow($input[0], $input[1]);
+}
+
+global proc float calculateMean(float $input[]) {
+    float $sum = 0.0;
+    for ($num in $input) {
+        $sum += $num;
+    }
+    return $sum / size($input);
+}
+
+// Bubble sort for median calculation
+global proc float[] sortArray(float $input[]) {
+    float $sorted[] = $input;
+    int $n = size($sorted);
+    for ($i = 0; $i < $n; $i++) {
+        for ($j = 0; $j < $n - 1; $j++) {
+            if ($sorted[$j] > $sorted[$j + 1]) {
+                float $tmp = $sorted[$j];
+                $sorted[$j] = $sorted[$j + 1];
+                $sorted[$j + 1] = $tmp;
+            }
+        }
+    }
+    return $sorted;
+}
+
+global proc float calculateMedian(float $input[]) {
+    float $sorted[] = sortArray($input);
+    int $n = size($sorted);
+    if ($n % 2 == 1) {
+        return $sorted[$n / 2];
+    } else {
+        return ($sorted[$n / 2 - 1] + $sorted[$n / 2]) / 2.0;
+    }
+}
+
+float $testArray[] = {2.0, 4.0, 6.0, 8.0, 10.0};
+
+print("Sum: " + calculateSum($testArray) + "\n");
+print("Difference: " + calculateDifference($testArray) + "\n");
+print("Multiplication: " + calculateMultiplication($testArray) + "\n");
+print("Division: " + calculateDivision($testArray) + "\n");
+print("Power: " + calculatePower({$testArray[0], $testArray[1]}) + "\n");
+print("Mean: " + calculateMean($testArray) + "\n");
+print("Median: " + calculateMedian($testArray) + "\n");

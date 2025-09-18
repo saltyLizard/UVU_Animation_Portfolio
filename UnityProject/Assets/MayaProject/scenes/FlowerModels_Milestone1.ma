@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: FlowerModels_Milestone1.ma
-//Last modified: Wed, Sep 17, 2025 12:13:09 PM
+//Last modified: Wed, Sep 17, 2025 12:18:02 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" -nodeType "aiImagerDenoiserOidn"
@@ -11,18 +11,18 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
-fileInfo "UUID" "7061C072-4364-2F69-AAE4-9DBA595FCB4C";
+fileInfo "UUID" "97EEB67F-433A-1280-0FC7-91AFDEB4308A";
 createNode transform -s -n "persp";
 	rename -uid "2B1FF3FC-467C-5F09-5912-9CA6D577C50C";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 0.72135467446077495 -2.5161439048859537 31.129969760882044 ;
-	setAttr ".r" -type "double3" -6.5999999999999703 357.99999999967594 2.4863229456541587e-17 ;
+	setAttr ".t" -type "double3" 1.4810373046177694 1.9614299617729269 21.503616037471044 ;
+	setAttr ".r" -type "double3" -16.200000000000795 359.99999999966082 -7.2813856228601583e-17 ;
 	setAttr ".rpt" -type "double3" 1.4784839023463246e-15 2.3405647310728657e-16 -1.4858325382311333e-15 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "FA531D06-4D9C-2B53-E2A9-8BA222FE53F0";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 31.722761248680907;
+	setAttr ".coi" 23.265159110264001;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
