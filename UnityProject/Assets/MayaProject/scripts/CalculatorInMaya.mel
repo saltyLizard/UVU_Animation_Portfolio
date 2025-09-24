@@ -73,8 +73,8 @@ global proc float calculateMedian(float $input[]) {
     }
 }
 
+/*
 float $testArray[] = {2.0, 4.0, 6.0, 8.0, 10.0};
-
 print("Sum: " + calculateSum($testArray) + "\n");
 print("Difference: " + calculateDifference($testArray) + "\n");
 print("Multiplication: " + calculateMultiplication($testArray) + "\n");
@@ -82,3 +82,100 @@ print("Division: " + calculateDivision($testArray) + "\n");
 print("Power: " + calculatePower({$testArray[0], $testArray[1]}) + "\n");
 print("Mean: " + calculateMean($testArray) + "\n");
 print("Median: " + calculateMedian($testArray) + "\n");
+*/
+
+
+// Calculator function: calls the math functions, prints the result with the inputed numbers
+global proc float calculator(float $input[], string $operation) {
+    if (size($input) == 0) {
+        print("Error: No input numbers provided.\n");
+        return 0.0;
+    }
+
+    float $result = 0.0;
+    int $n = size($input);
+    int $i;
+    string $expr = "";
+    string $nums = "";
+
+    if ($operation == "add" || $operation == "+") {
+        $result = calculateSum($input);
+        for ($i = 0; $i < $n; $i++) {
+            $expr += ($input[$i] + "");
+            if ($i < $n - 1) $expr += " + ";
+        }
+        print($expr + " = " + $result + "\n");
+    } 
+    else if ($operation == "subtract" || $operation == "-") {
+        $result = calculateDifference($input);
+        for ($i = 0; $i < $n; $i++) {
+            $expr += ($input[$i] + "");
+            if ($i < $n - 1) $expr += " - ";
+        }
+        print($expr + " = " + $result + "\n");
+    } 
+    else if ($operation == "multiply" ||  $operation == "*") {
+        $result = calculateMultiplication($input);
+        for ($i = 0; $i < $n; $i++) {
+            $expr += ($input[$i] + "");
+            if ($i < $n - 1) $expr += " * ";
+        }
+        print($expr + " = " + $result + "\n");
+    } 
+    else if ($operation == "divide" || $operation == "/") {
+        $result = calculateDivision($input);
+        for ($i = 0; $i < $n; $i++) {
+            $expr += ($input[$i] + "");
+            if ($i < $n - 1) $expr += " / ";
+        }
+        print($expr + " = " + $result + "\n");
+    } 
+    else if ($operation == "power" || $operation == "^") {
+        if ($n != 2) {
+            print("Error: Power requires two inputs (base and exponent).\n");
+            return 0.0;
+        }
+        $result = calculatePower($input);
+        $expr = ($input[0] + " ^ " + $input[1]);
+        print($expr + " = " + $result + "\n");
+    } 
+    else if ($operation == "mean" || $operation == "average") {
+        $result = calculateMean($input);
+        if ($n == 1) {
+            $nums = ($input[0] + "");
+        } else {
+            for ($i = 0; $i < $n - 1; $i++) {
+                $nums += ($input[$i] + ", ");
+            }
+            $nums += ("and " + $input[$n - 1]);
+        }
+        print("The mean of " + $nums + " is " + $result + "\n");
+    } 
+    else if ($operation == "median") {
+        $result = calculateMedian($input);
+        if ($n == 1) {
+            $nums = ($input[0] + "");
+        } else {
+            for ($i = 0; $i < $n - 1; $i++) {
+                $nums += ($input[$i] + ", ");
+            }
+            $nums += ("and " + $input[$n - 1]);
+        }
+        print("The median of " + $nums + " is " + $result + "\n");
+    } else {
+        print("Unknown operation: " + $operation + "\n");
+        return 0.0;
+    }
+
+    return $result;
+}
+
+
+//Test calls
+calculator({2,6,9}, "add");
+calculator({2,6,9}, "divide");
+calculator({2,6,9}, "multiply");
+calculator({2,6,9}, "subtract");
+calculator({2,6}, "power");
+calculator({2,6,9}, "mean");
+calculator({2,6,9}, "median");
