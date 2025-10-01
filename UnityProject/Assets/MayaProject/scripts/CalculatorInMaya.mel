@@ -178,4 +178,4 @@ calculator({2,6,9}, "multiply");
 calculator({2,6,9}, "subtract");
 calculator({2,6}, "power");
 calculator({2,6,9}, "mean");
-calculator({2,6,9}, "median");
+calculator({2,6,9,4}, "median");
