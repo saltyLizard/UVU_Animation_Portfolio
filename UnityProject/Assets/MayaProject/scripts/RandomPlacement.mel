@@ -1,0 +1,84 @@
+
+// Duplicates selected object(s) X times and randomly places the duplicates, plus a simple UI.
+
+global proc randomPlaceDuplicates(int $count, float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ)
+{
+	if ($count <= 0) {
+		error "Duplicate count must be greater than 0.\n";
+		return;
+	}
+
+	string $sel[] = `ls -sl -long`;
+	if (!size($sel)) {
+		error "No objects selected. Select one or more objects to duplicate.\n";
+		return;
+	}
+
+	for ($i = 0; $i < $count; $i++) {
+		for ($s = 0; $s < size($sel); $s++) {
+			string $orig = $sel[$s];
+			string $dups[] = `duplicate -rr $orig`;
+			if (!size($dups)) continue;
+			string $dup = $dups[0];
+
+			float $rx = rand($minX, $maxX);
+			float $ry = rand($minY, $maxY);
+			float $rz = rand($minZ, $maxZ);
+
+			setAttr ($dup + ".translateX") $rx;
+			setAttr ($dup + ".translateY") $ry;
+			setAttr ($dup + ".translateZ") $rz;
+		}
+	}
+}
+
+// UI wrapper reads fields and calls the function with those values
+global proc rp_placeFromUI()
+{
+	if (!`window -exists randomPlacementWin`) return;
+	int $count = `intField -q -v rp_count`;
+	float $minX = `floatField -q -v rp_minX`;
+	float $maxX = `floatField -q -v rp_maxX`;
+	float $minY = `floatField -q -v rp_minY`;
+	float $maxY = `floatField -q -v rp_maxY`;
+	float $minZ = `floatField -q -v rp_minZ`;
+	float $maxZ = `floatField -q -v rp_maxZ`;
+
+	randomPlaceDuplicates($count, $minX, $maxX, $minY, $maxY, $minZ, $maxZ);
+}
+
+// Minimal UI: fields required by the spec and a button to call the function
+global proc showRandomPlacementUI()
+{
+	if (`window -exists randomPlacementWin`) deleteUI -window randomPlacementWin;
+
+	window -title "Random Placement" randomPlacementWin;
+	columnLayout -adjustableColumn true;
+
+	rowLayout -numberOfColumns 2;
+		text -label "Duplicates (X):";
+		intField -min 1 -v 1 rp_count;
+	setParent ..;
+
+	text -label "X Range (min max):";
+	rowLayout -numberOfColumns 2;
+		floatField -v -10.0 rp_minX;
+		floatField -v 10.0 rp_maxX;
+	setParent ..;
+
+	text -label "Y Range (min max):";
+	rowLayout -numberOfColumns 2;
+		floatField -v 0.0 rp_minY;
+		floatField -v 10.0 rp_maxY;
+	setParent ..;
+
+	text -label "Z Range (min max):";
+	rowLayout -numberOfColumns 2;
+		floatField -v -10.0 rp_minZ;
+		floatField -v 10.0 rp_maxZ;
+	setParent ..;
+
+	button -label "Place Duplicates" -command "rp_placeFromUI()";
+	showWindow randomPlacementWin;
+}
+
