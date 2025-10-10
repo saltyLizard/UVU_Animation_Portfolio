@@ -1,6 +1,5 @@
 
-// Duplicates selected object(s) X times and randomly places the duplicates, plus a simple UI.
-
+// Duplicates selected objects X times and randomly places them
 global proc randomPlaceDuplicates(int $count, float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ)
 {
 	if ($count <= 0) {
@@ -32,7 +31,7 @@ global proc randomPlaceDuplicates(int $count, float $minX, float $maxX, float $m
 	}
 }
 
-// UI wrapper reads fields and calls the function with those values
+// Read the inputs in the UI and calls the function with those values
 global proc rp_placeFromUI()
 {
 	if (!`window -exists randomPlacementWin`) return;
@@ -47,7 +46,7 @@ global proc rp_placeFromUI()
 	randomPlaceDuplicates($count, $minX, $maxX, $minY, $maxY, $minZ, $maxZ);
 }
 
-// Minimal UI: fields required by the spec and a button to call the function
+// Creates and shows the UI in maya, if one is not open already
 global proc showRandomPlacementUI()
 {
 	if (`window -exists randomPlacementWin`) deleteUI -window randomPlacementWin;
@@ -82,3 +81,5 @@ global proc showRandomPlacementUI()
 	showWindow randomPlacementWin;
 }
 
+//Opens the UI in maya
+showRandomPlacementUI();
