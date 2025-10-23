@@ -1,3 +1,5 @@
+// All the math functions -----------------------------------------------------
+
 global proc float calculateSum(float $input[]) {
     float $sum = 0.0;
     for ($num in $input) {
@@ -72,17 +74,6 @@ global proc float calculateMedian(float $input[]) {
         return ($sorted[$n / 2 - 1] + $sorted[$n / 2]) / 2.0;
     }
 }
-
-/*
-float $testArray[] = {2.0, 4.0, 6.0, 8.0, 10.0};
-print("Sum: " + calculateSum($testArray) + "\n");
-print("Difference: " + calculateDifference($testArray) + "\n");
-print("Multiplication: " + calculateMultiplication($testArray) + "\n");
-print("Division: " + calculateDivision($testArray) + "\n");
-print("Power: " + calculatePower({$testArray[0], $testArray[1]}) + "\n");
-print("Mean: " + calculateMean($testArray) + "\n");
-print("Median: " + calculateMedian($testArray) + "\n");
-*/
 
 
 // Calculator function: calls the math functions, prints the result with the inputed numbers
@@ -171,11 +162,131 @@ global proc float calculator(float $input[], string $operation) {
 }
 
 
-//Test calls
-calculator({2,6,9}, "add");
-calculator({2,6,9}, "divide");
-calculator({2,6,9}, "multiply");
-calculator({2,6,9}, "subtract");
-calculator({2,6}, "power");
-calculator({2,6,9}, "mean");
-calculator({2,6,9,4}, "median");
+// UI functions -------------------------------------------------------------
+
+// Storage for the numbers inputed into the UI
+global float $calc_numbers[];
+
+// Read the numbers entered and return float[]
+global proc float[] ui_getNumbers()
+{
+    global float $calc_numbers[];
+    float $out[] = $calc_numbers;
+    return $out;
+}
+
+// Add a number from the input float field to the list
+global proc ui_addNumber()
+{
+    global float $calc_numbers[];
+    float $v = `floatField -q -v calc_inputNum`;
+    // append to numeric array
+    int $n = size($calc_numbers);
+    $calc_numbers[$n] = $v;
+    // append display string to list
+    textScrollList -e -append ($v) calc_numList;
+    // reset input to 0
+    floatField -e -v 0.0 calc_inputNum;
+}
+
+// Remove selected numbers from the list
+global proc ui_removeSelected()
+{
+    global float $calc_numbers[];
+    string $sel[] = `textScrollList -q -si calc_numList`;
+    if (!size($sel)) return;
+    // Build a new list containing only items not selected, then repopulate
+    string $all[] = `textScrollList -q -ai calc_numList`;
+    if (!size($all)) return;
+    string $keep[];
+    for ($i = 0; $i < size($all); $i++) {
+        string $item = $all[$i];
+        int $found = 0;
+        for ($j = 0; $j < size($sel); $j++) {
+            if ($item == $sel[$j]) { $found = 1; break; }
+        }
+        if (!$found) {
+            int $k = size($keep);
+            $keep[$k] = $item;
+        }
+    }
+    // Repopulate the UI list and rebuild numeric array
+    textScrollList -e -removeAll calc_numList;
+    $calc_numbers = {};
+    for ($i = 0; $i < size($keep); $i++) {
+        textScrollList -e -append $keep[$i] calc_numList;
+        float $fv = $keep[$i];
+        int $m = size($calc_numbers);
+        $calc_numbers[$m] = $fv;
+    }
+}
+
+// Clear all numbers
+global proc ui_clearNumbers()
+{
+    global float $calc_numbers[];
+    textScrollList -e -removeAll calc_numList;
+    $calc_numbers = {};
+}
+
+// Call calculator with chosen operation and update result field
+global proc ui_doOperation(string $op)
+{
+    float $nums[] = ui_getNumbers();
+    if (!size($nums)) {
+        textField -e -text "No numbers provided" calc_result;
+        return;
+    }
+    float $res = calculator($nums, $op);
+    textField -e -text ("Result: " + $res) calc_result;
+}
+
+// Build and show UI
+global proc showCalculatorUI()
+{
+    if (`window -exists calculatorWin`) deleteUI -window calculatorWin;
+
+    window -title "Calculator" calculatorWin;
+    columnLayout -adjustableColumn true;
+
+    // Number text field, add and remove buttons
+    rowLayout -numberOfColumns 3 -columnWidth3 200 60 60;
+        floatField -v 0.0 calc_inputNum;
+        button -label "Add Num" -command "ui_addNumber()";
+        button -label "Remove Selected" -command "ui_removeSelected()";
+    setParent ..;
+
+    // List of numbers
+    text -label "Numbers:";
+    textScrollList -allowMultiSelection true -height 100 calc_numList;
+
+    // Clear and example numbers buttons
+    rowLayout -numberOfColumns 2 -columnWidth2 150 150;
+        button -label "Clear List" -command "ui_clearNumbers()";
+        button -label "Example Numbers" -command "textScrollList -e -removeAll calc_numList; textScrollList -e -append \"2\" calc_numList; textScrollList -e -append \"6\" calc_numList; textScrollList -e -append \"9\" calc_numList;";
+    setParent ..;
+
+    // Operation buttons
+    text -label "Operations:";
+    rowLayout -numberOfColumns 4 -columnWidth4 75 75 75 75;
+        button -label "+" -command "ui_doOperation(\"add\")";
+        button -label "-" -command "ui_doOperation(\"subtract\")";
+        button -label "*" -command "ui_doOperation(\"multiply\")";
+        button -label "/" -command "ui_doOperation(\"divide\")";
+    setParent ..;
+
+    rowLayout -numberOfColumns 3 -columnWidth3 75 75 75;
+        button -label "^" -command "ui_doOperation(\"power\")";
+        button -label "mean" -command "ui_doOperation(\"mean\")";
+        button -label "median" -command "ui_doOperation(\"median\")";
+    setParent ..;
+
+    // Result display
+    text -label "Result:";
+    textField -editable false -text "" calc_result;
+
+    showWindow calculatorWin;
+}
+
+// How to call the UI
+showCalculatorUI();
