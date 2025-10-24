@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
-//Name: 6_EyesEdit.ma
-//Last modified: Fri, Oct 24, 2025 01:54:35 PM
+//Name: 6_NoseEdit.ma
+//Last modified: Fri, Oct 24, 2025 01:54:43 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires "stereoCamera" "10.0";
@@ -13,7 +13,7 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
-fileInfo "UUID" "8C3DCB0B-4AB9-B068-74D6-68BD22C4192C";
+fileInfo "UUID" "8E29242E-4C7F-050B-1A8C-58A1DE54278B";
 createNode transform -s -n "persp";
 	rename -uid "50A247D5-C042-AED7-01B4-DCB89E9990C4";
 	setAttr ".v" no;
@@ -12883,4 +12883,4 @@ connectAttr "pCubeShape4.iog" ":initialShadingGroup.dsm" -na;
 connectAttr "pCubeShape5.iog" ":initialShadingGroup.dsm" -na;
 connectAttr "pCubeShape6.iog" ":initialShadingGroup.dsm" -na;
 connectAttr "Head:pSphereShape1.iog" ":initialShadingGroup.dsm" -na;
-// End of 6_EyesEdit.ma
+// End of 6_NoseEdit.ma
