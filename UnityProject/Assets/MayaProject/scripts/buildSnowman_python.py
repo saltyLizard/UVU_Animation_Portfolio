@@ -48,3 +48,9 @@ cmds.setAttr('hatMain.translateY', 8.5)
 
 cmds.polyCylinder(r=1.5, h=0.1, name='hatRim')
 cmds.setAttr('hatRim.translateY', 7.7)
+
+
+# please copy and past the code into the maya script editor
+
+# I rage quited with trying to get pycharm to work
+# and couldnt figure out how to connect python VSCode to maya
