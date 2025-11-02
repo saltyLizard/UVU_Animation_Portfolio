@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
-//Name: ScriptingUnit6_PythonSnowman.ma
-//Last modified: Sat, Nov 01, 2025 08:11:38 PM
+//Name: ScriptingUnit7_AutoGroup.ma
+//Last modified: Sat, Nov 01, 2025 08:36:17 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires "stereoCamera" "10.0";
@@ -13,7 +13,7 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "222225DB-4093-9E96-6AE8-B4A5DB70BB07";
+fileInfo "UUID" "71B27ACD-496E-FE99-0866-3B90DC1BF134";
 createNode transform -s -n "persp";
 	rename -uid "2B1FF3FC-467C-5F09-5912-9CA6D577C50C";
 	setAttr ".v" no;
@@ -75,11 +75,13 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr ".man" -type "string" "side_mask";
 	setAttr ".hc" -type "string" "viewSet -s %camera";
 	setAttr ".o" yes;
-createNode transform -n "bottomSphere";
-	rename -uid "41867409-41A3-8D9E-9DED-A39689A265D1";
-	setAttr ".t" -type "double3" 0 2 0 ;
-createNode mesh -n "bottomSphereShape" -p "bottomSphere";
-	rename -uid "6ACD7D73-4AB0-5F0D-7980-6FB95411348B";
+createNode transform -n "pSphere2_Grp";
+	rename -uid "AD7BFE71-4EAA-C715-605A-4F98477F7783";
+	setAttr ".t" -type "double3" 2.8870409391119143 2.7015907790043645 0 ;
+createNode transform -n "pSphere2" -p "pSphere2_Grp";
+	rename -uid "56E294D1-44E0-0096-AE0D-D784941B6DC7";
+createNode mesh -n "pSphereShape2" -p "pSphere2";
+	rename -uid "03B79BFC-4EA1-228C-5C42-188D4D94D027";
 	setAttr -k off ".v";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -88,11 +90,84 @@ createNode mesh -n "bottomSphereShape" -p "bottomSphere";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "middleSphere";
-	rename -uid "482A069F-4D84-2ECE-9D5C-9DAEB167C1F7";
-	setAttr ".t" -type "double3" 0 5 0 ;
-createNode mesh -n "middleSphereShape" -p "middleSphere";
-	rename -uid "50756899-4771-C73C-6E37-17B6D01FAFD6";
+	setAttr -s 382 ".pt";
+	setAttr ".pt[0:165]" -type "float3"  0.14703892 0 0 0.12507883 0 0 0.090875082 
+		0 0 0.047775824 0 0 0 0 0 -0.047775824 0 0 -0.090875074 0 0 -0.1250788 0 0 -0.14703889 
+		0 0 -0.15460594 0 0 -0.14703889 0 0 -0.1250788 0 0 -0.090875052 0 0 -0.047775816 
+		0 0 -4.6076152e-09 0 0 0.047775805 0 0 0.090875052 0 0 0.12507878 0 0 0.14703888 
+		0 0 0.15460591 0 0 0.29045746 0 0 0.24707766 0 0 0.1795125 0 0 0.094375245 0 0 0 
+		0 0 -0.094375245 0 0 -0.17951247 0 0 -0.24707761 0 0 -0.29045701 0 0 -0.30540487 
+		0 0 -0.29045701 0 0 -0.2470776 0 0 -0.17951244 0 0 -0.094375238 0 0 -9.1017727e-09 
+		0 0 0.094375186 0 0 0.17951241 0 0 0.24707757 0 0 0.29045698 0 0 0.30540481 0 0 0.42672372 
+		0 0 0.36299264 0 0 0.2637299 0 0 0.13865095 0 0 0 0 0 -0.13865095 0 0 -0.26372951 
+		0 0 -0.3629925 0 0 -0.4267236 0 0 -0.44868374 0 0 -0.4267236 0 0 -0.36299247 0 0 
+		-0.26372951 0 0 -0.13865083 0 0 -1.3371816e-08 0 0 0.13865082 0 0 0.26372945 0 0 
+		0.36299244 0 0 0.42672354 0 0 0.44868368 0 0 0.55248308 0 0 0.46996999 0 0 0.34145316 
+		0 0 0.17951249 0 0 0 0 0 -0.17951249 0 0 -0.34145311 0 0 -0.46996987 0 0 -0.55248225 
+		0 0 -0.58091396 0 0 -0.55248225 0 0 -0.46996987 0 0 -0.34145305 0 0 -0.17951243 0 
+		0 -1.7312583e-08 0 0 0.1795124 0 0 0.34145299 0 0 0.46996981 0 0 0.55248219 0 0 0.5809139 
+		0 0 0.66463792 0 0 0.56537485 0 0 0.41076887 0 0 0.21595369 0 0 0 0 0 -0.21595369 
+		0 0 -0.41076869 0 0 -0.56537467 0 0 -0.6646378 0 0 -0.69884074 0 0 -0.6646378 0 0 
+		-0.56537467 0 0 -0.41076866 0 0 -0.21595365 0 0 -2.0827073e-08 0 0 0.2159536 0 0 
+		0.41076863 0 0 0.56537461 0 0 0.66463763 0 0 0.69884062 0 0 0.76042652 0 0 0.64685833 
+		0 0 0.46996996 0 0 0.24707763 0 0 0 0 0 -0.24707763 0 0 -0.46996993 0 0 -0.64685822 
+		0 0 -0.76042634 0 0 -0.79956013 0 0 -0.76042634 0 0 -0.64685816 0 0 -0.46996987 0 
+		0 -0.2470776 0 0 -2.3828745e-08 0 0 0.24707755 0 0 0.46996981 0 0 0.64685768 0 0 
+		0.7604261 0 0 0.79956001 0 0 0.83749181 0 0 0.71241307 0 0 0.51759851 0 0 0.2721177 
+		0 0 0 0 0 -0.2721177 0 0 -0.51759845 0 0 -0.71241289 0 0 -0.83749163 0 0 -0.88059169 
+		0 0 -0.83749163 0 0 -0.71241289 0 0 -0.51759845 0 0 -0.27211764 0 0 -2.6243674e-08 
+		0 0 0.27211758 0 0 0.51759833 0 0 0.71241283 0 0 0.83749127 0 0 0.88059157 0 0 0.89393562 
+		0 0 0.76042652 0 0 0.55248308 0 0 0.29045704 0 0 0 0 0 -0.29045704 0 0 -0.55248231 
+		0 0 -0.7604264 0 0 -0.8939352 0 0 -0.93993974 0 0 -0.8939352 0 0 -0.76042634 0 0 
+		-0.55248225 0 0 -0.29045701 0 0 -2.8012384e-08 0 0 0.29045695 0 0 0.55248219 0 0 
+		0.7604261 0 0 0.89393508 0 0 0.93993962 0 0 0.92836666 0 0 0.78971702 0 0 0.57376242 
+		0 0 0.30164489 0 0 0 0 0 -0.30164489 0 0;
+	setAttr ".pt[166:331]" -0.57376236 0 0 -0.78971684 0 0 -0.92836648 0 0 -0.97614259 
+		0 0 -0.92836648 0 0 -0.78971678 0 0 -0.5737623 0 0 -0.30164483 0 0 -2.9091312e-08 
+		0 0 0.30164477 0 0 0.57376206 0 0 0.78971523 0 0 0.92836642 0 0 0.97614247 0 0 0.93993998 
+		0 0 0.79956037 0 0 0.58091408 0 0 0.3054049 0 0 0 0 0 -0.3054049 0 0 -0.58091402 
+		0 0 -0.79956019 0 0 -0.93993974 0 0 -0.9883104 0 0 -0.93993974 0 0 -0.79956013 0 
+		0 -0.58091396 0 0 -0.30540487 0 0 -2.9453942e-08 0 0 0.30540478 0 0 0.5809139 0 0 
+		0.79956001 0 0 0.93993962 0 0 0.98831028 0 0 0.92836666 0 0 0.78971702 0 0 0.57376242 
+		0 0 0.30164489 0 0 0 0 0 -0.30164489 0 0 -0.57376236 0 0 -0.78971684 0 0 -0.92836648 
+		0 0 -0.97614259 0 0 -0.92836648 0 0 -0.78971678 0 0 -0.5737623 0 0 -0.30164483 0 
+		0 -2.9091312e-08 0 0 0.30164477 0 0 0.57376206 0 0 0.78971523 0 0 0.92836642 0 0 
+		0.97614247 0 0 0.89393562 0 0 0.76042652 0 0 0.55248308 0 0 0.29045704 0 0 0 0 0 
+		-0.29045704 0 0 -0.55248231 0 0 -0.7604264 0 0 -0.8939352 0 0 -0.93993974 0 0 -0.8939352 
+		0 0 -0.76042634 0 0 -0.55248225 0 0 -0.29045701 0 0 -2.8012384e-08 0 0 0.29045695 
+		0 0 0.55248219 0 0 0.7604261 0 0 0.89393508 0 0 0.93993962 0 0 0.83749181 0 0 0.71241307 
+		0 0 0.51759851 0 0 0.2721177 0 0 0 0 0 -0.2721177 0 0 -0.51759845 0 0 -0.71241289 
+		0 0 -0.83749163 0 0 -0.88059169 0 0 -0.83749163 0 0 -0.71241289 0 0 -0.51759845 0 
+		0 -0.27211764 0 0 -2.6243674e-08 0 0 0.27211758 0 0 0.51759833 0 0 0.71241283 0 0 
+		0.83749127 0 0 0.88059157 0 0 0.76042652 0 0 0.64685833 0 0 0.46996996 0 0 0.24707763 
+		0 0 0 0 0 -0.24707763 0 0 -0.46996993 0 0 -0.64685822 0 0 -0.76042634 0 0 -0.79956013 
+		0 0 -0.76042634 0 0 -0.64685816 0 0 -0.46996987 0 0 -0.2470776 0 0 -2.3828745e-08 
+		0 0 0.24707755 0 0 0.46996981 0 0 0.64685768 0 0 0.7604261 0 0 0.79956001 0 0 0.66463792 
+		0 0 0.56537485 0 0 0.41076887 0 0 0.21595369 0 0 0 0 0 -0.21595369 0 0 -0.41076869 
+		0 0 -0.56537467 0 0 -0.6646378 0 0 -0.69884074 0 0 -0.6646378 0 0 -0.56537467 0 0 
+		-0.41076866 0 0 -0.21595365 0 0 -2.0827073e-08 0 0 0.2159536 0 0 0.41076863 0 0 0.56537461 
+		0 0 0.66463763 0 0 0.69884062 0 0 0.55248308 0 0 0.46996999 0 0 0.34145316 0 0 0.17951249 
+		0 0 0 0 0 -0.17951249 0 0 -0.34145311 0 0 -0.46996987 0 0 -0.55248225 0 0 -0.58091396 
+		0 0 -0.55248225 0 0 -0.46996987 0 0 -0.34145305 0 0 -0.17951243 0 0 -1.7312583e-08 
+		0 0 0.1795124 0 0 0.34145299 0 0 0.46996981 0 0 0.55248219 0 0 0.5809139 0 0 0.42672372 
+		0 0 0.36299264 0 0 0.2637299 0 0 0.13865095 0 0 0 0 0 -0.13865095 0 0 -0.26372951 
+		0 0 -0.3629925 0 0 -0.4267236 0 0 -0.44868374 0 0 -0.4267236 0 0 -0.36299247 0 0;
+	setAttr ".pt[332:381]" -0.26372951 0 0 -0.13865083 0 0 -1.3371816e-08 0 0 
+		0.13865082 0 0 0.26372945 0 0 0.36299244 0 0 0.42672354 0 0 0.44868368 0 0 0.29045746 
+		0 0 0.24707766 0 0 0.1795125 0 0 0.094375245 0 0 0 0 0 -0.094375245 0 0 -0.17951247 
+		0 0 -0.24707761 0 0 -0.29045701 0 0 -0.30540487 0 0 -0.29045701 0 0 -0.2470776 0 
+		0 -0.17951244 0 0 -0.094375238 0 0 -9.1017727e-09 0 0 0.094375186 0 0 0.17951241 
+		0 0 0.24707757 0 0 0.29045698 0 0 0.30540481 0 0 0.14703892 0 0 0.12507883 0 0 0.090875082 
+		0 0 0.047775824 0 0 0 0 0 -0.047775824 0 0 -0.090875074 0 0 -0.1250788 0 0 -0.14703889 
+		0 0 -0.15460594 0 0 -0.14703889 0 0 -0.1250788 0 0 -0.090875052 0 0 -0.047775816 
+		0 0 -4.6076152e-09 0 0 0.047775805 0 0 0.090875052 0 0 0.12507878 0 0 0.14703888 
+		0 0 0.15460591 0 0 0 0 0 0 0 0;
+createNode transform -n "pSphere1_Grp";
+	rename -uid "CA041EAF-4730-316B-97F0-4C925118B64B";
+createNode transform -n "pSphere1" -p "pSphere1_Grp";
+	rename -uid "104B736C-49E8-7C0D-2891-939DBDFE84DD";
+createNode mesh -n "pSphereShape1" -p "pSphere1";
+	rename -uid "B1CAA92C-47E6-5224-A6FC-BB8B91999CE6";
 	setAttr -k off ".v";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -101,11 +176,13 @@ createNode mesh -n "middleSphereShape" -p "middleSphere";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "topSphere";
-	rename -uid "E69B2C9D-4A5A-56E1-4DEB-78A386116BB6";
-	setAttr ".t" -type "double3" 0 7 0 ;
-createNode mesh -n "topSphereShape" -p "topSphere";
-	rename -uid "FFECAF0B-44F5-959B-6088-27A2892CFC2C";
+createNode transform -n "pCone1_Grp";
+	rename -uid "C5CA1853-4E92-D090-A448-028F61DB77FD";
+	setAttr ".t" -type "double3" -4.2430761793390053 8.760776606605571 0 ;
+createNode transform -n "pCone1" -p "pCone1_Grp";
+	rename -uid "CA6291EE-4459-5B26-5B60-3895E0F76B0F";
+createNode mesh -n "pConeShape1" -p "pCone1";
+	rename -uid "2F884678-437F-9DDE-FBA3-13A686C57A12";
 	setAttr -k off ".v";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -114,103 +191,13 @@ createNode mesh -n "topSphereShape" -p "topSphere";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "nose";
-	rename -uid "328BABFB-4E79-1828-2FF3-70BC8AB35A17";
-	setAttr ".t" -type "double3" 0 7 1.4 ;
-	setAttr ".r" -type "double3" 90 0 -90 ;
-createNode mesh -n "noseShape" -p "nose";
-	rename -uid "B8CD2FEC-43EE-36B0-DB89-628905D5D91F";
-	setAttr -k off ".v";
-	setAttr ".vir" yes;
-	setAttr ".vif" yes;
-	setAttr ".uvst[0].uvsn" -type "string" "map1";
-	setAttr ".cuvs" -type "string" "map1";
-	setAttr ".dcc" -type "string" "Ambient+Diffuse";
-	setAttr ".covm[0]"  0 1 1;
-	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "eyeLeft";
-	rename -uid "FD4F7DD7-430B-22E7-2BEC-67A3E89ED1DB";
-	setAttr ".t" -type "double3" 0.35 7.3 0.9 ;
-createNode mesh -n "eyeLeftShape" -p "eyeLeft";
-	rename -uid "3306630F-4635-3B04-FB7B-1F8C31016098";
-	setAttr -k off ".v";
-	setAttr ".vir" yes;
-	setAttr ".vif" yes;
-	setAttr ".uvst[0].uvsn" -type "string" "map1";
-	setAttr ".cuvs" -type "string" "map1";
-	setAttr ".dcc" -type "string" "Ambient+Diffuse";
-	setAttr ".covm[0]"  0 1 1;
-	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "eyeRight";
-	rename -uid "90A47689-4FCD-6B34-7872-A5A14363BB79";
-	setAttr ".t" -type "double3" -0.35 7.3 0.9 ;
-createNode mesh -n "eyeRightShape" -p "eyeRight";
-	rename -uid "F6C72F82-4420-B0F9-9E7B-59892A55FB0B";
-	setAttr -k off ".v";
-	setAttr ".vir" yes;
-	setAttr ".vif" yes;
-	setAttr ".uvst[0].uvsn" -type "string" "map1";
-	setAttr ".cuvs" -type "string" "map1";
-	setAttr ".dcc" -type "string" "Ambient+Diffuse";
-	setAttr ".covm[0]"  0 1 1;
-	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "button1";
-	rename -uid "2D23FB91-4602-B78F-9E91-E88F71DF823F";
-	setAttr ".t" -type "double3" 0 5.5 1.4 ;
-createNode mesh -n "button1Shape" -p "button1";
-	rename -uid "640E9A39-4A33-35AE-527F-A9ADC21C1D06";
-	setAttr -k off ".v";
-	setAttr ".vir" yes;
-	setAttr ".vif" yes;
-	setAttr ".uvst[0].uvsn" -type "string" "map1";
-	setAttr ".cuvs" -type "string" "map1";
-	setAttr ".dcc" -type "string" "Ambient+Diffuse";
-	setAttr ".covm[0]"  0 1 1;
-	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "button2";
-	rename -uid "E12BB13D-411D-40E4-19F4-0BAE6DE778E7";
-	setAttr ".t" -type "double3" 0 4.6 1.4 ;
-createNode mesh -n "button2Shape" -p "button2";
-	rename -uid "7EE61813-468C-D463-D7E2-07B6FFABBEDB";
-	setAttr -k off ".v";
-	setAttr ".vir" yes;
-	setAttr ".vif" yes;
-	setAttr ".uvst[0].uvsn" -type "string" "map1";
-	setAttr ".cuvs" -type "string" "map1";
-	setAttr ".dcc" -type "string" "Ambient+Diffuse";
-	setAttr ".covm[0]"  0 1 1;
-	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "button3";
-	rename -uid "29E1DACB-4661-594C-7BBA-1C876DBE62B1";
-	setAttr ".t" -type "double3" 0 3.1 1.7 ;
-createNode mesh -n "button3Shape" -p "button3";
-	rename -uid "05DB117F-463E-3ED2-F9D0-CB8DCEB20951";
-	setAttr -k off ".v";
-	setAttr ".vir" yes;
-	setAttr ".vif" yes;
-	setAttr ".uvst[0].uvsn" -type "string" "map1";
-	setAttr ".cuvs" -type "string" "map1";
-	setAttr ".dcc" -type "string" "Ambient+Diffuse";
-	setAttr ".covm[0]"  0 1 1;
-	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "hatMain";
-	rename -uid "4905BE89-4D6C-2A9F-404D-57B370418C39";
-	setAttr ".t" -type "double3" 0 8.5 0 ;
-createNode mesh -n "hatMainShape" -p "hatMain";
-	rename -uid "F5A17D46-4628-EEE7-C974-3495339B22E8";
-	setAttr -k off ".v";
-	setAttr ".vir" yes;
-	setAttr ".vif" yes;
-	setAttr ".uvst[0].uvsn" -type "string" "map1";
-	setAttr ".cuvs" -type "string" "map1";
-	setAttr ".dcc" -type "string" "Ambient+Diffuse";
-	setAttr ".covm[0]"  0 1 1;
-	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "hatRim";
-	rename -uid "5AB5ACD7-4AA9-1B5D-41AE-FE888986A987";
-	setAttr ".t" -type "double3" 0 7.7 0 ;
-createNode mesh -n "hatRimShape" -p "hatRim";
-	rename -uid "0803D421-4BD3-EB26-9DB2-389631BB8C30";
+createNode transform -n "pCylinder1_Grp";
+	rename -uid "AFD86798-4125-4401-A389-F0AA68728EA7";
+	setAttr ".t" -type "double3" -6.4072170866573011 9.6891094371503552 6.5387617427482283 ;
+createNode transform -n "pCylinder1" -p "pCylinder1_Grp";
+	rename -uid "9A8F937C-403B-2F3A-99E2-0A9D36A27360";
+createNode mesh -n "pCylinderShape1" -p "pCylinder1";
+	rename -uid "768DBDD3-410E-EC33-BEBF-238D741AF0E1";
 	setAttr -k off ".v";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -304,39 +291,16 @@ createNode aiAOVDriver -s -n "defaultArnoldDisplayDriver";
 createNode aiImagerDenoiserOidn -s -n "defaultArnoldDenoiser";
 	rename -uid "C2597BA8-4549-EBDC-F790-849D1C99D447";
 createNode polySphere -n "polySphere1";
-	rename -uid "93C4C26F-4B1A-2251-1735-1DB7014F058E";
-	setAttr ".r" 2;
+	rename -uid "C7D421E9-423C-6CF0-49C8-D1BCE589F51C";
 createNode polySphere -n "polySphere2";
-	rename -uid "266D6FA0-41D3-1079-06DB-9CB0CA07AD49";
-	setAttr ".r" 1.5;
-createNode polySphere -n "polySphere3";
-	rename -uid "D250D75F-436F-B2C8-2ECA-4BA4A35A1BD8";
+	rename -uid "4DBC7CA3-4641-3D00-B8AA-4FBC4774B163";
 createNode polyCone -n "polyCone1";
-	rename -uid "9222391C-4CA6-9044-03B4-A7A36258AEC9";
-	setAttr ".r" 0.2;
-	setAttr ".h" 1;
-createNode polySphere -n "polySphere4";
-	rename -uid "AE208675-42C5-C30F-D9B6-2BA0649CF0E6";
-	setAttr ".r" 0.15;
-createNode polySphere -n "polySphere5";
-	rename -uid "85AF1E7F-4B47-D4C1-4DB0-528967442AB2";
-	setAttr ".r" 0.15;
-createNode polySphere -n "polySphere6";
-	rename -uid "164814C2-4498-6F93-B07E-1E8F120A3245";
-	setAttr ".r" 0.25;
-createNode polySphere -n "polySphere7";
-	rename -uid "C10ED9A9-4E53-000A-4453-DDADF0D06724";
-	setAttr ".r" 0.25;
-createNode polySphere -n "polySphere8";
-	rename -uid "D74E6D19-48D8-A247-0042-43B74B33F1A1";
-	setAttr ".r" 0.25;
+	rename -uid "83B79526-4D80-8C87-F68F-5C9F9AE32D64";
+	setAttr ".cuv" 3;
 createNode polyCylinder -n "polyCylinder1";
-	rename -uid "6AAD335D-4A9A-7770-B6C7-169A5B0EFBA2";
-	setAttr ".h" 1.5;
-createNode polyCylinder -n "polyCylinder2";
-	rename -uid "F9FF494D-4589-B7B4-51BE-CB843F1F6863";
-	setAttr ".r" 1.5;
-	setAttr ".h" 0.1;
+	rename -uid "2945F371-421C-66D9-8D3F-BFBB0647E3E2";
+	setAttr ".sc" 1;
+	setAttr ".cuv" 3;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -359,7 +323,7 @@ select -ne :standardSurface1;
 	setAttr ".bc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sr" 0.5;
 select -ne :initialShadingGroup;
-	setAttr -s 11 ".dsm";
+	setAttr -s 4 ".dsm";
 	setAttr ".ro" yes;
 select -ne :initialParticleSE;
 	setAttr ".ro" yes;
@@ -381,17 +345,10 @@ select -ne :defaultColorMgtGlobals;
 select -ne :hardwareRenderGlobals;
 	setAttr ".ctrs" 256;
 	setAttr ".btrs" 512;
-connectAttr "polySphere1.out" "bottomSphereShape.i";
-connectAttr "polySphere2.out" "middleSphereShape.i";
-connectAttr "polySphere3.out" "topSphereShape.i";
-connectAttr "polyCone1.out" "noseShape.i";
-connectAttr "polySphere4.out" "eyeLeftShape.i";
-connectAttr "polySphere5.out" "eyeRightShape.i";
-connectAttr "polySphere6.out" "button1Shape.i";
-connectAttr "polySphere7.out" "button2Shape.i";
-connectAttr "polySphere8.out" "button3Shape.i";
-connectAttr "polyCylinder1.out" "hatMainShape.i";
-connectAttr "polyCylinder2.out" "hatRimShape.i";
+connectAttr "polySphere2.out" "pSphereShape2.i";
+connectAttr "polySphere1.out" "pSphereShape1.i";
+connectAttr "polyCone1.out" "pConeShape1.i";
+connectAttr "polyCylinder1.out" "pCylinderShape1.i";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
@@ -405,15 +362,8 @@ connectAttr ":defaultArnoldDisplayDriver.msg" ":defaultArnoldRenderOptions.drive
 connectAttr ":defaultArnoldFilter.msg" ":defaultArnoldRenderOptions.filt";
 connectAttr ":defaultArnoldDriver.msg" ":defaultArnoldRenderOptions.drvr";
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
-connectAttr "bottomSphereShape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "middleSphereShape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "topSphereShape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "noseShape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "eyeLeftShape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "eyeRightShape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "button1Shape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "button2Shape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "button3Shape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "hatMainShape.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "hatRimShape.iog" ":initialShadingGroup.dsm" -na;
-// End of ScriptingUnit6_PythonSnowman.ma
+connectAttr "pSphereShape1.iog" ":initialShadingGroup.dsm" -na;
+connectAttr "pSphereShape2.iog" ":initialShadingGroup.dsm" -na;
+connectAttr "pConeShape1.iog" ":initialShadingGroup.dsm" -na;
+connectAttr "pCylinderShape1.iog" ":initialShadingGroup.dsm" -na;
+// End of ScriptingUnit7_AutoGroup.ma
