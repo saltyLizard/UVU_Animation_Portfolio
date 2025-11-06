@@ -40,3 +40,5 @@ UnityProject/Assets/MayaProject/sourceimages/3dPaintTextures/Lilac/Lilac_v1_stan
 UnityProject/Assets/MayaProject/sourceimages/3dPaintTextures/Lilac/Lilac_v1_standardSurface1_Roughness_Raw_ACEScg.png.tx
 
 *.png.tx
+
+*.swatch
