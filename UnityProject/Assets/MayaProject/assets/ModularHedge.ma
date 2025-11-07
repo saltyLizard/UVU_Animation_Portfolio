@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: ModularHedge.ma
-//Last modified: Thu, Nov 06, 2025 07:56:14 PM
+//Last modified: Thu, Nov 06, 2025 08:07:19 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires "stereoCamera" "10.0";
@@ -12,12 +12,12 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "FE61A695-467D-AF80-3486-61B800729DBF";
+fileInfo "UUID" "8FA85C85-4DA3-59BD-113F-918F26C1D6E3";
 createNode transform -s -n "persp";
 	rename -uid "90089B46-4319-4F5B-B456-42AFE27DEE01";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -1188.0893852187373 189.05398780457713 175.84570130194021 ;
-	setAttr ".r" -type "double3" -4.1999999999999522 270.80000000000166 -2.847473141909288e-14 ;
+	setAttr ".t" -type "double3" -1188.2946497090229 169.55577958653009 117.35034454963687 ;
+	setAttr ".r" -type "double3" -2.9999999999997118 267.20000000001892 0 ;
 	setAttr ".rpt" -type "double3" 5.65321091714682e-14 -8.7509805545766363e-14 2.6691942728324115e-13 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "918E994A-420B-C7B8-A63D-70AF37DD4804";
@@ -86,6 +86,19 @@ createNode transform -n "Hedge";
 createNode mesh -n "HedgeShape" -p "Hedge";
 	rename -uid "623FC3FB-4CD1-55C7-71AC-3CB545665DC3";
 	setAttr -k off ".v";
+	setAttr ".vir" yes;
+	setAttr ".vif" yes;
+	setAttr ".pv" -type "double2" 0.4997226670384407 0.50308333337306976 ;
+	setAttr ".uvst[0].uvsn" -type "string" "map1";
+	setAttr ".cuvs" -type "string" "map1";
+	setAttr ".dcc" -type "string" "Ambient+Diffuse";
+	setAttr ".covm[0]"  0 1 1;
+	setAttr ".cdvm[0]"  0 1 1;
+	setAttr ".dr" 1;
+createNode mesh -n "polySurfaceShape1" -p "Hedge";
+	rename -uid "0CF69B92-4011-0509-4734-79925471C249";
+	setAttr -k off ".v";
+	setAttr ".io" yes;
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
 	setAttr -s 6 ".gtag";
@@ -5453,6 +5466,15 @@ createNode aiOptions -s -n "defaultArnoldRenderOptions";
 	setAttr ".version" -type "string" "5.4.2.1";
 createNode aiImagerDenoiserOidn -s -n "defaultArnoldDenoiser";
 	rename -uid "D6519F94-44BC-6CA2-4D5B-75AB47CA08AE";
+createNode polySmoothFace -n "polySmoothFace1";
+	rename -uid "B16C8902-4D7F-568C-D969-C195516BD987";
+	setAttr ".ics" -type "componentList" 1 "f[*]";
+	setAttr ".sdt" 2;
+	setAttr ".suv" yes;
+	setAttr ".ps" 0.10000000149011612;
+	setAttr ".ro" 1;
+	setAttr ".ma" yes;
+	setAttr ".m08" yes;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -5499,6 +5521,7 @@ select -ne :hardwareRenderGlobals;
 	setAttr ".btrs" 512;
 select -ne :ikSystem;
 	setAttr -s 4 ".sol";
+connectAttr "polySmoothFace1.out" "HedgeShape.i";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
@@ -5507,6 +5530,7 @@ connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr ":defaultArnoldDenoiser.msg" ":defaultArnoldRenderOptions.imagers" -na
 		;
+connectAttr "polySurfaceShape1.o" "polySmoothFace1.ip";
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr "HedgeShape.iog" ":initialShadingGroup.dsm" -na;
 // End of ModularHedge.ma
