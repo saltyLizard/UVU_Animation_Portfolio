@@ -38,3 +38,4 @@ def auto_group_selected(selection=None, suffix="_Grp"):
 	return created
 
 auto_group_selected()
+
