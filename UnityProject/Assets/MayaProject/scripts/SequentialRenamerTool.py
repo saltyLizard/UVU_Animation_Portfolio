@@ -81,21 +81,20 @@ def sequential_rename(pattern: str, selection: List[str] = None, start: int = 1,
     return results
 
 
-# this is here cuz I was having a hard time seeing if everything worked, and it's just useful
-try:
-    _res = sequential_rename('Arm_##_Jnt')  # Example Call
-   
-    # show visible feedback on the name changes
-    import maya.cmds as _mc
-    _mc.warning('SequentialRenamerTool: renamed %d objects' % len([r for r in _res if r[1]]))
-    try:
-        print('SequentialRenamerTool result:', _res)
-    except Exception:
-        pass
-except Exception as _err:
-    import maya.cmds as _mc
-    _mc.warning('SequentialRenamerTool: error - %s' % _err)
-    try:
-        print('SequentialRenamerTool error:', _err)
-    except Exception:
-        pass
+# Example invocation (commented out so importing this module is side-effect free)
+# try:
+#     _res = sequential_rename('Arm_##_Jnt')  # Example Call
+#     # show visible feedback on the name changes
+#     import maya.cmds as _mc
+#     _mc.warning('SequentialRenamerTool: renamed %d objects' % len([r for r in _res if r[1]]))
+#     try:
+#         print('SequentialRenamerTool result:', _res)
+#     except Exception:
+#         pass
+# except Exception as _err:
+#     import maya.cmds as _mc
+#     _mc.warning('SequentialRenamerTool: error - %s' % _err)
+#     try:
+#         print('SequentialRenamerTool error:', _err)
+#     except Exception:
+#         pass

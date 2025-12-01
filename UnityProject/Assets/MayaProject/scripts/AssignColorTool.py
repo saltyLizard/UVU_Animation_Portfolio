@@ -10,9 +10,8 @@ COLOR_NAME_MAP = {
     'green': 23,
     'light blue': 18,
     'blue': 6,
-    'purple': 9,
+    'magenta': 9,
     'pink': 20,
-    'lightgray': 4,
     'gray': 3,
     'darkgray': 2,
     'black': 1,
@@ -109,7 +108,7 @@ def assign_color_to_shape_node(color, selection=None, include_parents=False, inc
             pass
     return modified # returns a list of the modified shape node names
 
-# Example calls:
+# Example calls (commented out so importing this module is side-effect free):
 # assign_color_to_shape_node(23)
 # assign_color_to_shape_node('6', include_parents=True, include_children=True)
-assign_color_to_shape_node('green')
+# assign_color_to_shape_node('green')
