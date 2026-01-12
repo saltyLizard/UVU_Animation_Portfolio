@@ -3,3 +3,24 @@
 *.png filter=lfs diff=lfs merge=lfs -text
 *.aiff filter=lfs diff=lfs merge=lfs -text
 *.jpg filter=lfs diff=lfs merge=lfs -text
+
+git lfs track "*.hip"
+git lfs track "*.hiplc"
+git lfs track "*.hda"
+git lfs track "*.hdalc"
+
+git lfs track "*.bgeo"
+git lfs track "*.bgeo.sc"
+git lfs track "*.vdb"
+
+git lfs track "*.fbx"
+git lfs track "*.obj"
+git lfs track "*.usd"
+git lfs track "*.usda"
+git lfs track "*.usdc"
+
+git lfs track "*.exr"
+git lfs track "*.png"
+git lfs track "*.tif"
+git lfs track "*.tiff"
+git lfs track "*.tga"
