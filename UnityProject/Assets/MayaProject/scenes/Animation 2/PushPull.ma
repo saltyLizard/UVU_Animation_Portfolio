@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: PushPull.ma
-//Last modified: Fri, Feb 20, 2026 04:15:16 PM
+//Last modified: Fri, Feb 20, 2026 04:46:06 PM
 //Codeset: 1252
 file -rdi 1 -ns "Ultimate_Bony_v1_0_5" -rfn "Ultimate_Bony_v1_0_5RN" -op "v=0;"
 		 -typ "mayaAscii" "D:/trist/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/-rigged walkers and stuff/Ultimate_Bony_v1.0.5.ma";
@@ -18,7 +18,7 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "9CD7AE78-47F6-4B4F-8950-C883DF2E7595";
+fileInfo "UUID" "30AD6DFF-43CE-406B-BA89-C9BB9524FDF1";
 createNode transform -s -n "persp";
 	rename -uid "3015C25D-4209-1A21-3C8A-C085F14D2B5E";
 	setAttr ".v" no;
@@ -2712,16 +2712,16 @@ createNode transform -n "group";
 	setAttr ".rpt" -type "double3" 8.8817841970012523e-14 -2.6645352591003757e-15 7.1054273576010019e-15 ;
 	setAttr ".sp" -type "double3" -17.566770612203641 11.958147295996564 -27.92521935672978 ;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "023D7100-48AA-391A-E68A-96A090CFDBE3";
+	rename -uid "D1E08E08-4DB1-F8D9-822C-799545FFEC57";
 	setAttr -s 9 ".lnk";
 	setAttr -s 9 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "DB2A3163-4B93-FF4B-D56A-02AAF55D42C8";
+	rename -uid "5E30E393-430D-5095-041D-948879026321";
 	setAttr ".bsdt[0].bscd" -type "Int32Array" 1 0 ;
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "71AADF49-421E-FE28-35A2-F7A56C82DBC2";
+	rename -uid "84B6EB10-4147-F26B-7B11-D498A3182EF9";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "9BBEA3A5-466E-7AFB-E7AA-D9B874439793";
+	rename -uid "C199BA66-4C70-88C7-348F-CF91E54C27F2";
 	setAttr ".cdl" 2;
 	setAttr -s 4 ".dli[1:3]"  1 2 3;
 	setAttr -s 3 ".dli";
@@ -2729,7 +2729,7 @@ createNode displayLayer -n "defaultLayer";
 	rename -uid "A23DB64A-4C36-B067-47D3-C88B0EC9E7EA";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "EC06896B-4010-F886-32AD-7494E41D33B9";
+	rename -uid "3FBEDF1C-4201-F52F-F7E2-81BB70314AD9";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "823077E7-4FE8-3610-E020-EDA3CF0464E8";
 	setAttr ".g" yes;
@@ -2787,7 +2787,7 @@ createNode script -n "sceneConfigurationScriptNode";
 createNode aiOptions -s -n "defaultArnoldRenderOptions";
 	rename -uid "9BD3981C-43CE-45CA-E150-52AC94FC80D6";
 	addAttr -ci true -sn "ARV_options" -ln "ARV_options" -dt "string";
-	setAttr -s 4 ".aovs";
+	setAttr -s 3 ".aovs";
 	setAttr ".version" -type "string" "5.3.5.2";
 	setAttr ".ARV_options" -type "string" "Test Resolution=100%;Camera=RenderCamShape;Snapshots Folder=D:/trist/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject/images/snapshots/PushPull;Color Management.Gamma=1;Color Management.Exposure=5;Background.BG=BG Color;Background.Color=0 0 0;Background.Image=;Background.Scale=1    1;Background.Offset=0    0;Background.Apply Color Management=1;Foreground.Enable FG=0;Foreground.Image=;Foreground.Scale=1    1;Foreground.Offset=0    0;Foreground.Apply Color Management=1;";
 createNode aiAOVFilter -s -n "defaultArnoldFilter";
@@ -4512,9 +4512,65 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 		2 "Ultimate_Bony_v1_0_5:groupParts177" "inputRemoveComponent" " -type \"componentList\" 1 \"f[0:279]\""
 		
 		2 "Ultimate_Bony_v1_0_5:groupParts177" "groupId" " 267"
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J2CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J2C.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_ROOTCG|Ultimate_Bony_v1_0_5:Bony_ROOTC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:groupId175.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg|Ultimate_Bony_v1_0_5:Bony_L_legShape.instObjGroups.objectGroups[0].objectGroupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg|Ultimate_Bony_v1_0_5:Bony_L_legShape.instObjGroups.objectGroups[0].objectGrpColor" 
+		""
+		3 "Ultimate_Bony_v1_0_5:groupId177.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg|Ultimate_Bony_v1_0_5:Bony_R_legShape.instObjGroups.objectGroups[0].objectGroupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg|Ultimate_Bony_v1_0_5:Bony_R_legShape.instObjGroups.objectGroups[0].objectGrpColor" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristFKCG|Ultimate_Bony_v1_0_5:Bony_rWristFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Neck01CG|Ultimate_Bony_v1_0_5:Bony_Neck01C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J2CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J2C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lShoulderFKCG2|Ultimate_Bony_v1_0_5:Bony_lShoulderFKCG|Ultimate_Bony_v1_0_5:Bony_lShoulderFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J3CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J3C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rKneeIKCG|Ultimate_Bony_v1_0_5:Bony_rKneeIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_HeadCG2|Ultimate_Bony_v1_0_5:Bony_HeadCG|Ultimate_Bony_v1_0_5:Bony_HeadC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rArmSwitchCG|Ultimate_Bony_v1_0_5:Bony_rArmSwitchC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rElbowFKCG|Ultimate_Bony_v1_0_5:Bony_rElbowFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine03FKCG|Ultimate_Bony_v1_0_5:Bony_Spine03FKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rShoulderFKCG2|Ultimate_Bony_v1_0_5:Bony_rShoulderFKCG|Ultimate_Bony_v1_0_5:Bony_rShoulderFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rFootIKCG|Ultimate_Bony_v1_0_5:Bony_rFootIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:groupId177.groupId" "Ultimate_Bony_v1_0_5:groupParts177.groupId" 
 		""
 		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lElbowFKCG|Ultimate_Bony_v1_0_5:Bony_lElbowFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:groupId174.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_arm|Ultimate_Bony_v1_0_5:Bony_L_armShape.instObjGroups.objectGroups[0].objectGroupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_arm|Ultimate_Bony_v1_0_5:Bony_L_armShape.instObjGroups.objectGroups[0].objectGrpColor" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristFKCG|Ultimate_Bony_v1_0_5:Bony_lWristFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J3CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J3C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rLegSwitchCG|Ultimate_Bony_v1_0_5:Bony_rLegSwitchC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ2CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ2C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ3CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ3C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lKneeIKCG|Ultimate_Bony_v1_0_5:Bony_lKneeIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_SpineTopIKCG|Ultimate_Bony_v1_0_5:Bony_SpineTopIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ1CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ1C.drawOverride" 
 		""
 		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_arm|Ultimate_Bony_v1_0_5:Bony_R_armShape.instObjGroups.objectGroups[0]" 
 		"Ultimate_Bony_v1_0_5:char_body_blinn1SG.dagSetMembers" "-na"
@@ -4590,61 +4646,13 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 		"Ultimate_Bony_v1_0_5:char_body_blinn1SG.dagSetMembers" "-na"
 		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_body_Grp|Ultimate_Bony_v1_0_5:Bony_spine1|Ultimate_Bony_v1_0_5:Bony_spineShape1.instObjGroups" 
 		"Ultimate_Bony_v1_0_5:char_body_blinn1SG.dagSetMembers" "-na"
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rArmSwitchCG|Ultimate_Bony_v1_0_5:Bony_rArmSwitchC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ1CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ1C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId177.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg|Ultimate_Bony_v1_0_5:Bony_R_legShape.instObjGroups.objectGroups[0].objectGroupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg|Ultimate_Bony_v1_0_5:Bony_R_legShape.instObjGroups.objectGroups[0].objectGrpColor" 
-		""
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:BonyExtraNodes|Ultimate_Bony_v1_0_5:Bony_ribbon|Ultimate_Bony_v1_0_5:Bony_ribbonShape.instObjGroups" 
-		":initialShadingGroup.dagSetMembers" "-na"
 		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J1CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J1C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId174.groupId" "Ultimate_Bony_v1_0_5:groupParts170.groupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ2CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ2C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J1CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J1C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rKneeIKCG|Ultimate_Bony_v1_0_5:Bony_rKneeIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rShoulderFKCG2|Ultimate_Bony_v1_0_5:Bony_rShoulderFKCG|Ultimate_Bony_v1_0_5:Bony_rShoulderFKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J3CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J3C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId176.groupId" "Ultimate_Bony_v1_0_5:groupParts176.groupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rToeIKCG|Ultimate_Bony_v1_0_5:Bony_rToeIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J1CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J1C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristFKCG|Ultimate_Bony_v1_0_5:Bony_rWristFKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ2CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ2C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rClavicleCG|Ultimate_Bony_v1_0_5:Bony_rClavicleC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristFKCG|Ultimate_Bony_v1_0_5:Bony_lWristFKC.drawOverride" 
 		""
 		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger1J3CG|Ultimate_Bony_v1_0_5:Bony_lFinger1J3C.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_ROOTCG|Ultimate_Bony_v1_0_5:Bony_ROOTC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J1CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J1C.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Pelvis.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_MainHipCG|Ultimate_Bony_v1_0_5:Bony_MainHipC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId175.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg|Ultimate_Bony_v1_0_5:Bony_L_legShape.instObjGroups.objectGroups[0].objectGroupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg|Ultimate_Bony_v1_0_5:Bony_L_legShape.instObjGroups.objectGroups[0].objectGrpColor" 
-		""
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:BonyExtraNodes|Ultimate_Bony_v1_0_5:Bony_ribbonBlend|Ultimate_Bony_v1_0_5:Bony_ribbonBlendShape.instObjGroups" 
-		":initialShadingGroup.dagSetMembers" "-na"
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine03FKCG|Ultimate_Bony_v1_0_5:Bony_Spine03FKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Neck01CG|Ultimate_Bony_v1_0_5:Bony_Neck01C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_SpineTopIKCG|Ultimate_Bony_v1_0_5:Bony_SpineTopIKC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J2CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J2C.drawOverride" 
 		""
 		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_wrist|Ultimate_Bony_v1_0_5:Bony_R_wristShape.instObjGroups" 
 		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
@@ -4672,65 +4680,57 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
 		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_body_Grp|Ultimate_Bony_v1_0_5:Bony_neck|Ultimate_Bony_v1_0_5:Bony_neckShape.instObjGroups" 
 		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J1CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J1C.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J2CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J2C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lArmSwitchCG|Ultimate_Bony_v1_0_5:Bony_lArmSwitchC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lFootIKCG|Ultimate_Bony_v1_0_5:Bony_lFootIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId174.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_arm|Ultimate_Bony_v1_0_5:Bony_L_armShape.instObjGroups.objectGroups[0].objectGroupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_arm|Ultimate_Bony_v1_0_5:Bony_L_armShape.instObjGroups.objectGroups[0].objectGrpColor" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lLegSwitchCG|Ultimate_Bony_v1_0_5:Bony_lLegSwitchC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lToeIKCG|Ultimate_Bony_v1_0_5:Bony_lToeIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J3CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J3C.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lClavicleCG|Ultimate_Bony_v1_0_5:Bony_lClavicleC.drawOverride" 
 		""
 		3 "Ultimate_Bony_v1_0_5:groupId176.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_arm|Ultimate_Bony_v1_0_5:Bony_R_armShape.instObjGroups.objectGroups[0].objectGroupId" 
 		""
 		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_arm|Ultimate_Bony_v1_0_5:Bony_R_armShape.instObjGroups.objectGroups[0].objectGrpColor" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger1J1CG|Ultimate_Bony_v1_0_5:Bony_lFinger1J1C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lShoulderFKCG2|Ultimate_Bony_v1_0_5:Bony_lShoulderFKCG|Ultimate_Bony_v1_0_5:Bony_lShoulderFKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine01FKCG|Ultimate_Bony_v1_0_5:Bony_Spine01FKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine02FKCG|Ultimate_Bony_v1_0_5:Bony_Spine02FKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ1CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ1C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rFootIKCG|Ultimate_Bony_v1_0_5:Bony_rFootIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lClavicleCG|Ultimate_Bony_v1_0_5:Bony_lClavicleC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ3CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ3C.drawOverride" 
-		""
 		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger1J2CG|Ultimate_Bony_v1_0_5:Bony_lFinger1J2C.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lKneeIKCG|Ultimate_Bony_v1_0_5:Bony_lKneeIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J2CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J2C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J3CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J3C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ3CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ3C.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rToeIKCG|Ultimate_Bony_v1_0_5:Bony_rToeIKC.drawOverride" 
 		""
 		3 "Ultimate_Bony_v1_0_5:groupId175.groupId" "Ultimate_Bony_v1_0_5:groupParts173.groupId" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_HeadCG2|Ultimate_Bony_v1_0_5:Bony_HeadCG|Ultimate_Bony_v1_0_5:Bony_HeadC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Pelvis.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_MainHipCG|Ultimate_Bony_v1_0_5:Bony_MainHipC.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:groupId177.groupId" "Ultimate_Bony_v1_0_5:groupParts177.groupId" 
+		3 "Ultimate_Bony_v1_0_5:groupId174.groupId" "Ultimate_Bony_v1_0_5:groupParts170.groupId" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rElbowFKCG|Ultimate_Bony_v1_0_5:Bony_rElbowFKC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ2CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ2C.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rLegSwitchCG|Ultimate_Bony_v1_0_5:Bony_rLegSwitchC.drawOverride" 
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:BonyExtraNodes|Ultimate_Bony_v1_0_5:Bony_ribbon|Ultimate_Bony_v1_0_5:Bony_ribbonShape.instObjGroups" 
+		":initialShadingGroup.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:BonyExtraNodes|Ultimate_Bony_v1_0_5:Bony_ribbonBlend|Ultimate_Bony_v1_0_5:Bony_ribbonBlendShape.instObjGroups" 
+		":initialShadingGroup.dagSetMembers" "-na"
+		3 "Ultimate_Bony_v1_0_5:groupId176.groupId" "Ultimate_Bony_v1_0_5:groupParts176.groupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lLegSwitchCG|Ultimate_Bony_v1_0_5:Bony_lLegSwitchC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lFootIKCG|Ultimate_Bony_v1_0_5:Bony_lFootIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lArmSwitchCG|Ultimate_Bony_v1_0_5:Bony_lArmSwitchC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J2CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J2C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger1J1CG|Ultimate_Bony_v1_0_5:Bony_lFinger1J1C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ3CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ3C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ1CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ1C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rClavicleCG|Ultimate_Bony_v1_0_5:Bony_rClavicleC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine02FKCG|Ultimate_Bony_v1_0_5:Bony_Spine02FKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine01FKCG|Ultimate_Bony_v1_0_5:Bony_Spine01FKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lToeIKCG|Ultimate_Bony_v1_0_5:Bony_lToeIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J3CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J3C.drawOverride" 
 		""
 		5 4 "Ultimate_Bony_v1_0_5RN" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT.GlobalScale" 
 		"Ultimate_Bony_v1_0_5RN.placeHolderList[1]" ""
@@ -7401,7 +7401,7 @@ createNode shadingEngine -n "standardSurface2SG";
 	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
 	setAttr ".ihi" 0;
 	setAttr ".ro" yes;
-	setAttr -s 38 ".aovs";
+	setAttr -s 37 ".aovs";
 	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
 	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
 	setAttr ".aovs[6].aov_name" -type "string" "shadow";
@@ -7432,15 +7432,14 @@ createNode shadingEngine -n "standardSurface2SG";
 	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
 	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
 	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
-	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
 	setAttr ".aovs[35].aov_name" -type "string" "sss";
 	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
 	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
 	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
 	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
 	setAttr ".aovs[40].aov_name" -type "string" "specular";
-	setAttr ".aovs[41].aov_name" -type "string" "indirect";
-	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
+	setAttr ".aovs[41].aov_name" -type "string" "diffuse";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_background" "aiCustomAOVs[10]" "ai_aov_denoise_albedo" "aiCustomAOVs[11]" "ai_aov_shadow_matte" "aiCustomAOVs[12]" "ai_aov_volume" "aiCustomAOVs[13]" "ai_aov_highlight" "aiCustomAOVs[14]" "ai_aov_Z" "aiCustomAOVs[15]" "ai_aov_transmission" "aiCustomAOVs[16]" "ai_aov_RGBA" "aiCustomAOVs[17]" "ai_aov_albedo" "aiCustomAOVs[18]" "ai_aov_coat" "aiCustomAOVs[19]" "ai_aov_coat_albedo" "aiCustomAOVs[20]" "ai_aov_coat_direct" "aiCustomAOVs[21]" "ai_aov_coat_indirect" "aiCustomAOVs[22]" "ai_aov_cputime" "aiCustomAOVs[23]" "ai_aov_direct" "aiCustomAOVs[24]" "ai_aov_emission" "aiCustomAOVs[25]" "ai_aov_opacity" "aiCustomAOVs[26]" "ai_aov_raycount" "aiCustomAOVs[27]" "ai_aov_sheen" "aiCustomAOVs[28]" "ai_aov_sheen_albedo" "aiCustomAOVs[29]" "ai_aov_sheen_direct" "aiCustomAOVs[30]" "ai_aov_sheen_indirect" "aiCustomAOVs[31]" "ai_aov_specular_albedo" "aiCustomAOVs[32]" "ai_aov_specular_direct" "aiCustomAOVs[33]" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35]" "ai_aov_sss_albedo" "aiCustomAOVs[36]" "ai_aov_sss_direct" "aiCustomAOVs[37]" "ai_aov_sss_indirect" "aiCustomAOVs[38]" "ai_aov_rim_light" "aiCustomAOVs[39]" "ai_aov_specular" "aiCustomAOVs[40]" "ai_aov_indirect" "aiCustomAOVs[41]" "ai_aov_diffuse" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6]" "ai_aov_shadow_diff" "aiCustomAOVs[7]" "ai_aov_shadow_mask" "aiCustomAOVs[8]" "ai_aov_ID" "aiCustomAOVs[9]" ;
 createNode materialInfo -n "materialInfo1";
 	rename -uid "CF56E0A1-4B47-7F10-C2BD-2C953B9B8644";
 createNode standardSurface -n "Bow_mat";
@@ -7463,7 +7462,7 @@ createNode shadingEngine -n "standardSurface3SG";
 	setAttr ".ihi" 0;
 	setAttr -s 4 ".dsm";
 	setAttr ".ro" yes;
-	setAttr -s 38 ".aovs";
+	setAttr -s 37 ".aovs";
 	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
 	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
 	setAttr ".aovs[6].aov_name" -type "string" "shadow";
@@ -7494,15 +7493,14 @@ createNode shadingEngine -n "standardSurface3SG";
 	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
 	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
 	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
-	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
 	setAttr ".aovs[35].aov_name" -type "string" "sss";
 	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
 	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
 	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
 	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
 	setAttr ".aovs[40].aov_name" -type "string" "specular";
-	setAttr ".aovs[41].aov_name" -type "string" "indirect";
-	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
+	setAttr ".aovs[41].aov_name" -type "string" "diffuse";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_background" "aiCustomAOVs[10]" "ai_aov_denoise_albedo" "aiCustomAOVs[11]" "ai_aov_shadow_matte" "aiCustomAOVs[12]" "ai_aov_volume" "aiCustomAOVs[13]" "ai_aov_highlight" "aiCustomAOVs[14]" "ai_aov_Z" "aiCustomAOVs[15]" "ai_aov_transmission" "aiCustomAOVs[16]" "ai_aov_RGBA" "aiCustomAOVs[17]" "ai_aov_albedo" "aiCustomAOVs[18]" "ai_aov_coat" "aiCustomAOVs[19]" "ai_aov_coat_albedo" "aiCustomAOVs[20]" "ai_aov_coat_direct" "aiCustomAOVs[21]" "ai_aov_coat_indirect" "aiCustomAOVs[22]" "ai_aov_cputime" "aiCustomAOVs[23]" "ai_aov_direct" "aiCustomAOVs[24]" "ai_aov_emission" "aiCustomAOVs[25]" "ai_aov_opacity" "aiCustomAOVs[26]" "ai_aov_raycount" "aiCustomAOVs[27]" "ai_aov_sheen" "aiCustomAOVs[28]" "ai_aov_sheen_albedo" "aiCustomAOVs[29]" "ai_aov_sheen_direct" "aiCustomAOVs[30]" "ai_aov_sheen_indirect" "aiCustomAOVs[31]" "ai_aov_specular_albedo" "aiCustomAOVs[32]" "ai_aov_specular_direct" "aiCustomAOVs[33]" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35]" "ai_aov_sss_albedo" "aiCustomAOVs[36]" "ai_aov_sss_direct" "aiCustomAOVs[37]" "ai_aov_sss_indirect" "aiCustomAOVs[38]" "ai_aov_rim_light" "aiCustomAOVs[39]" "ai_aov_specular" "aiCustomAOVs[40]" "ai_aov_indirect" "aiCustomAOVs[41]" "ai_aov_diffuse" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6]" "ai_aov_shadow_diff" "aiCustomAOVs[7]" "ai_aov_shadow_mask" "aiCustomAOVs[8]" "ai_aov_ID" "aiCustomAOVs[9]" ;
 createNode materialInfo -n "materialInfo2";
 	rename -uid "3BA94435-49AF-101C-B87F-9D81FCA2C46C";
 createNode standardSurface -n "ground_mat";
@@ -7524,7 +7522,7 @@ createNode shadingEngine -n "standardSurface4SG";
 	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
 	setAttr ".ihi" 0;
 	setAttr ".ro" yes;
-	setAttr -s 38 ".aovs";
+	setAttr -s 37 ".aovs";
 	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
 	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
 	setAttr ".aovs[6].aov_name" -type "string" "shadow";
@@ -7555,15 +7553,14 @@ createNode shadingEngine -n "standardSurface4SG";
 	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
 	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
 	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
-	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
 	setAttr ".aovs[35].aov_name" -type "string" "sss";
 	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
 	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
 	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
 	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
 	setAttr ".aovs[40].aov_name" -type "string" "specular";
-	setAttr ".aovs[41].aov_name" -type "string" "indirect";
-	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
+	setAttr ".aovs[41].aov_name" -type "string" "diffuse";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_background" "aiCustomAOVs[10]" "ai_aov_denoise_albedo" "aiCustomAOVs[11]" "ai_aov_shadow_matte" "aiCustomAOVs[12]" "ai_aov_volume" "aiCustomAOVs[13]" "ai_aov_highlight" "aiCustomAOVs[14]" "ai_aov_Z" "aiCustomAOVs[15]" "ai_aov_transmission" "aiCustomAOVs[16]" "ai_aov_RGBA" "aiCustomAOVs[17]" "ai_aov_albedo" "aiCustomAOVs[18]" "ai_aov_coat" "aiCustomAOVs[19]" "ai_aov_coat_albedo" "aiCustomAOVs[20]" "ai_aov_coat_direct" "aiCustomAOVs[21]" "ai_aov_coat_indirect" "aiCustomAOVs[22]" "ai_aov_cputime" "aiCustomAOVs[23]" "ai_aov_direct" "aiCustomAOVs[24]" "ai_aov_emission" "aiCustomAOVs[25]" "ai_aov_opacity" "aiCustomAOVs[26]" "ai_aov_raycount" "aiCustomAOVs[27]" "ai_aov_sheen" "aiCustomAOVs[28]" "ai_aov_sheen_albedo" "aiCustomAOVs[29]" "ai_aov_sheen_direct" "aiCustomAOVs[30]" "ai_aov_sheen_indirect" "aiCustomAOVs[31]" "ai_aov_specular_albedo" "aiCustomAOVs[32]" "ai_aov_specular_direct" "aiCustomAOVs[33]" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35]" "ai_aov_sss_albedo" "aiCustomAOVs[36]" "ai_aov_sss_direct" "aiCustomAOVs[37]" "ai_aov_sss_indirect" "aiCustomAOVs[38]" "ai_aov_rim_light" "aiCustomAOVs[39]" "ai_aov_specular" "aiCustomAOVs[40]" "ai_aov_indirect" "aiCustomAOVs[41]" "ai_aov_diffuse" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6]" "ai_aov_shadow_diff" "aiCustomAOVs[7]" "ai_aov_shadow_mask" "aiCustomAOVs[8]" "ai_aov_ID" "aiCustomAOVs[9]" ;
 createNode materialInfo -n "materialInfo3";
 	rename -uid "7CB2375E-44B6-4E00-5725-C7928429508F";
 createNode standardSurface -n "wall_mat";
@@ -7576,7 +7573,7 @@ createNode shadingEngine -n "standardSurface5SG";
 	setAttr ".ihi" 0;
 	setAttr -s 2 ".dsm";
 	setAttr ".ro" yes;
-	setAttr -s 38 ".aovs";
+	setAttr -s 37 ".aovs";
 	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
 	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
 	setAttr ".aovs[6].aov_name" -type "string" "shadow";
@@ -7607,15 +7604,14 @@ createNode shadingEngine -n "standardSurface5SG";
 	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
 	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
 	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
-	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
 	setAttr ".aovs[35].aov_name" -type "string" "sss";
 	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
 	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
 	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
 	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
 	setAttr ".aovs[40].aov_name" -type "string" "specular";
-	setAttr ".aovs[41].aov_name" -type "string" "indirect";
-	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
+	setAttr ".aovs[41].aov_name" -type "string" "diffuse";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_background" "aiCustomAOVs[10]" "ai_aov_denoise_albedo" "aiCustomAOVs[11]" "ai_aov_shadow_matte" "aiCustomAOVs[12]" "ai_aov_volume" "aiCustomAOVs[13]" "ai_aov_highlight" "aiCustomAOVs[14]" "ai_aov_Z" "aiCustomAOVs[15]" "ai_aov_transmission" "aiCustomAOVs[16]" "ai_aov_RGBA" "aiCustomAOVs[17]" "ai_aov_albedo" "aiCustomAOVs[18]" "ai_aov_coat" "aiCustomAOVs[19]" "ai_aov_coat_albedo" "aiCustomAOVs[20]" "ai_aov_coat_direct" "aiCustomAOVs[21]" "ai_aov_coat_indirect" "aiCustomAOVs[22]" "ai_aov_cputime" "aiCustomAOVs[23]" "ai_aov_direct" "aiCustomAOVs[24]" "ai_aov_emission" "aiCustomAOVs[25]" "ai_aov_opacity" "aiCustomAOVs[26]" "ai_aov_raycount" "aiCustomAOVs[27]" "ai_aov_sheen" "aiCustomAOVs[28]" "ai_aov_sheen_albedo" "aiCustomAOVs[29]" "ai_aov_sheen_direct" "aiCustomAOVs[30]" "ai_aov_sheen_indirect" "aiCustomAOVs[31]" "ai_aov_specular_albedo" "aiCustomAOVs[32]" "ai_aov_specular_direct" "aiCustomAOVs[33]" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35]" "ai_aov_sss_albedo" "aiCustomAOVs[36]" "ai_aov_sss_direct" "aiCustomAOVs[37]" "ai_aov_sss_indirect" "aiCustomAOVs[38]" "ai_aov_rim_light" "aiCustomAOVs[39]" "ai_aov_specular" "aiCustomAOVs[40]" "ai_aov_indirect" "aiCustomAOVs[41]" "ai_aov_diffuse" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6]" "ai_aov_shadow_diff" "aiCustomAOVs[7]" "ai_aov_shadow_mask" "aiCustomAOVs[8]" "ai_aov_ID" "aiCustomAOVs[9]" ;
 createNode materialInfo -n "materialInfo4";
 	rename -uid "9F779F32-4F16-5433-B755-5189045C098B";
 createNode animCurveTL -n "Bony_rWristIKC_translateX";
@@ -7967,7 +7963,7 @@ createNode shadingEngine -n "standardSurface6SG";
 	setAttr ".ihi" 0;
 	setAttr -s 48 ".dsm";
 	setAttr ".ro" yes;
-	setAttr -s 38 ".aovs";
+	setAttr -s 37 ".aovs";
 	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
 	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
 	setAttr ".aovs[6].aov_name" -type "string" "shadow";
@@ -7998,15 +7994,14 @@ createNode shadingEngine -n "standardSurface6SG";
 	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
 	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
 	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
-	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
 	setAttr ".aovs[35].aov_name" -type "string" "sss";
 	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
 	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
 	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
 	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
 	setAttr ".aovs[40].aov_name" -type "string" "specular";
-	setAttr ".aovs[41].aov_name" -type "string" "indirect";
-	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
+	setAttr ".aovs[41].aov_name" -type "string" "diffuse";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_background" "aiCustomAOVs[10]" "ai_aov_denoise_albedo" "aiCustomAOVs[11]" "ai_aov_shadow_matte" "aiCustomAOVs[12]" "ai_aov_volume" "aiCustomAOVs[13]" "ai_aov_highlight" "aiCustomAOVs[14]" "ai_aov_Z" "aiCustomAOVs[15]" "ai_aov_transmission" "aiCustomAOVs[16]" "ai_aov_RGBA" "aiCustomAOVs[17]" "ai_aov_albedo" "aiCustomAOVs[18]" "ai_aov_coat" "aiCustomAOVs[19]" "ai_aov_coat_albedo" "aiCustomAOVs[20]" "ai_aov_coat_direct" "aiCustomAOVs[21]" "ai_aov_coat_indirect" "aiCustomAOVs[22]" "ai_aov_cputime" "aiCustomAOVs[23]" "ai_aov_direct" "aiCustomAOVs[24]" "ai_aov_emission" "aiCustomAOVs[25]" "ai_aov_opacity" "aiCustomAOVs[26]" "ai_aov_raycount" "aiCustomAOVs[27]" "ai_aov_sheen" "aiCustomAOVs[28]" "ai_aov_sheen_albedo" "aiCustomAOVs[29]" "ai_aov_sheen_direct" "aiCustomAOVs[30]" "ai_aov_sheen_indirect" "aiCustomAOVs[31]" "ai_aov_specular_albedo" "aiCustomAOVs[32]" "ai_aov_specular_direct" "aiCustomAOVs[33]" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35]" "ai_aov_sss_albedo" "aiCustomAOVs[36]" "ai_aov_sss_direct" "aiCustomAOVs[37]" "ai_aov_sss_indirect" "aiCustomAOVs[38]" "ai_aov_rim_light" "aiCustomAOVs[39]" "ai_aov_specular" "aiCustomAOVs[40]" "ai_aov_indirect" "aiCustomAOVs[41]" "ai_aov_diffuse" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6]" "ai_aov_shadow_diff" "aiCustomAOVs[7]" "ai_aov_shadow_mask" "aiCustomAOVs[8]" "ai_aov_ID" "aiCustomAOVs[9]" ;
 createNode materialInfo -n "materialInfo5";
 	rename -uid "C1865FA7-4A1C-92C3-1D13-8886BF22360C";
 createNode aiFog -n "aiFog";
@@ -8028,13 +8023,9 @@ createNode aiAOV -n "aiAOV_specular";
 	rename -uid "71249387-4DFF-CF10-E874-E5AFFAC47C6B";
 	setAttr ".aovn" -type "string" "specular";
 	setAttr ".aovt" 5;
-createNode aiAOV -n "aiAOV_specular_indirect";
-	rename -uid "959BF857-454C-8A65-81F0-208195CB86AA";
-	setAttr ".aovn" -type "string" "specular_indirect";
-	setAttr ".aovt" 5;
-createNode aiAOV -n "aiAOV_indirect";
-	rename -uid "AEDC77B3-495A-ABE4-0A08-B68561645C0C";
-	setAttr ".aovn" -type "string" "indirect";
+createNode aiAOV -n "aiAOV_diffuse";
+	rename -uid "86AE9ED0-4F19-FA32-6E3B-A08A4DDC1AA3";
+	setAttr ".aovn" -type "string" "diffuse";
 	setAttr ".aovt" 5;
 select -ne :time1;
 	setAttr ".o" 70;
@@ -8065,7 +8056,7 @@ select -ne :standardSurface1;
 select -ne :initialShadingGroup;
 	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
 	setAttr ".ro" yes;
-	setAttr -s 37 ".aovs";
+	setAttr -s 36 ".aovs";
 	setAttr ".aovs[0].aov_name" -type "string" "diffuse";
 	setAttr ".aovs[1].aov_name" -type "string" "specular";
 	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
@@ -8096,18 +8087,17 @@ select -ne :initialShadingGroup;
 	setAttr ".aovs[29].aov_name" -type "string" "sheen_indirect";
 	setAttr ".aovs[30].aov_name" -type "string" "specular_albedo";
 	setAttr ".aovs[31].aov_name" -type "string" "specular_direct";
-	setAttr ".aovs[32].aov_name" -type "string" "specular_indirect";
 	setAttr ".aovs[33].aov_name" -type "string" "sss";
 	setAttr ".aovs[34].aov_name" -type "string" "sss_albedo";
 	setAttr ".aovs[35].aov_name" -type "string" "sss_direct";
 	setAttr ".aovs[36].aov_name" -type "string" "sss_indirect";
 	setAttr ".aovs[37].aov_name" -type "string" "rim_light";
 	setAttr ".aovs[38].aov_name" -type "string" "indirect";
-	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[10].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[11].aovName" "ai_aov_volume" "aiCustomAOVs[12].aovName" "ai_aov_highlight" "aiCustomAOVs[13].aovName" "ai_aov_Z" "aiCustomAOVs[14].aovName" "ai_aov_RGBA" "aiCustomAOVs[15].aovName" "ai_aov_albedo" "aiCustomAOVs[16].aovName" "ai_aov_coat" "aiCustomAOVs[17].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat_direct" "aiCustomAOVs[19].aovName" "ai_aov_specular" "aiCustomAOVs[1]" "ai_aov_coat_indirect" "aiCustomAOVs[20].aovName" "ai_aov_cputime" "aiCustomAOVs[21].aovName" "ai_aov_direct" "aiCustomAOVs[22].aovName" "ai_aov_emission" "aiCustomAOVs[23].aovName" "ai_aov_opacity" "aiCustomAOVs[24].aovName" "ai_aov_raycount" "aiCustomAOVs[25].aovName" "ai_aov_sheen" "aiCustomAOVs[26].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[27].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[28].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[29].aovName" "ai_aov_transmission" "aiCustomAOVs[2]" "ai_aov_specular_albedo" "aiCustomAOVs[30].aovName" "ai_aov_specular_direct" "aiCustomAOVs[31].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[32]" "ai_aov_sss" "aiCustomAOVs[33].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[34].aovName" "ai_aov_sss_direct" "aiCustomAOVs[35].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[36].aovName" "ai_aov_rim_light" "aiCustomAOVs[37].aovName" "ai_aov_indirect" "aiCustomAOVs[38].aovName" "ai_aov_shadow" "aiCustomAOVs[3]" "ai_aov_diffuse_direct" "aiCustomAOVs[4].aovName" "ai_aov_diffuse_indirect" "aiCustomAOVs[5].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[6].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[7].aovName" "ai_aov_ID" "aiCustomAOVs[8].aovName" "ai_aov_background" "aiCustomAOVs[9].aovName" ;
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_denoise_albedo" "aiCustomAOVs[10].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[11].aovName" "ai_aov_volume" "aiCustomAOVs[12].aovName" "ai_aov_highlight" "aiCustomAOVs[13].aovName" "ai_aov_Z" "aiCustomAOVs[14].aovName" "ai_aov_RGBA" "aiCustomAOVs[15].aovName" "ai_aov_albedo" "aiCustomAOVs[16].aovName" "ai_aov_coat" "aiCustomAOVs[17].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat_direct" "aiCustomAOVs[19].aovName" "ai_aov_specular" "aiCustomAOVs[1]" "ai_aov_coat_indirect" "aiCustomAOVs[20].aovName" "ai_aov_cputime" "aiCustomAOVs[21].aovName" "ai_aov_direct" "aiCustomAOVs[22].aovName" "ai_aov_emission" "aiCustomAOVs[23].aovName" "ai_aov_opacity" "aiCustomAOVs[24].aovName" "ai_aov_raycount" "aiCustomAOVs[25].aovName" "ai_aov_sheen" "aiCustomAOVs[26].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[27].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[28].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[29].aovName" "ai_aov_transmission" "aiCustomAOVs[2]" "ai_aov_specular_albedo" "aiCustomAOVs[30].aovName" "ai_aov_specular_direct" "aiCustomAOVs[31].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[32]" "ai_aov_sss" "aiCustomAOVs[33].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[34].aovName" "ai_aov_sss_direct" "aiCustomAOVs[35].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[36].aovName" "ai_aov_rim_light" "aiCustomAOVs[37].aovName" "ai_aov_indirect" "aiCustomAOVs[38].aovName" "ai_aov_shadow" "aiCustomAOVs[3]" "ai_aov_diffuse_direct" "aiCustomAOVs[4].aovName" "ai_aov_diffuse_indirect" "aiCustomAOVs[5].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[6].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[7].aovName" "ai_aov_ID" "aiCustomAOVs[8].aovName" "ai_aov_background" "aiCustomAOVs[9].aovName" ;
 select -ne :initialParticleSE;
 	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
 	setAttr ".ro" yes;
-	setAttr -s 37 ".aovs";
+	setAttr -s 36 ".aovs";
 	setAttr ".aovs[0].aov_name" -type "string" "diffuse";
 	setAttr ".aovs[1].aov_name" -type "string" "specular";
 	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
@@ -8138,14 +8128,13 @@ select -ne :initialParticleSE;
 	setAttr ".aovs[29].aov_name" -type "string" "sheen_indirect";
 	setAttr ".aovs[30].aov_name" -type "string" "specular_albedo";
 	setAttr ".aovs[31].aov_name" -type "string" "specular_direct";
-	setAttr ".aovs[32].aov_name" -type "string" "specular_indirect";
 	setAttr ".aovs[33].aov_name" -type "string" "sss";
 	setAttr ".aovs[34].aov_name" -type "string" "sss_albedo";
 	setAttr ".aovs[35].aov_name" -type "string" "sss_direct";
 	setAttr ".aovs[36].aov_name" -type "string" "sss_indirect";
 	setAttr ".aovs[37].aov_name" -type "string" "rim_light";
 	setAttr ".aovs[38].aov_name" -type "string" "indirect";
-	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[10].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[11].aovName" "ai_aov_volume" "aiCustomAOVs[12].aovName" "ai_aov_highlight" "aiCustomAOVs[13].aovName" "ai_aov_Z" "aiCustomAOVs[14].aovName" "ai_aov_RGBA" "aiCustomAOVs[15].aovName" "ai_aov_albedo" "aiCustomAOVs[16].aovName" "ai_aov_coat" "aiCustomAOVs[17].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat_direct" "aiCustomAOVs[19].aovName" "ai_aov_specular" "aiCustomAOVs[1]" "ai_aov_coat_indirect" "aiCustomAOVs[20].aovName" "ai_aov_cputime" "aiCustomAOVs[21].aovName" "ai_aov_direct" "aiCustomAOVs[22].aovName" "ai_aov_emission" "aiCustomAOVs[23].aovName" "ai_aov_opacity" "aiCustomAOVs[24].aovName" "ai_aov_raycount" "aiCustomAOVs[25].aovName" "ai_aov_sheen" "aiCustomAOVs[26].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[27].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[28].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[29].aovName" "ai_aov_transmission" "aiCustomAOVs[2]" "ai_aov_specular_albedo" "aiCustomAOVs[30].aovName" "ai_aov_specular_direct" "aiCustomAOVs[31].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[32]" "ai_aov_sss" "aiCustomAOVs[33].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[34].aovName" "ai_aov_sss_direct" "aiCustomAOVs[35].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[36].aovName" "ai_aov_rim_light" "aiCustomAOVs[37].aovName" "ai_aov_indirect" "aiCustomAOVs[38].aovName" "ai_aov_shadow" "aiCustomAOVs[3]" "ai_aov_diffuse_direct" "aiCustomAOVs[4].aovName" "ai_aov_diffuse_indirect" "aiCustomAOVs[5].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[6].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[7].aovName" "ai_aov_ID" "aiCustomAOVs[8].aovName" "ai_aov_background" "aiCustomAOVs[9].aovName" ;
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_denoise_albedo" "aiCustomAOVs[10].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[11].aovName" "ai_aov_volume" "aiCustomAOVs[12].aovName" "ai_aov_highlight" "aiCustomAOVs[13].aovName" "ai_aov_Z" "aiCustomAOVs[14].aovName" "ai_aov_RGBA" "aiCustomAOVs[15].aovName" "ai_aov_albedo" "aiCustomAOVs[16].aovName" "ai_aov_coat" "aiCustomAOVs[17].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat_direct" "aiCustomAOVs[19].aovName" "ai_aov_specular" "aiCustomAOVs[1]" "ai_aov_coat_indirect" "aiCustomAOVs[20].aovName" "ai_aov_cputime" "aiCustomAOVs[21].aovName" "ai_aov_direct" "aiCustomAOVs[22].aovName" "ai_aov_emission" "aiCustomAOVs[23].aovName" "ai_aov_opacity" "aiCustomAOVs[24].aovName" "ai_aov_raycount" "aiCustomAOVs[25].aovName" "ai_aov_sheen" "aiCustomAOVs[26].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[27].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[28].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[29].aovName" "ai_aov_transmission" "aiCustomAOVs[2]" "ai_aov_specular_albedo" "aiCustomAOVs[30].aovName" "ai_aov_specular_direct" "aiCustomAOVs[31].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[32]" "ai_aov_sss" "aiCustomAOVs[33].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[34].aovName" "ai_aov_sss_direct" "aiCustomAOVs[35].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[36].aovName" "ai_aov_rim_light" "aiCustomAOVs[37].aovName" "ai_aov_indirect" "aiCustomAOVs[38].aovName" "ai_aov_shadow" "aiCustomAOVs[3]" "ai_aov_diffuse_direct" "aiCustomAOVs[4].aovName" "ai_aov_diffuse_indirect" "aiCustomAOVs[5].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[6].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[7].aovName" "ai_aov_ID" "aiCustomAOVs[8].aovName" "ai_aov_background" "aiCustomAOVs[9].aovName" ;
 select -ne :defaultRenderGlobals;
 	addAttr -ci true -h true -sn "dss" -ln "defaultSurfaceShader" -dt "string";
 	setAttr ".ren" -type "string" "arnold";
@@ -8521,9 +8510,7 @@ connectAttr "aiImagerDenoiserNoice1.msg" ":defaultArnoldRenderOptions.imagers" -
 		;
 connectAttr "aiAOV_direct.msg" ":defaultArnoldRenderOptions.aovs" -na;
 connectAttr "aiAOV_specular.msg" ":defaultArnoldRenderOptions.aovs" -na;
-connectAttr "aiAOV_specular_indirect.msg" ":defaultArnoldRenderOptions.aovs" -na
-		;
-connectAttr "aiAOV_indirect.msg" ":defaultArnoldRenderOptions.aovs" -na;
+connectAttr "aiAOV_diffuse.msg" ":defaultArnoldRenderOptions.aovs" -na;
 connectAttr "polyCube1.out" "transformGeometry1.ig";
 connectAttr "layerManager.dli[1]" "Enviornment.id";
 connectAttr "polyTweak1.out" "polySubdFace1.ip";
@@ -8556,10 +8543,8 @@ connectAttr ":defaultArnoldDriver.msg" "aiAOV_direct.out[0].drvr";
 connectAttr ":defaultArnoldFilter.msg" "aiAOV_direct.out[0].ftr";
 connectAttr ":defaultArnoldDriver.msg" "aiAOV_specular.out[0].drvr";
 connectAttr ":defaultArnoldFilter.msg" "aiAOV_specular.out[0].ftr";
-connectAttr ":defaultArnoldDriver.msg" "aiAOV_specular_indirect.out[0].drvr";
-connectAttr ":defaultArnoldFilter.msg" "aiAOV_specular_indirect.out[0].ftr";
-connectAttr ":defaultArnoldDriver.msg" "aiAOV_indirect.out[0].drvr";
-connectAttr ":defaultArnoldFilter.msg" "aiAOV_indirect.out[0].ftr";
+connectAttr ":defaultArnoldDriver.msg" "aiAOV_diffuse.out[0].drvr";
+connectAttr ":defaultArnoldFilter.msg" "aiAOV_diffuse.out[0].ftr";
 connectAttr "standardSurface2SG.pa" ":renderPartition.st" -na;
 connectAttr "standardSurface3SG.pa" ":renderPartition.st" -na;
 connectAttr "standardSurface4SG.pa" ":renderPartition.st" -na;
