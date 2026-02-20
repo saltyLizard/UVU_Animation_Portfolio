@@ -1,31 +1,35 @@
 //Maya ASCII 2025ff03 scene
 //Name: PushPull.ma
-//Last modified: Tue, Feb 17, 2026 01:27:36 PM
+//Last modified: Fri, Feb 20, 2026 04:15:16 PM
 //Codeset: 1252
 file -rdi 1 -ns "Ultimate_Bony_v1_0_5" -rfn "Ultimate_Bony_v1_0_5RN" -op "v=0;"
 		 -typ "mayaAscii" "D:/trist/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/-rigged walkers and stuff/Ultimate_Bony_v1.0.5.ma";
 file -r -ns "Ultimate_Bony_v1_0_5" -dr 1 -rfn "Ultimate_Bony_v1_0_5RN" -op "v=0;"
 		 -typ "mayaAscii" "D:/trist/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/-rigged walkers and stuff/Ultimate_Bony_v1.0.5.ma";
 requires maya "2025ff03";
+requires "stereoCamera" "10.0";
 requires -nodeType "aiOptions" -nodeType "aiAOV" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter"
-		 -nodeType "aiAreaLight" -nodeType "aiFog" -nodeType "aiImagerDenoiserNoice" "mtoa" "5.4.2.1";
+		 -nodeType "aiAreaLight" -nodeType "aiToon" -nodeType "aiFog" -nodeType "aiImagerDenoiserNoice"
+		 "mtoa" "5.4.2.1";
+requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "27E16FBE-4EEB-3A72-F6F2-E8A2F60EAE93";
+fileInfo "UUID" "9CD7AE78-47F6-4B4F-8950-C883DF2E7595";
 createNode transform -s -n "persp";
 	rename -uid "3015C25D-4209-1A21-3C8A-C085F14D2B5E";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 28.407914540069374 9.7761565313301126 -2.073082480742769 ;
-	setAttr ".r" -type "double3" -8.9999999999949623 458.39999999957433 0 ;
+	setAttr ".t" -type "double3" 63.90490729287329 43.143073536722945 8.0661048566745102 ;
+	setAttr ".r" -type "double3" -23.999999999967059 454.79999999948944 -5.0888874903416268e-14 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "B846BF80-4C4D-03F3-DC4F-759DF5837066";
 	setAttr -k off ".v" no;
+	setAttr ".rnd" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 30.437740999485111;
+	setAttr ".coi" 79.801215833274654;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -2666,7 +2670,7 @@ createNode aiAreaLight -n "aiAreaLightShape2" -p "aiAreaLight2";
 	setAttr -k off ".v";
 	setAttr ".csh" no;
 	setAttr ".rcsh" no;
-	setAttr ".ai_exposure" 7.9935064315795898;
+	setAttr ".ai_exposure" 8;
 	setAttr ".ai_translator" -type "string" "disk";
 	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
 createNode transform -n "aiAreaLight3";
@@ -2680,13 +2684,14 @@ createNode aiAreaLight -n "aiAreaLightShape3" -p "aiAreaLight3";
 	setAttr -k off ".v";
 	setAttr ".csh" no;
 	setAttr ".rcsh" no;
+	setAttr ".sc" -type "float3" 1 0.89700001 0.89700001 ;
 	setAttr ".ai_exposure" 8.798701286315918;
 	setAttr ".ai_translator" -type "string" "disk";
 	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
 createNode transform -n "aiAreaLight4";
 	rename -uid "4F9B1384-44D8-34F8-3339-5F96A77E8920";
-	setAttr ".t" -type "double3" -18.233352142162172 10.385851347438445 23.326222544333817 ;
-	setAttr ".r" -type "double3" -21.593323061394344 -19.897681324532481 0 ;
+	setAttr ".t" -type "double3" -17.566770612203641 11.958147295996564 -27.92521935672978 ;
+	setAttr ".r" -type "double3" -13.41103709386512 183.91453650333983 0 ;
 	setAttr ".s" -type "double3" 10.660263365688094 10.660263365688094 10.660263365688094 ;
 createNode aiAreaLight -n "aiAreaLightShape4" -p "aiAreaLight4";
 	rename -uid "13DFE714-44C0-29EE-C492-F08D89D7A882";
@@ -2694,20 +2699,29 @@ createNode aiAreaLight -n "aiAreaLightShape4" -p "aiAreaLight4";
 	setAttr -k off ".v";
 	setAttr ".csh" no;
 	setAttr ".rcsh" no;
-	setAttr ".ai_exposure" 8.2190923690795898;
+	setAttr ".sc" -type "float3" 0.60897434 0.5462501 0.5462501 ;
+	setAttr ".ai_exposure" 9;
+	setAttr ".ai_color_temperature" 15000;
 	setAttr ".ai_translator" -type "string" "quad";
 	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
+createNode transform -n "group";
+	rename -uid "3E31744C-4980-66FC-A727-51880A2DA071";
+	setAttr ".t" -type "double3" -10.441660089310847 -1.1277193852002607 26.559379806136075 ;
+	setAttr ".r" -type "double3" -7.1098309820045289 89.408903025070032 0 ;
+	setAttr ".rp" -type "double3" -17.566770612203641 11.958147295996564 -27.92521935672978 ;
+	setAttr ".rpt" -type "double3" 8.8817841970012523e-14 -2.6645352591003757e-15 7.1054273576010019e-15 ;
+	setAttr ".sp" -type "double3" -17.566770612203641 11.958147295996564 -27.92521935672978 ;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "1C9F475F-4F4A-C8CC-9B54-18918418EE65";
+	rename -uid "023D7100-48AA-391A-E68A-96A090CFDBE3";
 	setAttr -s 9 ".lnk";
 	setAttr -s 9 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "214405E2-4323-8BE4-3E6B-E3813760F190";
+	rename -uid "DB2A3163-4B93-FF4B-D56A-02AAF55D42C8";
 	setAttr ".bsdt[0].bscd" -type "Int32Array" 1 0 ;
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "563CB264-4960-2B22-8114-0CB417ADD892";
+	rename -uid "71AADF49-421E-FE28-35A2-F7A56C82DBC2";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "5F0345F5-4A62-02E9-584E-EAB045B1D586";
+	rename -uid "9BBEA3A5-466E-7AFB-E7AA-D9B874439793";
 	setAttr ".cdl" 2;
 	setAttr -s 4 ".dli[1:3]"  1 2 3;
 	setAttr -s 3 ".dli";
@@ -2715,7 +2729,7 @@ createNode displayLayer -n "defaultLayer";
 	rename -uid "A23DB64A-4C36-B067-47D3-C88B0EC9E7EA";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "6F6BA1A8-47B8-800D-44BD-B6B3A3E80659";
+	rename -uid "EC06896B-4010-F886-32AD-7494E41D33B9";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "823077E7-4FE8-3610-E020-EDA3CF0464E8";
 	setAttr ".g" yes;
@@ -2725,29 +2739,29 @@ createNode script -n "uiConfigurationScriptNode";
 		"// Maya Mel UI Configuration File.\n//\n//  This script is machine generated.  Edit at your own risk.\n//\n//\n\nglobal string $gMainPane;\nif (`paneLayout -exists $gMainPane`) {\n\n\tglobal int $gUseScenePanelConfig;\n\tint    $useSceneConfig = $gUseScenePanelConfig;\n\tint    $nodeEditorPanelVisible = stringArrayContains(\"nodeEditorPanel1\", `getPanel -vis`);\n\tint    $nodeEditorWorkspaceControlOpen = (`workspaceControl -exists nodeEditorPanel1Window` && `workspaceControl -q -visible nodeEditorPanel1Window`);\n\tint    $menusOkayInPanels = `optionVar -q allowMenusInPanels`;\n\tint    $nVisPanes = `paneLayout -q -nvp $gMainPane`;\n\tint    $nPanes = 0;\n\tstring $editorName;\n\tstring $panelName;\n\tstring $itemFilterName;\n\tstring $panelConfig;\n\n\t//\n\t//  get current state of the UI\n\t//\n\tsceneUIReplacement -update $gMainPane;\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Top View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n"
 		+ "            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n"
-		+ "            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 495\n            -height 192\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n"
+		+ "            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 939\n            -height 409\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n"
 		+ "\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|side\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n"
 		+ "            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n"
-		+ "            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 494\n            -height 191\n            -sceneRenderFilter 0\n"
+		+ "            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n"
 		+ "            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Front View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n"
 		+ "            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n"
 		+ "            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n"
-		+ "            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 495\n            -height 191\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|RenderCam\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n"
-		+ "            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n"
-		+ "            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n"
-		+ "            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 996\n            -height 430\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"ToggledOutliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"ToggledOutliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n"
-		+ "            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 1\n            -showReferenceMembers 1\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n"
-		+ "            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -isSet 0\n            -isSetMember 0\n            -showUfeItems 1\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -selectCommand \"print(\\\"\\\")\" \n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            -renderFilterIndex 0\n            -selectionOrder \"chronological\" \n            -expandAttribute 0\n            $editorName;\n"
-		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"Outliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 0\n            -showReferenceMembers 0\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n"
-		+ "            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -showUfeItems 1\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -showNamespace 1\n"
-		+ "            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showAssignedMaterials 0\n                -showTimeEditor 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -organizeByClip 1\n                -showAnimLayerWeight 1\n"
-		+ "                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showParentContainers 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -isSet 0\n                -isSetMember 0\n                -showUfeItems 1\n                -displayMode \"DAG\" \n                -expandObjects 0\n"
-		+ "                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 1\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                -selectionOrder \"display\" \n                -expandAttribute 1\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"GraphEd\");\n            animCurveEditor -e \n                -displayValues 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -showPlayRangeShades \"on\" \n                -lockPlayRangeShades \"off\" \n"
-		+ "                -smoothness \"fine\" \n                -resultSamples 1\n                -resultScreenSamples 0\n                -resultUpdate \"delayed\" \n                -showUpstreamCurves 1\n                -keyMinScale 1\n                -stackedCurvesMin -1\n                -stackedCurvesMax 1\n                -stackedCurvesSpace 0.2\n                -preSelectionHighlight 0\n                -limitToSelectedCurves 0\n                -constrainDrag 0\n                -valueLinesToggle 0\n                -outliner \"graphEditor1OutlineEd\" \n                -highlightAffectedCurves 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dopeSheetPanel\" (localizedPanelLabel(\"Dope Sheet\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dope Sheet\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n"
-		+ "                -showShapes 1\n                -showAssignedMaterials 0\n                -showTimeEditor 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -organizeByClip 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showParentContainers 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 0\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 0\n"
-		+ "                -doNotSelectNewObjects 1\n                -dropIsParent 1\n                -transmitFilters 0\n                -setFilter \"0\" \n                -showSetMembers 1\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -showUfeItems 1\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n"
-		+ "                $editorName;\n\n\t\t\t$editorName = ($panelName+\"DopeSheetEd\");\n            dopeSheetEditor -e \n                -displayValues 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -outliner \"dopeSheetPanel1OutlineEd\" \n                -hierarchyBelow 0\n                -selectionWindow 0 0 0 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"timeEditorPanel\" (localizedPanelLabel(\"Time Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Time Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"clipEditorPanel\" (localizedPanelLabel(\"Trax Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Trax Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
-		+ "\n\t\t\t$editorName = clipEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayValues 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"sequenceEditorPanel\" (localizedPanelLabel(\"Camera Sequencer\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Camera Sequencer\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = sequenceEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayValues 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 1 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperGraphPanel\" (localizedPanelLabel(\"Hypergraph Hierarchy\")) `;\n"
+		+ "            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|RenderCam\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n"
+		+ "            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n"
+		+ "            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n"
+		+ "            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 898\n            -height 651\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"ToggledOutliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"ToggledOutliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n"
+		+ "            -showReferenceNodes 1\n            -showReferenceMembers 1\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n"
+		+ "            -alwaysToggleSelect 0\n            -directSelect 0\n            -isSet 0\n            -isSetMember 0\n            -showUfeItems 1\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -selectCommand \"print(\\\"\\\")\" \n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            -renderFilterIndex 0\n            -selectionOrder \"chronological\" \n            -expandAttribute 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n"
+		+ "\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"Outliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 0\n            -showReferenceMembers 0\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n"
+		+ "            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -showUfeItems 1\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -showNamespace 1\n            -showPinIcons 0\n"
+		+ "            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showAssignedMaterials 0\n                -showTimeEditor 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -organizeByClip 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n"
+		+ "                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showParentContainers 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -isSet 0\n                -isSetMember 0\n                -showUfeItems 1\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n"
+		+ "                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 1\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                -selectionOrder \"display\" \n                -expandAttribute 1\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"GraphEd\");\n            animCurveEditor -e \n                -displayValues 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -showPlayRangeShades \"on\" \n                -lockPlayRangeShades \"off\" \n                -smoothness \"fine\" \n"
+		+ "                -resultSamples 1\n                -resultScreenSamples 0\n                -resultUpdate \"delayed\" \n                -showUpstreamCurves 1\n                -keyMinScale 1\n                -stackedCurvesMin -1\n                -stackedCurvesMax 1\n                -stackedCurvesSpace 0.2\n                -preSelectionHighlight 0\n                -limitToSelectedCurves 0\n                -constrainDrag 0\n                -valueLinesToggle 0\n                -outliner \"graphEditor1OutlineEd\" \n                -highlightAffectedCurves 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dopeSheetPanel\" (localizedPanelLabel(\"Dope Sheet\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dope Sheet\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showAssignedMaterials 0\n"
+		+ "                -showTimeEditor 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -organizeByClip 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showParentContainers 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 0\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 0\n                -doNotSelectNewObjects 1\n                -dropIsParent 1\n"
+		+ "                -transmitFilters 0\n                -setFilter \"0\" \n                -showSetMembers 1\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -showUfeItems 1\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"DopeSheetEd\");\n"
+		+ "            dopeSheetEditor -e \n                -displayValues 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -outliner \"dopeSheetPanel1OutlineEd\" \n                -hierarchyBelow 0\n                -selectionWindow 0 0 0 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"timeEditorPanel\" (localizedPanelLabel(\"Time Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Time Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"clipEditorPanel\" (localizedPanelLabel(\"Trax Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Trax Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = clipEditorNameFromPanel($panelName);\n"
+		+ "            clipEditor -e \n                -displayValues 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"sequenceEditorPanel\" (localizedPanelLabel(\"Camera Sequencer\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Camera Sequencer\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = sequenceEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayValues 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 1 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperGraphPanel\" (localizedPanelLabel(\"Hypergraph Hierarchy\")) `;\n"
 		+ "\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Hypergraph Hierarchy\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"HyperGraphEd\");\n            hyperGraph -e \n                -graphLayoutStyle \"hierarchicalLayout\" \n                -orientation \"horiz\" \n                -mergeConnections 0\n                -zoom 1\n                -animateTransition 0\n                -showRelationships 1\n                -showShapes 0\n                -showDeformers 0\n                -showExpressions 0\n                -showConstraints 0\n                -showConnectionFromSelected 0\n                -showConnectionToSelected 0\n                -showConstraintLabels 0\n                -showUnderworld 0\n                -showInvisible 0\n                -transitionFrames 1\n                -opaqueContainers 0\n                -freeform 0\n                -imagePosition 0 0 \n                -imageScale 1\n                -imageEnabled 0\n                -graphType \"DAG\" \n"
 		+ "                -heatMapDisplay 0\n                -updateSelection 1\n                -updateNodeAdded 1\n                -useDrawOverrideColor 0\n                -limitGraphTraversal -1\n                -range 0 0 \n                -iconSize \"smallIcons\" \n                -showCachedConnections 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperShadePanel\" (localizedPanelLabel(\"Hypershade\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Hypershade\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"visorPanel\" (localizedPanelLabel(\"Visor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Visor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n"
 		+ "\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"nodeEditorPanel\" (localizedPanelLabel(\"Node Editor\")) `;\n\tif ($nodeEditorPanelVisible || $nodeEditorWorkspaceControlOpen) {\n\t\tif (\"\" == $panelName) {\n\t\t\tif ($useSceneConfig) {\n\t\t\t\t$panelName = `scriptedPanel -unParent  -type \"nodeEditorPanel\" -l (localizedPanelLabel(\"Node Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"NodeEditorEd\");\n            nodeEditor -e \n                -allAttributes 0\n                -allNodes 0\n                -autoSizeNodes 1\n                -consistentNameSize 1\n                -createNodeCommand \"nodeEdCreateNodeCommand\" \n                -connectNodeOnCreation 0\n                -connectOnDrop 0\n                -copyConnectionsOnPaste 0\n                -connectionStyle \"bezier\" \n                -defaultPinnedState 0\n                -additiveGraphingMode 0\n                -connectedGraphingMode 1\n                -settingsChangedCallback \"nodeEdSyncControls\" \n                -traversalDepthLimit -1\n"
@@ -2757,9 +2771,13 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"shapePanel\" (localizedPanelLabel(\"Shape Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tshapePanel -edit -l (localizedPanelLabel(\"Shape Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"posePanel\" (localizedPanelLabel(\"Pose Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tposePanel -edit -l (localizedPanelLabel(\"Pose Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynRelEdPanel\" (localizedPanelLabel(\"Dynamic Relationships\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"relationshipPanel\" (localizedPanelLabel(\"Relationship Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"referenceEditorPanel\" (localizedPanelLabel(\"Reference Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynPaintScriptedPanelType\" (localizedPanelLabel(\"Paint Effects\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"scriptEditorPanel\" (localizedPanelLabel(\"Script Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"profilerPanel\" (localizedPanelLabel(\"Profiler Tool\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Profiler Tool\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"contentBrowserPanel\" (localizedPanelLabel(\"Content Browser\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Content Browser\")) -mbv $menusOkayInPanels  $panelName;\n"
-		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-userCreated false\n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"single\\\" -ps 1 100 100 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
-		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -camera \\\"|RenderCam\\\" \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 996\\n    -height 430\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
-		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -camera \\\"|RenderCam\\\" \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 996\\n    -height 430\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"Stereo\" (localizedPanelLabel(\"Stereo\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\n{ string $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"|RenderCam\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -holdOuts 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 1\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n"
+		+ "                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n"
+		+ "                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -controllers 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n"
+		+ "                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -bluePencil 1\n                -greasePencils 0\n                -shadows 0\n                -captureSequenceNumber -1\n                -width 0\n                -height 0\n                -sceneRenderFilter 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName; };\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-userCreated false\n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n"
+		+ "\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"single\\\" -ps 1 100 100 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Top View\")) \n\t\t\t\t\t\"modelPanel\"\n"
+		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Top View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -camera \\\"|persp\\\" \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 939\\n    -height 409\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
+		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Top View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -camera \\\"|persp\\\" \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 939\\n    -height 409\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
 		+ "\t\t\t\t$configName;\n\n            setNamedPanelLayout (localizedPanelLabel(\"Current Layout\"));\n        }\n\n        panelHistory -e -clear mainPanelHistory;\n        sceneUIReplacement -clear;\n\t}\n\n\ngrid -spacing 0.05 -size 0.12 -divisions 5 -displayAxes yes -displayGridLines yes -displayDivisionLines yes -displayPerspectiveLabels no -displayOrthographicLabels no -displayAxesBold yes -perspectiveLabelPosition axis -orthographicLabelPosition edge;\nviewManip -drawCompass 0 -compassAngle 0 -frontParameters \"\" -homeParameters \"\" -selectionLockParameters \"\";\n}\n");
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
@@ -2771,13 +2789,14 @@ createNode aiOptions -s -n "defaultArnoldRenderOptions";
 	addAttr -ci true -sn "ARV_options" -ln "ARV_options" -dt "string";
 	setAttr -s 4 ".aovs";
 	setAttr ".version" -type "string" "5.3.5.2";
-	setAttr ".ARV_options" -type "string" "Test Resolution=100%;Camera=RenderCamShape;Snapshots Folder=D:/trist/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject/images/snapshots/PushPull;Color Management.Gamma=1;Color Management.Exposure=0;Background.BG=BG Color;Background.Color=0 0 0;Background.Image=;Background.Scale=1 1;Background.Offset=0 0;Background.Apply Color Management=1;Foreground.Enable FG=0;Foreground.Image=;Foreground.Scale=1 1;Foreground.Offset=0 0;Foreground.Apply Color Management=1;";
+	setAttr ".ARV_options" -type "string" "Test Resolution=100%;Camera=RenderCamShape;Snapshots Folder=D:/trist/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject/images/snapshots/PushPull;Color Management.Gamma=1;Color Management.Exposure=5;Background.BG=BG Color;Background.Color=0 0 0;Background.Image=;Background.Scale=1    1;Background.Offset=0    0;Background.Apply Color Management=1;Foreground.Enable FG=0;Foreground.Image=;Foreground.Scale=1    1;Foreground.Offset=0    0;Foreground.Apply Color Management=1;";
 createNode aiAOVFilter -s -n "defaultArnoldFilter";
 	rename -uid "D250FD96-453A-F040-8204-62AA38003DE5";
 	setAttr ".ai_translator" -type "string" "gaussian";
 createNode aiAOVDriver -s -n "defaultArnoldDriver";
 	rename -uid "492D98C1-4760-C7C5-7712-FD8DF945190F";
-	setAttr ".ai_translator" -type "string" "exr";
+	setAttr ".ai_translator" -type "string" "png";
+	setAttr ".color_management" 1;
 createNode aiAOVDriver -s -n "defaultArnoldDisplayDriver";
 	rename -uid "21A20FC3-4DB4-A639-6469-D2BF7A55B667";
 	setAttr ".ai_translator" -type "string" "maya";
@@ -4242,7 +4261,7 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"Ultimate_Bony_v1_0_5RN"
 		"Ultimate_Bony_v1_0_5RN" 0
-		"Ultimate_Bony_v1_0_5RN" 487
+		"Ultimate_Bony_v1_0_5RN" 556
 		2 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_ROOTCG|Ultimate_Bony_v1_0_5:Bony_ROOTC" 
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_MainHipCG|Ultimate_Bony_v1_0_5:Bony_MainHipC" 
@@ -4277,8 +4296,6 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rFootIKCG|Ultimate_Bony_v1_0_5:Bony_rFootIKC" 
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
-		2 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rFootIKCG|Ultimate_Bony_v1_0_5:Bony_rFootIKC" 
-		"heelBall" " -k 1"
 		2 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristIKCG|Ultimate_Bony_v1_0_5:Bony_rWristIKC" 
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristFKCG|Ultimate_Bony_v1_0_5:Bony_rWristFKC" 
@@ -4317,7 +4334,7 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 		"instObjGroups.objectGroups" " -s 4"
 		2 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_arm|Ultimate_Bony_v1_0_5:Bony_R_armShape" 
 		"instObjGroups.objectGroups" " -s 4"
-		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs" " -s 4"
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs" " -s 39"
 		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[0].aovName" " -type \"string\" \"diffuse\""
 		
 		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[1].aovName" " -type \"string\" \"specular\""
@@ -4326,7 +4343,77 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 		
 		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[3].aovName" " -type \"string\" \"shadow\""
 		
-		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs" " -s 4"
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[4].aovName" " -type \"string\" \"diffuse_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[5].aovName" " -type \"string\" \"diffuse_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[6].aovName" " -type \"string\" \"shadow_diff\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[7].aovName" " -type \"string\" \"shadow_mask\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[8].aovName" " -type \"string\" \"ID\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[9].aovName" " -type \"string\" \"background\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[10].aovName" " -type \"string\" \"denoise_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[11].aovName" " -type \"string\" \"shadow_matte\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[12].aovName" " -type \"string\" \"volume\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[13].aovName" " -type \"string\" \"highlight\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[14].aovName" " -type \"string\" \"Z\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[15].aovName" " -type \"string\" \"RGBA\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[16].aovName" " -type \"string\" \"albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[17].aovName" " -type \"string\" \"coat\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[18].aovName" " -type \"string\" \"coat_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[19].aovName" " -type \"string\" \"coat_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[20].aovName" " -type \"string\" \"coat_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[21].aovName" " -type \"string\" \"cputime\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[22].aovName" " -type \"string\" \"direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[23].aovName" " -type \"string\" \"emission\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[24].aovName" " -type \"string\" \"opacity\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[25].aovName" " -type \"string\" \"raycount\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[26].aovName" " -type \"string\" \"sheen\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[27].aovName" " -type \"string\" \"sheen_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[28].aovName" " -type \"string\" \"sheen_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[29].aovName" " -type \"string\" \"sheen_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[30].aovName" " -type \"string\" \"specular_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[31].aovName" " -type \"string\" \"specular_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[32].aovName" " -type \"string\" \"specular_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[33].aovName" " -type \"string\" \"sss\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[34].aovName" " -type \"string\" \"sss_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[35].aovName" " -type \"string\" \"sss_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[36].aovName" " -type \"string\" \"sss_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[37].aovName" " -type \"string\" \"rim_light\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn1SG" "aiCustomAOVs[38].aovName" " -type \"string\" \"indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs" " -s 39"
 		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[0].aovName" " -type \"string\" \"diffuse\""
 		
 		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[1].aovName" " -type \"string\" \"specular\""
@@ -4334,6 +4421,76 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[2].aovName" " -type \"string\" \"transmission\""
 		
 		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[3].aovName" " -type \"string\" \"shadow\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[4].aovName" " -type \"string\" \"diffuse_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[5].aovName" " -type \"string\" \"diffuse_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[6].aovName" " -type \"string\" \"shadow_diff\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[7].aovName" " -type \"string\" \"shadow_mask\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[8].aovName" " -type \"string\" \"ID\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[9].aovName" " -type \"string\" \"background\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[10].aovName" " -type \"string\" \"denoise_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[11].aovName" " -type \"string\" \"shadow_matte\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[12].aovName" " -type \"string\" \"volume\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[13].aovName" " -type \"string\" \"highlight\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[14].aovName" " -type \"string\" \"Z\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[15].aovName" " -type \"string\" \"RGBA\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[16].aovName" " -type \"string\" \"albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[17].aovName" " -type \"string\" \"coat\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[18].aovName" " -type \"string\" \"coat_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[19].aovName" " -type \"string\" \"coat_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[20].aovName" " -type \"string\" \"coat_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[21].aovName" " -type \"string\" \"cputime\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[22].aovName" " -type \"string\" \"direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[23].aovName" " -type \"string\" \"emission\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[24].aovName" " -type \"string\" \"opacity\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[25].aovName" " -type \"string\" \"raycount\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[26].aovName" " -type \"string\" \"sheen\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[27].aovName" " -type \"string\" \"sheen_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[28].aovName" " -type \"string\" \"sheen_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[29].aovName" " -type \"string\" \"sheen_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[30].aovName" " -type \"string\" \"specular_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[31].aovName" " -type \"string\" \"specular_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[32].aovName" " -type \"string\" \"specular_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[33].aovName" " -type \"string\" \"sss\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[34].aovName" " -type \"string\" \"sss_albedo\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[35].aovName" " -type \"string\" \"sss_direct\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[36].aovName" " -type \"string\" \"sss_indirect\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[37].aovName" " -type \"string\" \"rim_light\""
+		
+		2 "Ultimate_Bony_v1_0_5:char_body_blinn5SG" "aiCustomAOVs[38].aovName" " -type \"string\" \"indirect\""
 		
 		2 "Ultimate_Bony_v1_0_5:Bony_Pelvis" "visibility" " 1"
 		2 "Ultimate_Bony_v1_0_5:Bony_Pelvis" "displayOrder" " 4"
@@ -4355,97 +4512,9 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 		2 "Ultimate_Bony_v1_0_5:groupParts177" "inputRemoveComponent" " -type \"componentList\" 1 \"f[0:279]\""
 		
 		2 "Ultimate_Bony_v1_0_5:groupParts177" "groupId" " 267"
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rShoulderFKCG2|Ultimate_Bony_v1_0_5:Bony_rShoulderFKCG|Ultimate_Bony_v1_0_5:Bony_rShoulderFKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine01FKCG|Ultimate_Bony_v1_0_5:Bony_Spine01FKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lToeIKCG|Ultimate_Bony_v1_0_5:Bony_lToeIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lLegSwitchCG|Ultimate_Bony_v1_0_5:Bony_lLegSwitchC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Neck01CG|Ultimate_Bony_v1_0_5:Bony_Neck01C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ1CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ1C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristFKCG|Ultimate_Bony_v1_0_5:Bony_rWristFKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lElbowFKCG|Ultimate_Bony_v1_0_5:Bony_lElbowFKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger1J1CG|Ultimate_Bony_v1_0_5:Bony_lFinger1J1C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ1CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ1C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ3CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ3C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId176.groupId" "Ultimate_Bony_v1_0_5:groupParts176.groupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rToeIKCG|Ultimate_Bony_v1_0_5:Bony_rToeIKC.drawOverride" 
-		""
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_wrist|Ultimate_Bony_v1_0_5:Bony_R_wristShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_elbow|Ultimate_Bony_v1_0_5:Bony_R_elbowShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_shoulder|Ultimate_Bony_v1_0_5:Bony_R_shoulderShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_but|Ultimate_Bony_v1_0_5:Bony_R_butShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_knee|Ultimate_Bony_v1_0_5:Bony_R_kneeShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_ankle|Ultimate_Bony_v1_0_5:Bony_R_ankleShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_wrist|Ultimate_Bony_v1_0_5:Bony_L_wristShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_elbow|Ultimate_Bony_v1_0_5:Bony_L_elbowShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_shoulder|Ultimate_Bony_v1_0_5:Bony_L_shoulderShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_but|Ultimate_Bony_v1_0_5:Bony_L_butShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_knee|Ultimate_Bony_v1_0_5:Bony_L_kneeShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_ankle|Ultimate_Bony_v1_0_5:Bony_L_ankleShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_body_Grp|Ultimate_Bony_v1_0_5:Bony_neck|Ultimate_Bony_v1_0_5:Bony_neckShape.instObjGroups" 
-		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine03FKCG|Ultimate_Bony_v1_0_5:Bony_Spine03FKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId175.groupId" "Ultimate_Bony_v1_0_5:groupParts173.groupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lKneeIKCG|Ultimate_Bony_v1_0_5:Bony_lKneeIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J3CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J3C.drawOverride" 
-		""
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:BonyExtraNodes|Ultimate_Bony_v1_0_5:Bony_ribbon|Ultimate_Bony_v1_0_5:Bony_ribbonShape.instObjGroups" 
-		":initialShadingGroup.dagSetMembers" "-na"
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine02FKCG|Ultimate_Bony_v1_0_5:Bony_Spine02FKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lFootIKCG|Ultimate_Bony_v1_0_5:Bony_lFootIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Pelvis.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_MainHipCG|Ultimate_Bony_v1_0_5:Bony_MainHipC.drawOverride" 
-		""
-		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:BonyExtraNodes|Ultimate_Bony_v1_0_5:Bony_ribbonBlend|Ultimate_Bony_v1_0_5:Bony_ribbonBlendShape.instObjGroups" 
-		":initialShadingGroup.dagSetMembers" "-na"
-		3 "Ultimate_Bony_v1_0_5:groupId177.groupId" "Ultimate_Bony_v1_0_5:groupParts177.groupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ2CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ2C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lArmSwitchCG|Ultimate_Bony_v1_0_5:Bony_lArmSwitchC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_SpineTopIKCG|Ultimate_Bony_v1_0_5:Bony_SpineTopIKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J3CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J3C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J1CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J1C.drawOverride" 
-		""
 		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J2CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J2C.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rElbowFKCG|Ultimate_Bony_v1_0_5:Bony_rElbowFKC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId175.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg|Ultimate_Bony_v1_0_5:Bony_L_legShape.instObjGroups.objectGroups[0].objectGroupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg|Ultimate_Bony_v1_0_5:Bony_L_legShape.instObjGroups.objectGroups[0].objectGrpColor" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lElbowFKCG|Ultimate_Bony_v1_0_5:Bony_lElbowFKC.drawOverride" 
 		""
 		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_arm|Ultimate_Bony_v1_0_5:Bony_R_armShape.instObjGroups.objectGroups[0]" 
 		"Ultimate_Bony_v1_0_5:char_body_blinn1SG.dagSetMembers" "-na"
@@ -4521,59 +4590,147 @@ createNode reference -n "Ultimate_Bony_v1_0_5RN";
 		"Ultimate_Bony_v1_0_5:char_body_blinn1SG.dagSetMembers" "-na"
 		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_body_Grp|Ultimate_Bony_v1_0_5:Bony_spine1|Ultimate_Bony_v1_0_5:Bony_spineShape1.instObjGroups" 
 		"Ultimate_Bony_v1_0_5:char_body_blinn1SG.dagSetMembers" "-na"
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J1CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J1C.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rArmSwitchCG|Ultimate_Bony_v1_0_5:Bony_rArmSwitchC.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ2CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ2C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger1J3CG|Ultimate_Bony_v1_0_5:Bony_lFinger1J3C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ3CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ3C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rClavicleCG|Ultimate_Bony_v1_0_5:Bony_rClavicleC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J3CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J3C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J2CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J2C.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId174.groupId" "Ultimate_Bony_v1_0_5:groupParts170.groupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lClavicleCG|Ultimate_Bony_v1_0_5:Bony_lClavicleC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rKneeIKCG|Ultimate_Bony_v1_0_5:Bony_rKneeIKC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ1CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ1C.drawOverride" 
 		""
 		3 "Ultimate_Bony_v1_0_5:groupId177.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg|Ultimate_Bony_v1_0_5:Bony_R_legShape.instObjGroups.objectGroups[0].objectGroupId" 
 		""
 		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg|Ultimate_Bony_v1_0_5:Bony_R_legShape.instObjGroups.objectGroups[0].objectGrpColor" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rFootIKCG|Ultimate_Bony_v1_0_5:Bony_rFootIKC.drawOverride" 
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:BonyExtraNodes|Ultimate_Bony_v1_0_5:Bony_ribbon|Ultimate_Bony_v1_0_5:Bony_ribbonShape.instObjGroups" 
+		":initialShadingGroup.dagSetMembers" "-na"
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J1CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J1C.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lShoulderFKCG2|Ultimate_Bony_v1_0_5:Bony_lShoulderFKCG|Ultimate_Bony_v1_0_5:Bony_lShoulderFKC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:groupId174.groupId" "Ultimate_Bony_v1_0_5:groupParts170.groupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ2CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ2C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J1CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J1C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rKneeIKCG|Ultimate_Bony_v1_0_5:Bony_rKneeIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rShoulderFKCG2|Ultimate_Bony_v1_0_5:Bony_rShoulderFKCG|Ultimate_Bony_v1_0_5:Bony_rShoulderFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J3CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J3C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:groupId176.groupId" "Ultimate_Bony_v1_0_5:groupParts176.groupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rToeIKCG|Ultimate_Bony_v1_0_5:Bony_rToeIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J1CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J1C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristFKCG|Ultimate_Bony_v1_0_5:Bony_rWristFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ2CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ2C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rClavicleCG|Ultimate_Bony_v1_0_5:Bony_rClavicleC.drawOverride" 
 		""
 		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristFKCG|Ultimate_Bony_v1_0_5:Bony_lWristFKC.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_HeadCG2|Ultimate_Bony_v1_0_5:Bony_HeadCG|Ultimate_Bony_v1_0_5:Bony_HeadC.drawOverride" 
-		""
-		3 "Ultimate_Bony_v1_0_5:groupId176.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_arm|Ultimate_Bony_v1_0_5:Bony_R_armShape.instObjGroups.objectGroups[0].objectGroupId" 
-		""
-		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_arm|Ultimate_Bony_v1_0_5:Bony_R_armShape.instObjGroups.objectGroups[0].objectGrpColor" 
-		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rLegSwitchCG|Ultimate_Bony_v1_0_5:Bony_rLegSwitchC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger1J3CG|Ultimate_Bony_v1_0_5:Bony_lFinger1J3C.drawOverride" 
 		""
 		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_ROOTCG|Ultimate_Bony_v1_0_5:Bony_ROOTC.drawOverride" 
 		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Pelvis.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_MainHipCG|Ultimate_Bony_v1_0_5:Bony_MainHipC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:groupId175.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg|Ultimate_Bony_v1_0_5:Bony_L_legShape.instObjGroups.objectGroups[0].objectGroupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg|Ultimate_Bony_v1_0_5:Bony_L_legShape.instObjGroups.objectGroups[0].objectGrpColor" 
+		""
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:BonyExtraNodes|Ultimate_Bony_v1_0_5:Bony_ribbonBlend|Ultimate_Bony_v1_0_5:Bony_ribbonBlendShape.instObjGroups" 
+		":initialShadingGroup.dagSetMembers" "-na"
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine03FKCG|Ultimate_Bony_v1_0_5:Bony_Spine03FKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Neck01CG|Ultimate_Bony_v1_0_5:Bony_Neck01C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_SpineTopIKCG|Ultimate_Bony_v1_0_5:Bony_SpineTopIKC.drawOverride" 
+		""
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_wrist|Ultimate_Bony_v1_0_5:Bony_R_wristShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_elbow|Ultimate_Bony_v1_0_5:Bony_R_elbowShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_shoulder|Ultimate_Bony_v1_0_5:Bony_R_shoulderShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_but|Ultimate_Bony_v1_0_5:Bony_R_butShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_knee|Ultimate_Bony_v1_0_5:Bony_R_kneeShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_R_leg_Grp|Ultimate_Bony_v1_0_5:Bony_R_ankle|Ultimate_Bony_v1_0_5:Bony_R_ankleShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_wrist|Ultimate_Bony_v1_0_5:Bony_L_wristShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_elbow|Ultimate_Bony_v1_0_5:Bony_L_elbowShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_shoulder|Ultimate_Bony_v1_0_5:Bony_L_shoulderShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_but|Ultimate_Bony_v1_0_5:Bony_L_butShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_knee|Ultimate_Bony_v1_0_5:Bony_L_kneeShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_L_leg_Grp|Ultimate_Bony_v1_0_5:Bony_L_ankle|Ultimate_Bony_v1_0_5:Bony_L_ankleShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony_body_Grp|Ultimate_Bony_v1_0_5:Bony_neck|Ultimate_Bony_v1_0_5:Bony_neckShape.instObjGroups" 
+		"Ultimate_Bony_v1_0_5:char_body_blinn5SG.dagSetMembers" "-na"
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC.drawOverride" 
+		""
 		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J2CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J2C.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J1CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J1C.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lArmSwitchCG|Ultimate_Bony_v1_0_5:Bony_lArmSwitchC.drawOverride" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lFootIKCG|Ultimate_Bony_v1_0_5:Bony_lFootIKC.drawOverride" 
 		""
 		3 "Ultimate_Bony_v1_0_5:groupId174.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_arm|Ultimate_Bony_v1_0_5:Bony_L_armShape.instObjGroups.objectGroups[0].objectGroupId" 
 		""
 		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__L_arm_Grp|Ultimate_Bony_v1_0_5:Bony_L_arm|Ultimate_Bony_v1_0_5:Bony_L_armShape.instObjGroups.objectGroups[0].objectGrpColor" 
 		""
-		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rArmSwitchCG|Ultimate_Bony_v1_0_5:Bony_rArmSwitchC.drawOverride" 
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lLegSwitchCG|Ultimate_Bony_v1_0_5:Bony_lLegSwitchC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lToeIKCG|Ultimate_Bony_v1_0_5:Bony_lToeIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger1J3CG|Ultimate_Bony_v1_0_5:Bony_rFinger1J3C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:groupId176.groupId" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_arm|Ultimate_Bony_v1_0_5:Bony_R_armShape.instObjGroups.objectGroups[0].objectGroupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:char_body_blinn1SG.memberWireframeColor" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Mesh_Grp|Ultimate_Bony_v1_0_5:Bony__R_arm_Grp|Ultimate_Bony_v1_0_5:Bony_R_arm|Ultimate_Bony_v1_0_5:Bony_R_armShape.instObjGroups.objectGroups[0].objectGrpColor" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger1J1CG|Ultimate_Bony_v1_0_5:Bony_lFinger1J1C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lShoulderFKCG2|Ultimate_Bony_v1_0_5:Bony_lShoulderFKCG|Ultimate_Bony_v1_0_5:Bony_lShoulderFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine01FKCG|Ultimate_Bony_v1_0_5:Bony_Spine01FKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_Spine02FKCG|Ultimate_Bony_v1_0_5:Bony_Spine02FKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ1CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ1C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rFootIKCG|Ultimate_Bony_v1_0_5:Bony_rFootIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lClavicleCG|Ultimate_Bony_v1_0_5:Bony_lClavicleC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rWristJG2|Ultimate_Bony_v1_0_5:Bony_rWristJG1|Ultimate_Bony_v1_0_5:Bony_rThumbJ3CG|Ultimate_Bony_v1_0_5:Bony_rThumbJ3C.drawOverride" 
 		""
 		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger1J2CG|Ultimate_Bony_v1_0_5:Bony_lFinger1J2C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lKneeIKCG|Ultimate_Bony_v1_0_5:Bony_lKneeIKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rPalmCG|Ultimate_Bony_v1_0_5:Bony_rPalmC|Ultimate_Bony_v1_0_5:Bony_rFinger2J2CG|Ultimate_Bony_v1_0_5:Bony_rFinger2J2C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lPalmCG|Ultimate_Bony_v1_0_5:Bony_lPalmC|Ultimate_Bony_v1_0_5:Bony_lFinger2J3CG|Ultimate_Bony_v1_0_5:Bony_lFinger2J3C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_lWristJG2|Ultimate_Bony_v1_0_5:Bony_lWristJG1|Ultimate_Bony_v1_0_5:Bony_lThumbJ3CG|Ultimate_Bony_v1_0_5:Bony_lThumbJ3C.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:groupId175.groupId" "Ultimate_Bony_v1_0_5:groupParts173.groupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Body.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_HeadCG2|Ultimate_Bony_v1_0_5:Bony_HeadCG|Ultimate_Bony_v1_0_5:Bony_HeadC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:groupId177.groupId" "Ultimate_Bony_v1_0_5:groupParts177.groupId" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Arms.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rElbowFKCG|Ultimate_Bony_v1_0_5:Bony_rElbowFKC.drawOverride" 
+		""
+		3 "Ultimate_Bony_v1_0_5:Bony_Legs.drawInfo" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT|Ultimate_Bony_v1_0_5:Bony_rLegSwitchCG|Ultimate_Bony_v1_0_5:Bony_rLegSwitchC.drawOverride" 
 		""
 		5 4 "Ultimate_Bony_v1_0_5RN" "|Ultimate_Bony_v1_0_5:Bony|Ultimate_Bony_v1_0_5:Bony_Main_CNT.GlobalScale" 
 		"Ultimate_Bony_v1_0_5RN.placeHolderList[1]" ""
@@ -7223,13 +7380,20 @@ createNode displayLayer -n "Controls";
 	setAttr ".do" 1;
 createNode standardSurface -n "Box_mat";
 	rename -uid "42ECB303-4624-31D1-D108-1E9610E2A5A5";
-	setAttr ".bc" -type "float3" 0.45500001 0.10401949 0.058240011 ;
-	setAttr ".sr" 0.32467532157897949;
-	setAttr ".sior" 1.5199999809265137;
-	setAttr ".sub" 0.20000000298023224;
-	setAttr ".subc" -type "float3" 0.10470402 0.24188282 0.81800002 ;
-	setAttr ".ctr" 0;
-	setAttr ".ctior" 1;
+	setAttr ".b" 0.94999998807907104;
+	setAttr ".bc" -type "float3" 0.23324418 0.026072206 0.01183432 ;
+	setAttr ".s" 0.75;
+	setAttr ".sc" -type "float3" 0.75 0.75 0.75 ;
+	setAttr ".sr" 0.41669926047325134;
+	setAttr ".sior" 1.1399999856948853;
+	setAttr ".sa" 0.047077920287847519;
+	setAttr ".sub" 0.15000000596046448;
+	setAttr ".subc" -type "float3" 1 0.33653748 0.25 ;
+	setAttr ".sh" 0.25;
+	setAttr ".shc" -type "float3" 0.85095 0.76450002 1 ;
+	setAttr ".ctc" -type "float3" 0.75 0.75 0.75 ;
+	setAttr ".ctr" 0.1979166716337204;
+	setAttr ".ctior" 0.75;
 	setAttr ".ctac" 1;
 	setAttr ".ctar" 1;
 createNode shadingEngine -n "standardSurface2SG";
@@ -7237,12 +7401,46 @@ createNode shadingEngine -n "standardSurface2SG";
 	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
 	setAttr ".ihi" 0;
 	setAttr ".ro" yes;
-	setAttr -s 4 ".aovs";
-	setAttr ".aovs[0].aov_name" -type "string" "diffuse";
-	setAttr ".aovs[1].aov_name" -type "string" "specular";
-	setAttr ".aovs[2].aov_name" -type "string" "transmission";
-	setAttr ".aovs[3].aov_name" -type "string" "shadow";
-	setAttr ".aal" -type "attributeAlias" 8 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_specular" "aiCustomAOVs[1].aovName" "ai_aov_transmission" "aiCustomAOVs[2].aovName" "ai_aov_shadow" "aiCustomAOVs[3].aovName" ;
+	setAttr -s 38 ".aovs";
+	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
+	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
+	setAttr ".aovs[6].aov_name" -type "string" "shadow";
+	setAttr ".aovs[7].aov_name" -type "string" "shadow_diff";
+	setAttr ".aovs[8].aov_name" -type "string" "shadow_mask";
+	setAttr ".aovs[9].aov_name" -type "string" "ID";
+	setAttr ".aovs[10].aov_name" -type "string" "background";
+	setAttr ".aovs[11].aov_name" -type "string" "denoise_albedo";
+	setAttr ".aovs[12].aov_name" -type "string" "shadow_matte";
+	setAttr ".aovs[13].aov_name" -type "string" "volume";
+	setAttr ".aovs[14].aov_name" -type "string" "highlight";
+	setAttr ".aovs[15].aov_name" -type "string" "Z";
+	setAttr ".aovs[16].aov_name" -type "string" "transmission";
+	setAttr ".aovs[17].aov_name" -type "string" "RGBA";
+	setAttr ".aovs[18].aov_name" -type "string" "albedo";
+	setAttr ".aovs[19].aov_name" -type "string" "coat";
+	setAttr ".aovs[20].aov_name" -type "string" "coat_albedo";
+	setAttr ".aovs[21].aov_name" -type "string" "coat_direct";
+	setAttr ".aovs[22].aov_name" -type "string" "coat_indirect";
+	setAttr ".aovs[23].aov_name" -type "string" "cputime";
+	setAttr ".aovs[24].aov_name" -type "string" "direct";
+	setAttr ".aovs[25].aov_name" -type "string" "emission";
+	setAttr ".aovs[26].aov_name" -type "string" "opacity";
+	setAttr ".aovs[27].aov_name" -type "string" "raycount";
+	setAttr ".aovs[28].aov_name" -type "string" "sheen";
+	setAttr ".aovs[29].aov_name" -type "string" "sheen_albedo";
+	setAttr ".aovs[30].aov_name" -type "string" "sheen_direct";
+	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
+	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
+	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
+	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
+	setAttr ".aovs[35].aov_name" -type "string" "sss";
+	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
+	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
+	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
+	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
+	setAttr ".aovs[40].aov_name" -type "string" "specular";
+	setAttr ".aovs[41].aov_name" -type "string" "indirect";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
 createNode materialInfo -n "materialInfo1";
 	rename -uid "CF56E0A1-4B47-7F10-C2BD-2C953B9B8644";
 createNode standardSurface -n "Bow_mat";
@@ -7265,18 +7463,52 @@ createNode shadingEngine -n "standardSurface3SG";
 	setAttr ".ihi" 0;
 	setAttr -s 4 ".dsm";
 	setAttr ".ro" yes;
-	setAttr -s 4 ".aovs";
-	setAttr ".aovs[0].aov_name" -type "string" "diffuse";
-	setAttr ".aovs[1].aov_name" -type "string" "specular";
-	setAttr ".aovs[2].aov_name" -type "string" "transmission";
-	setAttr ".aovs[3].aov_name" -type "string" "shadow";
-	setAttr ".aal" -type "attributeAlias" 8 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_specular" "aiCustomAOVs[1].aovName" "ai_aov_transmission" "aiCustomAOVs[2].aovName" "ai_aov_shadow" "aiCustomAOVs[3].aovName" ;
+	setAttr -s 38 ".aovs";
+	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
+	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
+	setAttr ".aovs[6].aov_name" -type "string" "shadow";
+	setAttr ".aovs[7].aov_name" -type "string" "shadow_diff";
+	setAttr ".aovs[8].aov_name" -type "string" "shadow_mask";
+	setAttr ".aovs[9].aov_name" -type "string" "ID";
+	setAttr ".aovs[10].aov_name" -type "string" "background";
+	setAttr ".aovs[11].aov_name" -type "string" "denoise_albedo";
+	setAttr ".aovs[12].aov_name" -type "string" "shadow_matte";
+	setAttr ".aovs[13].aov_name" -type "string" "volume";
+	setAttr ".aovs[14].aov_name" -type "string" "highlight";
+	setAttr ".aovs[15].aov_name" -type "string" "Z";
+	setAttr ".aovs[16].aov_name" -type "string" "transmission";
+	setAttr ".aovs[17].aov_name" -type "string" "RGBA";
+	setAttr ".aovs[18].aov_name" -type "string" "albedo";
+	setAttr ".aovs[19].aov_name" -type "string" "coat";
+	setAttr ".aovs[20].aov_name" -type "string" "coat_albedo";
+	setAttr ".aovs[21].aov_name" -type "string" "coat_direct";
+	setAttr ".aovs[22].aov_name" -type "string" "coat_indirect";
+	setAttr ".aovs[23].aov_name" -type "string" "cputime";
+	setAttr ".aovs[24].aov_name" -type "string" "direct";
+	setAttr ".aovs[25].aov_name" -type "string" "emission";
+	setAttr ".aovs[26].aov_name" -type "string" "opacity";
+	setAttr ".aovs[27].aov_name" -type "string" "raycount";
+	setAttr ".aovs[28].aov_name" -type "string" "sheen";
+	setAttr ".aovs[29].aov_name" -type "string" "sheen_albedo";
+	setAttr ".aovs[30].aov_name" -type "string" "sheen_direct";
+	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
+	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
+	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
+	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
+	setAttr ".aovs[35].aov_name" -type "string" "sss";
+	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
+	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
+	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
+	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
+	setAttr ".aovs[40].aov_name" -type "string" "specular";
+	setAttr ".aovs[41].aov_name" -type "string" "indirect";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
 createNode materialInfo -n "materialInfo2";
 	rename -uid "3BA94435-49AF-101C-B87F-9D81FCA2C46C";
 createNode standardSurface -n "ground_mat";
 	rename -uid "7108C653-46A2-5FE5-E4A7-CBA6180003F7";
 	setAttr ".b" 0.80000001192092896;
-	setAttr ".bc" -type "float3" 0 0 0 ;
+	setAttr ".bc" -type "float3" 0.12820514 0.12820514 0.12820514 ;
 	setAttr ".s" 0;
 	setAttr ".sc" -type "float3" 0 0 0 ;
 	setAttr ".sr" 0.69277107715606689;
@@ -7292,30 +7524,98 @@ createNode shadingEngine -n "standardSurface4SG";
 	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
 	setAttr ".ihi" 0;
 	setAttr ".ro" yes;
-	setAttr -s 4 ".aovs";
-	setAttr ".aovs[0].aov_name" -type "string" "diffuse";
-	setAttr ".aovs[1].aov_name" -type "string" "specular";
-	setAttr ".aovs[2].aov_name" -type "string" "transmission";
-	setAttr ".aovs[3].aov_name" -type "string" "shadow";
-	setAttr ".aal" -type "attributeAlias" 8 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_specular" "aiCustomAOVs[1].aovName" "ai_aov_transmission" "aiCustomAOVs[2].aovName" "ai_aov_shadow" "aiCustomAOVs[3].aovName" ;
+	setAttr -s 38 ".aovs";
+	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
+	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
+	setAttr ".aovs[6].aov_name" -type "string" "shadow";
+	setAttr ".aovs[7].aov_name" -type "string" "shadow_diff";
+	setAttr ".aovs[8].aov_name" -type "string" "shadow_mask";
+	setAttr ".aovs[9].aov_name" -type "string" "ID";
+	setAttr ".aovs[10].aov_name" -type "string" "background";
+	setAttr ".aovs[11].aov_name" -type "string" "denoise_albedo";
+	setAttr ".aovs[12].aov_name" -type "string" "shadow_matte";
+	setAttr ".aovs[13].aov_name" -type "string" "volume";
+	setAttr ".aovs[14].aov_name" -type "string" "highlight";
+	setAttr ".aovs[15].aov_name" -type "string" "Z";
+	setAttr ".aovs[16].aov_name" -type "string" "transmission";
+	setAttr ".aovs[17].aov_name" -type "string" "RGBA";
+	setAttr ".aovs[18].aov_name" -type "string" "albedo";
+	setAttr ".aovs[19].aov_name" -type "string" "coat";
+	setAttr ".aovs[20].aov_name" -type "string" "coat_albedo";
+	setAttr ".aovs[21].aov_name" -type "string" "coat_direct";
+	setAttr ".aovs[22].aov_name" -type "string" "coat_indirect";
+	setAttr ".aovs[23].aov_name" -type "string" "cputime";
+	setAttr ".aovs[24].aov_name" -type "string" "direct";
+	setAttr ".aovs[25].aov_name" -type "string" "emission";
+	setAttr ".aovs[26].aov_name" -type "string" "opacity";
+	setAttr ".aovs[27].aov_name" -type "string" "raycount";
+	setAttr ".aovs[28].aov_name" -type "string" "sheen";
+	setAttr ".aovs[29].aov_name" -type "string" "sheen_albedo";
+	setAttr ".aovs[30].aov_name" -type "string" "sheen_direct";
+	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
+	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
+	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
+	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
+	setAttr ".aovs[35].aov_name" -type "string" "sss";
+	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
+	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
+	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
+	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
+	setAttr ".aovs[40].aov_name" -type "string" "specular";
+	setAttr ".aovs[41].aov_name" -type "string" "indirect";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
 createNode materialInfo -n "materialInfo3";
 	rename -uid "7CB2375E-44B6-4E00-5725-C7928429508F";
 createNode standardSurface -n "wall_mat";
 	rename -uid "D5B9FFD2-4C31-ECA3-0169-43893391A676";
-	setAttr ".bc" -type "float3" 0.30769232 0.30769232 0.30769232 ;
-	setAttr ".e" 0.025641025975346565;
+	setAttr ".bc" -type "float3" 0.44230768 0.44230768 0.44230768 ;
+	setAttr ".sr" 0.35256409645080566;
 createNode shadingEngine -n "standardSurface5SG";
 	rename -uid "440D8FE0-4601-810C-7F4F-BA95A1DA3E1D";
 	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
 	setAttr ".ihi" 0;
 	setAttr -s 2 ".dsm";
 	setAttr ".ro" yes;
-	setAttr -s 4 ".aovs";
-	setAttr ".aovs[0].aov_name" -type "string" "diffuse";
-	setAttr ".aovs[1].aov_name" -type "string" "specular";
-	setAttr ".aovs[2].aov_name" -type "string" "transmission";
-	setAttr ".aovs[3].aov_name" -type "string" "shadow";
-	setAttr ".aal" -type "attributeAlias" 8 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_specular" "aiCustomAOVs[1].aovName" "ai_aov_transmission" "aiCustomAOVs[2].aovName" "ai_aov_shadow" "aiCustomAOVs[3].aovName" ;
+	setAttr -s 38 ".aovs";
+	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
+	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
+	setAttr ".aovs[6].aov_name" -type "string" "shadow";
+	setAttr ".aovs[7].aov_name" -type "string" "shadow_diff";
+	setAttr ".aovs[8].aov_name" -type "string" "shadow_mask";
+	setAttr ".aovs[9].aov_name" -type "string" "ID";
+	setAttr ".aovs[10].aov_name" -type "string" "background";
+	setAttr ".aovs[11].aov_name" -type "string" "denoise_albedo";
+	setAttr ".aovs[12].aov_name" -type "string" "shadow_matte";
+	setAttr ".aovs[13].aov_name" -type "string" "volume";
+	setAttr ".aovs[14].aov_name" -type "string" "highlight";
+	setAttr ".aovs[15].aov_name" -type "string" "Z";
+	setAttr ".aovs[16].aov_name" -type "string" "transmission";
+	setAttr ".aovs[17].aov_name" -type "string" "RGBA";
+	setAttr ".aovs[18].aov_name" -type "string" "albedo";
+	setAttr ".aovs[19].aov_name" -type "string" "coat";
+	setAttr ".aovs[20].aov_name" -type "string" "coat_albedo";
+	setAttr ".aovs[21].aov_name" -type "string" "coat_direct";
+	setAttr ".aovs[22].aov_name" -type "string" "coat_indirect";
+	setAttr ".aovs[23].aov_name" -type "string" "cputime";
+	setAttr ".aovs[24].aov_name" -type "string" "direct";
+	setAttr ".aovs[25].aov_name" -type "string" "emission";
+	setAttr ".aovs[26].aov_name" -type "string" "opacity";
+	setAttr ".aovs[27].aov_name" -type "string" "raycount";
+	setAttr ".aovs[28].aov_name" -type "string" "sheen";
+	setAttr ".aovs[29].aov_name" -type "string" "sheen_albedo";
+	setAttr ".aovs[30].aov_name" -type "string" "sheen_direct";
+	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
+	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
+	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
+	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
+	setAttr ".aovs[35].aov_name" -type "string" "sss";
+	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
+	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
+	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
+	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
+	setAttr ".aovs[40].aov_name" -type "string" "specular";
+	setAttr ".aovs[41].aov_name" -type "string" "indirect";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
 createNode materialInfo -n "materialInfo4";
 	rename -uid "9F779F32-4F16-5433-B755-5189045C098B";
 createNode animCurveTL -n "Bony_rWristIKC_translateX";
@@ -7646,14 +7946,19 @@ createNode animCurveTU -n "Bony_rElbowIKC_Follow";
 		 180 0 181 0 182 0 184 0 185 0 186 0 198 0 202 0 204 0 208 0 209 0 210 0;
 createNode standardSurface -n "person_mat";
 	rename -uid "042D0EDC-4C49-7DBD-490A-C8A2819943A6";
-	setAttr ".bc" -type "float3" 0.024615435 0.056865469 0.1923077 ;
-	setAttr ".sr" 0.32467532157897949;
-	setAttr ".sior" 1.5199999809265137;
+	setAttr ".b" 0.98000001907348633;
+	setAttr ".bc" -type "float3" 0.023303891 0.051178921 0.18877693 ;
+	setAttr ".sc" -type "float3" 0.94999999 0.89999998 1 ;
+	setAttr ".sr" 0.33246752619743347;
+	setAttr ".sior" 1.5230000019073486;
+	setAttr ".sa" 0.05000000074505806;
+	setAttr ".m" 0.037012986838817596;
 	setAttr ".td" 1;
-	setAttr ".sub" 0.20000000298023224;
-	setAttr ".subc" -type "float3" 0.10470402 0.24188282 0.81800002 ;
+	setAttr ".sub" 0.18000000715255737;
+	setAttr ".subc" -type "float3" 0.19423363 0.31769454 0.8362 ;
+	setAttr ".ct" 0.10000000149011612;
 	setAttr ".ctr" 0;
-	setAttr ".ctior" 1;
+	setAttr ".ctior" 1.0549999475479126;
 	setAttr ".ctac" 1;
 	setAttr ".ctar" 1;
 createNode shadingEngine -n "standardSurface6SG";
@@ -7662,12 +7967,46 @@ createNode shadingEngine -n "standardSurface6SG";
 	setAttr ".ihi" 0;
 	setAttr -s 48 ".dsm";
 	setAttr ".ro" yes;
-	setAttr -s 4 ".aovs";
-	setAttr ".aovs[0].aov_name" -type "string" "diffuse";
-	setAttr ".aovs[1].aov_name" -type "string" "specular";
-	setAttr ".aovs[2].aov_name" -type "string" "transmission";
-	setAttr ".aovs[3].aov_name" -type "string" "shadow";
-	setAttr ".aal" -type "attributeAlias" 8 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_specular" "aiCustomAOVs[1].aovName" "ai_aov_transmission" "aiCustomAOVs[2].aovName" "ai_aov_shadow" "aiCustomAOVs[3].aovName" ;
+	setAttr -s 38 ".aovs";
+	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
+	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
+	setAttr ".aovs[6].aov_name" -type "string" "shadow";
+	setAttr ".aovs[7].aov_name" -type "string" "shadow_diff";
+	setAttr ".aovs[8].aov_name" -type "string" "shadow_mask";
+	setAttr ".aovs[9].aov_name" -type "string" "ID";
+	setAttr ".aovs[10].aov_name" -type "string" "background";
+	setAttr ".aovs[11].aov_name" -type "string" "denoise_albedo";
+	setAttr ".aovs[12].aov_name" -type "string" "shadow_matte";
+	setAttr ".aovs[13].aov_name" -type "string" "volume";
+	setAttr ".aovs[14].aov_name" -type "string" "highlight";
+	setAttr ".aovs[15].aov_name" -type "string" "Z";
+	setAttr ".aovs[16].aov_name" -type "string" "transmission";
+	setAttr ".aovs[17].aov_name" -type "string" "RGBA";
+	setAttr ".aovs[18].aov_name" -type "string" "albedo";
+	setAttr ".aovs[19].aov_name" -type "string" "coat";
+	setAttr ".aovs[20].aov_name" -type "string" "coat_albedo";
+	setAttr ".aovs[21].aov_name" -type "string" "coat_direct";
+	setAttr ".aovs[22].aov_name" -type "string" "coat_indirect";
+	setAttr ".aovs[23].aov_name" -type "string" "cputime";
+	setAttr ".aovs[24].aov_name" -type "string" "direct";
+	setAttr ".aovs[25].aov_name" -type "string" "emission";
+	setAttr ".aovs[26].aov_name" -type "string" "opacity";
+	setAttr ".aovs[27].aov_name" -type "string" "raycount";
+	setAttr ".aovs[28].aov_name" -type "string" "sheen";
+	setAttr ".aovs[29].aov_name" -type "string" "sheen_albedo";
+	setAttr ".aovs[30].aov_name" -type "string" "sheen_direct";
+	setAttr ".aovs[31].aov_name" -type "string" "sheen_indirect";
+	setAttr ".aovs[32].aov_name" -type "string" "specular_albedo";
+	setAttr ".aovs[33].aov_name" -type "string" "specular_direct";
+	setAttr ".aovs[34].aov_name" -type "string" "specular_indirect";
+	setAttr ".aovs[35].aov_name" -type "string" "sss";
+	setAttr ".aovs[36].aov_name" -type "string" "sss_albedo";
+	setAttr ".aovs[37].aov_name" -type "string" "sss_direct";
+	setAttr ".aovs[38].aov_name" -type "string" "sss_indirect";
+	setAttr ".aovs[39].aov_name" -type "string" "rim_light";
+	setAttr ".aovs[40].aov_name" -type "string" "specular";
+	setAttr ".aovs[41].aov_name" -type "string" "indirect";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0]" "ai_aov_background" "aiCustomAOVs[10].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[11].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[12].aovName" "ai_aov_volume" "aiCustomAOVs[13].aovName" "ai_aov_highlight" "aiCustomAOVs[14].aovName" "ai_aov_Z" "aiCustomAOVs[15].aovName" "ai_aov_transmission" "aiCustomAOVs[16].aovName" "ai_aov_RGBA" "aiCustomAOVs[17].aovName" "ai_aov_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat" "aiCustomAOVs[19].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[20].aovName" "ai_aov_coat_direct" "aiCustomAOVs[21].aovName" "ai_aov_coat_indirect" "aiCustomAOVs[22].aovName" "ai_aov_cputime" "aiCustomAOVs[23].aovName" "ai_aov_direct" "aiCustomAOVs[24].aovName" "ai_aov_emission" "aiCustomAOVs[25].aovName" "ai_aov_opacity" "aiCustomAOVs[26].aovName" "ai_aov_raycount" "aiCustomAOVs[27].aovName" "ai_aov_sheen" "aiCustomAOVs[28].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[29].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[30].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[31].aovName" "ai_aov_specular_albedo" "aiCustomAOVs[32].aovName" "ai_aov_specular_direct" "aiCustomAOVs[33].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[34]" "ai_aov_sss" "aiCustomAOVs[35].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[36].aovName" "ai_aov_sss_direct" "aiCustomAOVs[37].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[38].aovName" "ai_aov_rim_light" "aiCustomAOVs[39].aovName" "ai_aov_specular" "aiCustomAOVs[40].aovName" "ai_aov_indirect" "aiCustomAOVs[41].aovName" "ai_aov_diffuse_direct" "aiCustomAOVs[4]" "ai_aov_diffuse_indirect" "aiCustomAOVs[5]" "ai_aov_shadow" "aiCustomAOVs[6].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[7].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[8].aovName" "ai_aov_ID" "aiCustomAOVs[9].aovName" ;
 createNode materialInfo -n "materialInfo5";
 	rename -uid "C1865FA7-4A1C-92C3-1D13-8886BF22360C";
 createNode aiFog -n "aiFog";
@@ -7679,25 +8018,27 @@ createNode nodeGraphEditorInfo -n "hyperShadePrimaryNodeEditorSavedTabsInfo";
 	setAttr ".tgi[0].vh" -type "double2" 649.9999741713217 44.047617297323995 ;
 createNode aiImagerDenoiserNoice -n "aiImagerDenoiserNoice1";
 	rename -uid "DEA6C629-455E-880D-163A-6CA7D6F70734";
-createNode aiAOV -n "aiAOV_diffuse";
-	rename -uid "41962A71-4F91-8D1B-1892-25BB32DDC2C4";
-	setAttr ".aovn" -type "string" "diffuse";
+createNode aiToon -n "_aov_aiToon";
+	rename -uid "548E8BF9-47E9-A79C-860B-4B801AA39F06";
+createNode aiAOV -n "aiAOV_direct";
+	rename -uid "8DFEB9B4-407D-577B-C985-EFB8BD9DC65B";
+	setAttr ".aovn" -type "string" "direct";
 	setAttr ".aovt" 5;
 createNode aiAOV -n "aiAOV_specular";
-	rename -uid "F90B625D-43D4-C6AE-E620-3D89BF770469";
+	rename -uid "71249387-4DFF-CF10-E874-E5AFFAC47C6B";
 	setAttr ".aovn" -type "string" "specular";
 	setAttr ".aovt" 5;
-createNode aiAOV -n "aiAOV_transmission";
-	rename -uid "D5555543-4B77-F523-ABB6-1B904B8B532A";
-	setAttr ".aovn" -type "string" "transmission";
+createNode aiAOV -n "aiAOV_specular_indirect";
+	rename -uid "959BF857-454C-8A65-81F0-208195CB86AA";
+	setAttr ".aovn" -type "string" "specular_indirect";
 	setAttr ".aovt" 5;
-createNode aiAOV -n "aiAOV_shadow";
-	rename -uid "258666B4-4BAC-1C01-55C3-ED88FF9D77DE";
-	setAttr ".aovn" -type "string" "shadow";
+createNode aiAOV -n "aiAOV_indirect";
+	rename -uid "AEDC77B3-495A-ABE4-0A08-B68561645C0C";
+	setAttr ".aovn" -type "string" "indirect";
 	setAttr ".aovt" 5;
 select -ne :time1;
-	setAttr ".o" 57;
-	setAttr ".unw" 57;
+	setAttr ".o" 70;
+	setAttr ".unw" 70;
 select -ne :hardwareRenderingGlobals;
 	setAttr ".otfna" -type "stringArray" 22 "NURBS Curves" "NURBS Surfaces" "Polygons" "Subdiv Surface" "Particles" "Particle Instance" "Fluids" "Strokes" "Image Planes" "UI" "Lights" "Cameras" "Locators" "Joints" "IK Handles" "Deformers" "Motion Trails" "Components" "Hair Systems" "Follicles" "Misc. UI" "Ornaments"  ;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
@@ -7709,7 +8050,7 @@ select -ne :renderPartition;
 	setAttr -s 9 ".st";
 select -ne :renderGlobalsList1;
 select -ne :defaultShaderList1;
-	setAttr -s 13 ".s";
+	setAttr -s 14 ".s";
 select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderUtilityList1;
@@ -7724,26 +8065,98 @@ select -ne :standardSurface1;
 select -ne :initialShadingGroup;
 	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
 	setAttr ".ro" yes;
-	setAttr -s 4 ".aovs";
+	setAttr -s 37 ".aovs";
 	setAttr ".aovs[0].aov_name" -type "string" "diffuse";
 	setAttr ".aovs[1].aov_name" -type "string" "specular";
-	setAttr ".aovs[2].aov_name" -type "string" "transmission";
-	setAttr ".aovs[3].aov_name" -type "string" "shadow";
-	setAttr ".aal" -type "attributeAlias" 8 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_specular" "aiCustomAOVs[1].aovName" "ai_aov_transmission" "aiCustomAOVs[2].aovName" "ai_aov_shadow" "aiCustomAOVs[3].aovName" ;
+	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
+	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
+	setAttr ".aovs[6].aov_name" -type "string" "shadow_diff";
+	setAttr ".aovs[7].aov_name" -type "string" "shadow_mask";
+	setAttr ".aovs[8].aov_name" -type "string" "ID";
+	setAttr ".aovs[9].aov_name" -type "string" "background";
+	setAttr ".aovs[10].aov_name" -type "string" "denoise_albedo";
+	setAttr ".aovs[11].aov_name" -type "string" "shadow_matte";
+	setAttr ".aovs[12].aov_name" -type "string" "volume";
+	setAttr ".aovs[13].aov_name" -type "string" "highlight";
+	setAttr ".aovs[14].aov_name" -type "string" "Z";
+	setAttr ".aovs[15].aov_name" -type "string" "RGBA";
+	setAttr ".aovs[16].aov_name" -type "string" "albedo";
+	setAttr ".aovs[17].aov_name" -type "string" "coat";
+	setAttr ".aovs[18].aov_name" -type "string" "coat_albedo";
+	setAttr ".aovs[19].aov_name" -type "string" "coat_direct";
+	setAttr ".aovs[20].aov_name" -type "string" "coat_indirect";
+	setAttr ".aovs[21].aov_name" -type "string" "cputime";
+	setAttr ".aovs[22].aov_name" -type "string" "direct";
+	setAttr ".aovs[23].aov_name" -type "string" "emission";
+	setAttr ".aovs[24].aov_name" -type "string" "opacity";
+	setAttr ".aovs[25].aov_name" -type "string" "raycount";
+	setAttr ".aovs[26].aov_name" -type "string" "sheen";
+	setAttr ".aovs[27].aov_name" -type "string" "sheen_albedo";
+	setAttr ".aovs[28].aov_name" -type "string" "sheen_direct";
+	setAttr ".aovs[29].aov_name" -type "string" "sheen_indirect";
+	setAttr ".aovs[30].aov_name" -type "string" "specular_albedo";
+	setAttr ".aovs[31].aov_name" -type "string" "specular_direct";
+	setAttr ".aovs[32].aov_name" -type "string" "specular_indirect";
+	setAttr ".aovs[33].aov_name" -type "string" "sss";
+	setAttr ".aovs[34].aov_name" -type "string" "sss_albedo";
+	setAttr ".aovs[35].aov_name" -type "string" "sss_direct";
+	setAttr ".aovs[36].aov_name" -type "string" "sss_indirect";
+	setAttr ".aovs[37].aov_name" -type "string" "rim_light";
+	setAttr ".aovs[38].aov_name" -type "string" "indirect";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[10].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[11].aovName" "ai_aov_volume" "aiCustomAOVs[12].aovName" "ai_aov_highlight" "aiCustomAOVs[13].aovName" "ai_aov_Z" "aiCustomAOVs[14].aovName" "ai_aov_RGBA" "aiCustomAOVs[15].aovName" "ai_aov_albedo" "aiCustomAOVs[16].aovName" "ai_aov_coat" "aiCustomAOVs[17].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat_direct" "aiCustomAOVs[19].aovName" "ai_aov_specular" "aiCustomAOVs[1]" "ai_aov_coat_indirect" "aiCustomAOVs[20].aovName" "ai_aov_cputime" "aiCustomAOVs[21].aovName" "ai_aov_direct" "aiCustomAOVs[22].aovName" "ai_aov_emission" "aiCustomAOVs[23].aovName" "ai_aov_opacity" "aiCustomAOVs[24].aovName" "ai_aov_raycount" "aiCustomAOVs[25].aovName" "ai_aov_sheen" "aiCustomAOVs[26].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[27].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[28].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[29].aovName" "ai_aov_transmission" "aiCustomAOVs[2]" "ai_aov_specular_albedo" "aiCustomAOVs[30].aovName" "ai_aov_specular_direct" "aiCustomAOVs[31].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[32]" "ai_aov_sss" "aiCustomAOVs[33].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[34].aovName" "ai_aov_sss_direct" "aiCustomAOVs[35].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[36].aovName" "ai_aov_rim_light" "aiCustomAOVs[37].aovName" "ai_aov_indirect" "aiCustomAOVs[38].aovName" "ai_aov_shadow" "aiCustomAOVs[3]" "ai_aov_diffuse_direct" "aiCustomAOVs[4].aovName" "ai_aov_diffuse_indirect" "aiCustomAOVs[5].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[6].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[7].aovName" "ai_aov_ID" "aiCustomAOVs[8].aovName" "ai_aov_background" "aiCustomAOVs[9].aovName" ;
 select -ne :initialParticleSE;
 	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
 	setAttr ".ro" yes;
-	setAttr -s 4 ".aovs";
+	setAttr -s 37 ".aovs";
 	setAttr ".aovs[0].aov_name" -type "string" "diffuse";
 	setAttr ".aovs[1].aov_name" -type "string" "specular";
-	setAttr ".aovs[2].aov_name" -type "string" "transmission";
-	setAttr ".aovs[3].aov_name" -type "string" "shadow";
-	setAttr ".aal" -type "attributeAlias" 8 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_specular" "aiCustomAOVs[1].aovName" "ai_aov_transmission" "aiCustomAOVs[2].aovName" "ai_aov_shadow" "aiCustomAOVs[3].aovName" ;
+	setAttr ".aovs[4].aov_name" -type "string" "diffuse_direct";
+	setAttr ".aovs[5].aov_name" -type "string" "diffuse_indirect";
+	setAttr ".aovs[6].aov_name" -type "string" "shadow_diff";
+	setAttr ".aovs[7].aov_name" -type "string" "shadow_mask";
+	setAttr ".aovs[8].aov_name" -type "string" "ID";
+	setAttr ".aovs[9].aov_name" -type "string" "background";
+	setAttr ".aovs[10].aov_name" -type "string" "denoise_albedo";
+	setAttr ".aovs[11].aov_name" -type "string" "shadow_matte";
+	setAttr ".aovs[12].aov_name" -type "string" "volume";
+	setAttr ".aovs[13].aov_name" -type "string" "highlight";
+	setAttr ".aovs[14].aov_name" -type "string" "Z";
+	setAttr ".aovs[15].aov_name" -type "string" "RGBA";
+	setAttr ".aovs[16].aov_name" -type "string" "albedo";
+	setAttr ".aovs[17].aov_name" -type "string" "coat";
+	setAttr ".aovs[18].aov_name" -type "string" "coat_albedo";
+	setAttr ".aovs[19].aov_name" -type "string" "coat_direct";
+	setAttr ".aovs[20].aov_name" -type "string" "coat_indirect";
+	setAttr ".aovs[21].aov_name" -type "string" "cputime";
+	setAttr ".aovs[22].aov_name" -type "string" "direct";
+	setAttr ".aovs[23].aov_name" -type "string" "emission";
+	setAttr ".aovs[24].aov_name" -type "string" "opacity";
+	setAttr ".aovs[25].aov_name" -type "string" "raycount";
+	setAttr ".aovs[26].aov_name" -type "string" "sheen";
+	setAttr ".aovs[27].aov_name" -type "string" "sheen_albedo";
+	setAttr ".aovs[28].aov_name" -type "string" "sheen_direct";
+	setAttr ".aovs[29].aov_name" -type "string" "sheen_indirect";
+	setAttr ".aovs[30].aov_name" -type "string" "specular_albedo";
+	setAttr ".aovs[31].aov_name" -type "string" "specular_direct";
+	setAttr ".aovs[32].aov_name" -type "string" "specular_indirect";
+	setAttr ".aovs[33].aov_name" -type "string" "sss";
+	setAttr ".aovs[34].aov_name" -type "string" "sss_albedo";
+	setAttr ".aovs[35].aov_name" -type "string" "sss_direct";
+	setAttr ".aovs[36].aov_name" -type "string" "sss_indirect";
+	setAttr ".aovs[37].aov_name" -type "string" "rim_light";
+	setAttr ".aovs[38].aov_name" -type "string" "indirect";
+	setAttr ".aal" -type "attributeAlias" 78 "ai_aov_diffuse" "aiCustomAOVs[0].aovName" "ai_aov_denoise_albedo" "aiCustomAOVs[10].aovName" "ai_aov_shadow_matte" "aiCustomAOVs[11].aovName" "ai_aov_volume" "aiCustomAOVs[12].aovName" "ai_aov_highlight" "aiCustomAOVs[13].aovName" "ai_aov_Z" "aiCustomAOVs[14].aovName" "ai_aov_RGBA" "aiCustomAOVs[15].aovName" "ai_aov_albedo" "aiCustomAOVs[16].aovName" "ai_aov_coat" "aiCustomAOVs[17].aovName" "ai_aov_coat_albedo" "aiCustomAOVs[18].aovName" "ai_aov_coat_direct" "aiCustomAOVs[19].aovName" "ai_aov_specular" "aiCustomAOVs[1]" "ai_aov_coat_indirect" "aiCustomAOVs[20].aovName" "ai_aov_cputime" "aiCustomAOVs[21].aovName" "ai_aov_direct" "aiCustomAOVs[22].aovName" "ai_aov_emission" "aiCustomAOVs[23].aovName" "ai_aov_opacity" "aiCustomAOVs[24].aovName" "ai_aov_raycount" "aiCustomAOVs[25].aovName" "ai_aov_sheen" "aiCustomAOVs[26].aovName" "ai_aov_sheen_albedo" "aiCustomAOVs[27].aovName" "ai_aov_sheen_direct" "aiCustomAOVs[28].aovName" "ai_aov_sheen_indirect" "aiCustomAOVs[29].aovName" "ai_aov_transmission" "aiCustomAOVs[2]" "ai_aov_specular_albedo" "aiCustomAOVs[30].aovName" "ai_aov_specular_direct" "aiCustomAOVs[31].aovName" "ai_aov_specular_indirect" "aiCustomAOVs[32]" "ai_aov_sss" "aiCustomAOVs[33].aovName" "ai_aov_sss_albedo" "aiCustomAOVs[34].aovName" "ai_aov_sss_direct" "aiCustomAOVs[35].aovName" "ai_aov_sss_indirect" "aiCustomAOVs[36].aovName" "ai_aov_rim_light" "aiCustomAOVs[37].aovName" "ai_aov_indirect" "aiCustomAOVs[38].aovName" "ai_aov_shadow" "aiCustomAOVs[3]" "ai_aov_diffuse_direct" "aiCustomAOVs[4].aovName" "ai_aov_diffuse_indirect" "aiCustomAOVs[5].aovName" "ai_aov_shadow_diff" "aiCustomAOVs[6].aovName" "ai_aov_shadow_mask" "aiCustomAOVs[7].aovName" "ai_aov_ID" "aiCustomAOVs[8].aovName" "ai_aov_background" "aiCustomAOVs[9].aovName" ;
 select -ne :defaultRenderGlobals;
 	addAttr -ci true -h true -sn "dss" -ln "defaultSurfaceShader" -dt "string";
 	setAttr ".ren" -type "string" "arnold";
 	setAttr ".outf" 51;
-	setAttr ".imfkey" -type "string" "exr";
+	setAttr ".imfkey" -type "string" "png";
+	setAttr ".an" yes;
+	setAttr ".fs" 0;
+	setAttr ".ef" 228;
+	setAttr ".ep" 3;
+	setAttr ".pff" yes;
+	setAttr ".ifp" -type "string" "<Scene>/<RenderPass>/<RenderPass>";
 	setAttr ".dss" -type "string" "standardSurface1";
 select -ne :defaultResolution;
 	setAttr ".pa" 1;
@@ -8106,10 +8519,11 @@ connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "aiImagerDenoiserNoice1.msg" ":defaultArnoldRenderOptions.imagers" -na
 		;
-connectAttr "aiAOV_diffuse.msg" ":defaultArnoldRenderOptions.aovs" -na;
+connectAttr "aiAOV_direct.msg" ":defaultArnoldRenderOptions.aovs" -na;
 connectAttr "aiAOV_specular.msg" ":defaultArnoldRenderOptions.aovs" -na;
-connectAttr "aiAOV_transmission.msg" ":defaultArnoldRenderOptions.aovs" -na;
-connectAttr "aiAOV_shadow.msg" ":defaultArnoldRenderOptions.aovs" -na;
+connectAttr "aiAOV_specular_indirect.msg" ":defaultArnoldRenderOptions.aovs" -na
+		;
+connectAttr "aiAOV_indirect.msg" ":defaultArnoldRenderOptions.aovs" -na;
 connectAttr "polyCube1.out" "transformGeometry1.ig";
 connectAttr "layerManager.dli[1]" "Enviornment.id";
 connectAttr "polyTweak1.out" "polySubdFace1.ip";
@@ -8138,14 +8552,14 @@ connectAttr "wall_mat.msg" "materialInfo4.m";
 connectAttr "person_mat.oc" "standardSurface6SG.ss";
 connectAttr "standardSurface6SG.msg" "materialInfo5.sg";
 connectAttr "person_mat.msg" "materialInfo5.m";
-connectAttr ":defaultArnoldDriver.msg" "aiAOV_diffuse.out[0].drvr";
-connectAttr ":defaultArnoldFilter.msg" "aiAOV_diffuse.out[0].ftr";
+connectAttr ":defaultArnoldDriver.msg" "aiAOV_direct.out[0].drvr";
+connectAttr ":defaultArnoldFilter.msg" "aiAOV_direct.out[0].ftr";
 connectAttr ":defaultArnoldDriver.msg" "aiAOV_specular.out[0].drvr";
 connectAttr ":defaultArnoldFilter.msg" "aiAOV_specular.out[0].ftr";
-connectAttr ":defaultArnoldDriver.msg" "aiAOV_transmission.out[0].drvr";
-connectAttr ":defaultArnoldFilter.msg" "aiAOV_transmission.out[0].ftr";
-connectAttr ":defaultArnoldDriver.msg" "aiAOV_shadow.out[0].drvr";
-connectAttr ":defaultArnoldFilter.msg" "aiAOV_shadow.out[0].ftr";
+connectAttr ":defaultArnoldDriver.msg" "aiAOV_specular_indirect.out[0].drvr";
+connectAttr ":defaultArnoldFilter.msg" "aiAOV_specular_indirect.out[0].ftr";
+connectAttr ":defaultArnoldDriver.msg" "aiAOV_indirect.out[0].drvr";
+connectAttr ":defaultArnoldFilter.msg" "aiAOV_indirect.out[0].ftr";
 connectAttr "standardSurface2SG.pa" ":renderPartition.st" -na;
 connectAttr "standardSurface3SG.pa" ":renderPartition.st" -na;
 connectAttr "standardSurface4SG.pa" ":renderPartition.st" -na;
@@ -8157,6 +8571,7 @@ connectAttr "ground_mat.msg" ":defaultShaderList1.s" -na;
 connectAttr "wall_mat.msg" ":defaultShaderList1.s" -na;
 connectAttr "person_mat.msg" ":defaultShaderList1.s" -na;
 connectAttr "aiFog.msg" ":defaultShaderList1.s" -na;
+connectAttr "_aov_aiToon.msg" ":defaultShaderList1.s" -na;
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr "aiAreaLightShape2.ltd" ":lightList1.l" -na;
 connectAttr "aiAreaLightShape3.ltd" ":lightList1.l" -na;
