@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: ReactionAnim.ma
-//Last modified: Wed, Mar 04, 2026 02:10:02 PM
+//Last modified: Thu, Mar 05, 2026 01:44:02 PM
 //Codeset: 1252
 file -rdi 1 -ns "Ultimate_Bony_v1_0_5" -rfn "Ultimate_Bony_v1_0_5RN" -op "v=0;"
 		 -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/-rigged walkers and stuff/Ultimate_Bony_v1.0.5.ma";
@@ -16,18 +16,18 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "AC803830-4145-F248-15DD-BC8BCB1C8EC1";
+fileInfo "UUID" "51BB229B-4ABF-4F90-2B46-FD96869EE2BA";
 createNode transform -s -n "persp";
 	rename -uid "A7A6F165-47F7-02E2-3B0F-36AE8F2E3769";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -0.59800381215317255 6.4463001034806453 9.416787126597697 ;
-	setAttr ".r" -type "double3" -0.33835272958174017 -15.799999999999667 6.4559391988176931e-18 ;
+	setAttr ".t" -type "double3" 1.683431309520147 -1.521474747773599 9.0326321845836972 ;
+	setAttr ".r" -type "double3" 41.661647270418086 -2.1999999999998696 3.9786259317119357e-16 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "57465BF7-4A5C-994F-0EC8-1C84B5D2E234";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 9.632668991627785;
+	setAttr ".coi" 11.90090069321619;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -3151,9 +3151,15 @@ createNode animCurveTA -n "Bony_Spine03FKC_rotateZ";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
 	setAttr -s 14 ".ktv[0:13]"  0 0 3 0 6 0 8 11.978113209203345 11 11.978113209203345
-		 17 -21.984249242230497 22 6.4449529783902788 27 2.9760200793983591 41 2.4521126757307519
+		 17 -17.634599714219519 22 6.5934827532561302 29 5.9208701606696597 41 5.9208701606696597
 		 50 -0.32225517839274798 60 -1.8775526730462573 71 3.4263875737703979 77 2.9760200793983591
 		 89 2.9760200793983591;
+	setAttr -s 14 ".kit[8:13]"  1 10 10 10 10 10;
+	setAttr -s 14 ".kot[8:13]"  1 10 10 10 10 10;
+	setAttr -s 14 ".kix[8:13]"  1 1 1 1 1 1;
+	setAttr -s 14 ".kiy[8:13]"  0 0 0 0 0 0;
+	setAttr -s 14 ".kox[8:13]"  1 1 1 1 1 1;
+	setAttr -s 14 ".koy[8:13]"  0 0 0 0 0 0;
 createNode polyCube -n "polyCube1";
 	rename -uid "4D96E7D5-4E86-4722-A46C-50AD190DE7FD";
 	setAttr ".cuv" 4;
@@ -3411,6 +3417,7 @@ createNode animCurveTU -n "Bony_lArmSwitchC_SwitchIkFk";
 	setAttr -s 7 ".ktv[0:6]"  22 1 41 1 47 1 49 1 75 0 80 0 89 0;
 createNode displayLayer -n "control_layer";
 	rename -uid "5053220C-4290-344F-E997-E6973E2CF980";
+	setAttr ".v" no;
 	setAttr ".ufem" -type "stringArray" 0  ;
 	setAttr ".do" 2;
 createNode animCurveTL -n "Bony_lElbowIKC_translateX";
@@ -3684,7 +3691,7 @@ createNode animCurveTL -n "Bony_Main_CNT_translateX";
 	setAttr -s 6 ".ktv[0:5]"  0 0 10 0 13 1.0532266896703488 16 2.089735495377675
 		 76 2.089735495377675 89 2.089735495377675;
 createNode nodeGraphEditorInfo -n "hyperShadePrimaryNodeEditorSavedTabsInfo";
-	rename -uid "C14782A2-4680-3643-F25F-32973F0E7C94";
+	rename -uid "7CBEA60F-467E-6A4C-FCF4-41B24D1FA330";
 	setAttr ".tgi[0].tn" -type "string" "Untitled_1";
 	setAttr ".tgi[0].vl" -type "double2" -44.047617297323995 -102.38094831269902 ;
 	setAttr ".tgi[0].vh" -type "double2" 102.38094831269902 44.047617297323995 ;
@@ -3696,8 +3703,8 @@ createNode nodeGraphEditorInfo -n "hyperShadePrimaryNodeEditorSavedTabsInfo";
 	setAttr ".tgi[0].ni[1].y" 37.142856597900391;
 	setAttr ".tgi[0].ni[1].nvs" 1923;
 select -ne :time1;
-	setAttr ".o" 20;
-	setAttr ".unw" 20;
+	setAttr ".o" 14;
+	setAttr ".unw" 14;
 select -ne :hardwareRenderingGlobals;
 	setAttr ".otfna" -type "stringArray" 22 "NURBS Curves" "NURBS Surfaces" "Polygons" "Subdiv Surface" "Particles" "Particle Instance" "Fluids" "Strokes" "Image Planes" "UI" "Lights" "Cameras" "Locators" "Joints" "IK Handles" "Deformers" "Motion Trails" "Components" "Hair Systems" "Follicles" "Misc. UI" "Ornaments"  ;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
