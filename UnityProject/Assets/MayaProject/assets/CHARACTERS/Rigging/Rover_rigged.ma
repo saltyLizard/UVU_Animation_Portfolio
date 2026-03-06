@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: Rover_rigged.ma
-//Last modified: Thu, Mar 05, 2026 10:13:24 PM
+//Last modified: Thu, Mar 05, 2026 10:16:26 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires "stereoCamera" "10.0";
@@ -13,18 +13,18 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "C851ECD0-42FF-9A31-242A-1BAF4A257CD3";
+fileInfo "UUID" "AFFDF728-45FB-A45B-653A-339535524AB8";
 createNode transform -s -n "persp";
 	rename -uid "E33F622D-463A-9D10-8DF3-19BC3E770EBD";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 321.09896577821667 183.00238952325881 488.79294028517882 ;
-	setAttr ".r" -type "double3" -13.200000000000008 35.599999999999994 0 ;
+	setAttr ".t" -type "double3" 312.52381090601421 144.29015798415369 464.81191284357214 ;
+	setAttr ".r" -type "double3" -9.600000000000108 32.799999999999876 9.4595558169824506e-16 ;
 	setAttr ".rpt" -type "double3" -1.0112427759323966e-14 5.9721178971161952e-15 1.696520829634141e-15 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "051BFE5F-442F-88AA-7536-C58795A55D51";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 629.68639538237358;
+	setAttr ".coi" 588.15565552980968;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -79,7 +79,9 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr ".tp" -type "double3" 0 12.365535736083956 4.2632564145606011e-14 ;
 	setAttr ".hc" -type "string" "viewSet -s %camera";
 	setAttr ".o" yes;
-createNode transform -n "Geometry";
+createNode transform -n "Rover";
+	rename -uid "D97C76D2-490A-434C-EFE7-54844630C656";
+createNode transform -n "Geometry" -p "Rover";
 	rename -uid "11BA9B5C-49B3-E28D-8A66-BC9137C16E56";
 createNode transform -n "Body_Geo" -p "Geometry";
 	rename -uid "E88AD6C8-48AC-3EAB-4382-B8B3CA5692DE";
@@ -46339,9 +46341,9 @@ createNode scaleConstraint -n "Head_Geo_scaleConstraint1" -p "Head_Geo";
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
 	setAttr -k on ".w0";
-createNode transform -n "Skelleton";
+createNode transform -n "Skeleton" -p "Rover";
 	rename -uid "0AACB32F-4F1A-C382-411B-3FBD00BAED2F";
-createNode joint -n "Root_jnt" -p "Skelleton";
+createNode joint -n "Root_jnt" -p "Skeleton";
 	rename -uid "0D723F9B-4170-2E13-53D5-38BDA41BFB2E";
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
@@ -47778,7 +47780,7 @@ createNode scaleConstraint -n "R_pannel2_jnt_scaleConstraint1" -p "R_pannel2_jnt
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
 	setAttr -k on ".w0";
-createNode transform -n "Controls";
+createNode transform -n "Controls" -p "Rover";
 	rename -uid "AAA091D6-4300-C374-DBB1-829E2C887479";
 createNode transform -n "Transform_ctrl_grp" -p "Controls";
 	rename -uid "D728B97E-4705-6F86-3307-2EB75A43D96F";
@@ -48909,6 +48911,7 @@ createNode ikRPsolver -n "ikRPsolver";
 	rename -uid "EB0C1582-4DEE-1F8A-02B3-E9BF0C138213";
 createNode displayLayer -n "joint_layer";
 	rename -uid "4FF41C4E-4B9C-7507-AACD-8FB22FD76D2C";
+	setAttr ".dt" 2;
 	setAttr ".v" no;
 	setAttr ".ufem" -type "stringArray" 0  ;
 	setAttr ".do" 2;
