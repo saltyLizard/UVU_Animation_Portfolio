@@ -21,3 +21,5 @@ UnityProject/Assets/MayaProject/sound/
 *.sbs
 
 UnityProject/Assets/Houdini/backup/
+
+*.hdalc
