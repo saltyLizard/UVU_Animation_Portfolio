@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: Robot_rigged.ma
-//Last modified: Thu, Mar 26, 2026 09:10:27 PM
+//Last modified: Thu, Mar 26, 2026 09:15:53 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires "stereoCamera" "10.0";
@@ -12,18 +12,18 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "85D91342-47CE-780A-30BD-BFBA8C85FAEA";
+fileInfo "UUID" "D7C1CD43-4118-A447-E0DB-1F8E259AFA2B";
 createNode transform -s -n "persp";
 	rename -uid "30986125-45B1-B2D8-FC05-F1B0E54AEDC8";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -221.22862734098422 182.27570625497992 794.23394641393645 ;
-	setAttr ".r" -type "double3" -8.399999999999185 343.19999999999135 2.0764715239158712e-16 ;
+	setAttr ".t" -type "double3" 38.177041538595603 204.72782854368933 826.24787741949581 ;
+	setAttr ".r" -type "double3" -7.199999999999255 359.19999999998834 -2.5471768421018753e-16 ;
 	setAttr ".rpt" -type "double3" 6.2653115631923652e-15 -6.5066530472359106e-16 2.5517967033121185e-15 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "BD8CAAF3-4580-ADF5-201E-CF9F9EFB8B18";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 810.12538350108366;
+	setAttr ".coi" 810.12538349970487;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -46754,7 +46754,6 @@ createNode materialInfo -n "materialInfo1";
 createNode displayLayer -n "geo_layer";
 	rename -uid "0B1639DE-4B15-E889-D0F4-339CA104184C";
 	setAttr ".dt" 2;
-	setAttr ".v" no;
 	setAttr ".ufem" -type "stringArray" 0  ;
 	setAttr ".do" 1;
 createNode ikRPsolver -n "ikRPsolver";
