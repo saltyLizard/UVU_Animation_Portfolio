@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: PhysicalGag.ma
-//Last modified: Wed, Apr 01, 2026 02:10:05 PM
+//Last modified: Wed, Apr 01, 2026 04:10:07 PM
 //Codeset: 1252
 file -rdi 1 -ns "Ultimate_Bony_v1_0_5" -rfn "Ultimate_Bony_v1_0_5RN" -op "v=0;"
 		 -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/-rigged walkers and stuff/Ultimate_Bony_v1.0.5.ma";
@@ -15,7 +15,7 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "58A96B9D-4EA3-C4DD-C787-45A9B85C973B";
+fileInfo "UUID" "D167F3F8-4662-0064-A1DC-0A94662A19BB";
 createNode transform -s -n "persp";
 	rename -uid "8F5AE07E-475F-B937-708C-48B19ACDEFC9";
 	setAttr ".v" no;
@@ -1666,6 +1666,10 @@ createNode animCurveTL -n "Bony_lFootIKC_translateY";
 		 57 0.87844631443425647 60 -0.010311275751346945 60.000000170068027 -0.010311275751346945
 		 61 -0.82908553693777121 64 -0.50237605915634076 67 -0.67246868722470343 70 1.2957742105205594
 		 73 -0.44276728991892522 78 3.1072615810400839 86 5.4788213575684042;
+	setAttr -s 21 ".kit[4:20]"  10 10 9 9 10 10 9 9 
+		9 9 9 9 9 9 9 9 9;
+	setAttr -s 21 ".kot[4:20]"  10 10 9 9 10 10 9 9 
+		9 9 9 9 9 9 9 9 9;
 createNode animCurveTL -n "Bony_lFootIKC_translateZ";
 	rename -uid "6E1E5939-4190-DD69-8718-668A4E071549";
 	setAttr ".tan" 9;
@@ -1702,6 +1706,12 @@ createNode animCurveTL -n "Bony_rFootIKC_translateY";
 		 60 -0.029679179024116941 60.000000170068027 -0.41665748238929251 61 -1.092209332059165
 		 64 -3.2697866180536503 67 -3.8503783035453947 70 -4.5593251957160268 73 -1.4235705170355
 		 78 -4.8471968009654507 86 -3.9076032582453344;
+	setAttr -s 28 ".kit[2:27]"  10 10 10 9 9 9 9 10 
+		10 10 9 9 9 9 10 10 10 9 9 9 9 9 9 9 9 
+		9;
+	setAttr -s 28 ".kot[2:27]"  10 10 10 9 9 9 9 10 
+		10 10 9 9 9 9 10 10 10 9 9 9 9 9 9 9 9 
+		9;
 createNode animCurveTL -n "Bony_rFootIKC_translateZ";
 	rename -uid "AA0137BF-46A1-F28B-125A-CEA9AFD6128E";
 	setAttr ".tan" 9;
@@ -2814,8 +2824,8 @@ createNode animCurveTU -n "Bony_rLegSwitchC_SwitchIkFk";
 	setAttr ".wgt" no;
 	setAttr ".ktv[0]"  60 0;
 select -ne :time1;
-	setAttr ".o" 72;
-	setAttr ".unw" 72;
+	setAttr ".o" 17;
+	setAttr ".unw" 17;
 select -ne :hardwareRenderingGlobals;
 	setAttr ".otfna" -type "stringArray" 22 "NURBS Curves" "NURBS Surfaces" "Polygons" "Subdiv Surface" "Particles" "Particle Instance" "Fluids" "Strokes" "Image Planes" "UI" "Lights" "Cameras" "Locators" "Joints" "IK Handles" "Deformers" "Motion Trails" "Components" "Hair Systems" "Follicles" "Misc. UI" "Ornaments"  ;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
