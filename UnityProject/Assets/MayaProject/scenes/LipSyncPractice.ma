@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: LipSyncPractice.ma
-//Last modified: Mon, Mar 30, 2026 08:19:55 PM
+//Last modified: Tue, Mar 31, 2026 11:03:36 AM
 //Codeset: 1252
 file -rdi 1 -ns "Tom" -rfn "TomRN" -op "v=0;" -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/-rigged walkers and stuff/Tom/Tom.ma";
 file -r -ns "Tom" -dr 1 -rfn "TomRN" -op "v=0;" -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/-rigged walkers and stuff/Tom/Tom.ma";
@@ -15,7 +15,7 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "991ABD45-4BDE-A294-445D-719C7961F6EE";
+fileInfo "UUID" "6528CBA4-497B-1639-054A-5C92B682F9C0";
 createNode transform -s -n "persp";
 	rename -uid "164A9118-4A3F-876E-926D-DB92706C91DA";
 	setAttr ".v" no;
@@ -24845,8 +24845,8 @@ createNode animCurveTU -n "M_tooth_low_base_control_scaleZ";
 		2 2 2 2 2 10 10 10 10 10 10 10 10 10 10 10 10 
 		10 10 10 10 10 10 10 10 10 10 10 10;
 select -ne :time1;
-	setAttr ".o" 6;
-	setAttr ".unw" 6;
+	setAttr ".o" 15;
+	setAttr ".unw" 15;
 select -ne :hardwareRenderingGlobals;
 	setAttr ".otfna" -type "stringArray" 22 "NURBS Curves" "NURBS Surfaces" "Polygons" "Subdiv Surface" "Particles" "Particle Instance" "Fluids" "Strokes" "Image Planes" "UI" "Lights" "Cameras" "Locators" "Joints" "IK Handles" "Deformers" "Motion Trails" "Components" "Hair Systems" "Follicles" "Misc. UI" "Ornaments"  ;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
