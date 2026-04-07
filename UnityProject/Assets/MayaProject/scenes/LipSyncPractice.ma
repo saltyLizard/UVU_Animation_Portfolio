@@ -1,6 +1,6 @@
 //Maya ASCII 2026 scene
 //Name: LipSyncPractice.ma
-//Last modified: Mon, Apr 06, 2026 11:35:38 AM
+//Last modified: Mon, Apr 06, 2026 12:05:10 PM
 //Codeset: 1252
 file -rdi 1 -ns "Tom" -rfn "TomRN" -op "v=0;" -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/-rigged walkers and stuff/Tom/Tom.ma";
 file -r -ns "Tom" -dr 1 -rfn "TomRN" -op "v=0;" -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/-rigged walkers and stuff/Tom/Tom.ma";
@@ -15,17 +15,17 @@ fileInfo "product" "Maya 2026";
 fileInfo "version" "2026";
 fileInfo "cutIdentifier" "202510291147-60ec9eda33";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "2D179F3D-4FCA-4250-2702-61A7A840BB85";
+fileInfo "UUID" "6EA1E55A-47EB-A3FC-724F-B99B46432068";
 createNode transform -s -n "persp";
 	rename -uid "164A9118-4A3F-876E-926D-DB92706C91DA";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -0.060734047715498833 10.542178777906331 16.361443685084886 ;
-	setAttr ".r" -type "double3" -5.7383527295843315 0.19999999999976628 3.1060293541104538e-17 ;
+	setAttr ".t" -type "double3" -0.24725532763456379 10.728072277990842 11.00873011185011 ;
+	setAttr ".r" -type "double3" -9.9383527295883649 -0.59999999999992937 6.2123614899555925e-18 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "54D3960C-4809-7288-3443-C98175552DDC";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 16.12120736408238;
+	setAttr ".coi" 10.656100964499856;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -4265,13 +4265,15 @@ createNode reference -n "TomRN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"TomRN"
 		"TomRN" 0
-		"TomRN" 4115
+		"TomRN" 4116
 		2 "|Tom:character|Tom:transform|Tom:rigs|Tom:spine_rigs|Tom:spine_skin_joints|Tom:spine_skin_10_locator|Tom:L_scapula_control_group|Tom:L_scapula_control_transform|Tom:L_scapula_control" 
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "|Tom:character|Tom:transform|Tom:rigs|Tom:spine_rigs|Tom:spine_skin_joints|Tom:spine_skin_10_locator|Tom:M_neck_control_group|Tom:M_neck_control_transform|Tom:M_neck_control|Tom:head_control_group|Tom:head_control_transform|Tom:head_control|Tom:head_controls|Tom:head_low_control_group|Tom:head_low_control_transform|Tom:head_low_control" 
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "|Tom:character|Tom:transform|Tom:rigs|Tom:spine_rigs|Tom:spine_skin_joints|Tom:spine_skin_10_locator|Tom:M_neck_control_group|Tom:M_neck_control_transform|Tom:M_neck_control|Tom:head_control_group|Tom:head_control_transform|Tom:head_control|Tom:head_controls|Tom:head_low_control_group|Tom:head_low_control_transform|Tom:head_low_control|Tom:M_mouth_global_control_group|Tom:M_mouth_global_control_transform|Tom:M_mouth_global_control|Tom:M_jaw_up_control_group|Tom:M_jaw_up_control_transform|Tom:M_jaw_up_control" 
 		"rotateOrder" " -k 1"
+		2 "|Tom:character|Tom:transform|Tom:rigs|Tom:spine_rigs|Tom:spine_skin_joints|Tom:spine_skin_10_locator|Tom:M_neck_control_group|Tom:M_neck_control_transform|Tom:M_neck_control|Tom:head_control_group|Tom:head_control_transform|Tom:head_control|Tom:head_controls|Tom:head_up_control_group|Tom:head_up_control_transform|Tom:head_up_control" 
+		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "|Tom:character|Tom:transform|Tom:rigs|Tom:spine_rigs|Tom:spine_skin_joints|Tom:spine_skin_10_locator|Tom:M_neck_control_group|Tom:M_neck_control_transform|Tom:M_neck_control|Tom:head_control_group|Tom:head_control_transform|Tom:head_control|Tom:head_controls|Tom:head_up_control_group|Tom:head_up_control_transform|Tom:head_up_control|Tom:L_ear_1_control_group|Tom:L_ear_1_control_transform|Tom:L_ear_1_control|Tom:L_ear_1_joint|Tom:L_ear_1_inverse_joint|Tom:L_ear_2_control_group|Tom:L_ear_2_control_transform|Tom:L_ear_2_control" 
 		"rotateOrder" " -k 1"
 		2 "|Tom:character|Tom:transform|Tom:rigs|Tom:spine_rigs|Tom:spine_skin_joints|Tom:spine_skin_10_locator|Tom:M_neck_control_group|Tom:M_neck_control_transform|Tom:M_neck_control|Tom:head_control_group|Tom:head_control_transform|Tom:head_control|Tom:head_controls|Tom:head_up_control_group|Tom:head_up_control_transform|Tom:head_up_control|Tom:R_ear_1_control_group|Tom:R_ear_1_control_transform|Tom:R_ear_1_control|Tom:R_ear_1_joint|Tom:R_ear_1_inverse_joint|Tom:R_ear_2_control_group|Tom:R_ear_2_control_transform|Tom:R_ear_2_control" 
@@ -25198,7 +25200,6 @@ createNode animBlendNodeAdditiveScale -n "Tom:tooth_low_2_control_scaleZ_AnimLay
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_2_control_translateX_AnimLayer1";
 	rename -uid "0DA7A150-44D3-49AE-C446-EFB525E443A4";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_2_control_translateY_AnimLayer1";
 	rename -uid "C7AC3E2F-463B-F5D9-B97D-159E8F45C74F";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_2_control_translateZ_AnimLayer1";
@@ -25438,13 +25439,13 @@ createNode animBlendNodeAdditiveScale -n "Tom:R_eyeRids_1_control_scaleZ_AnimLay
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:L_lid_low_2_control_translateX_AnimLayer1";
 	rename -uid "D6D6AC64-4A37-E648-8F09-69B547690E39";
-	setAttr ".o" 1.1796119636642288e-16;
+	setAttr ".o" -2.0816681711721685e-17;
 createNode animBlendNodeAdditiveDL -n "Tom:L_lid_low_2_control_translateY_AnimLayer1";
 	rename -uid "3040DE1F-4AC9-1C77-0A63-73B03F9D0481";
-	setAttr ".o" -0.018416430193464638;
+	setAttr ".o" -0.074469129007129986;
 createNode animBlendNodeAdditiveDL -n "Tom:L_lid_low_2_control_translateZ_AnimLayer1";
 	rename -uid "5FDBEBE1-4D62-907B-908D-E1B5AB63E389";
-	setAttr ".o" 1.5681900222830336e-15;
+	setAttr ".o" 3.4867941867133823e-16;
 createNode animBlendNodeAdditiveRotation -n "Tom:L_lid_low_2_control_rotate_AnimLayer1";
 	rename -uid "7FEA11B9-4DE5-F524-9A38-518449B15320";
 createNode animBlendNodeEnum -n "Tom:L_lid_low_2_control_rotateOrder_AnimLayer1";
@@ -25521,7 +25522,6 @@ createNode animBlendNodeAdditiveScale -n "Tom:L_ring_1_control_scaleZ_AnimLayer1
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_9_control_translateX_AnimLayer1";
 	rename -uid "6BB3A5D8-455B-8486-7159-139E85142627";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_9_control_translateY_AnimLayer1";
 	rename -uid "5F8B5200-4DA5-B1EE-ABAC-158CC6730889";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_9_control_translateZ_AnimLayer1";
@@ -25584,7 +25584,6 @@ createNode animBlendNodeAdditiveScale -n "Tom:tooth_low_12_control_scaleZ_AnimLa
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_8_control_translateX_AnimLayer1";
 	rename -uid "2845D9B5-4187-59C2-4998-66AEEAF98ADD";
-	setAttr ".o" 0.025521542623749147;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_8_control_translateY_AnimLayer1";
 	rename -uid "3D9E8557-45FF-05ED-5B8D-2F82C40A7EA0";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_8_control_translateZ_AnimLayer1";
@@ -25616,7 +25615,7 @@ createNode animBlendNodeAdditiveDL -n "Tom:R_ear_3_control_translateZ_AnimLayer1
 	rename -uid "6C4BA802-40D3-50CD-8901-2CB6955FEB1C";
 createNode animBlendNodeAdditiveRotation -n "Tom:R_ear_3_control_rotate_AnimLayer1";
 	rename -uid "CE4879B4-4CF3-7A62-CB93-F58F59FC60A3";
-	setAttr ".o" -type "double3" 0 -16.52173936688331 33.82190814678129 ;
+	setAttr ".o" -type "double3" 0 0 27.5499830459196 ;
 createNode animBlendNodeEnum -n "Tom:R_ear_3_control_rotateOrder_AnimLayer1";
 	rename -uid "DEBACE04-4B45-70FC-E31F-E6AC50F4A5AA";
 createNode animBlendNodeAdditiveScale -n "Tom:R_ear_3_control_scaleX_AnimLayer1";
@@ -25784,7 +25783,7 @@ createNode animBlendNodeAdditiveScale -n "Tom:L_index_1_control_scaleZ_AnimLayer
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:R_brow_1_base_control_translateY_AnimLayer1";
 	rename -uid "79CB367E-41D8-25AD-1692-71894998C222";
-	setAttr ".o" -0.068648414205056546;
+	setAttr ".o" -0.027293282699758191;
 createNode animBlendNodeEnum -n "Tom:R_brow_1_base_control_rotateOrder_AnimLayer1";
 	rename -uid "027FD686-462E-8BD0-DDB2-8EB97D903D99";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_low_3_control_translateX_AnimLayer1";
@@ -25814,7 +25813,6 @@ createNode animBlendNodeAdditiveScale -n "Tom:tooth_low_3_control_scaleZ_AnimLay
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_11_control_translateX_AnimLayer1";
 	rename -uid "AB22BC0B-4593-D794-C4F6-EABEA7721EE6";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_11_control_translateY_AnimLayer1";
 	rename -uid "F7853A9C-4C25-2449-2DE4-5B86309F4E91";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_11_control_translateZ_AnimLayer1";
@@ -26105,7 +26103,6 @@ createNode animBlendNodeEnum -n "Tom:L_lid_up_1_control_rotateOrder_AnimLayer1";
 	rename -uid "8CC7AA62-4735-D8D9-056D-DBB9E1608EC6";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_5_control_translateX_AnimLayer1";
 	rename -uid "7DC91212-4A90-DBD7-789D-929A639E8BFC";
-	setAttr ".o" 0.025521542623749147;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_5_control_translateY_AnimLayer1";
 	rename -uid "6E7D7B70-4B14-1379-36E9-C789416E7396";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_5_control_translateZ_AnimLayer1";
@@ -26168,7 +26165,7 @@ createNode animBlendNodeAdditive -n "Tom:spine_chest_control_saveVolume_AnimLaye
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:L_brow_1_base_control_translateY_AnimLayer1";
 	rename -uid "0380A775-49F1-A18A-D3AF-528CE0FE7F69";
-	setAttr ".o" -0.072639802227938907;
+	setAttr ".o" -0.027293282699758177;
 createNode animBlendNodeEnum -n "Tom:L_brow_1_base_control_rotateOrder_AnimLayer1";
 	rename -uid "C3887B1E-4FF8-E932-235F-49B19C578AF0";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_low_6_control_translateX_AnimLayer1";
@@ -26381,11 +26378,11 @@ createNode animBlendNodeEnum -n "Tom:L_lid_out_control_rotateOrder_AnimLayer1";
 	rename -uid "61961A3E-4D84-9254-CAC3-03871DBDA513";
 createNode animBlendNodeAdditiveDL -n "Tom:L_lid_low_base_control_translateX_AnimLayer1";
 	rename -uid "9D99162D-47EF-5110-AC04-E2924F22F448";
-	setAttr ".o" 9.2911789373317246e-18;
+	setAttr ".o" -2.8622937353617317e-17;
 createNode animBlendNodeAdditiveDL -n "Tom:L_lid_low_base_control_translateY_AnimLayer1";
 	rename -uid "0EE431C1-4680-0E6C-CC7C-9C9379E52E54";
 	setAttr ".ia" -0.22909289148670309;
-	setAttr ".o" -0.11845024513876658;
+	setAttr ".o" -0.12280999585851438;
 createNode animBlendNodeAdditiveDA -n "Tom:L_lid_low_base_control_rotateZ_AnimLayer1";
 	rename -uid "FEDA1A19-4847-2719-5636-1BAAEF6906EE";
 createNode animBlendNodeEnum -n "Tom:L_lid_low_base_control_rotateOrder_AnimLayer1";
@@ -26613,7 +26610,7 @@ createNode animBlendNodeAdditiveDL -n "Tom:M_neck_control_translateZ_AnimLayer1"
 	rename -uid "CD8C38F4-40FB-1491-FD2E-44939864F294";
 createNode animBlendNodeAdditiveRotation -n "Tom:M_neck_control_rotate_AnimLayer1";
 	rename -uid "2880764D-4DCD-4255-A2E3-C7969EC2243E";
-	setAttr ".o" -type "double3" -1.393707910807046 0 0.68126137783037188 ;
+	setAttr ".o" -type "double3" -1.393707910807046 0 0 ;
 createNode animBlendNodeEnum -n "Tom:M_neck_control_rotateOrder_AnimLayer1";
 	rename -uid "3B8C9B79-4208-13AD-6906-7CB1D4E80D54";
 createNode animBlendNodeAdditiveScale -n "Tom:M_neck_control_scaleX_AnimLayer1";
@@ -26632,7 +26629,6 @@ createNode animBlendNodeBoolean -n "Tom:M_neck_control_bendControls_AnimLayer1";
 	rename -uid "FAF28A8E-4916-ACB2-414C-759EDEF1F749";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_6_control_translateX_AnimLayer1";
 	rename -uid "4D28A512-49D1-5C9C-5A87-46814B999BCF";
-	setAttr ".o" 0.025521542623749147;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_6_control_translateY_AnimLayer1";
 	rename -uid "C15CA54A-4640-E4B3-4849-5382CEE41D5D";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_6_control_translateZ_AnimLayer1";
@@ -26708,13 +26704,13 @@ createNode animBlendNodeAdditiveScale -n "Tom:tongue_6_control_scaleZ_AnimLayer1
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:L_cheek_nose_control_translateX_AnimLayer1";
 	rename -uid "B59C2099-41BD-04DB-5502-86B108204F98";
-	setAttr ".o" 4.1956400143921364e-17;
+	setAttr ".o" 4.9701416452250072e-17;
 createNode animBlendNodeAdditiveDL -n "Tom:L_cheek_nose_control_translateY_AnimLayer1";
 	rename -uid "B7030B4D-40A7-67FE-6176-27BDC565F846";
-	setAttr ".o" 0.043059862648041763;
+	setAttr ".o" 0.063789887433167033;
 createNode animBlendNodeAdditiveDL -n "Tom:L_cheek_nose_control_translateZ_AnimLayer1";
 	rename -uid "9F439A94-46B4-E1E6-4FAE-4BB76401618B";
-	setAttr ".o" 7.8806742565116791e-18;
+	setAttr ".o" 4.6794165764474371e-16;
 createNode animBlendNodeAdditiveRotation -n "Tom:L_cheek_nose_control_rotate_AnimLayer1";
 	rename -uid "0E9C969B-4C25-BA54-C690-CBB3B5026415";
 createNode animBlendNodeEnum -n "Tom:L_cheek_nose_control_rotateOrder_AnimLayer1";
@@ -26810,10 +26806,10 @@ createNode animBlendNodeAdditiveDL -n "Tom:M_jaw_up_control_translateX_AnimLayer
 	rename -uid "3E4D22AD-4864-0793-B7A6-7F92CD051662";
 createNode animBlendNodeAdditiveDL -n "Tom:M_jaw_up_control_translateY_AnimLayer1";
 	rename -uid "469C0C03-48C6-5217-E31C-CAA5FAA88E6A";
-	setAttr ".o" 0.01975011846502147;
+	setAttr ".o" 0.018084423091325574;
 createNode animBlendNodeAdditiveDL -n "Tom:M_jaw_up_control_translateZ_AnimLayer1";
 	rename -uid "6376E133-4AC2-71F0-32CF-37955BA656A3";
-	setAttr ".o" 1.8787686496109766e-18;
+	setAttr ".o" 6.1685682603562775e-16;
 createNode animBlendNodeAdditiveRotation -n "Tom:M_jaw_up_control_rotate_AnimLayer1";
 	rename -uid "A3E658F9-4CA8-2089-2CC8-F7ADAC1C8444";
 createNode animBlendNodeEnum -n "Tom:M_jaw_up_control_rotateOrder_AnimLayer1";
@@ -26863,7 +26859,6 @@ createNode animBlendNodeEnum -n "Tom:R_lid_low_3_control_rotateOrder_AnimLayer1"
 	rename -uid "7DAECAA8-4182-AD22-390F-47A6F1592792";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_1_control_translateX_AnimLayer1";
 	rename -uid "7B56139C-47FF-7B10-1A74-81A7FAC09048";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_1_control_translateY_AnimLayer1";
 	rename -uid "9EFF5FDD-462D-D8EC-B795-1FB6EB2857FE";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_1_control_translateZ_AnimLayer1";
@@ -26939,7 +26934,6 @@ createNode animBlendNodeAdditiveScale -n "Tom:L_ear_bend_5_control_scaleZ_AnimLa
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_12_control_translateX_AnimLayer1";
 	rename -uid "93703F12-41A3-4B9B-E933-229230C2451A";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_12_control_translateY_AnimLayer1";
 	rename -uid "D6812696-42C8-69FD-49C5-BEAA1B0247EB";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_12_control_translateZ_AnimLayer1";
@@ -27111,7 +27105,7 @@ createNode animBlendNodeAdditiveDL -n "Tom:L_ear_3_control_translateZ_AnimLayer1
 	rename -uid "FBD1AD63-480F-606F-FC55-179385F4E28D";
 createNode animBlendNodeAdditiveRotation -n "Tom:L_ear_3_control_rotate_AnimLayer1";
 	rename -uid "0E3AC865-41F4-3853-F55F-37867C016F53";
-	setAttr ".o" -type "double3" 0 -16.52173936688331 33.82190814678129 ;
+	setAttr ".o" -type "double3" 0 0 27.5499830459196 ;
 createNode animBlendNodeEnum -n "Tom:L_ear_3_control_rotateOrder_AnimLayer1";
 	rename -uid "B625BBC6-4240-49FF-9323-668B1882AE37";
 createNode animBlendNodeAdditiveScale -n "Tom:L_ear_3_control_scaleX_AnimLayer1";
@@ -27128,13 +27122,10 @@ createNode animBlendNodeAdditiveScale -n "Tom:L_ear_3_control_scaleZ_AnimLayer1"
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:tongue_5_control_translateX_AnimLayer1";
 	rename -uid "5BBD9926-41F9-4428-2C79-5EBD3107BFC5";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tongue_5_control_translateY_AnimLayer1";
 	rename -uid "859250F1-454F-DCB1-972E-A5B739A1CE54";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tongue_5_control_translateZ_AnimLayer1";
 	rename -uid "D1D60AD0-4F9A-FA8F-8735-4E9F2C44F042";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveRotation -n "Tom:tongue_5_control_rotate_AnimLayer1";
 	rename -uid "083C2331-4011-378B-639E-8383C41197FC";
 createNode animBlendNodeEnum -n "Tom:tongue_5_control_rotateOrder_AnimLayer1";
@@ -27293,7 +27284,7 @@ createNode animBlendNodeAdditiveDL -n "Tom:L_ear_2_control_translateZ_AnimLayer1
 	rename -uid "8D94F77B-4049-3031-C22D-C8ACD63FB895";
 createNode animBlendNodeAdditiveRotation -n "Tom:L_ear_2_control_rotate_AnimLayer1";
 	rename -uid "39A0259E-48DB-A639-82CB-45A657AF2249";
-	setAttr ".o" -type "double3" 15.698589350966692 0 -22.221958002438466 ;
+	setAttr ".o" -type "double3" 0 0 -1.6706466391149428 ;
 createNode animBlendNodeEnum -n "Tom:L_ear_2_control_rotateOrder_AnimLayer1";
 	rename -uid "59A05B63-46BB-4C1B-457D-BE89B988539D";
 createNode animBlendNodeAdditiveScale -n "Tom:L_ear_2_control_scaleX_AnimLayer1";
@@ -27410,7 +27401,6 @@ createNode animBlendNodeAdditiveScale -n "Tom:L_eyeLids_1_control_scaleZ_AnimLay
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_3_control_translateX_AnimLayer1";
 	rename -uid "C1568C03-4F8B-9FA7-F732-05B6213BB743";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_3_control_translateY_AnimLayer1";
 	rename -uid "F3050AD0-47CA-07C3-EE97-B886CC25FCC2";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_3_control_translateZ_AnimLayer1";
@@ -27538,7 +27528,6 @@ createNode animBlendNodeAdditiveDL -n "Tom:L_lips_up_sneer_control_translateX_An
 	rename -uid "F899D612-4E5B-B4ED-F224-E2BA3C3734AE";
 createNode animBlendNodeAdditiveDL -n "Tom:L_lips_up_sneer_control_translateY_AnimLayer1";
 	rename -uid "680CC51B-44B7-CD55-07B5-0DAC542A7565";
-	setAttr ".o" 0.014219915240278252;
 createNode animBlendNodeAdditiveDL -n "Tom:L_lips_up_sneer_control_translateZ_AnimLayer1";
 	rename -uid "3114EF56-467A-58F5-A8CA-28859B7DABE3";
 createNode animBlendNodeAdditiveRotation -n "Tom:L_lips_up_sneer_control_rotate_AnimLayer1";
@@ -27568,7 +27557,6 @@ createNode animBlendNodeEnum -n "Tom:R_lid_up_3_control_rotateOrder_AnimLayer1";
 	rename -uid "93A95730-4E72-4E57-E061-D2ABD6A6F837";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_7_control_translateX_AnimLayer1";
 	rename -uid "F7DCB007-4C99-A9B5-C3C2-B68B877F2500";
-	setAttr ".o" 0.025521542623749147;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_7_control_translateY_AnimLayer1";
 	rename -uid "5508D027-4A46-F22F-1654-EC820AE83987";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_7_control_translateZ_AnimLayer1";
@@ -27600,7 +27588,7 @@ createNode animBlendNodeAdditiveDL -n "Tom:R_ear_2_control_translateZ_AnimLayer1
 	rename -uid "DBA73C35-44DC-CFE0-F5EC-FBAA7967A9C3";
 createNode animBlendNodeAdditiveRotation -n "Tom:R_ear_2_control_rotate_AnimLayer1";
 	rename -uid "282713BF-4B6B-C445-8D23-5B824D93F310";
-	setAttr ".o" -type "double3" 15.698589350966692 0 -22.221958002438466 ;
+	setAttr ".o" -type "double3" 0 0 -1.6706466391149428 ;
 createNode animBlendNodeEnum -n "Tom:R_ear_2_control_rotateOrder_AnimLayer1";
 	rename -uid "8F9F0575-47C8-691B-3EA9-57AEEC48010D";
 createNode animBlendNodeAdditiveScale -n "Tom:R_ear_2_control_scaleX_AnimLayer1";
@@ -27617,13 +27605,10 @@ createNode animBlendNodeAdditiveScale -n "Tom:R_ear_2_control_scaleZ_AnimLayer1"
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:lips_base_low_control_translateX_AnimLayer1";
 	rename -uid "0B92F716-49E2-423F-C869-FFBB7FCA483C";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:lips_base_low_control_translateY_AnimLayer1";
 	rename -uid "CAC9B10A-407F-C489-3C1F-0CACEF43CD40";
-	setAttr ".o" -0.038297645244466216;
 createNode animBlendNodeAdditiveDL -n "Tom:lips_base_low_control_translateZ_AnimLayer1";
 	rename -uid "D5037DCC-4DF2-9D4F-E261-AF84335A102F";
-	setAttr ".o" -1.6447748512965316e-16;
 createNode animBlendNodeAdditiveRotation -n "Tom:lips_base_low_control_rotate_AnimLayer1";
 	rename -uid "C3C31D8A-4EDE-B8DE-A4FC-409AA89442CB";
 createNode animBlendNodeEnum -n "Tom:lips_base_low_control_rotateOrder_AnimLayer1";
@@ -27699,7 +27684,6 @@ createNode animBlendNodeAdditive -n "Tom:M_jaw_control_avgZIP_AnimLayer1";
 	setAttr ".o" 0.5;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_4_control_translateX_AnimLayer1";
 	rename -uid "6A28DD5E-468D-F010-E037-72B3EC53B17B";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_4_control_translateY_AnimLayer1";
 	rename -uid "9C9F27D1-4D6E-2F08-3540-20A72DCDBC1E";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_4_control_translateZ_AnimLayer1";
@@ -27750,10 +27734,8 @@ createNode animBlendNodeAdditiveScale -n "Tom:L_tooth_up_2_control_scaleZ_AnimLa
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:R_emotion_control_translateX_AnimLayer1";
 	rename -uid "AC9D1FE3-43D5-9635-B979-858438B36B67";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:R_emotion_control_translateY_AnimLayer1";
 	rename -uid "5BCFFEC2-41BD-94C8-58CF-6B879A8EA96E";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDA -n "Tom:R_emotion_control_rotateZ_AnimLayer1";
 	rename -uid "EBCC549F-4F6A-D3AD-142A-348427149C77";
 createNode animBlendNodeEnum -n "Tom:R_emotion_control_rotateOrder_AnimLayer1";
@@ -27864,13 +27846,13 @@ createNode animBlendNodeAdditiveScale -n "Tom:M_mouth_global_control_scaleZ_Anim
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:R_cheek_nose_control_translateX_AnimLayer1";
 	rename -uid "58577139-47A9-777D-700B-0FB643B86EF4";
-	setAttr ".o" 4.1956400143921364e-17;
+	setAttr ".o" 4.9701416452250072e-17;
 createNode animBlendNodeAdditiveDL -n "Tom:R_cheek_nose_control_translateY_AnimLayer1";
 	rename -uid "0C210666-490C-1DF7-C4DB-41BF59205929";
-	setAttr ".o" 0.043059862648041763;
+	setAttr ".o" 0.063789887433167033;
 createNode animBlendNodeAdditiveDL -n "Tom:R_cheek_nose_control_translateZ_AnimLayer1";
 	rename -uid "8EF8F927-4A7B-9E96-FF4E-1887AAFFA720";
-	setAttr ".o" 7.8806742565116791e-18;
+	setAttr ".o" 4.6794165764474371e-16;
 createNode animBlendNodeAdditiveRotation -n "Tom:R_cheek_nose_control_rotate_AnimLayer1";
 	rename -uid "96B47C4B-4841-2994-F350-ED90FCA419EC";
 createNode animBlendNodeEnum -n "Tom:R_cheek_nose_control_rotateOrder_AnimLayer1";
@@ -27939,7 +27921,6 @@ createNode animBlendNodeAdditiveScale -n "Tom:R_iris_target_control_scaleZ_AnimL
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_10_control_translateX_AnimLayer1";
 	rename -uid "1D3CC2E3-4FF8-9E1F-C42A-B1B42CBCC92F";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_10_control_translateY_AnimLayer1";
 	rename -uid "A569E10E-4123-C657-1BCF-84983FA5EC47";
 createNode animBlendNodeAdditiveDL -n "Tom:tooth_up_10_control_translateZ_AnimLayer1";
@@ -28122,11 +28103,11 @@ createNode animBlendNodeAdditiveScale -n "Tom:L_ear_hair_A_2_control_scaleZ_Anim
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:R_lid_low_base_control_translateX_AnimLayer1";
 	rename -uid "AE543368-49EC-702F-C4E3-D883764281B2";
-	setAttr ".o" 9.2911789373317246e-18;
+	setAttr ".o" -2.8622937353617317e-17;
 createNode animBlendNodeAdditiveDL -n "Tom:R_lid_low_base_control_translateY_AnimLayer1";
 	rename -uid "52703AB5-4062-A530-6C35-598EF15629DD";
 	setAttr ".ia" -0.22909289148670312;
-	setAttr ".o" -0.11845024513876658;
+	setAttr ".o" -0.12280999585851438;
 createNode animBlendNodeAdditiveDA -n "Tom:R_lid_low_base_control_rotateZ_AnimLayer1";
 	rename -uid "79BF5C43-4808-6CA1-A41C-70B8C08AE175";
 createNode animBlendNodeEnum -n "Tom:R_lid_low_base_control_rotateOrder_AnimLayer1";
@@ -28374,7 +28355,6 @@ createNode animBlendNodeAdditiveDL -n "Tom:M_lips_low_mid_control_translateX_Ani
 	rename -uid "45A8EF2A-4D90-A872-74F7-62A428B3FB55";
 createNode animBlendNodeAdditiveDL -n "Tom:M_lips_low_mid_control_translateY_AnimLayer1";
 	rename -uid "5E1F5FF9-4B7C-228A-7CCC-4A8117D8A652";
-	setAttr ".o" -0.039052405921472313;
 createNode animBlendNodeAdditiveDL -n "Tom:M_lips_low_mid_control_translateZ_AnimLayer1";
 	rename -uid "3AC63C47-49AB-1778-A8FB-AFB196B84902";
 createNode animBlendNodeAdditiveRotation -n "Tom:M_lips_low_mid_control_rotate_AnimLayer1";
@@ -28462,15 +28442,13 @@ createNode animBlendNodeAdditiveScale -n "Tom:R_lid_low_2_control_scaleZ_AnimLay
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:R_cheek_hair_control_translateX_AnimLayer1";
 	rename -uid "EB3D577A-4725-8DC6-4F0C-4C8860B5750A";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:R_cheek_hair_control_translateY_AnimLayer1";
 	rename -uid "3B70293B-4A69-B0E7-3E85-36B962577EAB";
-	setAttr ".o" -0.061412507739667492;
+	setAttr ".o" 0.029098744201008084;
 createNode animBlendNodeAdditiveDL -n "Tom:R_cheek_hair_control_translateZ_AnimLayer1";
 	rename -uid "569108C2-4609-E0FC-D5DD-D68B25A2BA86";
 createNode animBlendNodeAdditiveRotation -n "Tom:R_cheek_hair_control_rotate_AnimLayer1";
 	rename -uid "56C32F3C-4058-1B06-93C8-F4BC90BDBF6F";
-	setAttr ".o" -type "double3" 0 0 -3.5406660904522145 ;
 createNode animBlendNodeEnum -n "Tom:R_cheek_hair_control_rotateOrder_AnimLayer1";
 	rename -uid "5FBA0611-4C19-80F0-AEDD-C78A32569A92";
 createNode animBlendNodeAdditiveScale -n "Tom:R_cheek_hair_control_scaleX_AnimLayer1";
@@ -28487,13 +28465,10 @@ createNode animBlendNodeAdditiveScale -n "Tom:R_cheek_hair_control_scaleZ_AnimLa
 	setAttr ".o" 0.4248000006134956;
 createNode animBlendNodeAdditiveDL -n "Tom:beard_control_translateX_AnimLayer1";
 	rename -uid "C944D4B2-4AA0-7623-7605-08B118A3DF94";
-	setAttr ".o" 2.0454174571278138e-26;
 createNode animBlendNodeAdditiveDL -n "Tom:beard_control_translateY_AnimLayer1";
 	rename -uid "BA370634-49BD-4B9C-946F-76969C88B051";
-	setAttr ".o" -0.029647020791778025;
 createNode animBlendNodeAdditiveDL -n "Tom:beard_control_translateZ_AnimLayer1";
 	rename -uid "7E36E93E-4CF1-91AE-A73A-B79EF1876636";
-	setAttr ".o" -1.3980586236020473e-16;
 createNode animBlendNodeAdditiveRotation -n "Tom:beard_control_rotate_AnimLayer1";
 	rename -uid "E72D5BD2-4903-8D99-D657-5C8E0749BCC6";
 createNode animBlendNodeEnum -n "Tom:beard_control_rotateOrder_AnimLayer1";
@@ -28821,13 +28796,10 @@ createNode animBlendNodeAdditiveScale -n "Tom:R_lid_up_2_control_scaleZ_AnimLaye
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:M_tooth_low_base_control_translateX_AnimLayer1";
 	rename -uid "8501568F-4ADC-FDC2-9746-E486E420C3C6";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:M_tooth_low_base_control_translateY_AnimLayer1";
 	rename -uid "6AB6458C-4A40-2F0D-4338-9CBD7B2F9FA7";
-	setAttr ".o" -0.028644671176787845;
 createNode animBlendNodeAdditiveDL -n "Tom:M_tooth_low_base_control_translateZ_AnimLayer1";
 	rename -uid "F6AB8DA7-4770-92E3-37AA-B0AB4CB7E06D";
-	setAttr ".o" -1.6447748512965316e-16;
 createNode animBlendNodeAdditiveRotation -n "Tom:M_tooth_low_base_control_rotate_AnimLayer1";
 	rename -uid "D43FD6AE-4F01-A601-D51E-E5AE6D6180AA";
 createNode animBlendNodeEnum -n "Tom:M_tooth_low_base_control_rotateOrder_AnimLayer1";
@@ -28876,13 +28848,10 @@ createNode animBlendNodeAdditive -n "Tom:R_chek_base_control_inflat_AnimLayer1";
 	rename -uid "A29B4568-4EDC-1F3B-5076-AE94D588693E";
 createNode animBlendNodeAdditiveDL -n "Tom:lips_base_up_control_translateX_AnimLayer1";
 	rename -uid "93D4106C-4368-D6AC-E02F-3C998F094494";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:lips_base_up_control_translateY_AnimLayer1";
 	rename -uid "E48583A1-4755-A567-E414-E0B760053C12";
-	setAttr ".o" 0.044566535744692437;
 createNode animBlendNodeAdditiveDL -n "Tom:lips_base_up_control_translateZ_AnimLayer1";
 	rename -uid "4EE61E94-401B-D651-4FD2-A392CADB6425";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveRotation -n "Tom:lips_base_up_control_rotate_AnimLayer1";
 	rename -uid "9A6E5D5D-46C1-025A-C8E1-8DAB3F2CD0DF";
 createNode animBlendNodeEnum -n "Tom:lips_base_up_control_rotateOrder_AnimLayer1";
@@ -28962,7 +28931,6 @@ createNode animBlendNodeAdditiveDL -n "Tom:R_lips_up_sneer_control_translateX_An
 	rename -uid "46453CC1-4DD0-4236-2339-83B794A4DA94";
 createNode animBlendNodeAdditiveDL -n "Tom:R_lips_up_sneer_control_translateY_AnimLayer1";
 	rename -uid "5968DACB-47AE-C6C2-E83C-438CDC07D324";
-	setAttr ".o" 0.016978984403275645;
 createNode animBlendNodeAdditiveDL -n "Tom:R_lips_up_sneer_control_translateZ_AnimLayer1";
 	rename -uid "F63E4507-4B65-B6E6-7CBD-4292FE4F204D";
 createNode animBlendNodeAdditiveRotation -n "Tom:R_lips_up_sneer_control_rotate_AnimLayer1";
@@ -28986,10 +28954,8 @@ createNode animBlendNodeAdditiveScale -n "Tom:R_lips_up_sneer_control_scaleZ_Ani
 	setAttr ".o" 1;
 createNode animBlendNodeAdditiveDL -n "Tom:L_emotion_control_translateX_AnimLayer1";
 	rename -uid "8AFC1763-4057-2F4D-E660-62B21BFDCDA7";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:L_emotion_control_translateY_AnimLayer1";
 	rename -uid "0AD1DAB3-4D7D-47FD-F413-CA9792F110F9";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDA -n "Tom:L_emotion_control_rotateZ_AnimLayer1";
 	rename -uid "890EB8D9-4B54-51CE-2DE2-6796A1EF987E";
 createNode animBlendNodeEnum -n "Tom:L_emotion_control_rotateOrder_AnimLayer1";
@@ -29033,15 +28999,13 @@ createNode animBlendNodeEnum -n "Tom:R_mustache_up_3_control_rotateOrder_AnimLay
 	rename -uid "EA692B94-4A14-6311-5422-289E676D5233";
 createNode animBlendNodeAdditiveDL -n "Tom:L_cheek_hair_control_translateX_AnimLayer1";
 	rename -uid "E03582A4-4D23-B50B-4109-33A7E03FFCCF";
-	setAttr ".o" 0;
 createNode animBlendNodeAdditiveDL -n "Tom:L_cheek_hair_control_translateY_AnimLayer1";
 	rename -uid "6D38F9F4-4F76-93D2-6310-EA9B89C734E3";
-	setAttr ".o" -0.061412507739667492;
+	setAttr ".o" 0.029098744201008084;
 createNode animBlendNodeAdditiveDL -n "Tom:L_cheek_hair_control_translateZ_AnimLayer1";
 	rename -uid "486539C1-44EB-DBFF-3C6A-38B1EBA0A6C9";
 createNode animBlendNodeAdditiveRotation -n "Tom:L_cheek_hair_control_rotate_AnimLayer1";
 	rename -uid "BCFC4D8B-4597-251D-682C-C3BB8A461A54";
-	setAttr ".o" -type "double3" 0 0 -3.5406660904522145 ;
 createNode animBlendNodeEnum -n "Tom:L_cheek_hair_control_rotateOrder_AnimLayer1";
 	rename -uid "E47DAC95-4258-BCE1-3BFE-448531458B95";
 createNode animBlendNodeAdditiveScale -n "Tom:L_cheek_hair_control_scaleX_AnimLayer1";
@@ -29418,56 +29382,77 @@ createNode animCurveTL -n "M_jaw_up_control_translateX_AnimLayer1_inputB";
 	rename -uid "C74EA28D-431A-63D2-8DE7-5FA089104A88";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 0 15 0 40 0 59 0 80 3.3069565207190402e-18
-		 82 3.306969755608841e-18 85 0;
+	setAttr -s 8 ".ktv[0:7]"  1 0 15 0 40 0 59 0 71 -8.2996065610590776e-17
+		 80 3.3069565207190402e-18 82 3.306969755608841e-18 85 0;
+	setAttr -s 8 ".kit[4:7]"  18 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTL -n "M_jaw_up_control_translateY_AnimLayer1_inputB";
 	rename -uid "15BE7F43-4634-F509-0C74-CDB666C58FBC";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 0.018084423091325574 15 0.018084423091325574
-		 40 0.018084423091325574 59 0.018084423091325574 80 0.081810800466197722 82 0.012513411003265876
-		 85 0.018084423091325574;
+	setAttr -s 8 ".ktv[0:7]"  1 0.018084423091325574 15 0.018084423091325574
+		 40 0.018084423091325574 59 0.018084423091325574 71 0.018842468995766703 80 0.081810800466197722
+		 82 0.012513411003265876 85 0.018084423091325574;
+	setAttr -s 8 ".kit[4:7]"  18 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTL -n "M_jaw_up_control_translateZ_AnimLayer1_inputB";
 	rename -uid "0F9832AD-492B-AB96-4452-E09B854491C8";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 6.1685682603562775e-16 15 6.1685682603562775e-16
-		 40 0 59 0 80 7.3725747729014302e-17 82 -1.4831885719601701e-16 85 6.1685682603562775e-16;
+	setAttr -s 8 ".ktv[0:7]"  1 6.1685682603562775e-16 15 6.1685682603562775e-16
+		 40 0 59 0 71 1.2965556536769401e-16 80 7.3725747729014302e-17 82 -1.4831885719601701e-16
+		 85 6.1685682603562775e-16;
+	setAttr -s 8 ".kit[4:7]"  18 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTA -n "M_jaw_up_control_rotate_AnimLayer1_inputBX";
 	rename -uid "2A1DE46C-4B30-45E5-7BF3-1688CC8B1E2B";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 0 15 0 40 0 59 0 80 0 82 0 85 0;
+	setAttr -s 8 ".ktv[0:7]"  1 0 15 0 40 0 59 0 71 0 80 0 82 0 85 0;
+	setAttr -s 8 ".kit[4:7]"  18 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTA -n "M_jaw_up_control_rotate_AnimLayer1_inputBY";
 	rename -uid "8B3A46FD-4492-97AA-767E-AFA32354CE12";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 0 15 0 40 0 59 0 80 0 82 0 85 0;
+	setAttr -s 8 ".ktv[0:7]"  1 0 15 0 40 0 59 0 71 0 80 0 82 0 85 0;
+	setAttr -s 8 ".kit[4:7]"  18 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTA -n "M_jaw_up_control_rotate_AnimLayer1_inputBZ";
 	rename -uid "5A1A0358-49A3-A43C-1071-159BF602A3CE";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 0 15 0 40 0 59 0 80 0 82 0 85 0;
+	setAttr -s 8 ".ktv[0:7]"  1 0 15 0 40 0 59 0 71 0 80 0 82 0 85 0;
+	setAttr -s 8 ".kit[4:7]"  18 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTU -n "M_jaw_up_control_rotateOrder_AnimLayer1_inputB";
 	rename -uid "7984E18F-4525-39E0-45D2-A7866B01CBF6";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 0 15 0 40 0 59 0 80 0 82 0 85 0;
+	setAttr -s 8 ".ktv[0:7]"  1 0 15 0 40 0 59 0 71 0 80 0 82 0 85 0;
+	setAttr -s 8 ".kit[4:7]"  9 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTU -n "M_jaw_up_control_scaleX_AnimLayer1_inputB";
 	rename -uid "30A57EC9-4B68-F5E7-BC66-F8936D0EBBA4";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 1 15 1 40 1 59 1 80 1 82 1 85 1;
+	setAttr -s 8 ".ktv[0:7]"  1 1 15 1 40 1 59 1 71 1 80 1 82 1 85 1;
+	setAttr -s 8 ".kit[4:7]"  18 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTU -n "M_jaw_up_control_scaleY_AnimLayer1_inputB";
 	rename -uid "EAB94534-41A3-73E7-4B4C-4397A7FA63C4";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 1 15 1 40 1 59 1 80 1 82 1 85 1;
+	setAttr -s 8 ".ktv[0:7]"  1 1 15 1 40 1 59 1 71 1 80 1 82 1 85 1;
+	setAttr -s 8 ".kit[4:7]"  18 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTU -n "M_jaw_up_control_scaleZ_AnimLayer1_inputB";
 	rename -uid "0CDC1EE6-4356-7109-2A63-26BBA85DB5DC";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
-	setAttr -s 7 ".ktv[0:6]"  1 1 15 1 40 1 59 1 80 1 82 1 85 1;
+	setAttr -s 8 ".ktv[0:7]"  1 1 15 1 40 1 59 1 71 1 80 1 82 1 85 1;
+	setAttr -s 8 ".kit[4:7]"  18 10 10 10;
+	setAttr -s 8 ".kot[4:7]"  5 10 10 10;
 createNode animCurveTL -n "L_brow_1_base_control_translateY_AnimLayer1_inputB";
 	rename -uid "72C2F46C-4188-16D4-0937-4E96D00E3FCE";
 	setAttr ".tan" 10;
@@ -29792,7 +29777,7 @@ createNode animCurveTA -n "L_ear_3_control_rotate_AnimLayer1_inputBZ";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
 	setAttr -s 5 ".ktv[0:4]"  13 27.5499830459196 23 39.740708954196577
-		 36 39.740708954196577 70 34.119949567949689 86 52.801589184687224;
+		 36 39.740708954196577 70 34.119949567949689 86 8.6249591510752488;
 createNode animCurveTA -n "R_ear_3_control_rotate_AnimLayer1_inputBX";
 	rename -uid "A13F6EAA-4781-BFA8-2F1A-8F9D01285EE0";
 	setAttr ".tan" 10;
@@ -29809,7 +29794,7 @@ createNode animCurveTA -n "R_ear_3_control_rotate_AnimLayer1_inputBZ";
 	setAttr ".tan" 10;
 	setAttr ".wgt" no;
 	setAttr -s 5 ".ktv[0:4]"  13 27.5499830459196 23 39.740708954196577
-		 36 39.740708954196577 70 34.119949567949689 86 52.801589184687224;
+		 36 39.740708954196577 70 34.119949567949689 86 8.6249591510752488;
 createNode animCurveTL -n "L_ear_3_control_translateX_AnimLayer1_inputB";
 	rename -uid "A5C50DC6-42C0-8B35-06FD-80BF57121A61";
 	setAttr ".tan" 10;
@@ -30219,8 +30204,7 @@ createNode animCurveTU -n "R_cheek_hair_control_scaleZ_AnimLayer1_inputB";
 		 26 0.4248000006134956 34 0.4248000006134956 43 0.4248000006134956 50 0.4248000006134956
 		 59 0.4248000006134956 69 0.4248000006134956 78 0.4248000006134956 85 0.4248000006134956;
 select -ne :time1;
-	setAttr ".o" 61;
-	setAttr ".unw" 61;
+	setAttr ".o" 0;
 select -ne :hardwareRenderingGlobals;
 	setAttr ".otfna" -type "stringArray" 22 "NURBS Curves" "NURBS Surfaces" "Polygons" "Subdiv Surface" "Particles" "Particle Instance" "Fluids" "Strokes" "Image Planes" "UI" "Lights" "Cameras" "Locators" "Joints" "IK Handles" "Deformers" "Motion Trails" "Components" "Hair Systems" "Follicles" "Misc. UI" "Ornaments"  ;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
