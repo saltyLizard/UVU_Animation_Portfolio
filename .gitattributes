@@ -22,3 +22,5 @@ git lfs track "*.tiff"
 git lfs track "*.tga"
 UnityProject/Assets/MayaProject/sceneAssembly/ForestRuinsWorld.ma filter=lfs diff=lfs merge=lfs -text
 UnityProject/Assets/Houdini/-objects/ForMaya/WorldSet_complex_woLeaves.fbx filter=lfs diff=lfs merge=lfs -text
+UnityProject/Assets/Houdini/-objects/ForMaya/FlowerPatch.fbx filter=lfs diff=lfs merge=lfs -text
+UnityProject/Assets/MayaProject/assets/FromHoudini/FlowerPatch.ma filter=lfs diff=lfs merge=lfs -text
