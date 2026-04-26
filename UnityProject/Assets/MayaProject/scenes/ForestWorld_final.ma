@@ -1,10 +1,17 @@
 //Maya ASCII 2026 scene
 //Name: ForestWorld_final.ma
-//Last modified: Wed, Apr 22, 2026 10:46:04 PM
+//Last modified: Sat, Apr 25, 2026 05:48:24 PM
 //Codeset: 1252
 file -rdi 1 -ns "ForestRuinsWorld" -rfn "ForestRuinsWorldRN" -op "v=0;" -typ
 		 "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//sceneAssembly/ForestRuinsWorld.ma";
-file -rdi 2 -ns "Bush" -rfn "ForestRuinsWorld:BushRN" -op "fbx" -typ "FBX" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/FromHoudini/Bush.fbx";
+file -rdi 2 -ns "ForestWorld_extras" -rfn "ForestRuinsWorld:ForestWorld_extrasRN"
+		 -op "v=0;" -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//sceneAssembly/ForestWorld_extras.ma";
+file -rdi 3 -ns "FlowerPatch" -rfn "ForestRuinsWorld:ForestWorld_extras:FlowerPatchRN"
+		 -op "v=0;" -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/FromHoudini/FlowerPatch.ma";
+file -rdi 2 -ns "ForestWorld_leaves" -rfn "ForestRuinsWorld:ForestWorld_leavesRN"
+		 -op "v=0;" -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//sceneAssembly/ForestWorld_leaves.ma";
+file -rdi 3 -ns "Bush" -rfn "ForestRuinsWorld:ForestWorld_leaves:BushRN" -op
+		 "fbx" -typ "FBX" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/FromHoudini/Bush.fbx";
 file -rdi 1 -ns "StoneGiant" -rfn "StoneGiantRN" -op "v=0;" -typ "mayaAscii"
 		 "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/Stone Giant/StoneGiant.ma";
 file -rdi 1 -ns "Jackalope" -rfn "JackalopeRN" -op "v=0;" -typ "mayaAscii" "D:/UVU_Animation_Portfolio/UnityProject/Assets/MayaProject//assets/CHARACTERS/Jackalope/Jackalope.ma";
@@ -17,31 +24,33 @@ file -r -ns "Pheonix" -dr 1 -rfn "PheonixRN" -op "v=0;" -typ "mayaAscii" "D:/UVU
 requires maya "2026";
 requires "stereoCamera" "10.0";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" -nodeType "aiSkyDomeLight"
-		 -nodeType "aiPhysicalSky" -nodeType "aiAtmosphereVolume" -nodeType "aiFog" -nodeType "aiImagerDenoiserOidn"
+		 -nodeType "aiAreaLight" -nodeType "aiPhysicalSky" -nodeType "aiAtmosphereVolume"
+		 -nodeType "aiFog" -nodeType "aiImagerDenoiserNoice" -nodeType "aiImagerDenoiserOidn"
 		 "mtoa" "5.5.4.2";
-requires "fbxmaya" "2020.3.9";
 requires "stereoCamera" "10.0";
+requires "fbxmaya" "2020.3.9";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2026";
 fileInfo "version" "2026";
 fileInfo "cutIdentifier" "202510291147-60ec9eda33";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
-fileInfo "UUID" "D2D305F3-439A-202D-EB0C-5F8BFADA6654";
+fileInfo "UUID" "A94C4A8C-4813-5C09-77CE-2C94D5329927";
 createNode transform -s -n "persp";
 	rename -uid "FAD49911-41CA-08B5-1E68-57A8BE0C61AD";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -11.922694754202503 6.7027247074585974 3.3761483851275771 ;
-	setAttr ".r" -type "double3" -20.738352681245203 -1888.1999999990019 -1.012568550727921e-13 ;
+	setAttr ".t" -type "double3" -52.183069561703796 21.16424737701001 -26.65616716053195 ;
+	setAttr ".r" -type "double3" -18.338352682002245 -2278.1999999975801 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "3C6A6066-410A-612E-8BDD-C9899BCCD079";
 	setAttr -k off ".v" no;
+	setAttr ".rnd" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 13.421399875275016;
+	setAttr ".coi" 69.747750833687377;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
-	setAttr ".tp" -type "double3" 1.582812098785453 4.2051995226168923 4.7673600887764813 ;
+	setAttr ".tp" -type "double3" -3.091514626789404 2.7213359135038586 1.814555248040489 ;
 	setAttr ".hc" -type "string" "viewSet -p %camera";
 createNode transform -s -n "top";
 	rename -uid "A25ACC36-4C17-1070-E628-29872E2FF47E";
@@ -102,29 +111,157 @@ createNode transform -n "CloudSky";
 createNode aiSkyDomeLight -n "CloudSkyShape" -p "CloudSky";
 	rename -uid "3DB76F55-4711-84AB-E8B8-D4B893B4C285";
 	setAttr -k off ".v";
-	setAttr ".ai_color_temperature" 1000;
+	setAttr ".ai_color_temperature" 15000;
+	setAttr ".ai_shadow_color" -type "float3" 0.50306749 0.50306749 0.50306749 ;
 createNode transform -n "RenderCam";
 	rename -uid "80554897-471A-FAC4-4FA0-9596D60941B7";
 createNode camera -n "RenderCamShape" -p "RenderCam";
 	rename -uid "4F6D0CBB-47C9-EE0A-07B8-FB9A1C31D4B4";
 	setAttr -k off ".v";
+	setAttr ".ovr" 1.3;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 124.18016933461236;
+	setAttr ".coi" 222.08324645052249;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
 	setAttr ".tp" -type "double3" -9.5460071563720703 4.9160428047180176 5.017918586730957 ;
 	setAttr ".hc" -type "string" "viewSet -p %camera";
+	setAttr ".dfg" yes;
+createNode transform -n "RimLightGiant";
+	rename -uid "58F0687C-4D3D-25AA-DB48-89AC91B12461";
+	setAttr ".t" -type "double3" 1.365084758263547 3.0487537699807157 -1.1422044461455587 ;
+	setAttr ".r" -type "double3" -17.558747378329763 118.93732918327382 1.5227702262615745 ;
+	setAttr ".s" -type "double3" 1.8914578468981049 1.8914578468981049 1.8914578468981049 ;
+createNode aiAreaLight -n "RimLightGiantShape" -p "RimLightGiant";
+	rename -uid "71161B1D-4D44-19D9-C23A-DD846C44FA0C";
+	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
+	setAttr -k off ".v";
+	setAttr ".csh" no;
+	setAttr ".rcsh" no;
+	setAttr ".sc" -type "float3" 0.09427949 0.073472708 0.16363636 ;
+	setAttr ".ai_exposure" 8;
+	setAttr ".ai_translator" -type "string" "quad";
+	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
+createNode transform -n "KeyLightPhoenix";
+	rename -uid "7E6C56F7-4CF0-9DD0-4711-57BF3B04846B";
+	setAttr ".t" -type "double3" -1.0743682925200122 4.2079037580217875 3.4882043064173325 ;
+	setAttr ".r" -type "double3" 0 -102.53680549290252 0 ;
+	setAttr ".s" -type "double3" 0.079621024023158349 0.079621024023158349 0.079621024023158349 ;
+createNode aiAreaLight -n "KeyLightPhoenixShape" -p "KeyLightPhoenix";
+	rename -uid "09E952E2-4721-A906-C6CD-69BB0D60D74D";
+	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
+	setAttr -k off ".v";
+	setAttr ".csh" no;
+	setAttr ".rcsh" no;
+	setAttr ".sc" -type "float3" 0.67878789 0.56912327 0.4262788 ;
+	setAttr ".shc" -type "float3" 0.11234973 0.087554999 0.19499999 ;
+	setAttr ".ai_exposure" 6;
+	setAttr ".ai_shadow_color" -type "float3" 0.11234973 0.087554999 0.19499999 ;
+	setAttr ".ai_translator" -type "string" "quad";
+	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
+createNode transform -n "RimLightPhoenix";
+	rename -uid "F84F9DC5-427A-253D-A1A4-26BFC3ADFD10";
+	setAttr ".t" -type "double3" 3.5021396053609881 5.5212507962951873 6.2671385802077895 ;
+	setAttr ".r" -type "double3" -21.286652715493418 54.317322290430546 -2.9506730125741769 ;
+	setAttr ".s" -type "double3" 1.8914578468981049 1.8914578468981049 1.8914578468981049 ;
+createNode aiAreaLight -n "RimLightPhoenixShape" -p "RimLightPhoenix";
+	rename -uid "3F4F5EFA-43EB-D855-D671-FAAF3180457F";
+	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
+	setAttr -k off ".v";
+	setAttr ".csh" no;
+	setAttr ".rcsh" no;
+	setAttr ".sc" -type "float3" 0.09427949 0.073472708 0.16363636 ;
+	setAttr ".ai_exposure" 10;
+	setAttr ".ai_translator" -type "string" "quad";
+	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
+createNode transform -n "KeyLightGiant";
+	rename -uid "9368EA6D-41D0-5122-0E64-A7ADD50FA21B";
+	setAttr ".t" -type "double3" -2.9924522745939401 2.7213359135038586 2.2359589963285416 ;
+	setAttr ".r" -type "double3" 0 -48.862147413022157 0 ;
+	setAttr ".s" -type "double3" -0.11832585883509518 -0.11832585883509518 -0.11832585883509518 ;
+createNode aiAreaLight -n "KeyLightGiantShape" -p "KeyLightGiant";
+	rename -uid "DABB491A-4028-6297-ADE8-149EBFFF556A";
+	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
+	setAttr -k off ".v";
+	setAttr ".csh" no;
+	setAttr ".rcsh" no;
+	setAttr ".sc" -type "float3" 0.67878789 0.56912351 0.4262788 ;
+	setAttr ".shc" -type "float3" 0.11234973 0.087554999 0.19499999 ;
+	setAttr ".ai_exposure" 7;
+	setAttr ".ai_shadow_color" -type "float3" 0.11234973 0.087554999 0.19499999 ;
+	setAttr ".ai_translator" -type "string" "quad";
+	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
+createNode transform -n "RimLightGiant1";
+	rename -uid "8A8AF64D-4B9F-01C4-4E7A-329254EDCE16";
+	setAttr ".t" -type "double3" -0.26188488424275591 0.33166156000833058 -1.7131926487291653 ;
+	setAttr ".r" -type "double3" 0 191.39018198242547 0 ;
+	setAttr ".s" -type "double3" 0.57077182401062176 0.57077182401062176 0.57077182401062176 ;
+createNode aiAreaLight -n "RimLightGiant1Shape" -p "RimLightGiant1";
+	rename -uid "B60D6CC8-47E3-CD48-5D2D-71B9A4735FC9";
+	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
+	setAttr -k off ".v";
+	setAttr ".csh" no;
+	setAttr ".rcsh" no;
+	setAttr ".sc" -type "float3" 0.069836661 0.05442423 0.12121212 ;
+	setAttr ".ai_exposure" 4;
+	setAttr ".ai_translator" -type "string" "quad";
+	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
+createNode transform -n "RimLightGiant2";
+	rename -uid "EEBD0C46-4B2F-3D95-1279-49A6975B3590";
+	setAttr ".t" -type "double3" -0.42726506451956991 0.33166156000833058 0.087511804879275318 ;
+	setAttr ".r" -type "double3" 0 226.11875039267721 0 ;
+	setAttr ".s" -type "double3" 0.37279785205300037 0.37279785205300037 0.37279785205300037 ;
+createNode aiAreaLight -n "RimLightGiant2Shape" -p "RimLightGiant2";
+	rename -uid "2FD11D16-44FF-F92C-8CE2-59879C8A5409";
+	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
+	setAttr -k off ".v";
+	setAttr ".csh" no;
+	setAttr ".rcsh" no;
+	setAttr ".sc" -type "float3" 0.069836661 0.05442423 0.12121212 ;
+	setAttr ".ai_exposure" 4;
+	setAttr ".ai_translator" -type "string" "quad";
+	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
+createNode transform -n "RimLightGiant3";
+	rename -uid "3EAE4D78-4002-F226-239D-9CBCB1BF00DE";
+	setAttr ".t" -type "double3" 0.63604372937635567 1.2409084816586451 1.8214727668253965 ;
+	setAttr ".r" -type "double3" 15.076365201550182 395.33483425577663 17.778000883718821 ;
+	setAttr ".s" -type "double3" 0.37279785205300037 0.37279785205300037 0.37279785205300037 ;
+createNode aiAreaLight -n "RimLightGiant3Shape" -p "RimLightGiant3";
+	rename -uid "806E4FBC-46D8-E518-F9D7-E391E980BF5A";
+	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
+	setAttr -k off ".v";
+	setAttr ".csh" no;
+	setAttr ".rcsh" no;
+	setAttr ".sc" -type "float3" 0.045393828 0.035375748 0.078787878 ;
+	setAttr ".ai_exposure" 6;
+	setAttr ".ai_translator" -type "string" "quad";
+	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
+createNode transform -n "RimLightPhoenix1";
+	rename -uid "5128DC89-41F3-10A0-894A-8997C38DF2E5";
+	setAttr ".t" -type "double3" 1.6098977218855972 4.3456111556183288 4.1545576737477123 ;
+	setAttr ".r" -type "double3" -160.68329366134509 44.891200909248994 -163.84623207312328 ;
+	setAttr ".s" -type "double3" 0.25720308469909675 0.25720308469909675 0.25720308469909675 ;
+createNode aiAreaLight -n "RimLightPhoenix1Shape" -p "RimLightPhoenix1";
+	rename -uid "46B16D3F-4E73-8CAE-F986-DDBEA812651D";
+	addAttr -ci true -h true -sn "aal" -ln "attributeAliasList" -dt "attributeAlias";
+	setAttr -k off ".v";
+	setAttr ".csh" no;
+	setAttr ".rcsh" no;
+	setAttr ".sc" -type "float3" 0.06088559 0.04278788 0.12121212 ;
+	setAttr ".ai_exposure" 4;
+	setAttr ".ai_translator" -type "string" "quad";
+	setAttr ".aal" -type "attributeAlias" 4 "exposure" "aiExposure" "normalize" "aiNormalize" ;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "DA975FA1-4E35-5F1B-1368-E7BF8C6EA40E";
-	setAttr -s 86 ".lnk";
-	setAttr -s 86 ".slnk";
+	rename -uid "C9E93514-44B0-3905-9CE6-09BC99D83C7B";
+	setAttr -s 150 ".lnk";
+	setAttr -s 38 ".ign";
+	setAttr -s 60 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "89ED2931-45DB-4A53-A31F-208E79FD1276";
+	rename -uid "656C5515-4747-0054-FC96-0C9F1EE18EFD";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "14907C3B-4CFC-242A-A208-56BBDEB059D2";
+	rename -uid "F4D08E4B-433E-8023-9B20-F3BA5A306B5E";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "38EEE8C3-438F-E528-FD41-9F95427D0C09";
+	rename -uid "85EB7770-4CAB-B5B4-D353-488F79888C6C";
 	setAttr ".cdl" 2;
 	setAttr -s 3 ".dli[1:2]"  1 2;
 	setAttr -s 3 ".dli";
@@ -132,7 +269,7 @@ createNode displayLayer -n "defaultLayer";
 	rename -uid "FA55AD35-4DF9-1532-0890-7EAAF9C0A01C";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "236A2015-4CE7-F6BE-B223-B0AB76F4A0A0";
+	rename -uid "8F209275-4158-39B7-CCD0-9EBAC72503D8";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "91C7D9C6-465F-6DA8-06E9-10BCF3BCB660";
 	setAttr ".g" yes;
@@ -140,27 +277,27 @@ createNode script -n "uiConfigurationScriptNode";
 	rename -uid "4C569A64-4326-9B02-70C6-3DA9409811C0";
 	setAttr ".b" -type "string" (
 		"// Maya Mel UI Configuration File.\n//\n//  This script is machine generated.  Edit at your own risk.\n//\n//\n\nglobal string $gMainPane;\nif (`paneLayout -exists $gMainPane`) {\n\n\tglobal int $gUseScenePanelConfig;\n\tint    $useSceneConfig = $gUseScenePanelConfig;\n\tint    $nodeEditorPanelVisible = stringArrayContains(\"nodeEditorPanel1\", `getPanel -vis`);\n\tint    $nodeEditorWorkspaceControlOpen = (`workspaceControl -exists nodeEditorPanel1Window` && `workspaceControl -q -visible nodeEditorPanel1Window`);\n\tint    $menusOkayInPanels = `optionVar -q allowMenusInPanels`;\n\tint    $nVisPanes = `paneLayout -q -nvp $gMainPane`;\n\tint    $nPanes = 0;\n\tstring $editorName;\n\tstring $panelName;\n\tstring $itemFilterName;\n\tstring $panelConfig;\n\n\t//\n\t//  get current state of the UI\n\t//\n\tsceneUIReplacement -update $gMainPane;\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Top View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels  $panelName;\n"
-		+ "\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n"
+		+ "\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|RenderCam\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n"
 		+ "            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n"
-		+ "            -hulls 1\n            -grid 0\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1188\n            -height 479\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n"
+		+ "            -hulls 1\n            -grid 0\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n"
 		+ "\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|side\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n"
 		+ "            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n"
-		+ "            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 590\n            -height 216\n            -sceneRenderFilter 0\n"
+		+ "            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n"
 		+ "            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Front View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n"
 		+ "            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n"
 		+ "            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n"
-		+ "            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 591\n            -height 216\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|RenderCam\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n"
-		+ "            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n"
-		+ "            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 0\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n"
-		+ "            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 590\n            -height 216\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"ToggledOutliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"ToggledOutliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n"
-		+ "            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 1\n            -showReferenceMembers 1\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n"
-		+ "            -showSetMembers 0\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -isSet 0\n            -isSetMember 0\n            -showUfeItems 1\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -selectCommand \"print(\\\"\\\")\" \n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            -renderFilterIndex 0\n            -selectionOrder \"chronological\" \n            -expandAttribute 0\n            $editorName;\n"
-		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"Outliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 0\n            -showReferenceMembers 0\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n"
-		+ "            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -showUfeItems 1\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -showNamespace 1\n"
-		+ "            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showAssignedMaterials 0\n                -showTimeEditor 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -organizeByClip 1\n                -showAnimLayerWeight 1\n"
-		+ "                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showParentContainers 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -isSet 0\n                -isSetMember 0\n                -showUfeItems 1\n                -displayMode \"DAG\" \n                -expandObjects 0\n"
-		+ "                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 1\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                -selectionOrder \"display\" \n                -expandAttribute 1\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"GraphEd\");\n            animCurveEditor -e \n                -displayValues 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -showPlayRangeShades \"on\" \n                -lockPlayRangeShades \"off\" \n"
-		+ "                -smoothness \"fine\" \n                -resultSamples 1\n                -resultScreenSamples 0\n                -resultUpdate \"delayed\" \n                -showUpstreamCurves 1\n                -tangentScale 1\n                -tangentLineThickness 1\n                -keyMinScale 1\n                -stackedCurvesMin -1\n                -stackedCurvesMax 1\n                -stackedCurvesSpace 0.2\n                -preSelectionHighlight 0\n                -limitToSelectedCurves 0\n                -constrainDrag 0\n                -valueLinesToggle 0\n                -outliner \"graphEditor1OutlineEd\" \n                -highlightAffectedCurves 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dopeSheetPanel\" (localizedPanelLabel(\"Dope Sheet\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dope Sheet\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n"
+		+ "            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"|persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n"
+		+ "            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n"
+		+ "            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 0\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n"
+		+ "            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -bluePencil 1\n            -greasePencils 0\n            -excludeObjectPreset \"All\" \n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1188\n            -height 479\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"ToggledOutliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"ToggledOutliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n"
+		+ "            -showReferenceNodes 1\n            -showReferenceMembers 1\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 0\n            -allowMultiSelection 1\n"
+		+ "            -alwaysToggleSelect 0\n            -directSelect 0\n            -isSet 0\n            -isSetMember 0\n            -showUfeItems 1\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -selectCommand \"print(\\\"\\\")\" \n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            -renderFilterIndex 0\n            -selectionOrder \"chronological\" \n            -expandAttribute 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n"
+		+ "\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"Outliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 0\n            -showReferenceMembers 0\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n"
+		+ "            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -showUfeItems 1\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -showNamespace 1\n            -showPinIcons 0\n"
+		+ "            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showAssignedMaterials 0\n                -showTimeEditor 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -organizeByClip 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n"
+		+ "                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showParentContainers 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -isSet 0\n                -isSetMember 0\n                -showUfeItems 1\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n"
+		+ "                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 1\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                -selectionOrder \"display\" \n                -expandAttribute 1\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"GraphEd\");\n            animCurveEditor -e \n                -displayValues 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -showPlayRangeShades \"on\" \n                -lockPlayRangeShades \"off\" \n                -smoothness \"fine\" \n"
+		+ "                -resultSamples 1\n                -resultScreenSamples 0\n                -resultUpdate \"delayed\" \n                -showUpstreamCurves 1\n                -tangentScale 1\n                -tangentLineThickness 1\n                -keyMinScale 1\n                -stackedCurvesMin -1\n                -stackedCurvesMax 1\n                -stackedCurvesSpace 0.2\n                -preSelectionHighlight 0\n                -limitToSelectedCurves 0\n                -constrainDrag 0\n                -valueLinesToggle 0\n                -outliner \"graphEditor1OutlineEd\" \n                -highlightAffectedCurves 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dopeSheetPanel\" (localizedPanelLabel(\"Dope Sheet\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dope Sheet\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n"
 		+ "            outlinerEditor -e \n                -showShapes 1\n                -showAssignedMaterials 0\n                -showTimeEditor 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -organizeByClip 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showParentContainers 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 0\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n"
 		+ "                -autoSelectNewObjects 0\n                -doNotSelectNewObjects 1\n                -dropIsParent 1\n                -transmitFilters 0\n                -setFilter \"0\" \n                -showSetMembers 1\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -showUfeItems 1\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n"
 		+ "                -renderFilterVisible 0\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"DopeSheetEd\");\n            dopeSheetEditor -e \n                -displayValues 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -outliner \"dopeSheetPanel1OutlineEd\" \n                -hierarchyBelow 0\n                -selectionWindow 0 0 0 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"timeEditorPanel\" (localizedPanelLabel(\"Time Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Time Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"clipEditorPanel\" (localizedPanelLabel(\"Trax Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Trax Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
@@ -174,30 +311,32 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"shapePanel\" (localizedPanelLabel(\"Shape Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tshapePanel -edit -l (localizedPanelLabel(\"Shape Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"posePanel\" (localizedPanelLabel(\"Pose Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tposePanel -edit -l (localizedPanelLabel(\"Pose Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynRelEdPanel\" (localizedPanelLabel(\"Dynamic Relationships\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"relationshipPanel\" (localizedPanelLabel(\"Relationship Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"referenceEditorPanel\" (localizedPanelLabel(\"Reference Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynPaintScriptedPanelType\" (localizedPanelLabel(\"Paint Effects\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"scriptEditorPanel\" (localizedPanelLabel(\"Script Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"profilerPanel\" (localizedPanelLabel(\"Profiler Tool\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Profiler Tool\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"motionMakerEditorPanel\" (localizedPanelLabel(\"MotionMaker Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"MotionMaker Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
-		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"contentBrowserPanel\" (localizedPanelLabel(\"Content Browser\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Content Browser\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"Stereo\" (localizedPanelLabel(\"Stereo\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\n{ string $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"|:persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"contentBrowserPanel\" (localizedPanelLabel(\"Content Browser\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Content Browser\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"Stereo\" (localizedPanelLabel(\"Stereo\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\n{ string $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"|persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n"
 		+ "                -headsUpDisplay 1\n                -holdOuts 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 1\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n"
 		+ "                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -controllers 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n"
 		+ "                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -bluePencil 1\n                -greasePencils 0\n                -shadows 0\n                -captureSequenceNumber -1\n                -width 0\n                -height 0\n                -sceneRenderFilter 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName; };\n"
-		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-userCreated false\n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"single\\\" -ps 1 100 100 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Top View\")) \n\t\t\t\t\t\"modelPanel\"\n"
-		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Top View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -camera \\\"|persp\\\" \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 0\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1188\\n    -height 479\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
-		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Top View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -camera \\\"|persp\\\" \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 0\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1188\\n    -height 479\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-userCreated false\n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"single\\\" -ps 1 100 100 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
+		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 0\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1188\\n    -height 479\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
+		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 0\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -bluePencil 1\\n    -greasePencils 0\\n    -excludeObjectPreset \\\"All\\\" \\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1188\\n    -height 479\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
 		+ "\t\t\t\t$configName;\n\n            setNamedPanelLayout (localizedPanelLabel(\"Current Layout\"));\n        }\n\n        panelHistory -e -clear mainPanelHistory;\n        sceneUIReplacement -clear;\n\t}\n\n\ngrid -spacing 5 -size 12 -divisions 5 -displayAxes yes -displayGridLines yes -displayDivisionLines yes -displayPerspectiveLabels no -displayOrthographicLabels no -displayAxesBold yes -perspectiveLabelPosition axis -orthographicLabelPosition edge;\nviewManip -drawCompass 0 -compassAngle 0 -frontParameters \"\" -homeParameters \"\" -selectionLockParameters \"\";\n}\n");
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
 	rename -uid "E08B2220-456A-0E12-789B-B5BA48A85D36";
-	setAttr ".b" -type "string" "playbackOptions -min 0 -max 400 -ast 0 -aet 403 ";
+	setAttr ".b" -type "string" "playbackOptions -min 1 -max 120 -ast 1 -aet 200 ";
 	setAttr ".st" 6;
 createNode aiOptions -s -n "defaultArnoldRenderOptions";
 	rename -uid "528140F0-46BA-4BF2-297A-2AB433899C3C";
 	addAttr -ci true -sn "ARV_options" -ln "ARV_options" -dt "string";
+	setAttr -s 5 ".imagers";
 	setAttr ".version" -type "string" "5.5.4.2";
-	setAttr ".ARV_options" -type "string" "Test Resolution=100%;Camera=perspShape;Color Management.Gamma=1;Color Management.Exposure=0;Background.BG=BG Color;Background.Color=0 0 0;Background.Image=;Background.Scale=1  1;Background.Offset=0  0;Background.Apply Color Management=1;Foreground.Enable FG=0;Foreground.Image=;Foreground.Scale=1  1;Foreground.Offset=0  0;Foreground.Apply Color Management=1;";
+	setAttr ".ARV_options" -type "string" "Test Resolution=100%;Camera=RenderCamShape;Color Management.Gamma=1;Color Management.Exposure=0;Background.BG=BG Color;Background.Color=0 0 0;Background.Image=;Background.Scale=1      1;Background.Offset=0      0;Background.Apply Color Management=1;Foreground.Enable FG=0;Foreground.Image=;Foreground.Scale=1      1;Foreground.Offset=0      0;Foreground.Apply Color Management=1;";
 createNode aiAOVFilter -s -n "defaultArnoldFilter";
 	rename -uid "0290E36E-4F99-7BE5-90F6-01937C1D3AA8";
 	setAttr ".ai_translator" -type "string" "gaussian";
 createNode aiAOVDriver -s -n "defaultArnoldDriver";
 	rename -uid "75A8F008-4996-F804-D53C-CB9EB0954866";
-	setAttr ".ai_translator" -type "string" "exr";
+	setAttr ".ai_translator" -type "string" "png";
+	setAttr ".color_management" 1;
 createNode aiAOVDriver -s -n "defaultArnoldDisplayDriver";
 	rename -uid "5F06CDF7-491B-BD79-85A0-58BB3727CFF7";
 	setAttr ".ai_translator" -type "string" "maya";
@@ -231,24 +370,1021 @@ createNode displayLayer -n "Lights_layer";
 	setAttr ".do" 2;
 createNode reference -n "ForestRuinsWorldRN";
 	rename -uid "73D34D62-4DA3-49F0-0EC2-3284511DAE39";
+	setAttr -s 2 ".phl";
 	setAttr ".phl[1]" 0;
+	setAttr ".phl[2]" 0;
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"ForestRuinsWorldRN"
-		"ForestRuinsWorld:BushRN" 0
-		"ForestRuinsWorldRN" 1
+		"ForestRuinsWorld:FlowerPatchRN" 16
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Grass|ForestRuinsWorld:FlowerPatch:MediumGrass|ForestRuinsWorld:FlowerPatch:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Grass|ForestRuinsWorld:FlowerPatch:MediumGrass|ForestRuinsWorld:FlowerPatch:MediumGrassShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Grass|ForestRuinsWorld:FlowerPatch:BigGrass|ForestRuinsWorld:FlowerPatch:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Grass|ForestRuinsWorld:FlowerPatch:BigGrass|ForestRuinsWorld:FlowerPatch:BigGrassShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Grass|ForestRuinsWorld:FlowerPatch:SmallGrass|ForestRuinsWorld:FlowerPatch:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Grass|ForestRuinsWorld:FlowerPatch:SmallGrass|ForestRuinsWorld:FlowerPatch:SmallGrassShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers1|ForestRuinsWorld:FlowerPatch:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers1|ForestRuinsWorld:FlowerPatch:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers3|ForestRuinsWorld:FlowerPatch:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers3|ForestRuinsWorld:FlowerPatch:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers4a|ForestRuinsWorld:FlowerPatch:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers4a|ForestRuinsWorld:FlowerPatch:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers4b|ForestRuinsWorld:FlowerPatch:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers4b|ForestRuinsWorld:FlowerPatch:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers5|ForestRuinsWorld:FlowerPatch:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:FlowerPatch:Flower_Patch|ForestRuinsWorld:FlowerPatch:Flowers|ForestRuinsWorld:FlowerPatch:Scatter_Flowers5|ForestRuinsWorld:FlowerPatch:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		"ForestRuinsWorld:ForestWorld_extras:FlowerPatchRN" 0
+		"ForestRuinsWorldRN" 421
 		2 "ForestRuinsWorld:layer1" "visibility" " 1"
-		"ForestRuinsWorldRN" 3
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms|ForestRuinsWorld:mushroomsShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms|ForestRuinsWorld:mushroomsShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms1|ForestRuinsWorld:mushrooms1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms1|ForestRuinsWorld:mushrooms1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms2|ForestRuinsWorld:mushrooms2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms2|ForestRuinsWorld:mushrooms2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms3|ForestRuinsWorld:mushrooms3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms3|ForestRuinsWorld:mushrooms3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms4|ForestRuinsWorld:mushrooms4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms4|ForestRuinsWorld:mushrooms4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms5|ForestRuinsWorld:mushrooms5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms5|ForestRuinsWorld:mushrooms5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms6|ForestRuinsWorld:mushrooms6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms6|ForestRuinsWorld:mushrooms6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms7|ForestRuinsWorld:mushrooms7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms7|ForestRuinsWorld:mushrooms7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms8|ForestRuinsWorld:mushrooms8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms8|ForestRuinsWorld:mushrooms8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms9|ForestRuinsWorld:mushrooms9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms9|ForestRuinsWorld:mushrooms9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms10|ForestRuinsWorld:mushrooms10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms10|ForestRuinsWorld:mushrooms10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms11|ForestRuinsWorld:mushrooms11Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms11|ForestRuinsWorld:mushrooms11Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms12|ForestRuinsWorld:mushrooms12Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms12|ForestRuinsWorld:mushrooms12Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms13|ForestRuinsWorld:mushrooms13Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms13|ForestRuinsWorld:mushrooms13Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms14|ForestRuinsWorld:mushrooms14Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms14|ForestRuinsWorld:mushrooms14Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms15|ForestRuinsWorld:mushrooms15Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms15|ForestRuinsWorld:mushrooms15Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms16|ForestRuinsWorld:mushrooms16Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms16|ForestRuinsWorld:mushrooms16Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms17|ForestRuinsWorld:mushrooms17Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Mushrooms|ForestRuinsWorld:mushrooms17|ForestRuinsWorld:mushrooms17Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves1|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves1|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves1|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves1|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves2|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves2|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves2|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves2|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves3|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves3|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves3|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves3|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves4|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves4|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves4|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves4|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves5|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves5|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves5|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves5|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves6|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves6|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves6|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves6|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves7|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves7|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves7|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves7|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves8|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves8|ForestRuinsWorld:Bush1|ForestRuinsWorld:Bush1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves8|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:SmallTreeLeaves|ForestRuinsWorld:Small_Leaves8|ForestRuinsWorld:Bush2|ForestRuinsWorld:Bush2Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves1|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves1|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves1|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves1|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves1|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves1|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves1|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves1|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves2|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves2|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves2|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves2|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves2|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves2|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves2|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves2|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves3|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves3|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves3|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves3|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves3|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves3|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves3|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves3|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves4|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves4|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves4|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves4|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves4|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves4|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves4|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves4|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves5|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves5|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves5|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves5|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves5|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves5|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves5|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves5|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves6|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves6|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves6|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves6|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves6|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves6|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves6|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves6|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves7|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves7|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves7|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves7|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves7|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves7|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves7|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves7|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves8|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves8|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves8|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves8|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves8|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves8|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves8|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves8|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves9|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves9|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves9|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves9|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves9|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves9|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves9|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves9|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves10|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves10|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves10|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves10|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves10|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves10|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves10|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves10|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves11|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves11|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves11|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves11|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves11|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves11|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves11|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves11|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves12|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves12|ForestRuinsWorld:Bush3|ForestRuinsWorld:Bush3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves12|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves12|ForestRuinsWorld:Bush4|ForestRuinsWorld:Bush4Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves12|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves12|ForestRuinsWorld:Bush5|ForestRuinsWorld:Bush5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves12|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:MediumTreeLeaves|ForestRuinsWorld:Med_Leaves12|ForestRuinsWorld:Bush6|ForestRuinsWorld:Bush6Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves1|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves1|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves1|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves1|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves1|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves1|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves1|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves1|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves2|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves2|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves2|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves2|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves2|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves2|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves2|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves2|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves3|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves3|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves3|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves3|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves3|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves3|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves3|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves3|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves4|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves4|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves4|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves4|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves4|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves4|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves4|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves4|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves5|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves5|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves5|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves5|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves5|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves5|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves5|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves5|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves6|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves6|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves6|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves6|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves6|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves6|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves6|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves6|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves7|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves7|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves7|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves7|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves7|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves7|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves7|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves7|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves8|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves8|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves8|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves8|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves8|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves8|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves8|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves8|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves9|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves9|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves9|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves9|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves9|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves9|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves9|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves9|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves10|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves10|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves10|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves10|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves10|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves10|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves10|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves10|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves11|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves11|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves11|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves11|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves11|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves11|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves11|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves11|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves12|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves12|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves12|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves12|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves12|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves12|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves12|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves12|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves13|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves13|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves13|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves13|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves13|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves13|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves13|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves13|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves14|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves14|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves14|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves14|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves14|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves14|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves14|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves14|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves15|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves15|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves15|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves15|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves15|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves15|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves15|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves15|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves16|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves16|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves16|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves16|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves16|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves16|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves16|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves16|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves17|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves17|ForestRuinsWorld:Bush7|ForestRuinsWorld:Bush7Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves17|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves17|ForestRuinsWorld:Bush8|ForestRuinsWorld:Bush8Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves17|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves17|ForestRuinsWorld:Bush9|ForestRuinsWorld:Bush9Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves17|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:BigTreeLeaves|ForestRuinsWorld:Big_Leaves17|ForestRuinsWorld:Bush10|ForestRuinsWorld:Bush10Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch4|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch7|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch9|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch10|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch11|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch12|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch14|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch15|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch16|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers1|ForestRuinsWorld:Scatter_Flowers1Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers3|ForestRuinsWorld:Scatter_Flowers3Shape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4a|ForestRuinsWorld:Scatter_Flowers4aShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers4b|ForestRuinsWorld:Scatter_Flowers4bShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Flowers|ForestRuinsWorld:Flower_Patch|ForestRuinsWorld:Flowers|ForestRuinsWorld:Scatter_Flowers5|ForestRuinsWorld:Scatter_Flowers5Shape.message" ":defaultLightSet.message" 
+		0
+		"ForestRuinsWorld:ForestWorld_leavesRN" 0
+		"ForestRuinsWorld:BushRN" 6
+		2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Bush:Bush|ForestRuinsWorld:Bush:BushShape" 
+		"castsShadows" " 1"
+		2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Bush:Bush|ForestRuinsWorld:Bush:BushShape" 
+		"aiOpaque" " 1"
+		2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Bush:Bush|ForestRuinsWorld:Bush:BushShape" 
+		"aiMatte" " 0"
+		5 4 "ForestRuinsWorldRN" "ForestRuinsWorld:Bush:BushSG.dagSetMembers" 
+		"ForestRuinsWorldRN.placeHolderList[1]" ""
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Bush:Bush|ForestRuinsWorld:Bush:BushShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Bush:Bush|ForestRuinsWorld:Bush:BushShape.message" ":defaultLightSet.message" 
+		0
+		"ForestRuinsWorld:ForestWorld_leaves:BushRN" 0
+		"ForestRuinsWorld:ForestWorld_extrasRN" 0
+		"ForestRuinsWorldRN" 56
 		2 "|ForestRuinsWorld:ForestLayout" "scale" " -type \"double3\" 20.93501386993552771 20.93501386993552771 20.93501386993552771"
 		
 		2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Person_ref" "visibility" 
 		" 0"
 		5 4 "ForestRuinsWorldRN" "|ForestRuinsWorld:ForestLayout.drawOverride" 
-		"ForestRuinsWorldRN.placeHolderList[1]" "";
+		"ForestRuinsWorldRN.placeHolderList[1]" ""
+		5 3 "ForestRuinsWorldRN" "|ForestRuinsWorld:ForestLayout.instObjGroups" 
+		"ForestRuinsWorldRN.placeHolderList[2]" ""
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:groundGrid|ForestRuinsWorld:groundGridShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:groundGrid|ForestRuinsWorld:groundGridShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:RuinsPillars|ForestRuinsWorld:RuinsPillarsShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:RuinsPillars|ForestRuinsWorld:RuinsPillarsShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Trees|ForestRuinsWorld:BigTrees|ForestRuinsWorld:BigTreesShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Trees|ForestRuinsWorld:BigTrees|ForestRuinsWorld:BigTreesShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Trees|ForestRuinsWorld:MediumTrees|ForestRuinsWorld:MediumTreesShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Trees|ForestRuinsWorld:MediumTrees|ForestRuinsWorld:MediumTreesShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Trees|ForestRuinsWorld:SmallTrees|ForestRuinsWorld:SmallTreesShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Trees|ForestRuinsWorld:SmallTrees|ForestRuinsWorld:SmallTreesShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Rocks|ForestRuinsWorld:BigRocks|ForestRuinsWorld:BigRocksShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Rocks|ForestRuinsWorld:BigRocks|ForestRuinsWorld:BigRocksShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Rocks|ForestRuinsWorld:SmallRocks|ForestRuinsWorld:SmallRocksShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Rocks|ForestRuinsWorld:SmallRocks|ForestRuinsWorld:SmallRocksShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:SmallGrass|ForestRuinsWorld:SmallGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:BigGrass|ForestRuinsWorld:BigGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Grass|ForestRuinsWorld:MediumGrass|ForestRuinsWorld:MediumGrassShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Person_ref|ForestRuinsWorld:Person_refShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|ForestRuinsWorld:ForestLayout|ForestRuinsWorld:Person_ref|ForestRuinsWorld:Person_refShape.message" "|CloudSky|CloudSkyShape.message" 
+		0;
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "StoneGiantRN";
 	rename -uid "77C09161-49E8-8404-6AEA-1C86E373297C";
-	setAttr -s 384 ".phl";
+	setAttr -s 385 ".phl";
 	setAttr ".phl[1]" 0;
 	setAttr ".phl[2]" 0;
 	setAttr ".phl[3]" 0;
@@ -633,10 +1769,11 @@ createNode reference -n "StoneGiantRN";
 	setAttr ".phl[382]" 0;
 	setAttr ".phl[383]" 0;
 	setAttr ".phl[384]" 0;
+	setAttr ".phl[385]" 0;
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"StoneGiantRN"
 		"StoneGiantRN" 0
-		"StoneGiantRN" 430
+		"StoneGiantRN" 458
 		1 "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl" 
 		"blendParent1" "blendParent1" " -ci 1 -k 1 -dv 1 -smn 0 -smx 1 -at \"double\""
 		2 "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl" 
@@ -734,774 +1871,830 @@ createNode reference -n "StoneGiantRN";
 		3 "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl|StoneGiant:Plant_ctrl_parentConstraint1.constraintRotateZ" 
 		"|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.rotateZ" 
 		""
+		5 3 "StoneGiantRN" "|StoneGiant:Stone_Giant.instObjGroups" "StoneGiantRN.placeHolderList[1]" 
+		""
 		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.scaleX" 
-		"StoneGiantRN.placeHolderList[1]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[2]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[3]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[4]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[5]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[6]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[7]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[8]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[9]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[10]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[11]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[12]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[13]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[14]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[15]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[16]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[17]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[18]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[19]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[20]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[21]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[22]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[23]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[24]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[25]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[26]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[27]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[28]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[29]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[30]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[31]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[32]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[33]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[34]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[35]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[36]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[37]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[38]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[39]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[40]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[41]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[42]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[43]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[44]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[45]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[46]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[47]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[48]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[49]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[50]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[51]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[52]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[53]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[54]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[55]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[56]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[57]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[58]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[59]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[60]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_eyebrow_ctrl_grp|StoneGiant:L_eyebrow_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[61]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[62]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[63]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[64]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[65]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[66]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[67]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[68]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[69]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[70]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_eyebrow_ctrl_grp|StoneGiant:R_eyebrow_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[71]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[72]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[73]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[74]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[75]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[76]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[77]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[78]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[79]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[80]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:L_ear_ctrl_grp|StoneGiant:L_ear_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[81]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[82]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[83]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[84]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[85]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[86]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[87]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[88]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[89]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[90]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:R_ear_ctrl_grp|StoneGiant:R_ear_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[91]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[92]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[93]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[94]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[95]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[96]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[97]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[98]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[99]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[100]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Neck_ctrl_grp|StoneGiant:Neck_ctrl|StoneGiant:Nose_ctrl_grp|StoneGiant:Nose_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[101]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.translateX" 
 		"StoneGiantRN.placeHolderList[102]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.translateY" 
 		"StoneGiantRN.placeHolderList[103]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.translateZ" 
 		"StoneGiantRN.placeHolderList[104]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.rotateX" 
 		"StoneGiantRN.placeHolderList[105]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[106]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.rotateZ" 
 		"StoneGiantRN.placeHolderList[107]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[108]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[109]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[110]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[111]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[112]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[113]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[114]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.translateX" 
 		"StoneGiantRN.placeHolderList[115]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.translateY" 
 		"StoneGiantRN.placeHolderList[116]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.translateZ" 
 		"StoneGiantRN.placeHolderList[117]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.rotateX" 
 		"StoneGiantRN.placeHolderList[118]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[119]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.rotateZ" 
 		"StoneGiantRN.placeHolderList[120]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[121]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[122]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_shoulder_ctrl_grp_FK|StoneGiant:L_shoulder_ctrl_FK|StoneGiant:L_elbow_ctrl_grp_FK|StoneGiant:L_elbow_ctrl_FK|StoneGiant:L_wrist_ctrl_grp_FK|StoneGiant:L_wrist_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[123]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.translateX" 
 		"StoneGiantRN.placeHolderList[124]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.translateY" 
 		"StoneGiantRN.placeHolderList[125]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.translateZ" 
 		"StoneGiantRN.placeHolderList[126]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.rotateX" 
 		"StoneGiantRN.placeHolderList[127]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[128]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.rotateZ" 
 		"StoneGiantRN.placeHolderList[129]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[130]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[131]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[132]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[133]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[134]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[135]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[136]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.translateX" 
 		"StoneGiantRN.placeHolderList[137]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.translateY" 
 		"StoneGiantRN.placeHolderList[138]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.translateZ" 
 		"StoneGiantRN.placeHolderList[139]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[140]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.rotateX" 
 		"StoneGiantRN.placeHolderList[141]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.rotateZ" 
 		"StoneGiantRN.placeHolderList[142]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[143]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[144]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_arm_IKFK_switch_grp|StoneGiant:L_arm_IKFK_switch.LArmIKFKswitch" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_shoulder_ctrl_grp_FK|StoneGiant:R_shoulder_ctrl_FK|StoneGiant:R_elbow_ctrl_grp_FK|StoneGiant:R_elbow_ctrl_FK|StoneGiant:R_wrist_ctrl_grp_FK|StoneGiant:R_wrist_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[145]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_arm_IKFK_switch_grp|StoneGiant:R_arm_IKFK_switch.RArmIKFKSwitch" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_arm_IKFK_switch_grp|StoneGiant:L_arm_IKFK_switch.LArmIKFKswitch" 
 		"StoneGiantRN.placeHolderList[146]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_arm_IKFK_switch_grp|StoneGiant:R_arm_IKFK_switch.RArmIKFKSwitch" 
 		"StoneGiantRN.placeHolderList[147]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[148]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[149]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[150]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[151]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[152]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[153]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[154]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[155]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[156]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[157]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pinky_1_ctrl_grp|StoneGiant:L_pinky_1_ctrl|StoneGiant:L_pinky_2_ctrl_grp|StoneGiant:L_pinky_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[158]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[159]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[160]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[161]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[162]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[163]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[164]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[165]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[166]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[167]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[168]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_ring_1_ctrl_grp|StoneGiant:L_ring_1_ctrl|StoneGiant:L_ring_2_ctrl_grp|StoneGiant:L_ring_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[169]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[170]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[171]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[172]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[173]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[174]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[175]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[176]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[177]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[178]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[179]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_middle_1_ctrl_grp|StoneGiant:L_middle_1_ctrl|StoneGiant:L_middle_2_ctrl_grp|StoneGiant:L_middle_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[180]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[181]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[182]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[183]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[184]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[185]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[186]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[187]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[188]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[189]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[190]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_pointer_1_ctrl_grp|StoneGiant:L_pointer_1_ctrl|StoneGiant:L_pointer_2_ctrl_grp|StoneGiant:L_pointer_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[191]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[192]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[193]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[194]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[195]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[196]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[197]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[198]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[199]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[200]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[201]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:L_finger_ctrls|StoneGiant:L_thumb_1_ctrl_grp|StoneGiant:L_thumb_1_ctrl|StoneGiant:L_thumb_2_ctrl_grp|StoneGiant:L_thumb_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[202]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[203]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[204]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[205]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[206]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[207]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[208]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[209]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[210]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[211]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[212]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_thumb_1_ctrl_grp|StoneGiant:R_thumb_1_ctrl|StoneGiant:R_thumb_2_ctrl_grp|StoneGiant:R_thumb_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[213]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[214]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[215]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[216]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[217]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[218]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[219]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[220]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[221]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[222]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[223]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pointer_1_ctrl_grp|StoneGiant:R_pointer_1_ctrl|StoneGiant:R_pointer_2_ctrl_grp|StoneGiant:R_pointer_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[224]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[225]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[226]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[227]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[228]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[229]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[230]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[231]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[232]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[233]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[234]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_middle_1_ctrl_grp|StoneGiant:R_middle_1_ctrl|StoneGiant:R_middle_2_ctrl_grp|StoneGiant:R_middle_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[235]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[236]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[237]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[238]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[239]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[240]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[241]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[242]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[243]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[244]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[245]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_ring_1_ctrl_grp|StoneGiant:R_ring_1_ctrl|StoneGiant:R_ring_2_ctrl_grp|StoneGiant:R_ring_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[246]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[247]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[248]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[249]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[250]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[251]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[252]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[253]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[254]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[255]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[256]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:R_finger_ctrls|StoneGiant:R_pinky_1_ctrl_grp|StoneGiant:R_pinky_1_ctrl|StoneGiant:R_pinky_2_ctrl_grp|StoneGiant:R_pinky_2_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[257]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.translateX" 
 		"StoneGiantRN.placeHolderList[258]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[259]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[260]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[261]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[262]" ""
-		5 3 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.blendParent1" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[263]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.blendParent1" 
+		5 3 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.blendParent1" 
 		"StoneGiantRN.placeHolderList[264]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.blendParent1" 
 		"StoneGiantRN.placeHolderList[265]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[266]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[267]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[268]" ""
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl.scaleZ" 
+		"StoneGiantRN.placeHolderList[269]" ""
 		5 3 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl|StoneGiant:Plant_ctrl_parentConstraint1.constraintTranslateX" 
-		"StoneGiantRN.placeHolderList[269]" "StoneGiant:Plant_ctrl.tx"
+		"StoneGiantRN.placeHolderList[270]" "StoneGiant:Plant_ctrl.tx"
 		5 3 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl|StoneGiant:Plant_ctrl_parentConstraint1.constraintTranslateY" 
-		"StoneGiantRN.placeHolderList[270]" "StoneGiant:Plant_ctrl.ty"
+		"StoneGiantRN.placeHolderList[271]" "StoneGiant:Plant_ctrl.ty"
 		5 3 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl|StoneGiant:Plant_ctrl_parentConstraint1.constraintTranslateZ" 
-		"StoneGiantRN.placeHolderList[271]" "StoneGiant:Plant_ctrl.tz"
+		"StoneGiantRN.placeHolderList[272]" "StoneGiant:Plant_ctrl.tz"
 		5 3 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl|StoneGiant:Plant_ctrl_parentConstraint1.constraintRotateX" 
-		"StoneGiantRN.placeHolderList[272]" "StoneGiant:Plant_ctrl.rx"
+		"StoneGiantRN.placeHolderList[273]" "StoneGiant:Plant_ctrl.rx"
 		5 3 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl|StoneGiant:Plant_ctrl_parentConstraint1.constraintRotateY" 
-		"StoneGiantRN.placeHolderList[273]" "StoneGiant:Plant_ctrl.ry"
+		"StoneGiantRN.placeHolderList[274]" "StoneGiant:Plant_ctrl.ry"
 		5 3 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Spine_1_ctrl_grp|StoneGiant:Spine_1_ctrl|StoneGiant:Spine_2_ctrl_grp|StoneGiant:Spine_2_ctrl|StoneGiant:Plant_ctrl_grp|StoneGiant:Plant_ctrl|StoneGiant:Plant_ctrl_parentConstraint1.constraintRotateZ" 
-		"StoneGiantRN.placeHolderList[274]" "StoneGiant:Plant_ctrl.rz"
+		"StoneGiantRN.placeHolderList[275]" "StoneGiant:Plant_ctrl.rz"
 		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.translateX" 
-		"StoneGiantRN.placeHolderList[275]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[276]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.translateY" 
 		"StoneGiantRN.placeHolderList[277]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.translateZ" 
 		"StoneGiantRN.placeHolderList[278]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.rotateX" 
 		"StoneGiantRN.placeHolderList[279]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[280]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[281]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[282]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[283]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[284]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[285]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.translateX" 
 		"StoneGiantRN.placeHolderList[286]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.translateY" 
 		"StoneGiantRN.placeHolderList[287]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.translateZ" 
 		"StoneGiantRN.placeHolderList[288]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[289]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.rotateX" 
 		"StoneGiantRN.placeHolderList[290]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.rotateZ" 
 		"StoneGiantRN.placeHolderList[291]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[292]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[293]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[294]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[295]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[296]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[297]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[298]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.rotateX" 
 		"StoneGiantRN.placeHolderList[299]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[300]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.rotateZ" 
 		"StoneGiantRN.placeHolderList[301]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[302]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[303]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.translateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_hip_2_ctrl_grp_FK|StoneGiant:L_hip_2_ctrl_FK|StoneGiant:L_knee_ctrl_FK|StoneGiant:L_ankle_ctrl_grp_FK|StoneGiant:L_ankle_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[304]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.translateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.translateX" 
 		"StoneGiantRN.placeHolderList[305]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.translateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.translateY" 
 		"StoneGiantRN.placeHolderList[306]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.translateZ" 
 		"StoneGiantRN.placeHolderList[307]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[308]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.rotateX" 
 		"StoneGiantRN.placeHolderList[309]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.rotateZ" 
 		"StoneGiantRN.placeHolderList[310]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[311]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[312]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[313]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[314]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[315]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[316]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[317]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.rotateX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.rotateY" 
 		"StoneGiantRN.placeHolderList[318]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.rotateX" 
 		"StoneGiantRN.placeHolderList[319]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.rotateZ" 
 		"StoneGiantRN.placeHolderList[320]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.scaleX" 
 		"StoneGiantRN.placeHolderList[321]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.scaleY" 
 		"StoneGiantRN.placeHolderList[322]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_leg_IKFK_switch_grp|StoneGiant:L_leg_IKFK_switch.LLegIKFKSwitch" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_hip_2_ctrl_grp_FK|StoneGiant:R_hip_2_ctrl_FK|StoneGiant:R_knee_ctrl_grp_FK|StoneGiant:R_knee_ctrl_FK|StoneGiant:R_ankle_ctrl_grp_FK|StoneGiant:R_ankle_ctrl_FK.scaleZ" 
 		"StoneGiantRN.placeHolderList[323]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_leg_IKFK_switch_grp|StoneGiant:R_leg_IKFK_switch.RLegIKFKSwitch" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_leg_IKFK_switch_grp|StoneGiant:L_leg_IKFK_switch.LLegIKFKSwitch" 
 		"StoneGiantRN.placeHolderList[324]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_leg_IKFK_switch_grp|StoneGiant:R_leg_IKFK_switch.RLegIKFKSwitch" 
 		"StoneGiantRN.placeHolderList[325]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[326]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[327]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[328]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[329]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[330]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_big_toe_ctrl_grp|StoneGiant:R_big_toe_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[331]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[332]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[333]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[334]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[335]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[336]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_first_toe_ctrl_grp|StoneGiant:R_first_toe_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[337]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[338]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[339]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[340]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[341]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[342]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_middle_toe_ctrl_grp|StoneGiant:R_middle_toe_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[343]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[344]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[345]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[346]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[347]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[348]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_other_toe_ctrl_grp|StoneGiant:R_other_toe_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[349]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[350]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[351]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[352]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[353]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[354]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:R_toe_ctrls|StoneGiant:R_pinky_toe_ctrl_grp|StoneGiant:R_pinky_toe_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[355]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[356]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[357]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[358]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[359]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[360]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_big_toe_ctrl_grp|StoneGiant:L_big_toe_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[361]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[362]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[363]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[364]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[365]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[366]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_first_toe_ctrl_grp|StoneGiant:L_first_toe_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[367]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[368]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[369]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[370]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[371]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[372]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_middle_toe_ctrl_grp|StoneGiant:L_middle_toe_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[373]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[374]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[375]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[376]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[377]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.visibility" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.scaleZ" 
 		"StoneGiantRN.placeHolderList[378]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.rotateY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_other_toe_ctrl_grp|StoneGiant:L_other_toe_ctrl.visibility" 
 		"StoneGiantRN.placeHolderList[379]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.rotateZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.rotateY" 
 		"StoneGiantRN.placeHolderList[380]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.scaleX" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.rotateZ" 
 		"StoneGiantRN.placeHolderList[381]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.scaleY" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.scaleX" 
 		"StoneGiantRN.placeHolderList[382]" ""
-		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.scaleZ" 
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.scaleY" 
 		"StoneGiantRN.placeHolderList[383]" ""
+		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.scaleZ" 
+		"StoneGiantRN.placeHolderList[384]" ""
 		5 4 "StoneGiantRN" "|StoneGiant:Stone_Giant|StoneGiant:Controls|StoneGiant:Transform_ctrl_grp|StoneGiant:Transform_ctrl|StoneGiant:COG_ctrl_grp|StoneGiant:COG_ctrl|StoneGiant:Hip_1_ctrl_grp|StoneGiant:Hip_1_ctrl|StoneGiant:L_toe_ctrls|StoneGiant:L_pinky_toe_ctrl_grp|StoneGiant:L_pinky_toe_ctrl.visibility" 
-		"StoneGiantRN.placeHolderList[384]" "";
+		"StoneGiantRN.placeHolderList[385]" ""
+		7 "ignore" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:Giant_Body|StoneGiant:Giant_BodyShape.message" "|RimLightPhoenix|RimLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:Giant_Body|StoneGiant:Giant_BodyShape.message" "|KeyLightPhoenix|KeyLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:Giant_Body|StoneGiant:Giant_BodyShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:Giant_Body|StoneGiant:Giant_BodyShape.message" "|RimLightGiant|RimLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:Giant_Body|StoneGiant:Giant_BodyShape.message" "|KeyLightGiant|KeyLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:Giant_Body|StoneGiant:Giant_BodyShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:Giant_Body|StoneGiant:Giant_BodyShape.message" "|RimLightGiant1|RimLightGiant1Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:Giant_Body|StoneGiant:Giant_BodyShape.message" "|RimLightGiant2|RimLightGiant2Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:Giant_Body|StoneGiant:Giant_BodyShape.message" "|RimLightGiant3|RimLightGiant3Shape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:L_eye|StoneGiant:L_eyeShape.message" "|RimLightPhoenix|RimLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:L_eye|StoneGiant:L_eyeShape.message" "|KeyLightPhoenix|KeyLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:L_eye|StoneGiant:L_eyeShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:L_eye|StoneGiant:L_eyeShape.message" "|RimLightGiant|RimLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:L_eye|StoneGiant:L_eyeShape.message" "|KeyLightGiant|KeyLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:L_eye|StoneGiant:L_eyeShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:L_eye|StoneGiant:L_eyeShape.message" "|RimLightGiant1|RimLightGiant1Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:L_eye|StoneGiant:L_eyeShape.message" "|RimLightGiant2|RimLightGiant2Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:L_eye|StoneGiant:L_eyeShape.message" "|RimLightGiant3|RimLightGiant3Shape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:R_eye|StoneGiant:R_eyeShape.message" "|RimLightPhoenix|RimLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:R_eye|StoneGiant:R_eyeShape.message" "|KeyLightPhoenix|KeyLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:R_eye|StoneGiant:R_eyeShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:R_eye|StoneGiant:R_eyeShape.message" "|RimLightGiant|RimLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:R_eye|StoneGiant:R_eyeShape.message" "|KeyLightGiant|KeyLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:R_eye|StoneGiant:R_eyeShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:R_eye|StoneGiant:R_eyeShape.message" "|RimLightGiant1|RimLightGiant1Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:R_eye|StoneGiant:R_eyeShape.message" "|RimLightGiant2|RimLightGiant2Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|StoneGiant:Stone_Giant|StoneGiant:StoneGiantGeo|StoneGiant:R_eye|StoneGiant:R_eyeShape.message" "|RimLightGiant3|RimLightGiant3Shape.message" 
+		0;
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "sharedReferenceNode";
@@ -1510,7 +2703,7 @@ createNode reference -n "sharedReferenceNode";
 		"sharedReferenceNode";
 createNode reference -n "JackalopeRN";
 	rename -uid "FBBE83A7-4197-F48E-B71D-568D4CFD3CC9";
-	setAttr -s 50 ".phl";
+	setAttr -s 51 ".phl";
 	setAttr ".phl[1]" 0;
 	setAttr ".phl[2]" 0;
 	setAttr ".phl[3]" 0;
@@ -1561,10 +2754,11 @@ createNode reference -n "JackalopeRN";
 	setAttr ".phl[48]" 0;
 	setAttr ".phl[49]" 0;
 	setAttr ".phl[50]" 0;
+	setAttr ".phl[51]" 0;
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"JackalopeRN"
 		"JackalopeRN" 0
-		"JackalopeRN" 76
+		"JackalopeRN" 104
 		2 "|Jackalope:Jackalope_char" "scale" " -type \"double3\" 1 1 1"
 		2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo" "scale" " -type \"double3\" 1 1 1"
 		
@@ -1623,110 +2817,166 @@ createNode reference -n "JackalopeRN";
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "Jackalope:Geo_Layer" "displayType" " 2"
 		2 "Jackalope:Control_Layer" "visibility" " 0"
+		5 3 "JackalopeRN" "|Jackalope:Jackalope_char.instObjGroups" "JackalopeRN.placeHolderList[1]" 
+		""
 		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.scaleX" 
-		"JackalopeRN.placeHolderList[1]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.scaleY" 
 		"JackalopeRN.placeHolderList[2]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.scaleZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.scaleY" 
 		"JackalopeRN.placeHolderList[3]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.translateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.scaleZ" 
 		"JackalopeRN.placeHolderList[4]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.translateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.translateZ" 
 		"JackalopeRN.placeHolderList[5]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.translateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.translateX" 
 		"JackalopeRN.placeHolderList[6]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.rotateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.translateY" 
 		"JackalopeRN.placeHolderList[7]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.rotateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.rotateY" 
 		"JackalopeRN.placeHolderList[8]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.rotateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.rotateX" 
 		"JackalopeRN.placeHolderList[9]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.visibility" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.rotateZ" 
 		"JackalopeRN.placeHolderList[10]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.translateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl.visibility" 
 		"JackalopeRN.placeHolderList[11]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.translateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.translateX" 
 		"JackalopeRN.placeHolderList[12]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.translateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.translateY" 
 		"JackalopeRN.placeHolderList[13]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.rotateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.translateZ" 
 		"JackalopeRN.placeHolderList[14]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.rotateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.rotateX" 
 		"JackalopeRN.placeHolderList[15]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.rotateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.rotateY" 
 		"JackalopeRN.placeHolderList[16]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.scaleX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.rotateZ" 
 		"JackalopeRN.placeHolderList[17]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.scaleY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.scaleX" 
 		"JackalopeRN.placeHolderList[18]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.scaleZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.scaleY" 
 		"JackalopeRN.placeHolderList[19]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.visibility" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.scaleZ" 
 		"JackalopeRN.placeHolderList[20]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.translateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl.visibility" 
 		"JackalopeRN.placeHolderList[21]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.translateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.translateX" 
 		"JackalopeRN.placeHolderList[22]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.translateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.translateY" 
 		"JackalopeRN.placeHolderList[23]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.rotateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.translateZ" 
 		"JackalopeRN.placeHolderList[24]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.rotateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.rotateX" 
 		"JackalopeRN.placeHolderList[25]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.rotateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.rotateY" 
 		"JackalopeRN.placeHolderList[26]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.scaleX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.rotateZ" 
 		"JackalopeRN.placeHolderList[27]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.scaleY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.scaleX" 
 		"JackalopeRN.placeHolderList[28]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.scaleZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.scaleY" 
 		"JackalopeRN.placeHolderList[29]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.visibility" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.scaleZ" 
 		"JackalopeRN.placeHolderList[30]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.translateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:Neck_ctrl_grp|Jackalope:Neck_ctrl|Jackalope:Mouth_ctrl_grp|Jackalope:Mouth_ctrl.visibility" 
 		"JackalopeRN.placeHolderList[31]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.translateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.translateX" 
 		"JackalopeRN.placeHolderList[32]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.translateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.translateY" 
 		"JackalopeRN.placeHolderList[33]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.rotateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.translateZ" 
 		"JackalopeRN.placeHolderList[34]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.rotateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.rotateY" 
 		"JackalopeRN.placeHolderList[35]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.rotateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.rotateX" 
 		"JackalopeRN.placeHolderList[36]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.scaleX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.rotateZ" 
 		"JackalopeRN.placeHolderList[37]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.scaleY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.scaleX" 
 		"JackalopeRN.placeHolderList[38]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.scaleZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.scaleY" 
 		"JackalopeRN.placeHolderList[39]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.visibility" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.scaleZ" 
 		"JackalopeRN.placeHolderList[40]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.translateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:L_shoulder_ctrl_grp|Jackalope:L_shoulder_ctrl|Jackalope:L_elbow_ctrl_grp|Jackalope:L_elbow_ctrl.visibility" 
 		"JackalopeRN.placeHolderList[41]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.translateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.translateX" 
 		"JackalopeRN.placeHolderList[42]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.translateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.translateY" 
 		"JackalopeRN.placeHolderList[43]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.rotateY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.translateZ" 
 		"JackalopeRN.placeHolderList[44]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.rotateX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.rotateY" 
 		"JackalopeRN.placeHolderList[45]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.rotateZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.rotateX" 
 		"JackalopeRN.placeHolderList[46]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.scaleX" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.rotateZ" 
 		"JackalopeRN.placeHolderList[47]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.scaleY" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.scaleX" 
 		"JackalopeRN.placeHolderList[48]" ""
-		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.scaleZ" 
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.scaleY" 
 		"JackalopeRN.placeHolderList[49]" ""
+		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.scaleZ" 
+		"JackalopeRN.placeHolderList[50]" ""
 		5 4 "JackalopeRN" "|Jackalope:Jackalope_char|Jackalope:SimpleControls|Jackalope:Transform_ctrl_grp|Jackalope:Transform_ctrl|Jackalope:R_shoulder_ctrl_grp|Jackalope:R_shoulder_ctrl|Jackalope:R_elbow_ctrl_grp|Jackalope:R_elbow_ctrl.visibility" 
-		"JackalopeRN.placeHolderList[50]" "";
+		"JackalopeRN.placeHolderList[51]" ""
+		7 "ignore" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:JackalopeBody|Jackalope:JackalopeBodyShape.message" "|RimLightPhoenix|RimLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:JackalopeBody|Jackalope:JackalopeBodyShape.message" "|KeyLightPhoenix|KeyLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:JackalopeBody|Jackalope:JackalopeBodyShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:JackalopeBody|Jackalope:JackalopeBodyShape.message" "|RimLightGiant1|RimLightGiant1Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:JackalopeBody|Jackalope:JackalopeBodyShape.message" "|KeyLightGiant|KeyLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:JackalopeBody|Jackalope:JackalopeBodyShape.message" "|RimLightGiant|RimLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:JackalopeBody|Jackalope:JackalopeBodyShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:JackalopeBody|Jackalope:JackalopeBodyShape.message" "|RimLightGiant2|RimLightGiant2Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:JackalopeBody|Jackalope:JackalopeBodyShape.message" "|RimLightGiant3|RimLightGiant3Shape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeR|Jackalope:EyeRShape.message" "|RimLightPhoenix|RimLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeR|Jackalope:EyeRShape.message" "|KeyLightPhoenix|KeyLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeR|Jackalope:EyeRShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeR|Jackalope:EyeRShape.message" "|RimLightGiant1|RimLightGiant1Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeR|Jackalope:EyeRShape.message" "|KeyLightGiant|KeyLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeR|Jackalope:EyeRShape.message" "|RimLightGiant|RimLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeR|Jackalope:EyeRShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeR|Jackalope:EyeRShape.message" "|RimLightGiant2|RimLightGiant2Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeR|Jackalope:EyeRShape.message" "|RimLightGiant3|RimLightGiant3Shape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeL|Jackalope:EyeLShape.message" "|RimLightPhoenix|RimLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeL|Jackalope:EyeLShape.message" "|KeyLightPhoenix|KeyLightPhoenixShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeL|Jackalope:EyeLShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeL|Jackalope:EyeLShape.message" "|RimLightGiant1|RimLightGiant1Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeL|Jackalope:EyeLShape.message" "|KeyLightGiant|KeyLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeL|Jackalope:EyeLShape.message" "|RimLightGiant|RimLightGiantShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeL|Jackalope:EyeLShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeL|Jackalope:EyeLShape.message" "|RimLightGiant2|RimLightGiant2Shape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Jackalope:Jackalope_char|Jackalope:JackalopeGeo|Jackalope:EyeL|Jackalope:EyeLShape.message" "|RimLightGiant3|RimLightGiant3Shape.message" 
+		0;
 lockNode -l 1 ;
 createNode reference -n "PheonixRN";
 	rename -uid "DBE56C9E-4F93-45FD-0E11-EEA080D7D4F7";
-	setAttr -s 80 ".phl";
+	setAttr -s 81 ".phl";
 	setAttr ".phl[1]" 0;
 	setAttr ".phl[2]" 0;
 	setAttr ".phl[3]" 0;
@@ -1807,10 +3057,11 @@ createNode reference -n "PheonixRN";
 	setAttr ".phl[78]" 0;
 	setAttr ".phl[79]" 0;
 	setAttr ".phl[80]" 0;
+	setAttr ".phl[81]" 0;
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"PheonixRN"
 		"PheonixRN" 0
-		"PheonixRN" 93
+		"PheonixRN" 133
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl" 
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl" 
@@ -1819,8 +3070,20 @@ createNode reference -n "PheonixRN";
 		"translate" " -type \"double3\" 0.021452053312675766 -0.070371014205561272 -0.064045385825066081"
 		
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_foot_ctrl_grp|Pheonix:R_foot_ctrl" 
+		"translateX" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_foot_ctrl_grp|Pheonix:R_foot_ctrl" 
+		"translateY" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_foot_ctrl_grp|Pheonix:R_foot_ctrl" 
+		"translateZ" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_foot_ctrl_grp|Pheonix:R_foot_ctrl" 
 		"rotate" " -type \"double3\" -10.43545014706824148 -45.12456166204000141 8.01370836451055446"
 		
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_foot_ctrl_grp|Pheonix:R_foot_ctrl" 
+		"rotateX" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_foot_ctrl_grp|Pheonix:R_foot_ctrl" 
+		"rotateY" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_foot_ctrl_grp|Pheonix:R_foot_ctrl" 
+		"rotateZ" " -av"
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_foot_ctrl_grp|Pheonix:R_foot_ctrl" 
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl" 
@@ -1828,175 +3091,243 @@ createNode reference -n "PheonixRN";
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl|Pheonix:L_elbow_ctrl_grp|Pheonix:L_elbow_ctrl" 
 		"translate" " -type \"double3\" 0 0 0"
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl|Pheonix:L_elbow_ctrl_grp|Pheonix:L_elbow_ctrl" 
+		"translateX" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl|Pheonix:L_elbow_ctrl_grp|Pheonix:L_elbow_ctrl" 
+		"translateY" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl|Pheonix:L_elbow_ctrl_grp|Pheonix:L_elbow_ctrl" 
+		"translateZ" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl|Pheonix:L_elbow_ctrl_grp|Pheonix:L_elbow_ctrl" 
 		"rotate" " -type \"double3\" 0 0 -30.16020258168394008"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl|Pheonix:L_elbow_ctrl_grp|Pheonix:L_elbow_ctrl" 
+		"rotateX" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl|Pheonix:L_elbow_ctrl_grp|Pheonix:L_elbow_ctrl" 
+		"rotateY" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl|Pheonix:L_elbow_ctrl_grp|Pheonix:L_elbow_ctrl" 
+		"rotateZ" " -av"
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl" 
 		"rotatePivotTranslate" " -type \"double3\" 0 0 0"
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl|Pheonix:R_elbow_ctrl_grp|Pheonix:R_elbow_ctrl" 
 		"translate" " -type \"double3\" 0 0 0"
 		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl|Pheonix:R_elbow_ctrl_grp|Pheonix:R_elbow_ctrl" 
+		"translateX" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl|Pheonix:R_elbow_ctrl_grp|Pheonix:R_elbow_ctrl" 
+		"translateY" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl|Pheonix:R_elbow_ctrl_grp|Pheonix:R_elbow_ctrl" 
+		"translateZ" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl|Pheonix:R_elbow_ctrl_grp|Pheonix:R_elbow_ctrl" 
 		"rotate" " -type \"double3\" 0 0 -30.93874468512519016"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl|Pheonix:R_elbow_ctrl_grp|Pheonix:R_elbow_ctrl" 
+		"rotateX" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl|Pheonix:R_elbow_ctrl_grp|Pheonix:R_elbow_ctrl" 
+		"rotateY" " -av"
+		2 "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl|Pheonix:R_elbow_ctrl_grp|Pheonix:R_elbow_ctrl" 
+		"rotateZ" " -av"
 		2 "Pheonix:Joint_Layer" "visibility" " 0"
 		2 "Pheonix:Control_Layer" "visibility" " 0"
+		5 3 "PheonixRN" "|Pheonix:Phoenix_char.instObjGroups" "PheonixRN.placeHolderList[1]" 
+		""
 		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.rotateX" 
-		"PheonixRN.placeHolderList[1]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.rotateY" 
 		"PheonixRN.placeHolderList[2]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.rotateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.rotateY" 
 		"PheonixRN.placeHolderList[3]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.translateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.rotateZ" 
 		"PheonixRN.placeHolderList[4]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.translateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.translateZ" 
 		"PheonixRN.placeHolderList[5]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.translateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.translateX" 
 		"PheonixRN.placeHolderList[6]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.scaleX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.translateY" 
 		"PheonixRN.placeHolderList[7]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.scaleY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.scaleX" 
 		"PheonixRN.placeHolderList[8]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.scaleZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.scaleY" 
 		"PheonixRN.placeHolderList[9]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.visibility" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.scaleZ" 
 		"PheonixRN.placeHolderList[10]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.translateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl.visibility" 
 		"PheonixRN.placeHolderList[11]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.translateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.translateX" 
 		"PheonixRN.placeHolderList[12]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.translateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.translateY" 
 		"PheonixRN.placeHolderList[13]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.rotateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.translateZ" 
 		"PheonixRN.placeHolderList[14]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.rotateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.rotateX" 
 		"PheonixRN.placeHolderList[15]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.rotateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.rotateY" 
 		"PheonixRN.placeHolderList[16]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.scaleX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.rotateZ" 
 		"PheonixRN.placeHolderList[17]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.scaleY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.scaleX" 
 		"PheonixRN.placeHolderList[18]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.scaleZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.scaleY" 
 		"PheonixRN.placeHolderList[19]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.visibility" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.scaleZ" 
 		"PheonixRN.placeHolderList[20]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.translateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl.visibility" 
 		"PheonixRN.placeHolderList[21]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.translateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.translateX" 
 		"PheonixRN.placeHolderList[22]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.translateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.translateY" 
 		"PheonixRN.placeHolderList[23]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.rotateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.translateZ" 
 		"PheonixRN.placeHolderList[24]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.rotateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.rotateX" 
 		"PheonixRN.placeHolderList[25]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.rotateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.rotateY" 
 		"PheonixRN.placeHolderList[26]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.scaleX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.rotateZ" 
 		"PheonixRN.placeHolderList[27]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.scaleY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.scaleX" 
 		"PheonixRN.placeHolderList[28]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.scaleZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.scaleY" 
 		"PheonixRN.placeHolderList[29]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.visibility" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.scaleZ" 
 		"PheonixRN.placeHolderList[30]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.translateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Tail_ctrl_grp|Pheonix:Tail_ctrl.visibility" 
 		"PheonixRN.placeHolderList[31]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.translateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.translateX" 
 		"PheonixRN.placeHolderList[32]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.translateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.translateY" 
 		"PheonixRN.placeHolderList[33]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.rotateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.translateZ" 
 		"PheonixRN.placeHolderList[34]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.rotateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.rotateX" 
 		"PheonixRN.placeHolderList[35]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.rotateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.rotateY" 
 		"PheonixRN.placeHolderList[36]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.scaleX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.rotateZ" 
 		"PheonixRN.placeHolderList[37]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.scaleY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.scaleX" 
 		"PheonixRN.placeHolderList[38]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.scaleZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.scaleY" 
 		"PheonixRN.placeHolderList[39]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.visibility" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.scaleZ" 
 		"PheonixRN.placeHolderList[40]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.translateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_foot_ctrl_grp|Pheonix:L_foot_ctrl.visibility" 
 		"PheonixRN.placeHolderList[41]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.translateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.translateX" 
 		"PheonixRN.placeHolderList[42]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.translateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.translateY" 
 		"PheonixRN.placeHolderList[43]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.rotateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.translateZ" 
 		"PheonixRN.placeHolderList[44]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.rotateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.rotateX" 
 		"PheonixRN.placeHolderList[45]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.rotateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.rotateY" 
 		"PheonixRN.placeHolderList[46]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.scaleX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.rotateZ" 
 		"PheonixRN.placeHolderList[47]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.scaleY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.scaleX" 
 		"PheonixRN.placeHolderList[48]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.scaleZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.scaleY" 
 		"PheonixRN.placeHolderList[49]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.visibility" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.scaleZ" 
 		"PheonixRN.placeHolderList[50]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.translateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:L_shoulder_ctrl_grp|Pheonix:L_shoulder_ctrl.visibility" 
 		"PheonixRN.placeHolderList[51]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.translateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.translateX" 
 		"PheonixRN.placeHolderList[52]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.translateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.translateY" 
 		"PheonixRN.placeHolderList[53]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.rotateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.translateZ" 
 		"PheonixRN.placeHolderList[54]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.rotateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.rotateX" 
 		"PheonixRN.placeHolderList[55]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.rotateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.rotateY" 
 		"PheonixRN.placeHolderList[56]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.scaleX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.rotateZ" 
 		"PheonixRN.placeHolderList[57]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.scaleY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.scaleX" 
 		"PheonixRN.placeHolderList[58]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.scaleZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.scaleY" 
 		"PheonixRN.placeHolderList[59]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.visibility" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.scaleZ" 
 		"PheonixRN.placeHolderList[60]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.translateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:R_shoulder_ctrl_grp|Pheonix:R_shoulder_ctrl.visibility" 
 		"PheonixRN.placeHolderList[61]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.translateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.translateX" 
 		"PheonixRN.placeHolderList[62]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.translateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.translateY" 
 		"PheonixRN.placeHolderList[63]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.rotateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.translateZ" 
 		"PheonixRN.placeHolderList[64]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.rotateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.rotateX" 
 		"PheonixRN.placeHolderList[65]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.rotateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.rotateY" 
 		"PheonixRN.placeHolderList[66]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.scaleX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.rotateZ" 
 		"PheonixRN.placeHolderList[67]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.scaleY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.scaleX" 
 		"PheonixRN.placeHolderList[68]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.scaleZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.scaleY" 
 		"PheonixRN.placeHolderList[69]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.visibility" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.scaleZ" 
 		"PheonixRN.placeHolderList[70]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.translateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl.visibility" 
 		"PheonixRN.placeHolderList[71]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.translateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.translateX" 
 		"PheonixRN.placeHolderList[72]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.translateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.translateY" 
 		"PheonixRN.placeHolderList[73]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.rotateX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.translateZ" 
 		"PheonixRN.placeHolderList[74]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.rotateY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.rotateX" 
 		"PheonixRN.placeHolderList[75]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.rotateZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.rotateY" 
 		"PheonixRN.placeHolderList[76]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.scaleX" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.rotateZ" 
 		"PheonixRN.placeHolderList[77]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.scaleY" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.scaleX" 
 		"PheonixRN.placeHolderList[78]" ""
-		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.scaleZ" 
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.scaleY" 
 		"PheonixRN.placeHolderList[79]" ""
+		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.scaleZ" 
+		"PheonixRN.placeHolderList[80]" ""
 		5 4 "PheonixRN" "|Pheonix:Phoenix_char|Pheonix:SimpleControls|Pheonix:Transform_ctrl_grp|Pheonix:Transform_ctrl|Pheonix:Body_ctrl_grp|Pheonix:Body_ctrl|Pheonix:Neck_ctrl_grp|Pheonix:Neck_ctrl|Pheonix:Mouth_ctrl_grp|Pheonix:Mouth_ctrl.visibility" 
-		"PheonixRN.placeHolderList[80]" "";
+		"PheonixRN.placeHolderList[81]" ""
+		7 "ignore" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:PhoenixRetopo|Pheonix:PhoenixRetopoShape.message" "|KeyLightGiant|KeyLightGiantShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:PhoenixRetopo|Pheonix:PhoenixRetopoShape.message" "|RimLightGiant|RimLightGiantShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:PhoenixRetopo|Pheonix:PhoenixRetopoShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:PhoenixRetopo|Pheonix:PhoenixRetopoShape.message" "|KeyLightPhoenix|KeyLightPhoenixShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:PhoenixRetopo|Pheonix:PhoenixRetopoShape.message" "|RimLightPhoenix|RimLightPhoenixShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:PhoenixRetopo|Pheonix:PhoenixRetopoShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:PhoenixRetopo|Pheonix:PhoenixRetopoShape.message" "|RimLightPhoenix1|RimLightPhoenix1Shape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeR|Pheonix:EyeRShape.message" "|KeyLightGiant|KeyLightGiantShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeR|Pheonix:EyeRShape.message" "|RimLightGiant|RimLightGiantShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeR|Pheonix:EyeRShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeR|Pheonix:EyeRShape.message" "|KeyLightPhoenix|KeyLightPhoenixShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeR|Pheonix:EyeRShape.message" "|RimLightPhoenix|RimLightPhoenixShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeR|Pheonix:EyeRShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeR|Pheonix:EyeRShape.message" "|RimLightPhoenix1|RimLightPhoenix1Shape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeL|Pheonix:EyeLShape.message" "|KeyLightGiant|KeyLightGiantShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeL|Pheonix:EyeLShape.message" "|RimLightGiant|RimLightGiantShape.message" 
+		0
+		7 "ignore" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeL|Pheonix:EyeLShape.message" ":defaultLightSet.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeL|Pheonix:EyeLShape.message" "|KeyLightPhoenix|KeyLightPhoenixShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeL|Pheonix:EyeLShape.message" "|RimLightPhoenix|RimLightPhoenixShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeL|Pheonix:EyeLShape.message" "|CloudSky|CloudSkyShape.message" 
+		0
+		7 "link" ":lightLinker1" 2 "|Pheonix:Phoenix_char|Pheonix:PhoenixGeo|Pheonix:EyeL|Pheonix:EyeLShape.message" "|RimLightPhoenix1|RimLightPhoenix1Shape.message" 
+		0;
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode animCurveTA -n "Transform_ctrl_rotateX";
@@ -2147,7 +3478,7 @@ createNode animCurveTA -n "R_shoulder_ctrl_rotateY";
 	rename -uid "65F6F2A5-41FE-4497-D60D-668EC9CBA601";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  1 33.93102053485012;
+	setAttr ".ktv[0]"  1 33.931020534850127;
 	setAttr ".kot[0]"  5;
 createNode animCurveTA -n "R_shoulder_ctrl_rotateZ";
 	rename -uid "6C144FE9-492C-4B9A-7CAF-8FB09643F773";
@@ -3275,7 +4606,7 @@ createNode animCurveTA -n "L_shoulder_ctrl_FK_rotateY";
 	rename -uid "039292B1-4065-E7EF-88DB-C393CCF822D1";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 25.085265326600414;
+	setAttr ".ktv[0]"  0 25.085265326600418;
 	setAttr ".kot[0]"  5;
 createNode animCurveTA -n "L_shoulder_ctrl_FK_rotateZ";
 	rename -uid "3413472E-4834-08BF-4FFC-06A66B0A1F06";
@@ -3737,7 +5068,7 @@ createNode animCurveTA -n "R_elbow_ctrl_FK_rotateY";
 	rename -uid "99383745-4F27-3CF5-7999-D696408EC390";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 -64.673668629283981;
+	setAttr ".ktv[0]"  0 -64.673668629283995;
 	setAttr ".kot[0]"  5;
 createNode animCurveTU -n "R_elbow_ctrl_FK_scaleX";
 	rename -uid "148C784E-43CA-E5EF-F4B9-BCB693EFB076";
@@ -4605,7 +5936,7 @@ createNode animCurveTA -n "pairBlend1_inRotateZ1";
 	rename -uid "032E4B96-4702-AB69-203C-11ADFC627208";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr ".ktv[0]"  0 26.564363930566596;
+	setAttr ".ktv[0]"  0 26.5643639305666;
 	setAttr ".kot[0]"  5;
 createNode animCurveTA -n "R_thumb_1_ctrl_rotateY";
 	rename -uid "21455673-4086-8648-1E7B-C7A83EA57AC6";
@@ -5099,9 +6430,51 @@ createNode animCurveTU -n "L_other_toe_ctrl_scaleZ";
 	setAttr ".wgt" no;
 	setAttr ".ktv[0]"  0 1;
 	setAttr ".kot[0]"  5;
+createNode aiImagerDenoiserNoice -n "aiImagerDenoiserNoice1";
+	rename -uid "B32D3D34-4D24-693A-B45B-1AB3B7FD6226";
+createNode objectSet -n "objectSet";
+	rename -uid "13F91C93-4E3E-8501-4770-8ABD32AF9DA8";
+	setAttr ".ihi" 0;
+createNode objectSet -n "objectSet1";
+	rename -uid "A7CC7AF9-4CF5-3C11-F9A9-F8A0D733909B";
+	setAttr ".ihi" 0;
+	setAttr -s 2 ".dsm";
+createNode objectSet -n "objectSet2";
+	rename -uid "4D64D38A-4346-4147-4740-DC92B8E2CA88";
+	setAttr ".ihi" 0;
+createNode nodeGraphEditorInfo -n "hyperShadePrimaryNodeEditorSavedTabsInfo";
+	rename -uid "05C16E9B-40F3-DE63-BE80-C08BDB2BC94F";
+	setAttr ".tgi[0].tn" -type "string" "Untitled_1";
+	setAttr ".tgi[0].vl" -type "double2" -622.61902287839052 -52.380950299520414 ;
+	setAttr ".tgi[0].vh" -type "double2" 860.71425151257415 51.190474156349509 ;
+	setAttr -s 8 ".tgi[0].ni";
+	setAttr ".tgi[0].ni[0].x" 25.714284896850586;
+	setAttr ".tgi[0].ni[0].y" 91.428573608398438;
+	setAttr ".tgi[0].ni[0].nvs" 1923;
+	setAttr ".tgi[0].ni[1].x" 25.714284896850586;
+	setAttr ".tgi[0].ni[1].y" 91.428573608398438;
+	setAttr ".tgi[0].ni[1].nvs" 1923;
+	setAttr ".tgi[0].ni[2].x" 25.714284896850586;
+	setAttr ".tgi[0].ni[2].y" 91.428573608398438;
+	setAttr ".tgi[0].ni[2].nvs" 1923;
+	setAttr ".tgi[0].ni[3].x" 25.714284896850586;
+	setAttr ".tgi[0].ni[3].y" 91.428573608398438;
+	setAttr ".tgi[0].ni[3].nvs" 1923;
+	setAttr ".tgi[0].ni[4].x" 25.714284896850586;
+	setAttr ".tgi[0].ni[4].y" 91.428573608398438;
+	setAttr ".tgi[0].ni[4].nvs" 1923;
+	setAttr ".tgi[0].ni[5].x" 25.714284896850586;
+	setAttr ".tgi[0].ni[5].y" 91.428573608398438;
+	setAttr ".tgi[0].ni[5].nvs" 1923;
+	setAttr ".tgi[0].ni[6].x" 25.714284896850586;
+	setAttr ".tgi[0].ni[6].y" 91.428573608398438;
+	setAttr ".tgi[0].ni[6].nvs" 1923;
+	setAttr ".tgi[0].ni[7].x" 25.714284896850586;
+	setAttr ".tgi[0].ni[7].y" 91.428573608398438;
+	setAttr ".tgi[0].ni[7].nvs" 1923;
 select -ne :time1;
-	setAttr ".o" 112;
-	setAttr ".unw" 112;
+	setAttr ".o" 1;
+	setAttr ".unw" 1;
 select -ne :hardwareRenderingGlobals;
 	setAttr ".otfna" -type "stringArray" 22 "NURBS Curves" "NURBS Surfaces" "Polygons" "Subdiv Surface" "Particles" "Particle Instance" "Fluids" "Strokes" "Image Planes" "UI" "Lights" "Cameras" "Locators" "Joints" "IK Handles" "Deformers" "Motion Trails" "Components" "Hair Systems" "Follicles" "Misc. UI" "Ornaments"  ;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
@@ -5110,19 +6483,20 @@ select -ne :hardwareRenderingGlobals;
 	setAttr ".fprt" yes;
 	setAttr ".rtfm" 1;
 select -ne :renderPartition;
-	setAttr -s 22 ".st";
+	setAttr -s 60 ".st";
 select -ne :renderGlobalsList1;
 select -ne :defaultShaderList1;
-	setAttr -s 28 ".s";
+	setAttr -s 66 ".s";
 select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderUtilityList1;
-	setAttr -s 106 ".u";
+	setAttr -s 282 ".u";
 select -ne :defaultRenderingList1;
-	setAttr -s 5 ".r";
+	setAttr -s 8 ".r";
 select -ne :lightList1;
+	setAttr -s 9 ".l";
 select -ne :defaultTextureList1;
-	setAttr -s 81 ".tx";
+	setAttr -s 219 ".tx";
 select -ne :standardSurface1;
 	setAttr ".bc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sr" 0.5;
@@ -5130,18 +6504,28 @@ select -ne :openPBR_shader1;
 	setAttr ".bc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sr" 0.5;
 select -ne :initialShadingGroup;
+	setAttr -s 19 ".dsm";
 	setAttr ".ro" yes;
+	setAttr -s 18 ".gn";
 select -ne :initialParticleSE;
 	setAttr ".ro" yes;
 select -ne :defaultRenderGlobals;
 	addAttr -ci true -h true -sn "dss" -ln "defaultSurfaceShader" -dt "string";
 	setAttr ".ren" -type "string" "arnold";
 	setAttr ".outf" 51;
-	setAttr ".imfkey" -type "string" "exr";
+	setAttr ".imfkey" -type "string" "png";
+	setAttr ".an" yes;
+	setAttr ".fs" 0;
+	setAttr ".ef" 400;
+	setAttr ".pff" yes;
+	setAttr ".peie" 2;
+	setAttr ".ifp" -type "string" "<Scene>/Sequence/<RenderPass>/Render_frame";
 	setAttr ".dss" -type "string" "openPBR_shader1";
 select -ne :defaultResolution;
 	setAttr ".pa" 1;
+	setAttr ".dar" 1.7769999504089355;
 select -ne :defaultLightSet;
+	setAttr -s 9 ".dsm";
 select -ne :defaultColorMgtGlobals;
 	setAttr ".cfe" yes;
 	setAttr ".cfp" -type "string" "<MAYA_RESOURCES>/OCIO-configs/Maya2022-default/config.ocio";
@@ -5156,520 +6540,524 @@ select -ne :hardwareRenderGlobals;
 	setAttr ".btrs" 512;
 select -ne :ikSystem;
 connectAttr "Forest.di" "ForestRuinsWorldRN.phl[1]";
-connectAttr "Transform_ctrl_scaleX2.o" "StoneGiantRN.phl[1]";
-connectAttr "Transform_ctrl_scaleY2.o" "StoneGiantRN.phl[2]";
-connectAttr "Transform_ctrl_scaleZ2.o" "StoneGiantRN.phl[3]";
-connectAttr "Transform_ctrl_translateX2.o" "StoneGiantRN.phl[4]";
-connectAttr "Transform_ctrl_translateZ2.o" "StoneGiantRN.phl[5]";
-connectAttr "Transform_ctrl_translateY2.o" "StoneGiantRN.phl[6]";
-connectAttr "Transform_ctrl_rotateY2.o" "StoneGiantRN.phl[7]";
-connectAttr "Transform_ctrl_rotateX2.o" "StoneGiantRN.phl[8]";
-connectAttr "Transform_ctrl_rotateZ2.o" "StoneGiantRN.phl[9]";
-connectAttr "Transform_ctrl_visibility2.o" "StoneGiantRN.phl[10]";
-connectAttr "COG_ctrl_translateX.o" "StoneGiantRN.phl[11]";
-connectAttr "COG_ctrl_translateY.o" "StoneGiantRN.phl[12]";
-connectAttr "COG_ctrl_translateZ.o" "StoneGiantRN.phl[13]";
-connectAttr "COG_ctrl_rotateX.o" "StoneGiantRN.phl[14]";
-connectAttr "COG_ctrl_rotateY.o" "StoneGiantRN.phl[15]";
-connectAttr "COG_ctrl_rotateZ.o" "StoneGiantRN.phl[16]";
-connectAttr "COG_ctrl_scaleX.o" "StoneGiantRN.phl[17]";
-connectAttr "COG_ctrl_scaleY.o" "StoneGiantRN.phl[18]";
-connectAttr "COG_ctrl_scaleZ.o" "StoneGiantRN.phl[19]";
-connectAttr "COG_ctrl_visibility.o" "StoneGiantRN.phl[20]";
-connectAttr "Spine_1_ctrl_translateX.o" "StoneGiantRN.phl[21]";
-connectAttr "Spine_1_ctrl_translateY.o" "StoneGiantRN.phl[22]";
-connectAttr "Spine_1_ctrl_translateZ.o" "StoneGiantRN.phl[23]";
-connectAttr "Spine_1_ctrl_rotateZ.o" "StoneGiantRN.phl[24]";
-connectAttr "Spine_1_ctrl_rotateX.o" "StoneGiantRN.phl[25]";
-connectAttr "Spine_1_ctrl_rotateY.o" "StoneGiantRN.phl[26]";
-connectAttr "Spine_1_ctrl_scaleX.o" "StoneGiantRN.phl[27]";
-connectAttr "Spine_1_ctrl_scaleY.o" "StoneGiantRN.phl[28]";
-connectAttr "Spine_1_ctrl_scaleZ.o" "StoneGiantRN.phl[29]";
-connectAttr "Spine_1_ctrl_visibility.o" "StoneGiantRN.phl[30]";
-connectAttr "Spine_2_ctrl_translateX.o" "StoneGiantRN.phl[31]";
-connectAttr "Spine_2_ctrl_translateY.o" "StoneGiantRN.phl[32]";
-connectAttr "Spine_2_ctrl_translateZ.o" "StoneGiantRN.phl[33]";
-connectAttr "Spine_2_ctrl_rotateX.o" "StoneGiantRN.phl[34]";
-connectAttr "Spine_2_ctrl_rotateY.o" "StoneGiantRN.phl[35]";
-connectAttr "Spine_2_ctrl_rotateZ.o" "StoneGiantRN.phl[36]";
-connectAttr "Spine_2_ctrl_scaleX.o" "StoneGiantRN.phl[37]";
-connectAttr "Spine_2_ctrl_scaleY.o" "StoneGiantRN.phl[38]";
-connectAttr "Spine_2_ctrl_scaleZ.o" "StoneGiantRN.phl[39]";
-connectAttr "Spine_2_ctrl_visibility.o" "StoneGiantRN.phl[40]";
-connectAttr "Neck_ctrl_translateX1.o" "StoneGiantRN.phl[41]";
-connectAttr "Neck_ctrl_translateY1.o" "StoneGiantRN.phl[42]";
-connectAttr "Neck_ctrl_translateZ1.o" "StoneGiantRN.phl[43]";
-connectAttr "Neck_ctrl_rotateX1.o" "StoneGiantRN.phl[44]";
-connectAttr "Neck_ctrl_rotateY1.o" "StoneGiantRN.phl[45]";
-connectAttr "Neck_ctrl_rotateZ1.o" "StoneGiantRN.phl[46]";
-connectAttr "Neck_ctrl_scaleX1.o" "StoneGiantRN.phl[47]";
-connectAttr "Neck_ctrl_scaleY1.o" "StoneGiantRN.phl[48]";
-connectAttr "Neck_ctrl_scaleZ1.o" "StoneGiantRN.phl[49]";
-connectAttr "Neck_ctrl_visibility1.o" "StoneGiantRN.phl[50]";
-connectAttr "L_eyebrow_ctrl_translateX.o" "StoneGiantRN.phl[51]";
-connectAttr "L_eyebrow_ctrl_translateY.o" "StoneGiantRN.phl[52]";
-connectAttr "L_eyebrow_ctrl_translateZ.o" "StoneGiantRN.phl[53]";
-connectAttr "L_eyebrow_ctrl_rotateX.o" "StoneGiantRN.phl[54]";
-connectAttr "L_eyebrow_ctrl_rotateY.o" "StoneGiantRN.phl[55]";
-connectAttr "L_eyebrow_ctrl_rotateZ.o" "StoneGiantRN.phl[56]";
-connectAttr "L_eyebrow_ctrl_scaleX.o" "StoneGiantRN.phl[57]";
-connectAttr "L_eyebrow_ctrl_scaleY.o" "StoneGiantRN.phl[58]";
-connectAttr "L_eyebrow_ctrl_scaleZ.o" "StoneGiantRN.phl[59]";
-connectAttr "L_eyebrow_ctrl_visibility.o" "StoneGiantRN.phl[60]";
-connectAttr "R_eyebrow_ctrl_translateX.o" "StoneGiantRN.phl[61]";
-connectAttr "R_eyebrow_ctrl_translateY.o" "StoneGiantRN.phl[62]";
-connectAttr "R_eyebrow_ctrl_translateZ.o" "StoneGiantRN.phl[63]";
-connectAttr "R_eyebrow_ctrl_rotateX.o" "StoneGiantRN.phl[64]";
-connectAttr "R_eyebrow_ctrl_rotateY.o" "StoneGiantRN.phl[65]";
-connectAttr "R_eyebrow_ctrl_rotateZ.o" "StoneGiantRN.phl[66]";
-connectAttr "R_eyebrow_ctrl_scaleX.o" "StoneGiantRN.phl[67]";
-connectAttr "R_eyebrow_ctrl_scaleY.o" "StoneGiantRN.phl[68]";
-connectAttr "R_eyebrow_ctrl_scaleZ.o" "StoneGiantRN.phl[69]";
-connectAttr "R_eyebrow_ctrl_visibility.o" "StoneGiantRN.phl[70]";
-connectAttr "L_ear_ctrl_translateX.o" "StoneGiantRN.phl[71]";
-connectAttr "L_ear_ctrl_translateY.o" "StoneGiantRN.phl[72]";
-connectAttr "L_ear_ctrl_translateZ.o" "StoneGiantRN.phl[73]";
-connectAttr "L_ear_ctrl_rotateY.o" "StoneGiantRN.phl[74]";
-connectAttr "L_ear_ctrl_rotateX.o" "StoneGiantRN.phl[75]";
-connectAttr "L_ear_ctrl_rotateZ.o" "StoneGiantRN.phl[76]";
-connectAttr "L_ear_ctrl_scaleX.o" "StoneGiantRN.phl[77]";
-connectAttr "L_ear_ctrl_scaleY.o" "StoneGiantRN.phl[78]";
-connectAttr "L_ear_ctrl_scaleZ.o" "StoneGiantRN.phl[79]";
-connectAttr "L_ear_ctrl_visibility.o" "StoneGiantRN.phl[80]";
-connectAttr "R_ear_ctrl_translateX.o" "StoneGiantRN.phl[81]";
-connectAttr "R_ear_ctrl_translateY.o" "StoneGiantRN.phl[82]";
-connectAttr "R_ear_ctrl_translateZ.o" "StoneGiantRN.phl[83]";
-connectAttr "R_ear_ctrl_rotateY.o" "StoneGiantRN.phl[84]";
-connectAttr "R_ear_ctrl_rotateX.o" "StoneGiantRN.phl[85]";
-connectAttr "R_ear_ctrl_rotateZ.o" "StoneGiantRN.phl[86]";
-connectAttr "R_ear_ctrl_scaleX.o" "StoneGiantRN.phl[87]";
-connectAttr "R_ear_ctrl_scaleY.o" "StoneGiantRN.phl[88]";
-connectAttr "R_ear_ctrl_scaleZ.o" "StoneGiantRN.phl[89]";
-connectAttr "R_ear_ctrl_visibility.o" "StoneGiantRN.phl[90]";
-connectAttr "Nose_ctrl_translateX.o" "StoneGiantRN.phl[91]";
-connectAttr "Nose_ctrl_translateY.o" "StoneGiantRN.phl[92]";
-connectAttr "Nose_ctrl_translateZ.o" "StoneGiantRN.phl[93]";
-connectAttr "Nose_ctrl_rotateZ.o" "StoneGiantRN.phl[94]";
-connectAttr "Nose_ctrl_rotateX.o" "StoneGiantRN.phl[95]";
-connectAttr "Nose_ctrl_rotateY.o" "StoneGiantRN.phl[96]";
-connectAttr "Nose_ctrl_scaleX.o" "StoneGiantRN.phl[97]";
-connectAttr "Nose_ctrl_scaleY.o" "StoneGiantRN.phl[98]";
-connectAttr "Nose_ctrl_scaleZ.o" "StoneGiantRN.phl[99]";
-connectAttr "Nose_ctrl_visibility.o" "StoneGiantRN.phl[100]";
-connectAttr "L_shoulder_ctrl_FK_translateX.o" "StoneGiantRN.phl[101]";
-connectAttr "L_shoulder_ctrl_FK_translateY.o" "StoneGiantRN.phl[102]";
-connectAttr "L_shoulder_ctrl_FK_translateZ.o" "StoneGiantRN.phl[103]";
-connectAttr "L_shoulder_ctrl_FK_rotateX.o" "StoneGiantRN.phl[104]";
-connectAttr "L_shoulder_ctrl_FK_rotateY.o" "StoneGiantRN.phl[105]";
-connectAttr "L_shoulder_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[106]";
-connectAttr "L_shoulder_ctrl_FK_scaleX.o" "StoneGiantRN.phl[107]";
-connectAttr "L_shoulder_ctrl_FK_scaleY.o" "StoneGiantRN.phl[108]";
-connectAttr "L_shoulder_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[109]";
-connectAttr "L_elbow_ctrl_FK_rotateY.o" "StoneGiantRN.phl[110]";
-connectAttr "L_elbow_ctrl_FK_scaleX.o" "StoneGiantRN.phl[111]";
-connectAttr "L_elbow_ctrl_FK_scaleY.o" "StoneGiantRN.phl[112]";
-connectAttr "L_elbow_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[113]";
-connectAttr "L_wrist_ctrl_FK_translateX.o" "StoneGiantRN.phl[114]";
-connectAttr "L_wrist_ctrl_FK_translateY.o" "StoneGiantRN.phl[115]";
-connectAttr "L_wrist_ctrl_FK_translateZ.o" "StoneGiantRN.phl[116]";
-connectAttr "L_wrist_ctrl_FK_rotateX.o" "StoneGiantRN.phl[117]";
-connectAttr "L_wrist_ctrl_FK_rotateY.o" "StoneGiantRN.phl[118]";
-connectAttr "L_wrist_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[119]";
-connectAttr "L_wrist_ctrl_FK_scaleX.o" "StoneGiantRN.phl[120]";
-connectAttr "L_wrist_ctrl_FK_scaleY.o" "StoneGiantRN.phl[121]";
-connectAttr "L_wrist_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[122]";
-connectAttr "R_shoulder_ctrl_FK_translateX.o" "StoneGiantRN.phl[123]";
-connectAttr "R_shoulder_ctrl_FK_translateY.o" "StoneGiantRN.phl[124]";
-connectAttr "R_shoulder_ctrl_FK_translateZ.o" "StoneGiantRN.phl[125]";
-connectAttr "R_shoulder_ctrl_FK_rotateX.o" "StoneGiantRN.phl[126]";
-connectAttr "R_shoulder_ctrl_FK_rotateY.o" "StoneGiantRN.phl[127]";
-connectAttr "R_shoulder_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[128]";
-connectAttr "R_shoulder_ctrl_FK_scaleX.o" "StoneGiantRN.phl[129]";
-connectAttr "R_shoulder_ctrl_FK_scaleY.o" "StoneGiantRN.phl[130]";
-connectAttr "R_shoulder_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[131]";
-connectAttr "R_elbow_ctrl_FK_rotateY.o" "StoneGiantRN.phl[132]";
-connectAttr "R_elbow_ctrl_FK_scaleX.o" "StoneGiantRN.phl[133]";
-connectAttr "R_elbow_ctrl_FK_scaleY.o" "StoneGiantRN.phl[134]";
-connectAttr "R_elbow_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[135]";
-connectAttr "R_wrist_ctrl_FK_translateX.o" "StoneGiantRN.phl[136]";
-connectAttr "R_wrist_ctrl_FK_translateY.o" "StoneGiantRN.phl[137]";
-connectAttr "R_wrist_ctrl_FK_translateZ.o" "StoneGiantRN.phl[138]";
-connectAttr "R_wrist_ctrl_FK_rotateY.o" "StoneGiantRN.phl[139]";
-connectAttr "R_wrist_ctrl_FK_rotateX.o" "StoneGiantRN.phl[140]";
-connectAttr "R_wrist_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[141]";
-connectAttr "R_wrist_ctrl_FK_scaleX.o" "StoneGiantRN.phl[142]";
-connectAttr "R_wrist_ctrl_FK_scaleY.o" "StoneGiantRN.phl[143]";
-connectAttr "R_wrist_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[144]";
-connectAttr "L_arm_IKFK_switch_LArmIKFKswitch.o" "StoneGiantRN.phl[145]";
-connectAttr "R_arm_IKFK_switch_RArmIKFKSwitch.o" "StoneGiantRN.phl[146]";
-connectAttr "L_pinky_1_ctrl_rotateZ.o" "StoneGiantRN.phl[147]";
-connectAttr "L_pinky_1_ctrl_rotateY.o" "StoneGiantRN.phl[148]";
-connectAttr "L_pinky_1_ctrl_scaleX.o" "StoneGiantRN.phl[149]";
-connectAttr "L_pinky_1_ctrl_scaleY.o" "StoneGiantRN.phl[150]";
-connectAttr "L_pinky_1_ctrl_scaleZ.o" "StoneGiantRN.phl[151]";
-connectAttr "L_pinky_1_ctrl_visibility.o" "StoneGiantRN.phl[152]";
-connectAttr "L_pinky_2_ctrl_rotateY.o" "StoneGiantRN.phl[153]";
-connectAttr "L_pinky_2_ctrl_scaleX.o" "StoneGiantRN.phl[154]";
-connectAttr "L_pinky_2_ctrl_scaleY.o" "StoneGiantRN.phl[155]";
-connectAttr "L_pinky_2_ctrl_scaleZ.o" "StoneGiantRN.phl[156]";
-connectAttr "L_pinky_2_ctrl_visibility.o" "StoneGiantRN.phl[157]";
-connectAttr "L_ring_1_ctrl_rotateZ.o" "StoneGiantRN.phl[158]";
-connectAttr "L_ring_1_ctrl_rotateY.o" "StoneGiantRN.phl[159]";
-connectAttr "L_ring_1_ctrl_scaleX.o" "StoneGiantRN.phl[160]";
-connectAttr "L_ring_1_ctrl_scaleY.o" "StoneGiantRN.phl[161]";
-connectAttr "L_ring_1_ctrl_scaleZ.o" "StoneGiantRN.phl[162]";
-connectAttr "L_ring_1_ctrl_visibility.o" "StoneGiantRN.phl[163]";
-connectAttr "L_ring_2_ctrl_rotateY.o" "StoneGiantRN.phl[164]";
-connectAttr "L_ring_2_ctrl_scaleX.o" "StoneGiantRN.phl[165]";
-connectAttr "L_ring_2_ctrl_scaleY.o" "StoneGiantRN.phl[166]";
-connectAttr "L_ring_2_ctrl_scaleZ.o" "StoneGiantRN.phl[167]";
-connectAttr "L_ring_2_ctrl_visibility.o" "StoneGiantRN.phl[168]";
-connectAttr "L_middle_1_ctrl_rotateZ.o" "StoneGiantRN.phl[169]";
-connectAttr "L_middle_1_ctrl_rotateY.o" "StoneGiantRN.phl[170]";
-connectAttr "L_middle_1_ctrl_scaleX.o" "StoneGiantRN.phl[171]";
-connectAttr "L_middle_1_ctrl_scaleY.o" "StoneGiantRN.phl[172]";
-connectAttr "L_middle_1_ctrl_scaleZ.o" "StoneGiantRN.phl[173]";
-connectAttr "L_middle_1_ctrl_visibility.o" "StoneGiantRN.phl[174]";
-connectAttr "L_middle_2_ctrl_rotateY.o" "StoneGiantRN.phl[175]";
-connectAttr "L_middle_2_ctrl_scaleX.o" "StoneGiantRN.phl[176]";
-connectAttr "L_middle_2_ctrl_scaleY.o" "StoneGiantRN.phl[177]";
-connectAttr "L_middle_2_ctrl_scaleZ.o" "StoneGiantRN.phl[178]";
-connectAttr "L_middle_2_ctrl_visibility.o" "StoneGiantRN.phl[179]";
-connectAttr "L_pointer_1_ctrl_rotateZ.o" "StoneGiantRN.phl[180]";
-connectAttr "L_pointer_1_ctrl_rotateY.o" "StoneGiantRN.phl[181]";
-connectAttr "L_pointer_1_ctrl_scaleX.o" "StoneGiantRN.phl[182]";
-connectAttr "L_pointer_1_ctrl_scaleY.o" "StoneGiantRN.phl[183]";
-connectAttr "L_pointer_1_ctrl_scaleZ.o" "StoneGiantRN.phl[184]";
-connectAttr "L_pointer_1_ctrl_visibility.o" "StoneGiantRN.phl[185]";
-connectAttr "L_pointer_2_ctrl_rotateY.o" "StoneGiantRN.phl[186]";
-connectAttr "L_pointer_2_ctrl_scaleX.o" "StoneGiantRN.phl[187]";
-connectAttr "L_pointer_2_ctrl_scaleY.o" "StoneGiantRN.phl[188]";
-connectAttr "L_pointer_2_ctrl_scaleZ.o" "StoneGiantRN.phl[189]";
-connectAttr "L_pointer_2_ctrl_visibility.o" "StoneGiantRN.phl[190]";
-connectAttr "L_thumb_1_ctrl_rotateZ.o" "StoneGiantRN.phl[191]";
-connectAttr "L_thumb_1_ctrl_rotateY.o" "StoneGiantRN.phl[192]";
-connectAttr "L_thumb_1_ctrl_scaleX.o" "StoneGiantRN.phl[193]";
-connectAttr "L_thumb_1_ctrl_scaleY.o" "StoneGiantRN.phl[194]";
-connectAttr "L_thumb_1_ctrl_scaleZ.o" "StoneGiantRN.phl[195]";
-connectAttr "L_thumb_1_ctrl_visibility.o" "StoneGiantRN.phl[196]";
-connectAttr "L_thumb_2_ctrl_rotateY.o" "StoneGiantRN.phl[197]";
-connectAttr "L_thumb_2_ctrl_scaleX.o" "StoneGiantRN.phl[198]";
-connectAttr "L_thumb_2_ctrl_scaleY.o" "StoneGiantRN.phl[199]";
-connectAttr "L_thumb_2_ctrl_scaleZ.o" "StoneGiantRN.phl[200]";
-connectAttr "L_thumb_2_ctrl_visibility.o" "StoneGiantRN.phl[201]";
-connectAttr "R_thumb_1_ctrl_rotateY.o" "StoneGiantRN.phl[202]";
-connectAttr "R_thumb_1_ctrl_rotateZ.o" "StoneGiantRN.phl[203]";
-connectAttr "R_thumb_1_ctrl_scaleX.o" "StoneGiantRN.phl[204]";
-connectAttr "R_thumb_1_ctrl_scaleY.o" "StoneGiantRN.phl[205]";
-connectAttr "R_thumb_1_ctrl_scaleZ.o" "StoneGiantRN.phl[206]";
-connectAttr "R_thumb_1_ctrl_visibility.o" "StoneGiantRN.phl[207]";
-connectAttr "R_thumb_2_ctrl_rotateY.o" "StoneGiantRN.phl[208]";
-connectAttr "R_thumb_2_ctrl_scaleX.o" "StoneGiantRN.phl[209]";
-connectAttr "R_thumb_2_ctrl_scaleY.o" "StoneGiantRN.phl[210]";
-connectAttr "R_thumb_2_ctrl_scaleZ.o" "StoneGiantRN.phl[211]";
-connectAttr "R_thumb_2_ctrl_visibility.o" "StoneGiantRN.phl[212]";
-connectAttr "R_pointer_1_ctrl_rotateY.o" "StoneGiantRN.phl[213]";
-connectAttr "R_pointer_1_ctrl_rotateZ.o" "StoneGiantRN.phl[214]";
-connectAttr "R_pointer_1_ctrl_scaleX.o" "StoneGiantRN.phl[215]";
-connectAttr "R_pointer_1_ctrl_scaleY.o" "StoneGiantRN.phl[216]";
-connectAttr "R_pointer_1_ctrl_scaleZ.o" "StoneGiantRN.phl[217]";
-connectAttr "R_pointer_1_ctrl_visibility.o" "StoneGiantRN.phl[218]";
-connectAttr "R_pointer_2_ctrl_rotateY.o" "StoneGiantRN.phl[219]";
-connectAttr "R_pointer_2_ctrl_scaleX.o" "StoneGiantRN.phl[220]";
-connectAttr "R_pointer_2_ctrl_scaleY.o" "StoneGiantRN.phl[221]";
-connectAttr "R_pointer_2_ctrl_scaleZ.o" "StoneGiantRN.phl[222]";
-connectAttr "R_pointer_2_ctrl_visibility.o" "StoneGiantRN.phl[223]";
-connectAttr "R_middle_1_ctrl_rotateY.o" "StoneGiantRN.phl[224]";
-connectAttr "R_middle_1_ctrl_rotateZ.o" "StoneGiantRN.phl[225]";
-connectAttr "R_middle_1_ctrl_scaleX.o" "StoneGiantRN.phl[226]";
-connectAttr "R_middle_1_ctrl_scaleY.o" "StoneGiantRN.phl[227]";
-connectAttr "R_middle_1_ctrl_scaleZ.o" "StoneGiantRN.phl[228]";
-connectAttr "R_middle_1_ctrl_visibility.o" "StoneGiantRN.phl[229]";
-connectAttr "R_middle_2_ctrl_rotateY.o" "StoneGiantRN.phl[230]";
-connectAttr "R_middle_2_ctrl_scaleX.o" "StoneGiantRN.phl[231]";
-connectAttr "R_middle_2_ctrl_scaleY.o" "StoneGiantRN.phl[232]";
-connectAttr "R_middle_2_ctrl_scaleZ.o" "StoneGiantRN.phl[233]";
-connectAttr "R_middle_2_ctrl_visibility.o" "StoneGiantRN.phl[234]";
-connectAttr "R_ring_1_ctrl_rotateY.o" "StoneGiantRN.phl[235]";
-connectAttr "R_ring_1_ctrl_rotateZ.o" "StoneGiantRN.phl[236]";
-connectAttr "R_ring_1_ctrl_scaleX.o" "StoneGiantRN.phl[237]";
-connectAttr "R_ring_1_ctrl_scaleY.o" "StoneGiantRN.phl[238]";
-connectAttr "R_ring_1_ctrl_scaleZ.o" "StoneGiantRN.phl[239]";
-connectAttr "R_ring_1_ctrl_visibility.o" "StoneGiantRN.phl[240]";
-connectAttr "R_ring_2_ctrl_rotateY.o" "StoneGiantRN.phl[241]";
-connectAttr "R_ring_2_ctrl_scaleX.o" "StoneGiantRN.phl[242]";
-connectAttr "R_ring_2_ctrl_scaleY.o" "StoneGiantRN.phl[243]";
-connectAttr "R_ring_2_ctrl_scaleZ.o" "StoneGiantRN.phl[244]";
-connectAttr "R_ring_2_ctrl_visibility.o" "StoneGiantRN.phl[245]";
-connectAttr "R_pinky_1_ctrl_rotateY.o" "StoneGiantRN.phl[246]";
-connectAttr "R_pinky_1_ctrl_rotateZ.o" "StoneGiantRN.phl[247]";
-connectAttr "R_pinky_1_ctrl_scaleX.o" "StoneGiantRN.phl[248]";
-connectAttr "R_pinky_1_ctrl_scaleY.o" "StoneGiantRN.phl[249]";
-connectAttr "R_pinky_1_ctrl_scaleZ.o" "StoneGiantRN.phl[250]";
-connectAttr "R_pinky_1_ctrl_visibility.o" "StoneGiantRN.phl[251]";
-connectAttr "R_pinky_2_ctrl_rotateY.o" "StoneGiantRN.phl[252]";
-connectAttr "R_pinky_2_ctrl_scaleX.o" "StoneGiantRN.phl[253]";
-connectAttr "R_pinky_2_ctrl_scaleY.o" "StoneGiantRN.phl[254]";
-connectAttr "R_pinky_2_ctrl_scaleZ.o" "StoneGiantRN.phl[255]";
-connectAttr "R_pinky_2_ctrl_visibility.o" "StoneGiantRN.phl[256]";
-connectAttr "pairBlend1.otx" "StoneGiantRN.phl[257]";
-connectAttr "pairBlend1.oty" "StoneGiantRN.phl[258]";
-connectAttr "pairBlend1.otz" "StoneGiantRN.phl[259]";
-connectAttr "pairBlend1.orx" "StoneGiantRN.phl[260]";
-connectAttr "pairBlend1.ory" "StoneGiantRN.phl[261]";
-connectAttr "pairBlend1.orz" "StoneGiantRN.phl[262]";
-connectAttr "StoneGiantRN.phl[263]" "pairBlend1.w";
-connectAttr "Plant_ctrl_blendParent1.o" "StoneGiantRN.phl[264]";
-connectAttr "Plant_ctrl_visibility.o" "StoneGiantRN.phl[265]";
-connectAttr "Plant_ctrl_scaleX.o" "StoneGiantRN.phl[266]";
-connectAttr "Plant_ctrl_scaleY.o" "StoneGiantRN.phl[267]";
-connectAttr "Plant_ctrl_scaleZ.o" "StoneGiantRN.phl[268]";
-connectAttr "StoneGiantRN.phl[269]" "pairBlend1.itx2";
-connectAttr "StoneGiantRN.phl[270]" "pairBlend1.ity2";
-connectAttr "StoneGiantRN.phl[271]" "pairBlend1.itz2";
-connectAttr "StoneGiantRN.phl[272]" "pairBlend1.irx2";
-connectAttr "StoneGiantRN.phl[273]" "pairBlend1.iry2";
-connectAttr "StoneGiantRN.phl[274]" "pairBlend1.irz2";
-connectAttr "Hip_1_ctrl_translateX.o" "StoneGiantRN.phl[275]";
-connectAttr "Hip_1_ctrl_translateY.o" "StoneGiantRN.phl[276]";
-connectAttr "Hip_1_ctrl_translateZ.o" "StoneGiantRN.phl[277]";
-connectAttr "Hip_1_ctrl_rotateX.o" "StoneGiantRN.phl[278]";
-connectAttr "Hip_1_ctrl_rotateY.o" "StoneGiantRN.phl[279]";
-connectAttr "Hip_1_ctrl_rotateZ.o" "StoneGiantRN.phl[280]";
-connectAttr "Hip_1_ctrl_scaleX.o" "StoneGiantRN.phl[281]";
-connectAttr "Hip_1_ctrl_scaleY.o" "StoneGiantRN.phl[282]";
-connectAttr "Hip_1_ctrl_scaleZ.o" "StoneGiantRN.phl[283]";
-connectAttr "Hip_1_ctrl_visibility.o" "StoneGiantRN.phl[284]";
-connectAttr "L_hip_2_ctrl_FK_translateX.o" "StoneGiantRN.phl[285]";
-connectAttr "L_hip_2_ctrl_FK_translateY.o" "StoneGiantRN.phl[286]";
-connectAttr "L_hip_2_ctrl_FK_translateZ.o" "StoneGiantRN.phl[287]";
-connectAttr "L_hip_2_ctrl_FK_rotateY.o" "StoneGiantRN.phl[288]";
-connectAttr "L_hip_2_ctrl_FK_rotateX.o" "StoneGiantRN.phl[289]";
-connectAttr "L_hip_2_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[290]";
-connectAttr "L_hip_2_ctrl_FK_scaleX.o" "StoneGiantRN.phl[291]";
-connectAttr "L_hip_2_ctrl_FK_scaleY.o" "StoneGiantRN.phl[292]";
-connectAttr "L_hip_2_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[293]";
-connectAttr "L_knee_ctrl_FK_rotateY.o" "StoneGiantRN.phl[294]";
-connectAttr "L_knee_ctrl_FK_scaleX.o" "StoneGiantRN.phl[295]";
-connectAttr "L_knee_ctrl_FK_scaleY.o" "StoneGiantRN.phl[296]";
-connectAttr "L_knee_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[297]";
-connectAttr "L_ankle_ctrl_FK_rotateX.o" "StoneGiantRN.phl[298]";
-connectAttr "L_ankle_ctrl_FK_rotateY.o" "StoneGiantRN.phl[299]";
-connectAttr "L_ankle_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[300]";
-connectAttr "L_ankle_ctrl_FK_scaleX.o" "StoneGiantRN.phl[301]";
-connectAttr "L_ankle_ctrl_FK_scaleY.o" "StoneGiantRN.phl[302]";
-connectAttr "L_ankle_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[303]";
-connectAttr "R_hip_2_ctrl_FK_translateX.o" "StoneGiantRN.phl[304]";
-connectAttr "R_hip_2_ctrl_FK_translateY.o" "StoneGiantRN.phl[305]";
-connectAttr "R_hip_2_ctrl_FK_translateZ.o" "StoneGiantRN.phl[306]";
-connectAttr "R_hip_2_ctrl_FK_rotateY.o" "StoneGiantRN.phl[307]";
-connectAttr "R_hip_2_ctrl_FK_rotateX.o" "StoneGiantRN.phl[308]";
-connectAttr "R_hip_2_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[309]";
-connectAttr "R_hip_2_ctrl_FK_scaleX.o" "StoneGiantRN.phl[310]";
-connectAttr "R_hip_2_ctrl_FK_scaleY.o" "StoneGiantRN.phl[311]";
-connectAttr "R_hip_2_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[312]";
-connectAttr "R_knee_ctrl_FK_rotateY.o" "StoneGiantRN.phl[313]";
-connectAttr "R_knee_ctrl_FK_scaleX.o" "StoneGiantRN.phl[314]";
-connectAttr "R_knee_ctrl_FK_scaleY.o" "StoneGiantRN.phl[315]";
-connectAttr "R_knee_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[316]";
-connectAttr "R_ankle_ctrl_FK_rotateY.o" "StoneGiantRN.phl[317]";
-connectAttr "R_ankle_ctrl_FK_rotateX.o" "StoneGiantRN.phl[318]";
-connectAttr "R_ankle_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[319]";
-connectAttr "R_ankle_ctrl_FK_scaleX.o" "StoneGiantRN.phl[320]";
-connectAttr "R_ankle_ctrl_FK_scaleY.o" "StoneGiantRN.phl[321]";
-connectAttr "R_ankle_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[322]";
-connectAttr "L_leg_IKFK_switch_LLegIKFKSwitch.o" "StoneGiantRN.phl[323]";
-connectAttr "R_leg_IKFK_switch_RLegIKFKSwitch.o" "StoneGiantRN.phl[324]";
-connectAttr "R_big_toe_ctrl_rotateY.o" "StoneGiantRN.phl[325]";
-connectAttr "R_big_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[326]";
-connectAttr "R_big_toe_ctrl_scaleX.o" "StoneGiantRN.phl[327]";
-connectAttr "R_big_toe_ctrl_scaleY.o" "StoneGiantRN.phl[328]";
-connectAttr "R_big_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[329]";
-connectAttr "R_big_toe_ctrl_visibility.o" "StoneGiantRN.phl[330]";
-connectAttr "R_first_toe_ctrl_rotateY.o" "StoneGiantRN.phl[331]";
-connectAttr "R_first_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[332]";
-connectAttr "R_first_toe_ctrl_scaleX.o" "StoneGiantRN.phl[333]";
-connectAttr "R_first_toe_ctrl_scaleY.o" "StoneGiantRN.phl[334]";
-connectAttr "R_first_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[335]";
-connectAttr "R_first_toe_ctrl_visibility.o" "StoneGiantRN.phl[336]";
-connectAttr "R_middle_toe_ctrl_rotateY.o" "StoneGiantRN.phl[337]";
-connectAttr "R_middle_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[338]";
-connectAttr "R_middle_toe_ctrl_scaleX.o" "StoneGiantRN.phl[339]";
-connectAttr "R_middle_toe_ctrl_scaleY.o" "StoneGiantRN.phl[340]";
-connectAttr "R_middle_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[341]";
-connectAttr "R_middle_toe_ctrl_visibility.o" "StoneGiantRN.phl[342]";
-connectAttr "R_other_toe_ctrl_rotateY.o" "StoneGiantRN.phl[343]";
-connectAttr "R_other_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[344]";
-connectAttr "R_other_toe_ctrl_scaleX.o" "StoneGiantRN.phl[345]";
-connectAttr "R_other_toe_ctrl_scaleY.o" "StoneGiantRN.phl[346]";
-connectAttr "R_other_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[347]";
-connectAttr "R_other_toe_ctrl_visibility.o" "StoneGiantRN.phl[348]";
-connectAttr "R_pinky_toe_ctrl_rotateY.o" "StoneGiantRN.phl[349]";
-connectAttr "R_pinky_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[350]";
-connectAttr "R_pinky_toe_ctrl_scaleX.o" "StoneGiantRN.phl[351]";
-connectAttr "R_pinky_toe_ctrl_scaleY.o" "StoneGiantRN.phl[352]";
-connectAttr "R_pinky_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[353]";
-connectAttr "R_pinky_toe_ctrl_visibility.o" "StoneGiantRN.phl[354]";
-connectAttr "L_big_toe_ctrl_rotateY.o" "StoneGiantRN.phl[355]";
-connectAttr "L_big_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[356]";
-connectAttr "L_big_toe_ctrl_scaleX.o" "StoneGiantRN.phl[357]";
-connectAttr "L_big_toe_ctrl_scaleY.o" "StoneGiantRN.phl[358]";
-connectAttr "L_big_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[359]";
-connectAttr "L_big_toe_ctrl_visibility.o" "StoneGiantRN.phl[360]";
-connectAttr "L_first_toe_ctrl_rotateY.o" "StoneGiantRN.phl[361]";
-connectAttr "L_first_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[362]";
-connectAttr "L_first_toe_ctrl_scaleX.o" "StoneGiantRN.phl[363]";
-connectAttr "L_first_toe_ctrl_scaleY.o" "StoneGiantRN.phl[364]";
-connectAttr "L_first_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[365]";
-connectAttr "L_first_toe_ctrl_visibility.o" "StoneGiantRN.phl[366]";
-connectAttr "L_middle_toe_ctrl_rotateY.o" "StoneGiantRN.phl[367]";
-connectAttr "L_middle_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[368]";
-connectAttr "L_middle_toe_ctrl_scaleX.o" "StoneGiantRN.phl[369]";
-connectAttr "L_middle_toe_ctrl_scaleY.o" "StoneGiantRN.phl[370]";
-connectAttr "L_middle_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[371]";
-connectAttr "L_middle_toe_ctrl_visibility.o" "StoneGiantRN.phl[372]";
-connectAttr "L_other_toe_ctrl_rotateY.o" "StoneGiantRN.phl[373]";
-connectAttr "L_other_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[374]";
-connectAttr "L_other_toe_ctrl_scaleX.o" "StoneGiantRN.phl[375]";
-connectAttr "L_other_toe_ctrl_scaleY.o" "StoneGiantRN.phl[376]";
-connectAttr "L_other_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[377]";
-connectAttr "L_other_toe_ctrl_visibility.o" "StoneGiantRN.phl[378]";
-connectAttr "L_pinky_toe_ctrl_rotateY.o" "StoneGiantRN.phl[379]";
-connectAttr "L_pinky_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[380]";
-connectAttr "L_pinky_toe_ctrl_scaleX.o" "StoneGiantRN.phl[381]";
-connectAttr "L_pinky_toe_ctrl_scaleY.o" "StoneGiantRN.phl[382]";
-connectAttr "L_pinky_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[383]";
-connectAttr "L_pinky_toe_ctrl_visibility.o" "StoneGiantRN.phl[384]";
-connectAttr "Transform_ctrl_scaleX1.o" "JackalopeRN.phl[1]";
-connectAttr "Transform_ctrl_scaleY1.o" "JackalopeRN.phl[2]";
-connectAttr "Transform_ctrl_scaleZ1.o" "JackalopeRN.phl[3]";
-connectAttr "Transform_ctrl_translateZ1.o" "JackalopeRN.phl[4]";
-connectAttr "Transform_ctrl_translateX1.o" "JackalopeRN.phl[5]";
-connectAttr "Transform_ctrl_translateY1.o" "JackalopeRN.phl[6]";
-connectAttr "Transform_ctrl_rotateY1.o" "JackalopeRN.phl[7]";
-connectAttr "Transform_ctrl_rotateX1.o" "JackalopeRN.phl[8]";
-connectAttr "Transform_ctrl_rotateZ1.o" "JackalopeRN.phl[9]";
-connectAttr "Transform_ctrl_visibility1.o" "JackalopeRN.phl[10]";
-connectAttr "Neck_ctrl_translateX2.o" "JackalopeRN.phl[11]";
-connectAttr "Neck_ctrl_translateY2.o" "JackalopeRN.phl[12]";
-connectAttr "Neck_ctrl_translateZ2.o" "JackalopeRN.phl[13]";
-connectAttr "Neck_ctrl_rotateX2.o" "JackalopeRN.phl[14]";
-connectAttr "Neck_ctrl_rotateY2.o" "JackalopeRN.phl[15]";
-connectAttr "Neck_ctrl_rotateZ2.o" "JackalopeRN.phl[16]";
-connectAttr "Neck_ctrl_scaleX2.o" "JackalopeRN.phl[17]";
-connectAttr "Neck_ctrl_scaleY2.o" "JackalopeRN.phl[18]";
-connectAttr "Neck_ctrl_scaleZ2.o" "JackalopeRN.phl[19]";
-connectAttr "Neck_ctrl_visibility2.o" "JackalopeRN.phl[20]";
-connectAttr "Mouth_ctrl_translateX1.o" "JackalopeRN.phl[21]";
-connectAttr "Mouth_ctrl_translateY1.o" "JackalopeRN.phl[22]";
-connectAttr "Mouth_ctrl_translateZ1.o" "JackalopeRN.phl[23]";
-connectAttr "Mouth_ctrl_rotateX1.o" "JackalopeRN.phl[24]";
-connectAttr "Mouth_ctrl_rotateY1.o" "JackalopeRN.phl[25]";
-connectAttr "Mouth_ctrl_rotateZ1.o" "JackalopeRN.phl[26]";
-connectAttr "Mouth_ctrl_scaleX1.o" "JackalopeRN.phl[27]";
-connectAttr "Mouth_ctrl_scaleY1.o" "JackalopeRN.phl[28]";
-connectAttr "Mouth_ctrl_scaleZ1.o" "JackalopeRN.phl[29]";
-connectAttr "Mouth_ctrl_visibility1.o" "JackalopeRN.phl[30]";
-connectAttr "L_elbow_ctrl_translateX.o" "JackalopeRN.phl[31]";
-connectAttr "L_elbow_ctrl_translateY.o" "JackalopeRN.phl[32]";
-connectAttr "L_elbow_ctrl_translateZ.o" "JackalopeRN.phl[33]";
-connectAttr "L_elbow_ctrl_rotateY.o" "JackalopeRN.phl[34]";
-connectAttr "L_elbow_ctrl_rotateX.o" "JackalopeRN.phl[35]";
-connectAttr "L_elbow_ctrl_rotateZ.o" "JackalopeRN.phl[36]";
-connectAttr "L_elbow_ctrl_scaleX.o" "JackalopeRN.phl[37]";
-connectAttr "L_elbow_ctrl_scaleY.o" "JackalopeRN.phl[38]";
-connectAttr "L_elbow_ctrl_scaleZ.o" "JackalopeRN.phl[39]";
-connectAttr "L_elbow_ctrl_visibility.o" "JackalopeRN.phl[40]";
-connectAttr "R_elbow_ctrl_translateX.o" "JackalopeRN.phl[41]";
-connectAttr "R_elbow_ctrl_translateY.o" "JackalopeRN.phl[42]";
-connectAttr "R_elbow_ctrl_translateZ.o" "JackalopeRN.phl[43]";
-connectAttr "R_elbow_ctrl_rotateY.o" "JackalopeRN.phl[44]";
-connectAttr "R_elbow_ctrl_rotateX.o" "JackalopeRN.phl[45]";
-connectAttr "R_elbow_ctrl_rotateZ.o" "JackalopeRN.phl[46]";
-connectAttr "R_elbow_ctrl_scaleX.o" "JackalopeRN.phl[47]";
-connectAttr "R_elbow_ctrl_scaleY.o" "JackalopeRN.phl[48]";
-connectAttr "R_elbow_ctrl_scaleZ.o" "JackalopeRN.phl[49]";
-connectAttr "R_elbow_ctrl_visibility.o" "JackalopeRN.phl[50]";
-connectAttr "Transform_ctrl_rotateX.o" "PheonixRN.phl[1]";
-connectAttr "Transform_ctrl_rotateY.o" "PheonixRN.phl[2]";
-connectAttr "Transform_ctrl_rotateZ.o" "PheonixRN.phl[3]";
-connectAttr "Transform_ctrl_translateZ.o" "PheonixRN.phl[4]";
-connectAttr "Transform_ctrl_translateX.o" "PheonixRN.phl[5]";
-connectAttr "Transform_ctrl_translateY.o" "PheonixRN.phl[6]";
-connectAttr "Transform_ctrl_scaleX.o" "PheonixRN.phl[7]";
-connectAttr "Transform_ctrl_scaleY.o" "PheonixRN.phl[8]";
-connectAttr "Transform_ctrl_scaleZ.o" "PheonixRN.phl[9]";
-connectAttr "Transform_ctrl_visibility.o" "PheonixRN.phl[10]";
-connectAttr "Body_ctrl_translateX.o" "PheonixRN.phl[11]";
-connectAttr "Body_ctrl_translateY.o" "PheonixRN.phl[12]";
-connectAttr "Body_ctrl_translateZ.o" "PheonixRN.phl[13]";
-connectAttr "Body_ctrl_rotateX.o" "PheonixRN.phl[14]";
-connectAttr "Body_ctrl_rotateY.o" "PheonixRN.phl[15]";
-connectAttr "Body_ctrl_rotateZ.o" "PheonixRN.phl[16]";
-connectAttr "Body_ctrl_scaleX.o" "PheonixRN.phl[17]";
-connectAttr "Body_ctrl_scaleY.o" "PheonixRN.phl[18]";
-connectAttr "Body_ctrl_scaleZ.o" "PheonixRN.phl[19]";
-connectAttr "Body_ctrl_visibility.o" "PheonixRN.phl[20]";
-connectAttr "Tail_ctrl_translateX.o" "PheonixRN.phl[21]";
-connectAttr "Tail_ctrl_translateY.o" "PheonixRN.phl[22]";
-connectAttr "Tail_ctrl_translateZ.o" "PheonixRN.phl[23]";
-connectAttr "Tail_ctrl_rotateX.o" "PheonixRN.phl[24]";
-connectAttr "Tail_ctrl_rotateY.o" "PheonixRN.phl[25]";
-connectAttr "Tail_ctrl_rotateZ.o" "PheonixRN.phl[26]";
-connectAttr "Tail_ctrl_scaleX.o" "PheonixRN.phl[27]";
-connectAttr "Tail_ctrl_scaleY.o" "PheonixRN.phl[28]";
-connectAttr "Tail_ctrl_scaleZ.o" "PheonixRN.phl[29]";
-connectAttr "Tail_ctrl_visibility.o" "PheonixRN.phl[30]";
-connectAttr "L_foot_ctrl_translateX.o" "PheonixRN.phl[31]";
-connectAttr "L_foot_ctrl_translateY.o" "PheonixRN.phl[32]";
-connectAttr "L_foot_ctrl_translateZ.o" "PheonixRN.phl[33]";
-connectAttr "L_foot_ctrl_rotateX.o" "PheonixRN.phl[34]";
-connectAttr "L_foot_ctrl_rotateY.o" "PheonixRN.phl[35]";
-connectAttr "L_foot_ctrl_rotateZ.o" "PheonixRN.phl[36]";
-connectAttr "L_foot_ctrl_scaleX.o" "PheonixRN.phl[37]";
-connectAttr "L_foot_ctrl_scaleY.o" "PheonixRN.phl[38]";
-connectAttr "L_foot_ctrl_scaleZ.o" "PheonixRN.phl[39]";
-connectAttr "L_foot_ctrl_visibility.o" "PheonixRN.phl[40]";
-connectAttr "L_shoulder_ctrl_translateX.o" "PheonixRN.phl[41]";
-connectAttr "L_shoulder_ctrl_translateY.o" "PheonixRN.phl[42]";
-connectAttr "L_shoulder_ctrl_translateZ.o" "PheonixRN.phl[43]";
-connectAttr "L_shoulder_ctrl_rotateX.o" "PheonixRN.phl[44]";
-connectAttr "L_shoulder_ctrl_rotateY.o" "PheonixRN.phl[45]";
-connectAttr "L_shoulder_ctrl_rotateZ.o" "PheonixRN.phl[46]";
-connectAttr "L_shoulder_ctrl_scaleX.o" "PheonixRN.phl[47]";
-connectAttr "L_shoulder_ctrl_scaleY.o" "PheonixRN.phl[48]";
-connectAttr "L_shoulder_ctrl_scaleZ.o" "PheonixRN.phl[49]";
-connectAttr "L_shoulder_ctrl_visibility.o" "PheonixRN.phl[50]";
-connectAttr "R_shoulder_ctrl_translateX.o" "PheonixRN.phl[51]";
-connectAttr "R_shoulder_ctrl_translateY.o" "PheonixRN.phl[52]";
-connectAttr "R_shoulder_ctrl_translateZ.o" "PheonixRN.phl[53]";
-connectAttr "R_shoulder_ctrl_rotateX.o" "PheonixRN.phl[54]";
-connectAttr "R_shoulder_ctrl_rotateY.o" "PheonixRN.phl[55]";
-connectAttr "R_shoulder_ctrl_rotateZ.o" "PheonixRN.phl[56]";
-connectAttr "R_shoulder_ctrl_scaleX.o" "PheonixRN.phl[57]";
-connectAttr "R_shoulder_ctrl_scaleY.o" "PheonixRN.phl[58]";
-connectAttr "R_shoulder_ctrl_scaleZ.o" "PheonixRN.phl[59]";
-connectAttr "R_shoulder_ctrl_visibility.o" "PheonixRN.phl[60]";
-connectAttr "Neck_ctrl_translateX.o" "PheonixRN.phl[61]";
-connectAttr "Neck_ctrl_translateY.o" "PheonixRN.phl[62]";
-connectAttr "Neck_ctrl_translateZ.o" "PheonixRN.phl[63]";
-connectAttr "Neck_ctrl_rotateX.o" "PheonixRN.phl[64]";
-connectAttr "Neck_ctrl_rotateY.o" "PheonixRN.phl[65]";
-connectAttr "Neck_ctrl_rotateZ.o" "PheonixRN.phl[66]";
-connectAttr "Neck_ctrl_scaleX.o" "PheonixRN.phl[67]";
-connectAttr "Neck_ctrl_scaleY.o" "PheonixRN.phl[68]";
-connectAttr "Neck_ctrl_scaleZ.o" "PheonixRN.phl[69]";
-connectAttr "Neck_ctrl_visibility.o" "PheonixRN.phl[70]";
-connectAttr "Mouth_ctrl_translateX.o" "PheonixRN.phl[71]";
-connectAttr "Mouth_ctrl_translateY.o" "PheonixRN.phl[72]";
-connectAttr "Mouth_ctrl_translateZ.o" "PheonixRN.phl[73]";
-connectAttr "Mouth_ctrl_rotateX.o" "PheonixRN.phl[74]";
-connectAttr "Mouth_ctrl_rotateY.o" "PheonixRN.phl[75]";
-connectAttr "Mouth_ctrl_rotateZ.o" "PheonixRN.phl[76]";
-connectAttr "Mouth_ctrl_scaleX.o" "PheonixRN.phl[77]";
-connectAttr "Mouth_ctrl_scaleY.o" "PheonixRN.phl[78]";
-connectAttr "Mouth_ctrl_scaleZ.o" "PheonixRN.phl[79]";
-connectAttr "Mouth_ctrl_visibility.o" "PheonixRN.phl[80]";
+connectAttr "ForestRuinsWorldRN.phl[2]" "objectSet.dsm" -na;
+connectAttr "StoneGiantRN.phl[1]" "objectSet1.dsm" -na;
+connectAttr "Transform_ctrl_scaleX2.o" "StoneGiantRN.phl[2]";
+connectAttr "Transform_ctrl_scaleY2.o" "StoneGiantRN.phl[3]";
+connectAttr "Transform_ctrl_scaleZ2.o" "StoneGiantRN.phl[4]";
+connectAttr "Transform_ctrl_translateX2.o" "StoneGiantRN.phl[5]";
+connectAttr "Transform_ctrl_translateZ2.o" "StoneGiantRN.phl[6]";
+connectAttr "Transform_ctrl_translateY2.o" "StoneGiantRN.phl[7]";
+connectAttr "Transform_ctrl_rotateY2.o" "StoneGiantRN.phl[8]";
+connectAttr "Transform_ctrl_rotateX2.o" "StoneGiantRN.phl[9]";
+connectAttr "Transform_ctrl_rotateZ2.o" "StoneGiantRN.phl[10]";
+connectAttr "Transform_ctrl_visibility2.o" "StoneGiantRN.phl[11]";
+connectAttr "COG_ctrl_translateX.o" "StoneGiantRN.phl[12]";
+connectAttr "COG_ctrl_translateY.o" "StoneGiantRN.phl[13]";
+connectAttr "COG_ctrl_translateZ.o" "StoneGiantRN.phl[14]";
+connectAttr "COG_ctrl_rotateX.o" "StoneGiantRN.phl[15]";
+connectAttr "COG_ctrl_rotateY.o" "StoneGiantRN.phl[16]";
+connectAttr "COG_ctrl_rotateZ.o" "StoneGiantRN.phl[17]";
+connectAttr "COG_ctrl_scaleX.o" "StoneGiantRN.phl[18]";
+connectAttr "COG_ctrl_scaleY.o" "StoneGiantRN.phl[19]";
+connectAttr "COG_ctrl_scaleZ.o" "StoneGiantRN.phl[20]";
+connectAttr "COG_ctrl_visibility.o" "StoneGiantRN.phl[21]";
+connectAttr "Spine_1_ctrl_translateX.o" "StoneGiantRN.phl[22]";
+connectAttr "Spine_1_ctrl_translateY.o" "StoneGiantRN.phl[23]";
+connectAttr "Spine_1_ctrl_translateZ.o" "StoneGiantRN.phl[24]";
+connectAttr "Spine_1_ctrl_rotateZ.o" "StoneGiantRN.phl[25]";
+connectAttr "Spine_1_ctrl_rotateX.o" "StoneGiantRN.phl[26]";
+connectAttr "Spine_1_ctrl_rotateY.o" "StoneGiantRN.phl[27]";
+connectAttr "Spine_1_ctrl_scaleX.o" "StoneGiantRN.phl[28]";
+connectAttr "Spine_1_ctrl_scaleY.o" "StoneGiantRN.phl[29]";
+connectAttr "Spine_1_ctrl_scaleZ.o" "StoneGiantRN.phl[30]";
+connectAttr "Spine_1_ctrl_visibility.o" "StoneGiantRN.phl[31]";
+connectAttr "Spine_2_ctrl_translateX.o" "StoneGiantRN.phl[32]";
+connectAttr "Spine_2_ctrl_translateY.o" "StoneGiantRN.phl[33]";
+connectAttr "Spine_2_ctrl_translateZ.o" "StoneGiantRN.phl[34]";
+connectAttr "Spine_2_ctrl_rotateX.o" "StoneGiantRN.phl[35]";
+connectAttr "Spine_2_ctrl_rotateY.o" "StoneGiantRN.phl[36]";
+connectAttr "Spine_2_ctrl_rotateZ.o" "StoneGiantRN.phl[37]";
+connectAttr "Spine_2_ctrl_scaleX.o" "StoneGiantRN.phl[38]";
+connectAttr "Spine_2_ctrl_scaleY.o" "StoneGiantRN.phl[39]";
+connectAttr "Spine_2_ctrl_scaleZ.o" "StoneGiantRN.phl[40]";
+connectAttr "Spine_2_ctrl_visibility.o" "StoneGiantRN.phl[41]";
+connectAttr "Neck_ctrl_translateX1.o" "StoneGiantRN.phl[42]";
+connectAttr "Neck_ctrl_translateY1.o" "StoneGiantRN.phl[43]";
+connectAttr "Neck_ctrl_translateZ1.o" "StoneGiantRN.phl[44]";
+connectAttr "Neck_ctrl_rotateX1.o" "StoneGiantRN.phl[45]";
+connectAttr "Neck_ctrl_rotateY1.o" "StoneGiantRN.phl[46]";
+connectAttr "Neck_ctrl_rotateZ1.o" "StoneGiantRN.phl[47]";
+connectAttr "Neck_ctrl_scaleX1.o" "StoneGiantRN.phl[48]";
+connectAttr "Neck_ctrl_scaleY1.o" "StoneGiantRN.phl[49]";
+connectAttr "Neck_ctrl_scaleZ1.o" "StoneGiantRN.phl[50]";
+connectAttr "Neck_ctrl_visibility1.o" "StoneGiantRN.phl[51]";
+connectAttr "L_eyebrow_ctrl_translateX.o" "StoneGiantRN.phl[52]";
+connectAttr "L_eyebrow_ctrl_translateY.o" "StoneGiantRN.phl[53]";
+connectAttr "L_eyebrow_ctrl_translateZ.o" "StoneGiantRN.phl[54]";
+connectAttr "L_eyebrow_ctrl_rotateX.o" "StoneGiantRN.phl[55]";
+connectAttr "L_eyebrow_ctrl_rotateY.o" "StoneGiantRN.phl[56]";
+connectAttr "L_eyebrow_ctrl_rotateZ.o" "StoneGiantRN.phl[57]";
+connectAttr "L_eyebrow_ctrl_scaleX.o" "StoneGiantRN.phl[58]";
+connectAttr "L_eyebrow_ctrl_scaleY.o" "StoneGiantRN.phl[59]";
+connectAttr "L_eyebrow_ctrl_scaleZ.o" "StoneGiantRN.phl[60]";
+connectAttr "L_eyebrow_ctrl_visibility.o" "StoneGiantRN.phl[61]";
+connectAttr "R_eyebrow_ctrl_translateX.o" "StoneGiantRN.phl[62]";
+connectAttr "R_eyebrow_ctrl_translateY.o" "StoneGiantRN.phl[63]";
+connectAttr "R_eyebrow_ctrl_translateZ.o" "StoneGiantRN.phl[64]";
+connectAttr "R_eyebrow_ctrl_rotateX.o" "StoneGiantRN.phl[65]";
+connectAttr "R_eyebrow_ctrl_rotateY.o" "StoneGiantRN.phl[66]";
+connectAttr "R_eyebrow_ctrl_rotateZ.o" "StoneGiantRN.phl[67]";
+connectAttr "R_eyebrow_ctrl_scaleX.o" "StoneGiantRN.phl[68]";
+connectAttr "R_eyebrow_ctrl_scaleY.o" "StoneGiantRN.phl[69]";
+connectAttr "R_eyebrow_ctrl_scaleZ.o" "StoneGiantRN.phl[70]";
+connectAttr "R_eyebrow_ctrl_visibility.o" "StoneGiantRN.phl[71]";
+connectAttr "L_ear_ctrl_translateX.o" "StoneGiantRN.phl[72]";
+connectAttr "L_ear_ctrl_translateY.o" "StoneGiantRN.phl[73]";
+connectAttr "L_ear_ctrl_translateZ.o" "StoneGiantRN.phl[74]";
+connectAttr "L_ear_ctrl_rotateY.o" "StoneGiantRN.phl[75]";
+connectAttr "L_ear_ctrl_rotateX.o" "StoneGiantRN.phl[76]";
+connectAttr "L_ear_ctrl_rotateZ.o" "StoneGiantRN.phl[77]";
+connectAttr "L_ear_ctrl_scaleX.o" "StoneGiantRN.phl[78]";
+connectAttr "L_ear_ctrl_scaleY.o" "StoneGiantRN.phl[79]";
+connectAttr "L_ear_ctrl_scaleZ.o" "StoneGiantRN.phl[80]";
+connectAttr "L_ear_ctrl_visibility.o" "StoneGiantRN.phl[81]";
+connectAttr "R_ear_ctrl_translateX.o" "StoneGiantRN.phl[82]";
+connectAttr "R_ear_ctrl_translateY.o" "StoneGiantRN.phl[83]";
+connectAttr "R_ear_ctrl_translateZ.o" "StoneGiantRN.phl[84]";
+connectAttr "R_ear_ctrl_rotateY.o" "StoneGiantRN.phl[85]";
+connectAttr "R_ear_ctrl_rotateX.o" "StoneGiantRN.phl[86]";
+connectAttr "R_ear_ctrl_rotateZ.o" "StoneGiantRN.phl[87]";
+connectAttr "R_ear_ctrl_scaleX.o" "StoneGiantRN.phl[88]";
+connectAttr "R_ear_ctrl_scaleY.o" "StoneGiantRN.phl[89]";
+connectAttr "R_ear_ctrl_scaleZ.o" "StoneGiantRN.phl[90]";
+connectAttr "R_ear_ctrl_visibility.o" "StoneGiantRN.phl[91]";
+connectAttr "Nose_ctrl_translateX.o" "StoneGiantRN.phl[92]";
+connectAttr "Nose_ctrl_translateY.o" "StoneGiantRN.phl[93]";
+connectAttr "Nose_ctrl_translateZ.o" "StoneGiantRN.phl[94]";
+connectAttr "Nose_ctrl_rotateZ.o" "StoneGiantRN.phl[95]";
+connectAttr "Nose_ctrl_rotateX.o" "StoneGiantRN.phl[96]";
+connectAttr "Nose_ctrl_rotateY.o" "StoneGiantRN.phl[97]";
+connectAttr "Nose_ctrl_scaleX.o" "StoneGiantRN.phl[98]";
+connectAttr "Nose_ctrl_scaleY.o" "StoneGiantRN.phl[99]";
+connectAttr "Nose_ctrl_scaleZ.o" "StoneGiantRN.phl[100]";
+connectAttr "Nose_ctrl_visibility.o" "StoneGiantRN.phl[101]";
+connectAttr "L_shoulder_ctrl_FK_translateX.o" "StoneGiantRN.phl[102]";
+connectAttr "L_shoulder_ctrl_FK_translateY.o" "StoneGiantRN.phl[103]";
+connectAttr "L_shoulder_ctrl_FK_translateZ.o" "StoneGiantRN.phl[104]";
+connectAttr "L_shoulder_ctrl_FK_rotateX.o" "StoneGiantRN.phl[105]";
+connectAttr "L_shoulder_ctrl_FK_rotateY.o" "StoneGiantRN.phl[106]";
+connectAttr "L_shoulder_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[107]";
+connectAttr "L_shoulder_ctrl_FK_scaleX.o" "StoneGiantRN.phl[108]";
+connectAttr "L_shoulder_ctrl_FK_scaleY.o" "StoneGiantRN.phl[109]";
+connectAttr "L_shoulder_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[110]";
+connectAttr "L_elbow_ctrl_FK_rotateY.o" "StoneGiantRN.phl[111]";
+connectAttr "L_elbow_ctrl_FK_scaleX.o" "StoneGiantRN.phl[112]";
+connectAttr "L_elbow_ctrl_FK_scaleY.o" "StoneGiantRN.phl[113]";
+connectAttr "L_elbow_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[114]";
+connectAttr "L_wrist_ctrl_FK_translateX.o" "StoneGiantRN.phl[115]";
+connectAttr "L_wrist_ctrl_FK_translateY.o" "StoneGiantRN.phl[116]";
+connectAttr "L_wrist_ctrl_FK_translateZ.o" "StoneGiantRN.phl[117]";
+connectAttr "L_wrist_ctrl_FK_rotateX.o" "StoneGiantRN.phl[118]";
+connectAttr "L_wrist_ctrl_FK_rotateY.o" "StoneGiantRN.phl[119]";
+connectAttr "L_wrist_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[120]";
+connectAttr "L_wrist_ctrl_FK_scaleX.o" "StoneGiantRN.phl[121]";
+connectAttr "L_wrist_ctrl_FK_scaleY.o" "StoneGiantRN.phl[122]";
+connectAttr "L_wrist_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[123]";
+connectAttr "R_shoulder_ctrl_FK_translateX.o" "StoneGiantRN.phl[124]";
+connectAttr "R_shoulder_ctrl_FK_translateY.o" "StoneGiantRN.phl[125]";
+connectAttr "R_shoulder_ctrl_FK_translateZ.o" "StoneGiantRN.phl[126]";
+connectAttr "R_shoulder_ctrl_FK_rotateX.o" "StoneGiantRN.phl[127]";
+connectAttr "R_shoulder_ctrl_FK_rotateY.o" "StoneGiantRN.phl[128]";
+connectAttr "R_shoulder_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[129]";
+connectAttr "R_shoulder_ctrl_FK_scaleX.o" "StoneGiantRN.phl[130]";
+connectAttr "R_shoulder_ctrl_FK_scaleY.o" "StoneGiantRN.phl[131]";
+connectAttr "R_shoulder_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[132]";
+connectAttr "R_elbow_ctrl_FK_rotateY.o" "StoneGiantRN.phl[133]";
+connectAttr "R_elbow_ctrl_FK_scaleX.o" "StoneGiantRN.phl[134]";
+connectAttr "R_elbow_ctrl_FK_scaleY.o" "StoneGiantRN.phl[135]";
+connectAttr "R_elbow_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[136]";
+connectAttr "R_wrist_ctrl_FK_translateX.o" "StoneGiantRN.phl[137]";
+connectAttr "R_wrist_ctrl_FK_translateY.o" "StoneGiantRN.phl[138]";
+connectAttr "R_wrist_ctrl_FK_translateZ.o" "StoneGiantRN.phl[139]";
+connectAttr "R_wrist_ctrl_FK_rotateY.o" "StoneGiantRN.phl[140]";
+connectAttr "R_wrist_ctrl_FK_rotateX.o" "StoneGiantRN.phl[141]";
+connectAttr "R_wrist_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[142]";
+connectAttr "R_wrist_ctrl_FK_scaleX.o" "StoneGiantRN.phl[143]";
+connectAttr "R_wrist_ctrl_FK_scaleY.o" "StoneGiantRN.phl[144]";
+connectAttr "R_wrist_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[145]";
+connectAttr "L_arm_IKFK_switch_LArmIKFKswitch.o" "StoneGiantRN.phl[146]";
+connectAttr "R_arm_IKFK_switch_RArmIKFKSwitch.o" "StoneGiantRN.phl[147]";
+connectAttr "L_pinky_1_ctrl_rotateZ.o" "StoneGiantRN.phl[148]";
+connectAttr "L_pinky_1_ctrl_rotateY.o" "StoneGiantRN.phl[149]";
+connectAttr "L_pinky_1_ctrl_scaleX.o" "StoneGiantRN.phl[150]";
+connectAttr "L_pinky_1_ctrl_scaleY.o" "StoneGiantRN.phl[151]";
+connectAttr "L_pinky_1_ctrl_scaleZ.o" "StoneGiantRN.phl[152]";
+connectAttr "L_pinky_1_ctrl_visibility.o" "StoneGiantRN.phl[153]";
+connectAttr "L_pinky_2_ctrl_rotateY.o" "StoneGiantRN.phl[154]";
+connectAttr "L_pinky_2_ctrl_scaleX.o" "StoneGiantRN.phl[155]";
+connectAttr "L_pinky_2_ctrl_scaleY.o" "StoneGiantRN.phl[156]";
+connectAttr "L_pinky_2_ctrl_scaleZ.o" "StoneGiantRN.phl[157]";
+connectAttr "L_pinky_2_ctrl_visibility.o" "StoneGiantRN.phl[158]";
+connectAttr "L_ring_1_ctrl_rotateZ.o" "StoneGiantRN.phl[159]";
+connectAttr "L_ring_1_ctrl_rotateY.o" "StoneGiantRN.phl[160]";
+connectAttr "L_ring_1_ctrl_scaleX.o" "StoneGiantRN.phl[161]";
+connectAttr "L_ring_1_ctrl_scaleY.o" "StoneGiantRN.phl[162]";
+connectAttr "L_ring_1_ctrl_scaleZ.o" "StoneGiantRN.phl[163]";
+connectAttr "L_ring_1_ctrl_visibility.o" "StoneGiantRN.phl[164]";
+connectAttr "L_ring_2_ctrl_rotateY.o" "StoneGiantRN.phl[165]";
+connectAttr "L_ring_2_ctrl_scaleX.o" "StoneGiantRN.phl[166]";
+connectAttr "L_ring_2_ctrl_scaleY.o" "StoneGiantRN.phl[167]";
+connectAttr "L_ring_2_ctrl_scaleZ.o" "StoneGiantRN.phl[168]";
+connectAttr "L_ring_2_ctrl_visibility.o" "StoneGiantRN.phl[169]";
+connectAttr "L_middle_1_ctrl_rotateZ.o" "StoneGiantRN.phl[170]";
+connectAttr "L_middle_1_ctrl_rotateY.o" "StoneGiantRN.phl[171]";
+connectAttr "L_middle_1_ctrl_scaleX.o" "StoneGiantRN.phl[172]";
+connectAttr "L_middle_1_ctrl_scaleY.o" "StoneGiantRN.phl[173]";
+connectAttr "L_middle_1_ctrl_scaleZ.o" "StoneGiantRN.phl[174]";
+connectAttr "L_middle_1_ctrl_visibility.o" "StoneGiantRN.phl[175]";
+connectAttr "L_middle_2_ctrl_rotateY.o" "StoneGiantRN.phl[176]";
+connectAttr "L_middle_2_ctrl_scaleX.o" "StoneGiantRN.phl[177]";
+connectAttr "L_middle_2_ctrl_scaleY.o" "StoneGiantRN.phl[178]";
+connectAttr "L_middle_2_ctrl_scaleZ.o" "StoneGiantRN.phl[179]";
+connectAttr "L_middle_2_ctrl_visibility.o" "StoneGiantRN.phl[180]";
+connectAttr "L_pointer_1_ctrl_rotateZ.o" "StoneGiantRN.phl[181]";
+connectAttr "L_pointer_1_ctrl_rotateY.o" "StoneGiantRN.phl[182]";
+connectAttr "L_pointer_1_ctrl_scaleX.o" "StoneGiantRN.phl[183]";
+connectAttr "L_pointer_1_ctrl_scaleY.o" "StoneGiantRN.phl[184]";
+connectAttr "L_pointer_1_ctrl_scaleZ.o" "StoneGiantRN.phl[185]";
+connectAttr "L_pointer_1_ctrl_visibility.o" "StoneGiantRN.phl[186]";
+connectAttr "L_pointer_2_ctrl_rotateY.o" "StoneGiantRN.phl[187]";
+connectAttr "L_pointer_2_ctrl_scaleX.o" "StoneGiantRN.phl[188]";
+connectAttr "L_pointer_2_ctrl_scaleY.o" "StoneGiantRN.phl[189]";
+connectAttr "L_pointer_2_ctrl_scaleZ.o" "StoneGiantRN.phl[190]";
+connectAttr "L_pointer_2_ctrl_visibility.o" "StoneGiantRN.phl[191]";
+connectAttr "L_thumb_1_ctrl_rotateZ.o" "StoneGiantRN.phl[192]";
+connectAttr "L_thumb_1_ctrl_rotateY.o" "StoneGiantRN.phl[193]";
+connectAttr "L_thumb_1_ctrl_scaleX.o" "StoneGiantRN.phl[194]";
+connectAttr "L_thumb_1_ctrl_scaleY.o" "StoneGiantRN.phl[195]";
+connectAttr "L_thumb_1_ctrl_scaleZ.o" "StoneGiantRN.phl[196]";
+connectAttr "L_thumb_1_ctrl_visibility.o" "StoneGiantRN.phl[197]";
+connectAttr "L_thumb_2_ctrl_rotateY.o" "StoneGiantRN.phl[198]";
+connectAttr "L_thumb_2_ctrl_scaleX.o" "StoneGiantRN.phl[199]";
+connectAttr "L_thumb_2_ctrl_scaleY.o" "StoneGiantRN.phl[200]";
+connectAttr "L_thumb_2_ctrl_scaleZ.o" "StoneGiantRN.phl[201]";
+connectAttr "L_thumb_2_ctrl_visibility.o" "StoneGiantRN.phl[202]";
+connectAttr "R_thumb_1_ctrl_rotateY.o" "StoneGiantRN.phl[203]";
+connectAttr "R_thumb_1_ctrl_rotateZ.o" "StoneGiantRN.phl[204]";
+connectAttr "R_thumb_1_ctrl_scaleX.o" "StoneGiantRN.phl[205]";
+connectAttr "R_thumb_1_ctrl_scaleY.o" "StoneGiantRN.phl[206]";
+connectAttr "R_thumb_1_ctrl_scaleZ.o" "StoneGiantRN.phl[207]";
+connectAttr "R_thumb_1_ctrl_visibility.o" "StoneGiantRN.phl[208]";
+connectAttr "R_thumb_2_ctrl_rotateY.o" "StoneGiantRN.phl[209]";
+connectAttr "R_thumb_2_ctrl_scaleX.o" "StoneGiantRN.phl[210]";
+connectAttr "R_thumb_2_ctrl_scaleY.o" "StoneGiantRN.phl[211]";
+connectAttr "R_thumb_2_ctrl_scaleZ.o" "StoneGiantRN.phl[212]";
+connectAttr "R_thumb_2_ctrl_visibility.o" "StoneGiantRN.phl[213]";
+connectAttr "R_pointer_1_ctrl_rotateY.o" "StoneGiantRN.phl[214]";
+connectAttr "R_pointer_1_ctrl_rotateZ.o" "StoneGiantRN.phl[215]";
+connectAttr "R_pointer_1_ctrl_scaleX.o" "StoneGiantRN.phl[216]";
+connectAttr "R_pointer_1_ctrl_scaleY.o" "StoneGiantRN.phl[217]";
+connectAttr "R_pointer_1_ctrl_scaleZ.o" "StoneGiantRN.phl[218]";
+connectAttr "R_pointer_1_ctrl_visibility.o" "StoneGiantRN.phl[219]";
+connectAttr "R_pointer_2_ctrl_rotateY.o" "StoneGiantRN.phl[220]";
+connectAttr "R_pointer_2_ctrl_scaleX.o" "StoneGiantRN.phl[221]";
+connectAttr "R_pointer_2_ctrl_scaleY.o" "StoneGiantRN.phl[222]";
+connectAttr "R_pointer_2_ctrl_scaleZ.o" "StoneGiantRN.phl[223]";
+connectAttr "R_pointer_2_ctrl_visibility.o" "StoneGiantRN.phl[224]";
+connectAttr "R_middle_1_ctrl_rotateY.o" "StoneGiantRN.phl[225]";
+connectAttr "R_middle_1_ctrl_rotateZ.o" "StoneGiantRN.phl[226]";
+connectAttr "R_middle_1_ctrl_scaleX.o" "StoneGiantRN.phl[227]";
+connectAttr "R_middle_1_ctrl_scaleY.o" "StoneGiantRN.phl[228]";
+connectAttr "R_middle_1_ctrl_scaleZ.o" "StoneGiantRN.phl[229]";
+connectAttr "R_middle_1_ctrl_visibility.o" "StoneGiantRN.phl[230]";
+connectAttr "R_middle_2_ctrl_rotateY.o" "StoneGiantRN.phl[231]";
+connectAttr "R_middle_2_ctrl_scaleX.o" "StoneGiantRN.phl[232]";
+connectAttr "R_middle_2_ctrl_scaleY.o" "StoneGiantRN.phl[233]";
+connectAttr "R_middle_2_ctrl_scaleZ.o" "StoneGiantRN.phl[234]";
+connectAttr "R_middle_2_ctrl_visibility.o" "StoneGiantRN.phl[235]";
+connectAttr "R_ring_1_ctrl_rotateY.o" "StoneGiantRN.phl[236]";
+connectAttr "R_ring_1_ctrl_rotateZ.o" "StoneGiantRN.phl[237]";
+connectAttr "R_ring_1_ctrl_scaleX.o" "StoneGiantRN.phl[238]";
+connectAttr "R_ring_1_ctrl_scaleY.o" "StoneGiantRN.phl[239]";
+connectAttr "R_ring_1_ctrl_scaleZ.o" "StoneGiantRN.phl[240]";
+connectAttr "R_ring_1_ctrl_visibility.o" "StoneGiantRN.phl[241]";
+connectAttr "R_ring_2_ctrl_rotateY.o" "StoneGiantRN.phl[242]";
+connectAttr "R_ring_2_ctrl_scaleX.o" "StoneGiantRN.phl[243]";
+connectAttr "R_ring_2_ctrl_scaleY.o" "StoneGiantRN.phl[244]";
+connectAttr "R_ring_2_ctrl_scaleZ.o" "StoneGiantRN.phl[245]";
+connectAttr "R_ring_2_ctrl_visibility.o" "StoneGiantRN.phl[246]";
+connectAttr "R_pinky_1_ctrl_rotateY.o" "StoneGiantRN.phl[247]";
+connectAttr "R_pinky_1_ctrl_rotateZ.o" "StoneGiantRN.phl[248]";
+connectAttr "R_pinky_1_ctrl_scaleX.o" "StoneGiantRN.phl[249]";
+connectAttr "R_pinky_1_ctrl_scaleY.o" "StoneGiantRN.phl[250]";
+connectAttr "R_pinky_1_ctrl_scaleZ.o" "StoneGiantRN.phl[251]";
+connectAttr "R_pinky_1_ctrl_visibility.o" "StoneGiantRN.phl[252]";
+connectAttr "R_pinky_2_ctrl_rotateY.o" "StoneGiantRN.phl[253]";
+connectAttr "R_pinky_2_ctrl_scaleX.o" "StoneGiantRN.phl[254]";
+connectAttr "R_pinky_2_ctrl_scaleY.o" "StoneGiantRN.phl[255]";
+connectAttr "R_pinky_2_ctrl_scaleZ.o" "StoneGiantRN.phl[256]";
+connectAttr "R_pinky_2_ctrl_visibility.o" "StoneGiantRN.phl[257]";
+connectAttr "pairBlend1.otx" "StoneGiantRN.phl[258]";
+connectAttr "pairBlend1.oty" "StoneGiantRN.phl[259]";
+connectAttr "pairBlend1.otz" "StoneGiantRN.phl[260]";
+connectAttr "pairBlend1.orx" "StoneGiantRN.phl[261]";
+connectAttr "pairBlend1.ory" "StoneGiantRN.phl[262]";
+connectAttr "pairBlend1.orz" "StoneGiantRN.phl[263]";
+connectAttr "StoneGiantRN.phl[264]" "pairBlend1.w";
+connectAttr "Plant_ctrl_blendParent1.o" "StoneGiantRN.phl[265]";
+connectAttr "Plant_ctrl_visibility.o" "StoneGiantRN.phl[266]";
+connectAttr "Plant_ctrl_scaleX.o" "StoneGiantRN.phl[267]";
+connectAttr "Plant_ctrl_scaleY.o" "StoneGiantRN.phl[268]";
+connectAttr "Plant_ctrl_scaleZ.o" "StoneGiantRN.phl[269]";
+connectAttr "StoneGiantRN.phl[270]" "pairBlend1.itx2";
+connectAttr "StoneGiantRN.phl[271]" "pairBlend1.ity2";
+connectAttr "StoneGiantRN.phl[272]" "pairBlend1.itz2";
+connectAttr "StoneGiantRN.phl[273]" "pairBlend1.irx2";
+connectAttr "StoneGiantRN.phl[274]" "pairBlend1.iry2";
+connectAttr "StoneGiantRN.phl[275]" "pairBlend1.irz2";
+connectAttr "Hip_1_ctrl_translateX.o" "StoneGiantRN.phl[276]";
+connectAttr "Hip_1_ctrl_translateY.o" "StoneGiantRN.phl[277]";
+connectAttr "Hip_1_ctrl_translateZ.o" "StoneGiantRN.phl[278]";
+connectAttr "Hip_1_ctrl_rotateX.o" "StoneGiantRN.phl[279]";
+connectAttr "Hip_1_ctrl_rotateY.o" "StoneGiantRN.phl[280]";
+connectAttr "Hip_1_ctrl_rotateZ.o" "StoneGiantRN.phl[281]";
+connectAttr "Hip_1_ctrl_scaleX.o" "StoneGiantRN.phl[282]";
+connectAttr "Hip_1_ctrl_scaleY.o" "StoneGiantRN.phl[283]";
+connectAttr "Hip_1_ctrl_scaleZ.o" "StoneGiantRN.phl[284]";
+connectAttr "Hip_1_ctrl_visibility.o" "StoneGiantRN.phl[285]";
+connectAttr "L_hip_2_ctrl_FK_translateX.o" "StoneGiantRN.phl[286]";
+connectAttr "L_hip_2_ctrl_FK_translateY.o" "StoneGiantRN.phl[287]";
+connectAttr "L_hip_2_ctrl_FK_translateZ.o" "StoneGiantRN.phl[288]";
+connectAttr "L_hip_2_ctrl_FK_rotateY.o" "StoneGiantRN.phl[289]";
+connectAttr "L_hip_2_ctrl_FK_rotateX.o" "StoneGiantRN.phl[290]";
+connectAttr "L_hip_2_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[291]";
+connectAttr "L_hip_2_ctrl_FK_scaleX.o" "StoneGiantRN.phl[292]";
+connectAttr "L_hip_2_ctrl_FK_scaleY.o" "StoneGiantRN.phl[293]";
+connectAttr "L_hip_2_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[294]";
+connectAttr "L_knee_ctrl_FK_rotateY.o" "StoneGiantRN.phl[295]";
+connectAttr "L_knee_ctrl_FK_scaleX.o" "StoneGiantRN.phl[296]";
+connectAttr "L_knee_ctrl_FK_scaleY.o" "StoneGiantRN.phl[297]";
+connectAttr "L_knee_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[298]";
+connectAttr "L_ankle_ctrl_FK_rotateX.o" "StoneGiantRN.phl[299]";
+connectAttr "L_ankle_ctrl_FK_rotateY.o" "StoneGiantRN.phl[300]";
+connectAttr "L_ankle_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[301]";
+connectAttr "L_ankle_ctrl_FK_scaleX.o" "StoneGiantRN.phl[302]";
+connectAttr "L_ankle_ctrl_FK_scaleY.o" "StoneGiantRN.phl[303]";
+connectAttr "L_ankle_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[304]";
+connectAttr "R_hip_2_ctrl_FK_translateX.o" "StoneGiantRN.phl[305]";
+connectAttr "R_hip_2_ctrl_FK_translateY.o" "StoneGiantRN.phl[306]";
+connectAttr "R_hip_2_ctrl_FK_translateZ.o" "StoneGiantRN.phl[307]";
+connectAttr "R_hip_2_ctrl_FK_rotateY.o" "StoneGiantRN.phl[308]";
+connectAttr "R_hip_2_ctrl_FK_rotateX.o" "StoneGiantRN.phl[309]";
+connectAttr "R_hip_2_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[310]";
+connectAttr "R_hip_2_ctrl_FK_scaleX.o" "StoneGiantRN.phl[311]";
+connectAttr "R_hip_2_ctrl_FK_scaleY.o" "StoneGiantRN.phl[312]";
+connectAttr "R_hip_2_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[313]";
+connectAttr "R_knee_ctrl_FK_rotateY.o" "StoneGiantRN.phl[314]";
+connectAttr "R_knee_ctrl_FK_scaleX.o" "StoneGiantRN.phl[315]";
+connectAttr "R_knee_ctrl_FK_scaleY.o" "StoneGiantRN.phl[316]";
+connectAttr "R_knee_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[317]";
+connectAttr "R_ankle_ctrl_FK_rotateY.o" "StoneGiantRN.phl[318]";
+connectAttr "R_ankle_ctrl_FK_rotateX.o" "StoneGiantRN.phl[319]";
+connectAttr "R_ankle_ctrl_FK_rotateZ.o" "StoneGiantRN.phl[320]";
+connectAttr "R_ankle_ctrl_FK_scaleX.o" "StoneGiantRN.phl[321]";
+connectAttr "R_ankle_ctrl_FK_scaleY.o" "StoneGiantRN.phl[322]";
+connectAttr "R_ankle_ctrl_FK_scaleZ.o" "StoneGiantRN.phl[323]";
+connectAttr "L_leg_IKFK_switch_LLegIKFKSwitch.o" "StoneGiantRN.phl[324]";
+connectAttr "R_leg_IKFK_switch_RLegIKFKSwitch.o" "StoneGiantRN.phl[325]";
+connectAttr "R_big_toe_ctrl_rotateY.o" "StoneGiantRN.phl[326]";
+connectAttr "R_big_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[327]";
+connectAttr "R_big_toe_ctrl_scaleX.o" "StoneGiantRN.phl[328]";
+connectAttr "R_big_toe_ctrl_scaleY.o" "StoneGiantRN.phl[329]";
+connectAttr "R_big_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[330]";
+connectAttr "R_big_toe_ctrl_visibility.o" "StoneGiantRN.phl[331]";
+connectAttr "R_first_toe_ctrl_rotateY.o" "StoneGiantRN.phl[332]";
+connectAttr "R_first_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[333]";
+connectAttr "R_first_toe_ctrl_scaleX.o" "StoneGiantRN.phl[334]";
+connectAttr "R_first_toe_ctrl_scaleY.o" "StoneGiantRN.phl[335]";
+connectAttr "R_first_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[336]";
+connectAttr "R_first_toe_ctrl_visibility.o" "StoneGiantRN.phl[337]";
+connectAttr "R_middle_toe_ctrl_rotateY.o" "StoneGiantRN.phl[338]";
+connectAttr "R_middle_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[339]";
+connectAttr "R_middle_toe_ctrl_scaleX.o" "StoneGiantRN.phl[340]";
+connectAttr "R_middle_toe_ctrl_scaleY.o" "StoneGiantRN.phl[341]";
+connectAttr "R_middle_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[342]";
+connectAttr "R_middle_toe_ctrl_visibility.o" "StoneGiantRN.phl[343]";
+connectAttr "R_other_toe_ctrl_rotateY.o" "StoneGiantRN.phl[344]";
+connectAttr "R_other_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[345]";
+connectAttr "R_other_toe_ctrl_scaleX.o" "StoneGiantRN.phl[346]";
+connectAttr "R_other_toe_ctrl_scaleY.o" "StoneGiantRN.phl[347]";
+connectAttr "R_other_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[348]";
+connectAttr "R_other_toe_ctrl_visibility.o" "StoneGiantRN.phl[349]";
+connectAttr "R_pinky_toe_ctrl_rotateY.o" "StoneGiantRN.phl[350]";
+connectAttr "R_pinky_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[351]";
+connectAttr "R_pinky_toe_ctrl_scaleX.o" "StoneGiantRN.phl[352]";
+connectAttr "R_pinky_toe_ctrl_scaleY.o" "StoneGiantRN.phl[353]";
+connectAttr "R_pinky_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[354]";
+connectAttr "R_pinky_toe_ctrl_visibility.o" "StoneGiantRN.phl[355]";
+connectAttr "L_big_toe_ctrl_rotateY.o" "StoneGiantRN.phl[356]";
+connectAttr "L_big_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[357]";
+connectAttr "L_big_toe_ctrl_scaleX.o" "StoneGiantRN.phl[358]";
+connectAttr "L_big_toe_ctrl_scaleY.o" "StoneGiantRN.phl[359]";
+connectAttr "L_big_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[360]";
+connectAttr "L_big_toe_ctrl_visibility.o" "StoneGiantRN.phl[361]";
+connectAttr "L_first_toe_ctrl_rotateY.o" "StoneGiantRN.phl[362]";
+connectAttr "L_first_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[363]";
+connectAttr "L_first_toe_ctrl_scaleX.o" "StoneGiantRN.phl[364]";
+connectAttr "L_first_toe_ctrl_scaleY.o" "StoneGiantRN.phl[365]";
+connectAttr "L_first_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[366]";
+connectAttr "L_first_toe_ctrl_visibility.o" "StoneGiantRN.phl[367]";
+connectAttr "L_middle_toe_ctrl_rotateY.o" "StoneGiantRN.phl[368]";
+connectAttr "L_middle_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[369]";
+connectAttr "L_middle_toe_ctrl_scaleX.o" "StoneGiantRN.phl[370]";
+connectAttr "L_middle_toe_ctrl_scaleY.o" "StoneGiantRN.phl[371]";
+connectAttr "L_middle_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[372]";
+connectAttr "L_middle_toe_ctrl_visibility.o" "StoneGiantRN.phl[373]";
+connectAttr "L_other_toe_ctrl_rotateY.o" "StoneGiantRN.phl[374]";
+connectAttr "L_other_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[375]";
+connectAttr "L_other_toe_ctrl_scaleX.o" "StoneGiantRN.phl[376]";
+connectAttr "L_other_toe_ctrl_scaleY.o" "StoneGiantRN.phl[377]";
+connectAttr "L_other_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[378]";
+connectAttr "L_other_toe_ctrl_visibility.o" "StoneGiantRN.phl[379]";
+connectAttr "L_pinky_toe_ctrl_rotateY.o" "StoneGiantRN.phl[380]";
+connectAttr "L_pinky_toe_ctrl_rotateZ.o" "StoneGiantRN.phl[381]";
+connectAttr "L_pinky_toe_ctrl_scaleX.o" "StoneGiantRN.phl[382]";
+connectAttr "L_pinky_toe_ctrl_scaleY.o" "StoneGiantRN.phl[383]";
+connectAttr "L_pinky_toe_ctrl_scaleZ.o" "StoneGiantRN.phl[384]";
+connectAttr "L_pinky_toe_ctrl_visibility.o" "StoneGiantRN.phl[385]";
+connectAttr "JackalopeRN.phl[1]" "objectSet1.dsm" -na;
+connectAttr "Transform_ctrl_scaleX1.o" "JackalopeRN.phl[2]";
+connectAttr "Transform_ctrl_scaleY1.o" "JackalopeRN.phl[3]";
+connectAttr "Transform_ctrl_scaleZ1.o" "JackalopeRN.phl[4]";
+connectAttr "Transform_ctrl_translateZ1.o" "JackalopeRN.phl[5]";
+connectAttr "Transform_ctrl_translateX1.o" "JackalopeRN.phl[6]";
+connectAttr "Transform_ctrl_translateY1.o" "JackalopeRN.phl[7]";
+connectAttr "Transform_ctrl_rotateY1.o" "JackalopeRN.phl[8]";
+connectAttr "Transform_ctrl_rotateX1.o" "JackalopeRN.phl[9]";
+connectAttr "Transform_ctrl_rotateZ1.o" "JackalopeRN.phl[10]";
+connectAttr "Transform_ctrl_visibility1.o" "JackalopeRN.phl[11]";
+connectAttr "Neck_ctrl_translateX2.o" "JackalopeRN.phl[12]";
+connectAttr "Neck_ctrl_translateY2.o" "JackalopeRN.phl[13]";
+connectAttr "Neck_ctrl_translateZ2.o" "JackalopeRN.phl[14]";
+connectAttr "Neck_ctrl_rotateX2.o" "JackalopeRN.phl[15]";
+connectAttr "Neck_ctrl_rotateY2.o" "JackalopeRN.phl[16]";
+connectAttr "Neck_ctrl_rotateZ2.o" "JackalopeRN.phl[17]";
+connectAttr "Neck_ctrl_scaleX2.o" "JackalopeRN.phl[18]";
+connectAttr "Neck_ctrl_scaleY2.o" "JackalopeRN.phl[19]";
+connectAttr "Neck_ctrl_scaleZ2.o" "JackalopeRN.phl[20]";
+connectAttr "Neck_ctrl_visibility2.o" "JackalopeRN.phl[21]";
+connectAttr "Mouth_ctrl_translateX1.o" "JackalopeRN.phl[22]";
+connectAttr "Mouth_ctrl_translateY1.o" "JackalopeRN.phl[23]";
+connectAttr "Mouth_ctrl_translateZ1.o" "JackalopeRN.phl[24]";
+connectAttr "Mouth_ctrl_rotateX1.o" "JackalopeRN.phl[25]";
+connectAttr "Mouth_ctrl_rotateY1.o" "JackalopeRN.phl[26]";
+connectAttr "Mouth_ctrl_rotateZ1.o" "JackalopeRN.phl[27]";
+connectAttr "Mouth_ctrl_scaleX1.o" "JackalopeRN.phl[28]";
+connectAttr "Mouth_ctrl_scaleY1.o" "JackalopeRN.phl[29]";
+connectAttr "Mouth_ctrl_scaleZ1.o" "JackalopeRN.phl[30]";
+connectAttr "Mouth_ctrl_visibility1.o" "JackalopeRN.phl[31]";
+connectAttr "L_elbow_ctrl_translateX.o" "JackalopeRN.phl[32]";
+connectAttr "L_elbow_ctrl_translateY.o" "JackalopeRN.phl[33]";
+connectAttr "L_elbow_ctrl_translateZ.o" "JackalopeRN.phl[34]";
+connectAttr "L_elbow_ctrl_rotateY.o" "JackalopeRN.phl[35]";
+connectAttr "L_elbow_ctrl_rotateX.o" "JackalopeRN.phl[36]";
+connectAttr "L_elbow_ctrl_rotateZ.o" "JackalopeRN.phl[37]";
+connectAttr "L_elbow_ctrl_scaleX.o" "JackalopeRN.phl[38]";
+connectAttr "L_elbow_ctrl_scaleY.o" "JackalopeRN.phl[39]";
+connectAttr "L_elbow_ctrl_scaleZ.o" "JackalopeRN.phl[40]";
+connectAttr "L_elbow_ctrl_visibility.o" "JackalopeRN.phl[41]";
+connectAttr "R_elbow_ctrl_translateX.o" "JackalopeRN.phl[42]";
+connectAttr "R_elbow_ctrl_translateY.o" "JackalopeRN.phl[43]";
+connectAttr "R_elbow_ctrl_translateZ.o" "JackalopeRN.phl[44]";
+connectAttr "R_elbow_ctrl_rotateY.o" "JackalopeRN.phl[45]";
+connectAttr "R_elbow_ctrl_rotateX.o" "JackalopeRN.phl[46]";
+connectAttr "R_elbow_ctrl_rotateZ.o" "JackalopeRN.phl[47]";
+connectAttr "R_elbow_ctrl_scaleX.o" "JackalopeRN.phl[48]";
+connectAttr "R_elbow_ctrl_scaleY.o" "JackalopeRN.phl[49]";
+connectAttr "R_elbow_ctrl_scaleZ.o" "JackalopeRN.phl[50]";
+connectAttr "R_elbow_ctrl_visibility.o" "JackalopeRN.phl[51]";
+connectAttr "PheonixRN.phl[1]" "objectSet2.dsm" -na;
+connectAttr "Transform_ctrl_rotateX.o" "PheonixRN.phl[2]";
+connectAttr "Transform_ctrl_rotateY.o" "PheonixRN.phl[3]";
+connectAttr "Transform_ctrl_rotateZ.o" "PheonixRN.phl[4]";
+connectAttr "Transform_ctrl_translateZ.o" "PheonixRN.phl[5]";
+connectAttr "Transform_ctrl_translateX.o" "PheonixRN.phl[6]";
+connectAttr "Transform_ctrl_translateY.o" "PheonixRN.phl[7]";
+connectAttr "Transform_ctrl_scaleX.o" "PheonixRN.phl[8]";
+connectAttr "Transform_ctrl_scaleY.o" "PheonixRN.phl[9]";
+connectAttr "Transform_ctrl_scaleZ.o" "PheonixRN.phl[10]";
+connectAttr "Transform_ctrl_visibility.o" "PheonixRN.phl[11]";
+connectAttr "Body_ctrl_translateX.o" "PheonixRN.phl[12]";
+connectAttr "Body_ctrl_translateY.o" "PheonixRN.phl[13]";
+connectAttr "Body_ctrl_translateZ.o" "PheonixRN.phl[14]";
+connectAttr "Body_ctrl_rotateX.o" "PheonixRN.phl[15]";
+connectAttr "Body_ctrl_rotateY.o" "PheonixRN.phl[16]";
+connectAttr "Body_ctrl_rotateZ.o" "PheonixRN.phl[17]";
+connectAttr "Body_ctrl_scaleX.o" "PheonixRN.phl[18]";
+connectAttr "Body_ctrl_scaleY.o" "PheonixRN.phl[19]";
+connectAttr "Body_ctrl_scaleZ.o" "PheonixRN.phl[20]";
+connectAttr "Body_ctrl_visibility.o" "PheonixRN.phl[21]";
+connectAttr "Tail_ctrl_translateX.o" "PheonixRN.phl[22]";
+connectAttr "Tail_ctrl_translateY.o" "PheonixRN.phl[23]";
+connectAttr "Tail_ctrl_translateZ.o" "PheonixRN.phl[24]";
+connectAttr "Tail_ctrl_rotateX.o" "PheonixRN.phl[25]";
+connectAttr "Tail_ctrl_rotateY.o" "PheonixRN.phl[26]";
+connectAttr "Tail_ctrl_rotateZ.o" "PheonixRN.phl[27]";
+connectAttr "Tail_ctrl_scaleX.o" "PheonixRN.phl[28]";
+connectAttr "Tail_ctrl_scaleY.o" "PheonixRN.phl[29]";
+connectAttr "Tail_ctrl_scaleZ.o" "PheonixRN.phl[30]";
+connectAttr "Tail_ctrl_visibility.o" "PheonixRN.phl[31]";
+connectAttr "L_foot_ctrl_translateX.o" "PheonixRN.phl[32]";
+connectAttr "L_foot_ctrl_translateY.o" "PheonixRN.phl[33]";
+connectAttr "L_foot_ctrl_translateZ.o" "PheonixRN.phl[34]";
+connectAttr "L_foot_ctrl_rotateX.o" "PheonixRN.phl[35]";
+connectAttr "L_foot_ctrl_rotateY.o" "PheonixRN.phl[36]";
+connectAttr "L_foot_ctrl_rotateZ.o" "PheonixRN.phl[37]";
+connectAttr "L_foot_ctrl_scaleX.o" "PheonixRN.phl[38]";
+connectAttr "L_foot_ctrl_scaleY.o" "PheonixRN.phl[39]";
+connectAttr "L_foot_ctrl_scaleZ.o" "PheonixRN.phl[40]";
+connectAttr "L_foot_ctrl_visibility.o" "PheonixRN.phl[41]";
+connectAttr "L_shoulder_ctrl_translateX.o" "PheonixRN.phl[42]";
+connectAttr "L_shoulder_ctrl_translateY.o" "PheonixRN.phl[43]";
+connectAttr "L_shoulder_ctrl_translateZ.o" "PheonixRN.phl[44]";
+connectAttr "L_shoulder_ctrl_rotateX.o" "PheonixRN.phl[45]";
+connectAttr "L_shoulder_ctrl_rotateY.o" "PheonixRN.phl[46]";
+connectAttr "L_shoulder_ctrl_rotateZ.o" "PheonixRN.phl[47]";
+connectAttr "L_shoulder_ctrl_scaleX.o" "PheonixRN.phl[48]";
+connectAttr "L_shoulder_ctrl_scaleY.o" "PheonixRN.phl[49]";
+connectAttr "L_shoulder_ctrl_scaleZ.o" "PheonixRN.phl[50]";
+connectAttr "L_shoulder_ctrl_visibility.o" "PheonixRN.phl[51]";
+connectAttr "R_shoulder_ctrl_translateX.o" "PheonixRN.phl[52]";
+connectAttr "R_shoulder_ctrl_translateY.o" "PheonixRN.phl[53]";
+connectAttr "R_shoulder_ctrl_translateZ.o" "PheonixRN.phl[54]";
+connectAttr "R_shoulder_ctrl_rotateX.o" "PheonixRN.phl[55]";
+connectAttr "R_shoulder_ctrl_rotateY.o" "PheonixRN.phl[56]";
+connectAttr "R_shoulder_ctrl_rotateZ.o" "PheonixRN.phl[57]";
+connectAttr "R_shoulder_ctrl_scaleX.o" "PheonixRN.phl[58]";
+connectAttr "R_shoulder_ctrl_scaleY.o" "PheonixRN.phl[59]";
+connectAttr "R_shoulder_ctrl_scaleZ.o" "PheonixRN.phl[60]";
+connectAttr "R_shoulder_ctrl_visibility.o" "PheonixRN.phl[61]";
+connectAttr "Neck_ctrl_translateX.o" "PheonixRN.phl[62]";
+connectAttr "Neck_ctrl_translateY.o" "PheonixRN.phl[63]";
+connectAttr "Neck_ctrl_translateZ.o" "PheonixRN.phl[64]";
+connectAttr "Neck_ctrl_rotateX.o" "PheonixRN.phl[65]";
+connectAttr "Neck_ctrl_rotateY.o" "PheonixRN.phl[66]";
+connectAttr "Neck_ctrl_rotateZ.o" "PheonixRN.phl[67]";
+connectAttr "Neck_ctrl_scaleX.o" "PheonixRN.phl[68]";
+connectAttr "Neck_ctrl_scaleY.o" "PheonixRN.phl[69]";
+connectAttr "Neck_ctrl_scaleZ.o" "PheonixRN.phl[70]";
+connectAttr "Neck_ctrl_visibility.o" "PheonixRN.phl[71]";
+connectAttr "Mouth_ctrl_translateX.o" "PheonixRN.phl[72]";
+connectAttr "Mouth_ctrl_translateY.o" "PheonixRN.phl[73]";
+connectAttr "Mouth_ctrl_translateZ.o" "PheonixRN.phl[74]";
+connectAttr "Mouth_ctrl_rotateX.o" "PheonixRN.phl[75]";
+connectAttr "Mouth_ctrl_rotateY.o" "PheonixRN.phl[76]";
+connectAttr "Mouth_ctrl_rotateZ.o" "PheonixRN.phl[77]";
+connectAttr "Mouth_ctrl_scaleX.o" "PheonixRN.phl[78]";
+connectAttr "Mouth_ctrl_scaleY.o" "PheonixRN.phl[79]";
+connectAttr "Mouth_ctrl_scaleZ.o" "PheonixRN.phl[80]";
+connectAttr "Mouth_ctrl_visibility.o" "PheonixRN.phl[81]";
 connectAttr "Lights_layer.di" "CloudSky.do";
 connectAttr "file1.oc" "CloudSkyShape.sc";
 connectAttr "RenderCam_rotateX.o" "RenderCam.rx";
@@ -5684,11 +7072,14 @@ connectAttr "RenderCam_scaleY.o" "RenderCam.sy";
 connectAttr "RenderCam_scaleZ.o" "RenderCam.sz";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
+relationship "link" ":lightLinker1" "objectSet1.message" "RimLightGiant1Shape.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "aiAtmosphereVolume.msg" ":defaultArnoldRenderOptions.atm";
+connectAttr "aiImagerDenoiserNoice1.msg" ":defaultArnoldRenderOptions.imagers" -na
+		;
 connectAttr ":defaultColorMgtGlobals.cme" "file1.cme";
 connectAttr ":defaultColorMgtGlobals.cfe" "file1.cmcf";
 connectAttr ":defaultColorMgtGlobals.cfp" "file1.cmcp";
@@ -5723,11 +7114,43 @@ connectAttr "pairBlend1_inRotateZ1.o" "pairBlend1.irz1";
 connectAttr "pairBlend1_inTranslateX1.o" "pairBlend1.itx1";
 connectAttr "pairBlend1_inTranslateY1.o" "pairBlend1.ity1";
 connectAttr "pairBlend1_inTranslateZ1.o" "pairBlend1.itz1";
+connectAttr "RimLightGiantShape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[0].dn"
+		;
+connectAttr "KeyLightPhoenixShape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[1].dn"
+		;
+connectAttr "RimLightPhoenixShape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[2].dn"
+		;
+connectAttr "KeyLightGiantShape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[3].dn"
+		;
+connectAttr "RimLightGiant1Shape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[4].dn"
+		;
+connectAttr "RimLightGiant2Shape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[5].dn"
+		;
+connectAttr "RimLightGiant3Shape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[6].dn"
+		;
+connectAttr "RimLightPhoenix1Shape.msg" "hyperShadePrimaryNodeEditorSavedTabsInfo.tgi[0].ni[7].dn"
+		;
 connectAttr "aiFog.msg" ":defaultShaderList1.s" -na;
 connectAttr "aiAtmosphereVolume.msg" ":defaultShaderList1.s" -na;
 connectAttr "place2dTexture1.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr "CloudSkyShape.ltd" ":lightList1.l" -na;
+connectAttr "RimLightGiantShape.ltd" ":lightList1.l" -na;
+connectAttr "KeyLightPhoenixShape.ltd" ":lightList1.l" -na;
+connectAttr "RimLightPhoenixShape.ltd" ":lightList1.l" -na;
+connectAttr "KeyLightGiantShape.ltd" ":lightList1.l" -na;
+connectAttr "RimLightGiant1Shape.ltd" ":lightList1.l" -na;
+connectAttr "RimLightGiant2Shape.ltd" ":lightList1.l" -na;
+connectAttr "RimLightGiant3Shape.ltd" ":lightList1.l" -na;
+connectAttr "RimLightPhoenix1Shape.ltd" ":lightList1.l" -na;
 connectAttr "file1.msg" ":defaultTextureList1.tx" -na;
 connectAttr "CloudSky.iog" ":defaultLightSet.dsm" -na;
+connectAttr "RimLightGiant.iog" ":defaultLightSet.dsm" -na;
+connectAttr "KeyLightPhoenix.iog" ":defaultLightSet.dsm" -na;
+connectAttr "RimLightPhoenix.iog" ":defaultLightSet.dsm" -na;
+connectAttr "KeyLightGiant.iog" ":defaultLightSet.dsm" -na;
+connectAttr "RimLightGiant1.iog" ":defaultLightSet.dsm" -na;
+connectAttr "RimLightGiant2.iog" ":defaultLightSet.dsm" -na;
+connectAttr "RimLightGiant3.iog" ":defaultLightSet.dsm" -na;
+connectAttr "RimLightPhoenix1.iog" ":defaultLightSet.dsm" -na;
 // End of ForestWorld_final.ma
